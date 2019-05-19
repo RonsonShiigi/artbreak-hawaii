@@ -1,0 +1,35 @@
+const express = require("express");
+const router = express.Router();
+
+router
+  .route("/")
+  .get((req, res) => {
+    return new req.database.Likes()
+      .fetchAll()
+      .then(likes => {
+        return res.json(likes);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  })
+  .post((req, res) => {
+    console.log("hitting");
+    const like_id = req.body.id;
+    const product_id = req.body.product_id;
+    const user_id = req.body.user_id;
+    const created_at = req.body.created_at;
+    console.log("post", req.body);
+    return new req.database.User({ like_id, product_id, user_id, created_at })
+      .save()
+      .then(like => {
+        return res.json({ success: true });
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  });
+
+module.exports = router;
