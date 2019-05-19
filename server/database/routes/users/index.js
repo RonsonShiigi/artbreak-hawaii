@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router
-  .route("/users")
+  .route("/")
   .get((req, res) => {
     return new req.database.User()
       .fetchAll()
@@ -16,7 +16,7 @@ router
   })
   .post((req, res) => {
     console.log("hitting");
-    const user_ID = req.body.id;
+    const user_id = req.body.id;
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
@@ -26,7 +26,7 @@ router
     const updated_at = req.body.updated_at;
     console.log("post", req.body);
     return new req.database.User({
-      user_ID,
+      user_id,
       username,
       password,
       email,

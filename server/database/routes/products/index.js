@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 router
-  .route("/users")
+  .route("/")
   .get((req, res) => {
-    return new req.database.Products()
+    return new req.database.Product()
       .fetchAll()
       .then(products => {
         return res.json(products);
@@ -26,7 +26,7 @@ router
     const updated_at = req.body.updated_at;
 
     console.log("post", req.body);
-    return new req.database.Products({
+    return new req.database.Product({
       product_id,
       title,
       description,
