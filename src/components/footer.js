@@ -23,7 +23,11 @@ class Footer extends Component {
 
   render() {
     return (
-      <BottomNavigation showLabels position="fixed">
+      <BottomNavigation
+        showLabels
+        position="fixed"
+        anchorOrigin={{ vertical: "bottom" }}
+      >
         <BottomNavigationAction
           label="My Dashboard"
           icon={<LocationOnIcon />}

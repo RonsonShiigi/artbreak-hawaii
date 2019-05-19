@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <CssBaseline />
       <Header />
-      <div>CONTENT CONTENT CONTENT</div>
+      <div className="container">CONTENT CONTENT CONTENT</div>
       <Footer />
     </div>
   );
