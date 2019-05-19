@@ -3,6 +3,8 @@ import { Component } from "react";
 
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Stars from "@material-ui/icons/Stars";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputBase from "@material-ui/core/InputBase";
@@ -26,6 +28,10 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1
+  },
+  button: {
+    margin: theme.spacing.unit,
+    marginLeft: 0
   },
   menuButton: {
     marginLeft: -12,
@@ -64,6 +70,9 @@ const styles = theme => ({
   inputRoot: {
     color: "inherit",
     width: "100%"
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit
   },
   inputInput: {
     paddingTop: theme.spacing.unit,
@@ -142,6 +151,10 @@ class Header extends Component {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+              <Button variant="contained" color="secondary">
+                Login
+                <Stars className={classes.rightIcon} />
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
