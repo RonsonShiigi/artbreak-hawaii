@@ -4,7 +4,7 @@ const router = express.Router();
 router
   .route("/")
   .get((req, res) => {
-    return new req.database.Likes()
+    return new req.database.Like()
       .fetchAll()
       .then(likes => {
         return res.json(likes);

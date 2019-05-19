@@ -1,6 +1,6 @@
 const bookshelf = require("../bookshelf");
 
-class Purchased extends bookshelf.Model {
+class Purchase extends bookshelf.Model {
   get tableName() {
     return "purchases";
   }
@@ -9,4 +9,4 @@ class Purchased extends bookshelf.Model {
   }
 }
 
-module.exports = bookshelf.model("Purchased", Purchased);
+module.exports = bookshelf.model("Purchase", Purchase);
