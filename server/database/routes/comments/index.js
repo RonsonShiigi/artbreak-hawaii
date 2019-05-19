@@ -16,18 +16,14 @@ router
   })
   .post((req, res) => {
     console.log("hitting");
-    const comment_id = req.body.id;
     const text = req.body.text;
     const user_id = req.body.user_id;
     const product_id = req.body.product_id;
-    const created_at = req.body.created_at;
     console.log("post", req.body);
     return new req.database.Comment({
-      comment_id,
       text,
       user_id,
-      product_id,
-      created_at
+      product_id
     })
       .save()
       .then(comment => {

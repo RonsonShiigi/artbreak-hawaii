@@ -16,25 +16,20 @@ router
   })
   .post((req, res) => {
     console.log("hitting");
-    const product_id = req.body.id;
+
     const title = req.body.title;
     const description = req.body.description;
     const image_url = req.body.image_url;
     const user_id = req.body.user_id;
     const price = req.body.price;
-    const created_at = req.body.created_at;
-    const updated_at = req.body.updated_at;
 
     console.log("post", req.body);
     return new req.database.Product({
-      product_id,
       title,
       description,
       image_url,
       user_id,
-      price,
-      created_at,
-      updated_at
+      price
     })
       .save()
       .then(products => {
