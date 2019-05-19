@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
     table.string("first_name");
     table.string("last_name");
     table.datetime("created_at").defaultTo(knex.raw("now()"));
-    table.datetime("modified_at");
+    table.datetime("updated_at");
   });
 };
 
