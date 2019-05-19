@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bookshelf": "^0.14.2",
@@ -12,6 +13,7 @@
     "express": "^4.16.4",
     "express-session": "^1.16.1",
     "knex": "^0.16.5",
+    "material-design-icons": "^3.0.1",
     "nodemon": "^1.19.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
