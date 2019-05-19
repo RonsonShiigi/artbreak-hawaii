@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer("product_id");
     table.integer("user_id");
+    table.timestamp("created_at").defaultTo(knex.raw("now()"));
   });
 };
 

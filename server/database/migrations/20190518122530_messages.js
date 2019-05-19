@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.string("text");
     table.integer("sent_to");
     table.integer("from");
-    table.timestamp("created_at");
+    table.timestamp("created_at").defaultTo(knex.raw("now()"));
   });
 };
 
