@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router
-  .route("/users")
+  .route("/")
   .get((req, res) => {
     return new req.database.User()
       .fetchAll()

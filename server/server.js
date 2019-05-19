@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+
+//authorization variables
 const passport = require("passport");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
@@ -7,6 +9,9 @@ const RedisStore = require("connect-redis")(session);
 const PORT = process.env.PORT;
 const REDIS_HOSTNAME = process.env.REDIS_HOSTNAME;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+
+//routes
+const UserRoutes = require("./database/routes/users");
 
 if (!PORT) {
   console.log("No Port Found");
@@ -23,7 +28,14 @@ if (!PORT || !SESSION_SECRET || !REDIS_HOSTNAME) {
   return process.exit(1);
 }
 
+//setup middleware
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//routing
+app.use("/users", UserRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
