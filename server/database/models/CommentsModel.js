@@ -1,6 +1,6 @@
 const bookshelf = require("../bookshelf");
 
-class Comments extends bookshelf.Model {
+class Comment extends bookshelf.Model {
   get tableName() {
     return "comments";
   }
@@ -9,4 +9,4 @@ class Comments extends bookshelf.Model {
   }
 }
 
-module.exports = bookshelf.model("Comments", Comments);
+module.exports = bookshelf.model("Comment", Comment);

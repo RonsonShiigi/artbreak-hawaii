@@ -1,5 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const decorator = require("./database/decorator");
+
+//authorization variables
 const passport = require("passport");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
@@ -7,6 +10,14 @@ const RedisStore = require("connect-redis")(session);
 const PORT = process.env.PORT;
 const REDIS_HOSTNAME = process.env.REDIS_HOSTNAME;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+
+//routes
+const UserRoutes = require("./database/routes/users/index");
+const ProductRoutes = require("./database/routes/products/index");
+const CommentRoutes = require("./database/routes/comments/index");
+const PurchaseRoutes = require("./database/routes/purchases/index");
+const MessageRoutes = require("./database/routes/messages/index");
+const LikeRoutes = require("./database/routes/likes/index");
 
 if (!PORT) {
   console.log("No Port Found");
@@ -23,7 +34,22 @@ if (!PORT || !SESSION_SECRET || !REDIS_HOSTNAME) {
   return process.exit(1);
 }
 
+//setup middleware
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//decorate
+app.use(decorator);
+
+//routing
+app.use("/users", UserRoutes);
+app.use("/products", ProductRoutes);
+app.use("/comments", CommentRoutes);
+app.use("/purchases", PurchaseRoutes);
+app.use("/messages", MessageRoutes);
+app.use("/likes", LikeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
