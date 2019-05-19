@@ -2,7 +2,7 @@ const bookshelf = require("../bookshelf");
 
 class Purchased extends bookshelf.Model {
   get tableName() {
-    return "purchased";
+    return "purchases";
   }
   get hasTimestamps() {
     return false;
