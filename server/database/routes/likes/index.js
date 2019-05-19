@@ -4,7 +4,7 @@ const router = express.Router();
 router
   .route("/")
   .get((req, res) => {
-    return new req.database.Likes()
+    return new req.database.Like()
       .fetchAll()
       .then(likes => {
         return res.json(likes);
@@ -21,7 +21,7 @@ router
     const user_id = req.body.user_id;
     const created_at = req.body.created_at;
     console.log("post", req.body);
-    return new req.database.User({ like_id, product_id, user_id, created_at })
+    return new req.database.Like({ like_id, product_id, user_id, created_at })
       .save()
       .then(like => {
         return res.json({ success: true });
