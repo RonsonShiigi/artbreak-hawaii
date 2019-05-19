@@ -142,9 +142,6 @@ class Header extends Component {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
-              <IconButton aria-haspopup="true" color="inherit">
-                <AccountCircle />
-              </IconButton>
             </div>
           </Toolbar>
         </AppBar>
