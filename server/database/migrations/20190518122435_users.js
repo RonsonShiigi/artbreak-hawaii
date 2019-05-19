@@ -12,8 +12,8 @@ exports.up = function(knex, Promise) {
     table.string("password").notNullable();
     table.string("first_name");
     table.string("last_name");
-    table.timestamp("created_at");
-    table.timestamp("modified_at");
+    table.datetime("created_at").defaultTo(knex.raw("now()"));
+    table.datetime("modified_at");
   });
 };
 
