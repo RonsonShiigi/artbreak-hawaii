@@ -4,7 +4,7 @@ const passport = require("passport");
 const session = require("express-session");
 const RedisStore = require("connect-redis")(session);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 const REDIS_HOSTNAME = process.env.REDIS_HOSTNAME;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
