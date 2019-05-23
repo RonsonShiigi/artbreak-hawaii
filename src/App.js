@@ -19,7 +19,7 @@ function App() {
           <GridList cellheight={150} cols={4}>
             {/* maybe use .map on database items here? */}
             <GridListTile>
-              <img src="https://i.imgur.com/CC4EFLz.jpg" />
+              <img src="https://s3-us-west-2.amazonaws.com/artbreakjeh/1558594417676" />
               <GridListTileBar title="FUCK" />
             </GridListTile>
             <GridListTile>
