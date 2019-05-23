@@ -9,18 +9,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuIcon from "@material-ui/icons/Menu";
-import Menu from "@material-ui/core/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import ImageSearch from "@material-ui/icons/ImageSearch";
 import Typography from "@material-ui/core/Typography";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import PropTypes from "prop-types";
-import { Input } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -117,7 +112,6 @@ class Header extends Component {
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
 
     return (

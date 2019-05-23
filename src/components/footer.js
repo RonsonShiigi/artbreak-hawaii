@@ -1,25 +1,19 @@
 import React from "react";
-import { Component } from "react";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import Icon from "@material-ui/core/Icon";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
-    // state = {
-    //   value: "recents"
-    // };
+class Footer extends React.Component {
+  // state = {
+  //   value: "recents"
+  // };
 
-    // handleChange = (event, value) => {
-    //   this.setState({ value });
-    // };
-  }
+  // handleChange = (event, value) => {
+  //   this.setState({ value });
+  // };
 
   render() {
     return (
