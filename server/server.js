@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const decorator = require("./database/decorator");
+const cors = require("cors");
 
 //authorization variables
 const passport = require("passport");
@@ -59,6 +60,9 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport, session());
+
+//cors issue
+app.use(cors({ credentials: true, origin: "http://localhost:8081" }));
 
 //routing
 app.use("/users", UserRoutes);
