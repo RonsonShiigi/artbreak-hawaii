@@ -18,12 +18,7 @@ const App = ({ products }) => {
         <div className="content">
           {/* maybe use .map on database items here? */}
           <GridList cellheight={150} cols={4}>
-            {products.map(item => (
-              <GridListTile>
-                <img src={item.image_url} alt="" />
-                <GridListTileBar title={item.title} />
-              </GridListTile>
-            ))}
+            <Gallery />
             {/* <GridListTile>
               <img src="https://i.imgur.com/CC4EFLz.jpg" alt="" />
               <GridListTileBar title="FUCK" />
@@ -61,13 +56,6 @@ const App = ({ products }) => {
       </div>
     </div>
   );
-};
-
-App.getInitialProps = async ({ req }) => {
-  const res = await fetch("http://localhost:8080/products");
-  console.log("ressssss", res);
-  const json = await res.json();
-  return { products: json };
 };
 
 export default App;
