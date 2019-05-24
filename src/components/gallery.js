@@ -12,8 +12,9 @@ class Gallery extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:8080/products").then(res => {
-      console.log("RES", res.data);
-      this.setState({ products: res.data });
+      console.log(res.data);
+      const products = res.data;
+      this.setState({ products });
     });
   }
 
@@ -22,7 +23,7 @@ class Gallery extends Component {
     console.log(products);
 
     return (
-      <GridList cellheight={150} cols={4}>
+      <GridList cellheight={150} cols={4} overflow="hidden">
         {products.map(product => (
           <GridListTile>
             <img src={product.image_url} alt="" />
