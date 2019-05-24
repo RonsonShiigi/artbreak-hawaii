@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -9,16 +9,33 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 
-const App = ({ products }) => {
-  return (
-    <div>
-      <div className="container">
-        <CssBaseline />
-        <Header />
-        <div className="content">
-          {/* maybe use .map on database items here? */}
-          <GridList cellheight={150} cols={4}>
-            <Gallery />
+//actions
+import { getProducts } from "./actions/actions";
+
+import { connect } from "react-redux";
+import Axios from "axios";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    console.log("this.props", this.props);
+    console.log(">>>>>>", this.props.getProducts());
+    // this.props.dispatch(getProducts());
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <CssBaseline />
+          <Header />
+          <div className="content">
+            {/* maybe use .map on database items here? */}
+            {/* <GridList cellheight={150} cols={4}> */}
+            {/* <Gallery /> */}
             {/* <GridListTile>
               <img src="https://i.imgur.com/CC4EFLz.jpg" alt="" />
               <GridListTileBar title="FUCK" />
@@ -48,14 +65,31 @@ const App = ({ products }) => {
               />
               <GridListTileBar title="I'M ON FIIIRE" />
             </GridListTile> */}
-          </GridList>
+            {/* </GridList> */}
+          </div>
+        </div>
+        <div className="footer">
+          <Footer />
         </div>
       </div>
-      <div className="footer">
-        <Footer />
-      </div>
-    </div>
-  );
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  console.log("state todos", state);
+  return {
+    todo: state
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProducts: () => dispatch(getProducts())
+  };
 };
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
