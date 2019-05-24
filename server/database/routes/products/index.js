@@ -30,9 +30,11 @@ const upload = multer({
 router
   .route("/")
   .get((req, res) => {
+    console.log("This is the GET /Products!!");
     return new req.database.Product()
       .fetchAll()
       .then(products => {
+        console.log("products", products);
         return res.json(products);
       })
       .catch(err => {
