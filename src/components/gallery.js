@@ -14,16 +14,23 @@ class Gallery extends Component {
     axios.get("http://localhost:8080/products").then(res => {
       console.log(res.data);
       const products = res.data;
-      this.setState({ products: products });
+      this.setState({ products });
     });
   }
 
   render() {
-    console.log(this.state);
+    const { products } = this.state;
+    console.log(products);
+
     return (
-      <div>
-        <p>aaaaa</p>
-      </div>
+      <GridList>
+        {products.map(product => (
+          <GridListTile>
+            <img src={product.image_url} alt="" />
+            <GridListTileBar title={product.title} />
+          </GridListTile>
+        ))}
+      </GridList>
     );
   }
 }
