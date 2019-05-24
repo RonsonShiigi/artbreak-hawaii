@@ -3,6 +3,17 @@ import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Gallery from "./components/gallery";
+import Register from "./components/register";
+
+//react router imports
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+  Switch
+} from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import GridList from "@material-ui/core/GridList";
@@ -51,6 +62,9 @@ const App = ({ products }) => {
           </GridList>
         </div>
       </div>
+      <Switch>
+        <Route exact path="/register" component={Register} />
+      </Switch>
       <div className="footer">
         <Footer />
       </div>
