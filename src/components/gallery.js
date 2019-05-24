@@ -12,8 +12,8 @@ class Gallery extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:8080/products").then(res => {
-      const products = res.data;
-      this.setState({ products });
+      console.log("RES", res.data);
+      this.setState({ products: res.data });
     });
   }
 
@@ -22,7 +22,7 @@ class Gallery extends Component {
     console.log(products);
 
     return (
-      <GridList>
+      <GridList cellheight={150} cols={4}>
         {products.map(product => (
           <GridListTile>
             <img src={product.image_url} alt="" />
