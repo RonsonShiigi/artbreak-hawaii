@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import Typography from "@material-ui/core/Typography";
 
 class Gallery extends Component {
   state = {
@@ -23,14 +26,21 @@ class Gallery extends Component {
     console.log(products);
 
     return (
-      <GridList cellheight={150} cols={4} overflow="hidden">
-        {products.map(product => (
-          <GridListTile>
-            <img src={product.image_url} alt="" />
-            <GridListTileBar title={product.title} />
+      <div className="holder">
+        <GridList cellheight={150} cols={4} overflow="hidden">
+          <GridListTile key="Subheader" cols={4} style={{ height: "auto" }}>
+            <ListSubheader component="div">
+              <Typography variant="h3">Recent</Typography>
+            </ListSubheader>
           </GridListTile>
-        ))}
-      </GridList>
+          {products.map(product => (
+            <GridListTile>
+              <img src={product.image_url} alt="" />
+              <GridListTileBar title={product.title} />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
     );
   }
 }
