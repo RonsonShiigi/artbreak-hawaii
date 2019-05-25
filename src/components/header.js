@@ -120,7 +120,7 @@ class Header extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="static" color="default" elevation="1">
+        <AppBar position="static" color="default" elevation={1}>
           <Toolbar>
             <Typography variant="h2" color="inherit" noWrap>
               ARTBREAK-HI
@@ -154,7 +154,7 @@ class Header extends Component {
                 <Stars className={classes.rightIcon} />
               </Button>
 
-              <Button
+              {/* <Button
                 variant="contained"
                 color="secondary"
                 component={Link}
@@ -162,7 +162,7 @@ class Header extends Component {
               >
                 Register
                 <Stars className={classes.rightIcon} />
-              </Button>
+              </Button> */}
             </div>
           </Toolbar>
         </AppBar>

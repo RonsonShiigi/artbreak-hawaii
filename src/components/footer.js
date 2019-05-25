@@ -20,7 +20,7 @@ class Footer extends React.Component {
       <BottomNavigation
         showLabels
         position="fixed"
-        anchorOrigin={{ vertical: "bottom" }}
+        anchororigin={{ vertical: "bottom" }}
       >
         <BottomNavigationAction
           label="My Dashboard"
