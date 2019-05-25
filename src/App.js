@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
+
+import withRoot from "./components/modules/withRoot";
 import Header from "./components/header";
-import Footer from "./components/footer";
 import Gallery from "./components/gallery";
 import Register from "./components/register";
 import Login from "./components/login";
@@ -15,11 +15,6 @@ import {
   withRouter,
   Switch
 } from "react-router-dom";
-
-import CssBaseline from "@material-ui/core/CssBaseline";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 //actions
 import { getProducts } from "./actions/actions";
@@ -100,4 +95,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(App);
+)(withRoot(App));
