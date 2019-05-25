@@ -1,82 +1,94 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
-class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      username: "",
-      first_name: "",
-      last_name: ""
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function Register() {
+  const [values, setValues] = React.useState({
+    email: "",
+    password: "",
+    first_name: "",
+    last_name: "",
+    username: ""
+  });
 
-  handleSubmit(e) {
+  const handleChange = name => e => {
+    setValues({ ...values, [name]: e.target.value });
+  };
+  const handleSubmit = e => {
     e.preventDefault();
-    fetch("http://localhost:8080/user", {
+    console.log("state", values);
+    fetch("http://localhost:8080/api/auth/register", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        password: this.state.password
+        first_name: values.first_name,
+        last_name: values.last_name,
+        password: values.password,
+        username: values.username,
+        email: values.email
       })
     })
       .then(() => {
-        console.log("User added to database!!");
+        console.log("User added to database");
       })
       .catch(err => {
-        console.log("error", err);
+        console.log(err);
       });
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-    console.log(this.state);
   };
 
-  render() {
-    const { email, password } = this.state;
-    return (
-      <form>
-        <div>
-          <label>
-            Email:
-            <input onChange={this.handleChange} type="text" name="email" />
-          </label>
-          <label>
-            Password:
-            <input onChange={this.handleChange} type="text" name="password" />
-          </label>
-          <label>
-            Username:
-            <input type="text" name="username" />
-          </label>
-          <label>
-            First Name:
-            <input type="text" name="first_name" />
-          </label>
-          <label>
-            Last Name:
-            <input type="text" name="last_name" />
-          </label>
-        </div>
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          id="email"
+          label="email"
+          key="email"
+          value={values.email}
+          onChange={handleChange("email")}
+          margin="normal"
+        />
+        <TextField
+          id="password"
+          label="password"
+          key="password"
+          value={values.password}
+          onChange={handleChange("password")}
+          margin="normal"
+        />
+        <TextField
+          id="username"
+          label="username"
+          key="username"
+          value={values.username}
+          onChange={handleChange("username")}
+          margin="normal"
+        />
+        <TextField
+          id="first_name"
+          label="first_name"
+          key="first_name"
+          value={values.first_name}
+          onChange={handleChange("first_name")}
+          margin="normal"
+        />
+        <TextField
+          id="last_name"
+          label="last_name"
+          key="last_name"
+          value={values.last_name}
+          onChange={handleChange("last_name")}
+          margin="normal"
+        />
+        <Button type="submit">Submit</Button>
       </form>
-    );
-  }
+    </div>
+  );
 }
-
 export default Register;

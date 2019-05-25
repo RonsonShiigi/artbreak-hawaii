@@ -153,12 +153,16 @@ class Header extends Component {
                 Login
                 <Stars className={classes.rightIcon} />
               </Button>
-              <Link to="/register" style={{ textDecoration: "none" }}>
-                <Button variant="contained" color="secondary">
-                  Register
-                  <Stars className={classes.rightIcon} />
-                </Button>
-              </Link>
+
+              <Button
+                variant="contained"
+                color="secondary"
+                component={Link}
+                to="/register"
+              >
+                Register
+                <Stars className={classes.rightIcon} />
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
