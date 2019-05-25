@@ -4,6 +4,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import Gallery from "./components/gallery";
 import Register from "./components/register";
+import Login from "./components/login";
 
 //react router imports
 import {
@@ -79,6 +80,8 @@ class App extends Component {
             </GridListTile> */}
             </GridList>
           </div>
+          <Register />
+          <Login />
         </div>
         <div className="footer">
           <Footer />
