@@ -3,6 +3,17 @@ import "./App.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Gallery from "./components/gallery";
+import Register from "./components/register";
+
+//react router imports
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+  Switch
+} from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import GridList from "@material-ui/core/GridList";
@@ -23,7 +34,7 @@ class App extends Component {
   componentDidMount() {
     console.log("this.props", this.props);
     console.log(">>>>>>", this.props.getProducts());
-    // this.props.dispatch(getProducts());
+    this.props.getProducts();
   }
 
   render() {
@@ -34,9 +45,10 @@ class App extends Component {
           <Header />
           <div className="content">
             {/* maybe use .map on database items here? */}
-            {/* <GridList cellheight={150} cols={4}> */}
-            {/* <Gallery /> */}
-            {/* <GridListTile>
+            <GridList cellheight={150} cols={4}>
+              <Gallery />
+
+              {/* <GridListTile>
               <img src="https://i.imgur.com/CC4EFLz.jpg" alt="" />
               <GridListTileBar title="FUCK" />
             </GridListTile>
@@ -65,7 +77,7 @@ class App extends Component {
               />
               <GridListTileBar title="I'M ON FIIIRE" />
             </GridListTile> */}
-            {/* </GridList> */}
+            </GridList>
           </div>
         </div>
         <div className="footer">
@@ -76,13 +88,6 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log("state todos", state);
-  return {
-    todo: state
-  };
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     getProducts: () => dispatch(getProducts())
@@ -90,6 +95,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);

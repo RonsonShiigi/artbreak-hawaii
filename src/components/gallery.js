@@ -5,14 +5,16 @@ import { connect } from "react-redux";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import Typography from "@material-ui/core/Typography";
 
 const Gallery = props => {
   console.log("props in products component", props);
 
   return (
     <GridList cellheight={150} cols={4} overflow="hidden">
-      {props.products.map(product => (
-        <GridListTile>
+      {props.products.map((product, i) => (
+        <GridListTile key={i}>
           <img src={product.image_url} alt="" />
           <GridListTileBar title={product.title} />
         </GridListTile>
@@ -21,14 +23,21 @@ const Gallery = props => {
   );
 };
 
-const mapReduxStoreStateToTheComponentProps = state => {
+function mapStateToProps(state) {
+  console.log("state products", state);
   return {
-    items: state,
-    lol: "say what"
+    products: state
   };
-};
+}
 
-export default connect(mapReduxStoreStateToTheComponentProps)(Gallery);
+// const mapReduxStoreStateToTheComponentProps = state => {
+//   return {
+//     items: state,
+//     lol: "say what"
+//   };
+// };
+
+export default connect(mapStateToProps)(Gallery);
 
 // class Gallery extends Component {
 //   state = {

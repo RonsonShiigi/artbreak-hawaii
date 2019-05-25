@@ -72,4 +72,18 @@ router
       });
   });
 
+router.route("/:id").get((req, res) => {
+  return new req.database.Product()
+    .where("id", req.params.id)
+    .fetch()
+    .then(product => {
+      console.log("PRODUCT", product);
+      return res.json(product);
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(500);
+    });
+});
+
 module.exports = router;

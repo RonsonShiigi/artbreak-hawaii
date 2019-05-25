@@ -1,6 +1,10 @@
 import React from "react";
 import { Component } from "react";
 
+import Register from "./register";
+//react router imports
+import { Link, Switch, Route } from "react-router-dom";
+
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -149,6 +153,16 @@ class Header extends Component {
                 Login
                 <Stars className={classes.rightIcon} />
               </Button>
+
+              {/* <Button
+                variant="contained"
+                color="secondary"
+                component={Link}
+                to="/register"
+              >
+                Register
+                <Stars className={classes.rightIcon} />
+              </Button> */}
             </div>
           </Toolbar>
         </AppBar>
