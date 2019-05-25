@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 import withRoot from "./components/modules/withRoot";
 import Header from "./components/header";
@@ -15,16 +15,40 @@ import {
   Switch
 } from "react-router-dom";
 
-function App() {
-  return (
-    <React.Fragment>
-      <Header />
-      <Gallery />
-      <Switch>
-        <Route exact path="/register" component={Register} />
-      </Switch>
-    </React.Fragment>
-  );
+//actions
+import { getProducts } from "./actions/actions";
+
+import { connect } from "react-redux";
+import Axios from "axios";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    console.log("this.props", this.props);
+    console.log(">>>>>>", this.props.getProducts());
+    this.props.getProducts();
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Header />
+        <Gallery />
+      </React.Fragment>
+    );
+  }
 }
 
-export default withRoot(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    getProducts: () => dispatch(getProducts())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRoot(App));
