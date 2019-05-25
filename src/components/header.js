@@ -120,7 +120,7 @@ class Header extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="fixed" color="#000000">
+        <AppBar position="fixed" color="default" elevation="1">
           <Toolbar>
             <Typography variant="h2" color="inherit" noWrap>
               ARTBREAK-HI

@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+
+import withRoot from "./components/modules/withRoot";
 import Header from "./components/header";
 import Gallery from "./components/gallery";
 import Register from "./components/register";
@@ -14,18 +15,16 @@ import {
   Switch
 } from "react-router-dom";
 
-const App = ({ products }) => {
+function App() {
   return (
-    <div className="container">
+    <React.Fragment>
       <Header />
-      <div className="content">
-        <Gallery />
-      </div>
+      <Gallery />
       <Switch>
         <Route exact path="/register" component={Register} />
       </Switch>
-    </div>
+    </React.Fragment>
   );
-};
+}
 
-export default App;
+export default withRoot(App);
