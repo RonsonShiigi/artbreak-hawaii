@@ -23,7 +23,8 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#000"
   },
   grow: {
     flexGrow: 1
@@ -42,47 +43,9 @@ const styles = theme => ({
       display: "block"
     }
   },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    width: theme.spacing(9),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit",
-    width: "100%"
-  },
+
   rightIcon: {
     marginLeft: theme.spacing(2)
-  },
-  inputInput: {
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-    paddingLeft: theme.spacing(1),
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: 200
-    }
   },
   sectionDesktop: {
     display: "none",
@@ -120,35 +83,14 @@ class Header extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="fixed" color="default" elevation="1">
-          <Toolbar>
+        <AppBar position="fixed" elevation="1">
+          <Toolbar color="#000">
             <Typography variant="h2" color="inherit" noWrap>
               ARTBREAK-HI
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <ImageSearch />
-              </div>
-              <InputBase
-                placeholder="SEARCH"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div>
+
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton color="inherit">
-                <Badge badgeContent={20} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
               <Button variant="contained" color="secondary">
                 Login
                 <Stars className={classes.rightIcon} />

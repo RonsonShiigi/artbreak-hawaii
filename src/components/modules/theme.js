@@ -8,15 +8,14 @@ import "typeface-roboto";
 const rawTheme = createMuiTheme({
   palette: {
     primary: {
-      light: "#F5E0D3",
-      main: "#DE6262",
-      dark: "#4D3B3B",
-      background: "#0e0e0e"
+      light: "##ed4b82",
+      main: "#28282a",
+      dark: "#a31545"
     },
     secondary: {
-      light: "#F0F0D8",
-      main: "#DE6262",
-      dark: "#77CCA4"
+      light: "#ed4b82",
+      main: "#e91e63",
+      dark: "#a31545"
     },
     warning: {
       main: amber[500],

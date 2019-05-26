@@ -14,8 +14,11 @@ const styles = theme => ({
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4)
   },
+  heading: {
+    marginTop: theme.spacing(45)
+  },
   images: {
-    marginTop: theme.spacing(30),
+    marginTop: theme.spacing(8),
     display: "flex",
     flexWrap: "wrap"
   },
@@ -24,7 +27,7 @@ const styles = theme => ({
     display: "block",
     padding: 0,
     borderRadius: 0,
-    height: "25vh",
+    height: "40vh",
     width: "50vh",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
@@ -94,8 +97,13 @@ const Gallery = props => {
 
   return (
     <Container className={classes.root} component="section">
-      <Typography variant="h4" marked="center" align="center" component="h2">
-        MOM HOLY FUCK!!!!{" "}
+      <Typography
+        variant="h4"
+        align="center"
+        component="h2"
+        className={classes.heading}
+      >
+        MOM HOLY FUCK!!!!
       </Typography>
       <div className={classes.images}>
         {props.products.map((product, i) => (

@@ -23,7 +23,7 @@ const styles = theme => ({
     top: 0,
     left: 0,
     height: "100vh",
-    width: "100vw",
+    width: "100%",
     flexDirection: "column",
     alignItems: "center",
     backgroundImage: `url(${backgroundImg})`,
@@ -50,6 +50,9 @@ const styles = theme => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     zIndex: -2
+  },
+  typography: {
+    position: "relative"
   }
 });
 

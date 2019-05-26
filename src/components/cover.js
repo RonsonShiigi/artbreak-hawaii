@@ -16,9 +16,8 @@ const styles = theme => ({
     top: 0
   },
   typography: {
-    zIndex: 4,
     position: "absolute",
-    top: 0
+    top: "100"
   }
 });
 
@@ -26,8 +25,7 @@ function Cover(props) {
   const { classes } = props;
   return (
     <CoverLayout>
-      {/* <img src={backgroundImg} alt="" /> */}
-      <Typography color="inherit" align="center" variant="h5" marked="center">
+      <Typography color="#000" align="center" variant="h5" marked="center">
         MOM HOLY FUCK
       </Typography>
     </CoverLayout>
