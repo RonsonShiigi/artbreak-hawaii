@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import withRoot from "./components/modules/withRoot";
 import Header from "./components/header";
 import Gallery from "./components/gallery";
+import Cover from "./components/cover";
 import Register from "./components/register";
-import newProduct from "./components/newProduct";
+import NewProduct from "./components/newProduct";
 import Login from "./components/login";
 
 //react router imports
@@ -36,57 +37,14 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div className="container">
-          <CssBaseline />
-          <Header />
-          <div className="content">
-            {/* maybe use .map on database items here? */}
-            <GridList cellheight={150} cols={4}>
-              <Gallery />
-
-              {/* <GridListTile>
-              <img src="https://i.imgur.com/CC4EFLz.jpg" alt="" />
-              <GridListTileBar title="FUCK" />
-            </GridListTile>
-            <GridListTile>
-              <img src="https://i.imgur.com/4kSDdjn.jpg" alt="" />
-              <GridListTileBar title="AAAAAA" />
-            </GridListTile>
-            <GridListTile>
-              <img
-                src="https://i.ytimg.com/vi/3z2EzQvpbok/maxresdefault.jpg"
-                alt=""
-              />
-              <GridListTileBar title="FUUUUCK" />
-            </GridListTile>
-            <GridListTile>
-              <img
-                src="https://cdn1.medicalnewstoday.com/content/images/articles/322/322868/golden-retriever-puppy.jpg"
-                alt=""
-              />
-              <GridListTileBar title="OH GOOOOD" />
-            </GridListTile>
-            <GridListTile>
-              <img
-                src="https://cdn.cnn.com/cnnnext/dam/assets/150324154010-04-internet-cats-restricted-super-169.jpg"
-                alt=""
-              />
-              <GridListTileBar title="I'M ON FIIIRE" />
-            </GridListTile> */}
-            </GridList>
-          </div>
-        </div>
-        <div className="register">
-          <Register />
-        </div>
-        <div>
-          <newProduct />
-        </div>
-        <div className="footer">
-          <Footer />
-        </div>
-      </div>
+      <React.Fragment>
+        <Header />
+        <Cover />
+        <Gallery />
+        <Register />
+        <Login />
+        <NewProduct />
+      </React.Fragment>
     );
   }
 }
