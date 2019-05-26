@@ -7,17 +7,11 @@ import { Link, Switch, Route } from "react-router-dom";
 
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Stars from "@material-ui/icons/Stars";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import IconButton from "@material-ui/core/IconButton";
-import ImageSearch from "@material-ui/icons/ImageSearch";
 import Typography from "@material-ui/core/Typography";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import PropTypes from "prop-types";
 
@@ -91,10 +85,13 @@ class Header extends Component {
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <Button variant="contained" color="secondary">
-                Login
+              <ButtonBase color="main">
+                <Typography component="h3" variant="h6" color="inherit">
+                  Login
+                </Typography>
+
                 <Stars className={classes.rightIcon} />
-              </Button>
+              </ButtonBase>
 
               {/* <Button
                 variant="contained"

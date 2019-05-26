@@ -1,8 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import grey from "@material-ui/core/colors/grey";
-import { spacing } from "@material-ui/system";
 
+import grey from "@material-ui/core/colors/grey";
 import { withStyles } from "@material-ui/core/styles";
 
 const backgroundImg = require("./assets/banner.png");

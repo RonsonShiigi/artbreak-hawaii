@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, ButtonBase } from "@material-ui/core";
+import { Typography, ButtonBase, Tab, Tabs } from "@material-ui/core";
 
 const bgUrl = require("./assets/heartbg.png");
 
@@ -126,8 +123,7 @@ const Gallery = props => {
             <div className={classes.imageBackdrop} />
             <div className={classes.imageButton}>
               <Typography
-                component="h3"
-                variant="h6"
+                variant="h2"
                 color="inherit"
                 className={classes.imageTitle}
               >
