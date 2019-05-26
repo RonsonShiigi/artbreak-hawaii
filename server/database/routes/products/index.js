@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const Product = require("../../models/ProductsModel.js");
+
 const AWS = require("aws-sdk");
 const multer = require("multer");
 const multer3 = require("multer-s3");
@@ -29,6 +31,7 @@ const upload = multer({
 
 router
   .route("/")
+  // GET PRODUCT
   .get((req, res) => {
     console.log("This is the GET /Products!!");
     return new req.database.Product()
@@ -42,6 +45,8 @@ router
         res.sendStatus(500);
       });
   })
+
+  // POST PRODUCT
   .post(upload.single("photos"), (req, res) => {
     console.log("hitting");
 
@@ -72,6 +77,7 @@ router
       });
   });
 
+<<<<<<< HEAD
 router.route("/:id").get((req, res) => {
   return new req.database.Product()
     .where("id", req.params.id)
@@ -83,6 +89,82 @@ router.route("/:id").get((req, res) => {
     .catch(err => {
       console.log(err);
       res.send(500);
+=======
+// EDIT PRODUCT
+router.post("/:id", upload.single("photos"), (req, res) => {
+  const body = req.body;
+  const paramsId = req.params.id;
+
+  const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
+  const image_url = url + res.req.file.key;
+
+  const key = req.body.image_url.split("/").pop();
+
+  console.log("key", key);
+  console.log("body", body);
+  console.log("id", paramsId);
+
+  Product.where({
+    id: paramsId
+  })
+    .fetch()
+    .then(product => {
+      new Product({
+        id: paramsId
+      })
+        .save(
+          {
+            title: req.body.title,
+            description: req.body.description,
+            image_url: image_url,
+            user_id: req.body.user_id,
+            price: req.body.price,
+            updated_at: new Date()
+          },
+          {
+            patch: true
+          }
+        )
+        .then(() => {
+          console.log(key);
+          s3.deleteObject(
+            {
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: key
+            },
+            function(err, data) {}
+          );
+          return res.redirect("/");
+        });
+    });
+});
+
+// DELETE PRODUCT
+router.delete("/:id", (req, res) => {
+  const paramsId = req.params.id;
+  const key = req.body.image_url.split("/").pop();
+
+  Product.where({
+    id: paramsId
+  })
+    .fetch()
+    .then(product => {
+      new Product({
+        id: paramsId
+      })
+        .destroy()
+        .then(() => {
+          s3.deleteObject(
+            {
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: key
+            },
+            function(err, data) {}
+          );
+
+          return res.redirect("/");
+        });
+>>>>>>> 0a1f289a0afe6cba7c3bd14d914d7ecc9e8e825e
     });
 });
 
