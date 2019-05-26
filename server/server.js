@@ -60,7 +60,7 @@ app.use(
   })
 );
 app.use(passport.initialize());
-app.use(passport, session());
+app.use(passport.session());
 
 //cors issue
 app.use(cors({ credentials: true, origin: "http://localhost:8081" }));

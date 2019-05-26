@@ -124,14 +124,14 @@ router.post(
           username: user.username
         };
         req.session.user = req.body;
-        req.logIn(user, err => {
-          if (err) {
-            return next(err);
-          } else {
-            console.log("sdfads");
-            res.json(userData);
-          }
-        });
+        // req.logIn(user, err => {
+        //   if (err) {
+        //     return next(err);
+        //   } else {
+        //     console.log("sdfads");
+        //     res.json(userData);
+        //   }
+        // });
         console.log("Session user", req.session.user);
       })
       .catch(err => {
