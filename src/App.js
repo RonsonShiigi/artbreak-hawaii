@@ -5,6 +5,7 @@ import Header from "./components/header";
 import Gallery from "./components/gallery";
 import Cover from "./components/cover";
 import Register from "./components/register";
+import Login from "./components/login";
 
 //react router imports
 import {
@@ -39,6 +40,8 @@ class App extends Component {
         <Header />
         <Cover />
         <Gallery />
+        <Register />
+        <Login />
       </React.Fragment>
     );
   }

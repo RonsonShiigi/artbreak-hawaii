@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const LocalStrategy = require("passport-local");
+const LocalStrategy = require("passport-local").Strategy;
 
 const Users = require("../../models/UsersModel");
 
@@ -27,6 +27,7 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(
+  "local",
   new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
     console.log("emailddddd", email);
     console.log("lcoal is being called");
@@ -40,15 +41,23 @@ passport.use(
         // } else {
         //   done(null, false);
         // }
-        bcrypt.compare(password, user.password).then(res => {
-          if (res) {
-            done(null, user);
-          } else {
-            done(null, false);
-          }
-        });
+        bcrypt
+          .compare(password, user.password)
+          .then(res => {
+            if (res) {
+              console.log("Passwords match");
+              done(null, user);
+            } else {
+              console.log("passwords don't match");
+              done(null, false);
+            }
+          })
+          .catch(err => {
+            console.log("bcrypt err", err);
+          });
       })
       .catch(err => {
+        console.log("auth ERRR", err);
         done(null, false);
       });
   })
@@ -84,7 +93,9 @@ router.post("/auth/register", (req, res) => {
     })
     .then(user => {
       user = user.toJSON();
-      res.redirect("/"); //Never send entire user obj to user
+      console.log("user", user);
+      res.send(user);
+      // res.redirect("/"); //Never send entire user obj to user
       //res.sendStatus(200)
       //res.redirect('/api/auth/secret')
     })
@@ -100,40 +111,77 @@ router.post(
   (req, res) => {
     const email = req.body.email;
     // Users.where({ email });
-    req.session.user = req.body;
-    let user = req.body;
+    // let user = req.body;
     console.log("sesshan", req.session);
     Users.where({ email })
       .fetch()
-      .then(user => {});
-    req.logIn(user, err => {
-      if (err) {
-        return next(err);
-      } else {
-        console.log("sdfads");
-      }
-    });
+      .then(user => {
+        user = user.toJSON();
+        const userData = {
+          id: user.id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          username: user.username
+        };
+        req.session.user = req.body;
+        // req.logIn(user, err => {
+        //   if (err) {
+        //     return next(err);
+        //   } else {
+        //     console.log("sdfads");
+        //     res.json(userData);
+        //   }
+        // });
+        console.log("Session user", req.session.user);
+      })
+      .catch(err => {
+        console.log("err", err);
+        res.sendStatus(500);
+      });
     console.log(
       "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&You Have Succesfully Logged In"
     );
-    res.redirect("/");
+    res.send("AUTH");
+    // res.redirect("/");
     //grab the user on record
     //compare req.body.password to password on record
   }
 );
 
-router.post("/auth/logout", (req, res) => {
-  req.logout();
-  console.log("loggingOff");
+// router.post("/auth/logout", (req, res) => {
+//   req.logout();
+//   console.log("loggingOff");
+//   res.redirect("/");
+// });
+
+router.post("/logout", (req, res) => {
+  console.log("before", req.session);
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        return next(err);
+      } else {
+        console.log("after", req.session);
+      }
+    });
+  }
   res.redirect("/");
 });
 
 function isAuthenticated(req, res, done) {
   if (req.isAuthenticated()) {
+    console.log("authenticated");
     done();
   } else {
+    console.log("not auth....");
+    console.log("req is Auth", req.isAuthenticated());
     res.redirect("/");
   }
 }
+
+router.get("/secret", isAuthenticated, (req, res) => {
+  console.log("secret authed!");
+  res.send("YOU ARE AUTHENTICATED!!!");
+});
 
 module.exports = router;
