@@ -5,17 +5,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
-class ShopCart extends Component {
+class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: []
-      //   title: "",
-      //   description: "",
-      //   image_url: "",
-      //   user_id: "",
-      //   price: null,
-      //   seller_id: ""
     };
   }
   componentDidMount = e => {
@@ -43,17 +37,16 @@ class ShopCart extends Component {
           <div>
             <div>{item.title}</div>
             <div>${item.price}</div>
-            <button>Delete</button>
           </div>
         ))}
         <div>
-          Sub Total: ${items.forEach(item => (total += parseInt(item.price)))}
+          Payment Total: $
+          {items.forEach(item => (total += parseInt(item.price)))}
           {total.toFixed(2)}
         </div>
-        <button>Proceed to Checkout</button>
       </div>
     );
   }
 }
 
-export default ShopCart;
+export default Checkout;
