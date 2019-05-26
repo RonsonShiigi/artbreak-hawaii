@@ -13,14 +13,15 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       height: "100vh",
       minHeight: 500,
-      maxHeight: 1300
+      maxHeight: 100
     }
   },
   main: {
     display: "flex",
+    height: "100vh",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: theme.spacing.unit * 3
+    marginBottom: theme.spacing(3)
   },
   backdrop: {
     position: "absolute",

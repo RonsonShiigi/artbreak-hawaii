@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
-import ButtonBase from "@material-ui/core/ButtonBase";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import { Typography, ButtonBase } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -99,18 +101,22 @@ const Gallery = props => {
           <ButtonBase
             key={i}
             className={classes.imageWrapper}
-            // style={{ width: product.width }}
+            style={{
+              width: product.width
+            }}
           >
             <div
               className={classes.imageSrc}
-              style={{ backgroundImage: `url(${product.image_url})` }}
+              style={{
+                backgroundImage: `url(${product.image_url})`
+              }}
             />
             <div className={classes.imageBackdrop} />
             <div className={classes.imageButton}>
               <Typography
                 component="h3"
                 variant="h6"
-                color="#000"
+                color="inherit"
                 className={classes.imageTitle}
               >
                 {product.title}
