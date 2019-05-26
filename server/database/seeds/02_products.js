@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex("products").insert([
         {
-          title: "Meme Machine",
+          title: "d",
           description: "Sam's Cool Meme",
           image_url: "https://i.imgur.com/CC4EFLz.jpg",
           user_id: 1,

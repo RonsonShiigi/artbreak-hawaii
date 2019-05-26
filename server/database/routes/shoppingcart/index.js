@@ -6,6 +6,7 @@ router
   //Get all users shopping cart items by user_id.
   .route("/:id")
   .get((req, res) => {
+    console.log("getting the items!!");
     ShoppingCart.where({ user_id: req.params.id })
       .fetchAll()
       .then(items => {

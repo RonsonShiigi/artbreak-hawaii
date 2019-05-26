@@ -6,6 +6,7 @@ import Gallery from "./components/gallery";
 import Cover from "./components/cover";
 import Register from "./components/register";
 import Login from "./components/login";
+import ShopCart from "./components/shopping-cart";
 
 //react router imports
 import {
@@ -40,8 +41,10 @@ class App extends Component {
         <Header />
         <Cover />
         <Gallery />
-        <Register />
-        <Login />
+        {/* <Register />
+        <Login /> */}
+        <div>ShoppingCart</div>
+        <ShopCart />
       </React.Fragment>
     );
   }
