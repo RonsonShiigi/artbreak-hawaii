@@ -77,19 +77,6 @@ router
       });
   });
 
-<<<<<<< HEAD
-router.route("/:id").get((req, res) => {
-  return new req.database.Product()
-    .where("id", req.params.id)
-    .fetch()
-    .then(product => {
-      console.log("PRODUCT", product);
-      return res.json(product);
-    })
-    .catch(err => {
-      console.log(err);
-      res.send(500);
-=======
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
   const body = req.body;
@@ -164,7 +151,6 @@ router.delete("/:id", (req, res) => {
 
           return res.redirect("/");
         });
->>>>>>> 0a1f289a0afe6cba7c3bd14d914d7ecc9e8e825e
     });
 });
 

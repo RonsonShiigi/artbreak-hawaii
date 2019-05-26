@@ -6,13 +6,10 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-function Register() {
+function Login() {
   const [values, setValues] = React.useState({
     email: "",
-    password: "",
-    first_name: "",
-    last_name: "",
-    username: ""
+    password: ""
   });
 
   const handleChange = name => e => {
@@ -21,8 +18,9 @@ function Register() {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("state", values);
-    fetch("http://localhost:8080/api/auth/register", {
+    fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
@@ -36,7 +34,7 @@ function Register() {
       })
     })
       .then(() => {
-        console.log("User added to database");
+        console.log("User Logged In...");
       })
       .catch(err => {
         console.log(err);
@@ -62,33 +60,9 @@ function Register() {
           onChange={handleChange("password")}
           margin="normal"
         />
-        <TextField
-          id="username"
-          label="username"
-          key="username"
-          value={values.username}
-          onChange={handleChange("username")}
-          margin="normal"
-        />
-        <TextField
-          id="first_name"
-          label="first_name"
-          key="first_name"
-          value={values.first_name}
-          onChange={handleChange("first_name")}
-          margin="normal"
-        />
-        <TextField
-          id="last_name"
-          label="last_name"
-          key="last_name"
-          value={values.last_name}
-          onChange={handleChange("last_name")}
-          margin="normal"
-        />
         <Button type="submit">Submit</Button>
       </form>
     </div>
   );
 }
-export default Register;
+export default Login;

@@ -4,8 +4,17 @@ const Comment = require("./models/CommentsModel");
 const Like = require("./models/LikesModel");
 const Message = require("./models/MessagesModel");
 const Purchase = require("./models/PurchasesModel");
+const ShoppingCart = require("./models/ShoppingCartModel");
 
 module.exports = function(req, res, next) {
-  req.database = { User, Product, Comment, Like, Message, Purchase };
+  req.database = {
+    User,
+    Product,
+    Comment,
+    Like,
+    Message,
+    Purchase,
+    ShoppingCart
+  };
   next();
 };
