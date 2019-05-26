@@ -15,7 +15,7 @@ const styles = theme => ({
     marginBottom: theme.spacing(4)
   },
   images: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(30),
     display: "flex",
     flexWrap: "wrap"
   },
@@ -24,7 +24,8 @@ const styles = theme => ({
     display: "block",
     padding: 0,
     borderRadius: 0,
-    height: "40vh",
+    height: "25vh",
+    width: "50vh",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
       height: 100

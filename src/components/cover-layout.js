@@ -5,6 +5,7 @@ import { spacing } from "@material-ui/system";
 
 import { withStyles } from "@material-ui/core/styles";
 
+const backgroundImg = require("./assets/banner.png");
 const styles = theme => ({
   root: {
     display: "flex",
@@ -18,13 +19,20 @@ const styles = theme => ({
   },
   main: {
     display: "flex",
+    position: "absolute",
+    top: 0,
+    left: 0,
     height: "100vh",
+    width: "100vw",
     flexDirection: "column",
     alignItems: "center",
+    backgroundImage: `url(${backgroundImg})`,
     marginBottom: theme.spacing(3)
   },
   backdrop: {
+    display: "flex",
     position: "absolute",
+    height: "100vh",
     top: 0,
     left: 0,
     right: 0,
