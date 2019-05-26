@@ -7,23 +7,18 @@ import { Link, Switch, Route } from "react-router-dom";
 
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Stars from "@material-ui/icons/Stars";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import IconButton from "@material-ui/core/IconButton";
-import ImageSearch from "@material-ui/icons/ImageSearch";
 import Typography from "@material-ui/core/Typography";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import PropTypes from "prop-types";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#000"
   },
   grow: {
     flexGrow: 1
@@ -42,47 +37,9 @@ const styles = theme => ({
       display: "block"
     }
   },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
-    },
-    marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit * 3,
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: "inherit",
-    width: "100%"
-  },
+
   rightIcon: {
-    marginLeft: theme.spacing.unit
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: 200
-    }
+    marginLeft: theme.spacing(2)
   },
   sectionDesktop: {
     display: "none",
@@ -120,39 +77,21 @@ class Header extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="fixed" color="default" elevation="1">
-          <Toolbar>
+        <AppBar position="fixed" elevation="1">
+          <Toolbar color="#000">
             <Typography variant="h2" color="inherit" noWrap>
               ARTBREAK-HI
             </Typography>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <ImageSearch />
-              </div>
-              <InputBase
-                placeholder="SEARCH"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div>
+
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton color="inherit">
-                <Badge badgeContent={20} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <Button variant="contained" color="secondary">
-                Login
+              <ButtonBase color="main">
+                <Typography component="h3" variant="h6" color="inherit">
+                  Login
+                </Typography>
+
                 <Stars className={classes.rightIcon} />
-              </Button>
+              </ButtonBase>
 
               {/* <Button
                 variant="contained"
