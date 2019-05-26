@@ -66,7 +66,7 @@ router.put("/:id", (req, res) => {
             email: body.email,
             first_name: body.first_name,
             last_name: body.last_name,
-            updated_at: new Date().getTimezoneOffset()
+            updated_at: new Date()
           },
           {
             patch: true
