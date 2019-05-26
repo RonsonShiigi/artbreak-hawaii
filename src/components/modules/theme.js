@@ -10,7 +10,8 @@ const rawTheme = createMuiTheme({
     primary: {
       light: "#F5E0D3",
       main: "#DE6262",
-      dark: "#4D3B3B"
+      dark: "#4D3B3B",
+      background: "#0e0e0e"
     },
     secondary: {
       light: "#F0F0D8",
@@ -31,6 +32,13 @@ const rawTheme = createMuiTheme({
       main: green[500],
       dark: green[700]
     }
+  },
+  typography: {
+    fontFamily: "'Roboto Condensed', sans-serif",
+    fontSize: 14,
+    fontWeightLight: 300, // Work Sans
+    fontWeightRegular: 400, // Work Sans
+    fontWeightMedium: 700 // Roboto Condensed
   }
 });
 const fontHeader = {

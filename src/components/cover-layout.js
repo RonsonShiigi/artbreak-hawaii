@@ -16,11 +16,11 @@ const styles = theme => ({
       maxHeight: 1300
     }
   },
-  div: {
+  main: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: 25
+    marginBottom: theme.spacing.unit * 3
   },
   backdrop: {
     position: "absolute",
@@ -49,9 +49,10 @@ function CoverLayout(props) {
 
   return (
     <section className={classes.root}>
-      <div className={classes.div}>
+      <div className={classes.main}>
         {children}
         <div className={classes.backdrop} />
+        <div className={clsx(classes.background, bgClass)} />
       </div>
     </section>
   );
