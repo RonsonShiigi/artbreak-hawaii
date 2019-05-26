@@ -6,6 +6,11 @@ const AWS = require("aws-sdk");
 const multer = require("multer");
 const multer3 = require("multer-s3");
 
+const fs = require("fs");
+const fileType = require("file-type");
+const bluebird = require("bluebird");
+const multiparty = require("multiparty");
+
 //set up AWS environment
 AWS.config.update({
   region: "us-west-2",
@@ -29,6 +34,17 @@ const upload = multer({
   })
 });
 
+const uploadFile = (buffer, name, type) => {
+  const params = {
+    ACL: "public-read",
+    Body: buffer,
+    Bucket: process.env.AWS_BUCKET_NAME,
+    ContentType: type.mime,
+    Key: `${name}.${type.ext}`
+  };
+  return s3.upload(params).promise();
+};
+
 router
   .route("/")
   // GET PRODUCT
@@ -45,10 +61,26 @@ router
         res.sendStatus(500);
       });
   })
-
+  // .post((req, res) => {
+  //   console.log("backend hi");
+  //   const form = new multiparty.Form();
+  //   form.parse(req, async (error, fields, files) => {
+  //     if (error) throw new Error(error);
+  //     try {
+  //       const path = files.file[0].path;
+  //       const buffer = fs.readFileSync(path);
+  //       const type = fileType(buffer);
+  //       const fileName = `bucketFolder/${timestamp}-lg`;
+  //       const data = await uploadFile(buffer, fileName, type);
+  //       return res.status(200).send(data);
+  //     } catch (error) {
+  //       return res.status(400).send(error);
+  //     }
+  //   });
+  // })
   // POST PRODUCT
   .post(upload.single("photos"), (req, res) => {
-    console.log("hitting");
+    console.log("hitting", req.body);
 
     const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
     const title = req.body.title;
@@ -72,24 +104,12 @@ router
         return res.json({ success: true });
       })
       .catch(err => {
+        console.log("you are fucking up but hitting backend");
         console.log(err);
         res.sendStatus(500);
       });
   });
 
-<<<<<<< HEAD
-router.route("/:id").get((req, res) => {
-  return new req.database.Product()
-    .where("id", req.params.id)
-    .fetch()
-    .then(product => {
-      console.log("PRODUCT", product);
-      return res.json(product);
-    })
-    .catch(err => {
-      console.log(err);
-      res.send(500);
-=======
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
   const body = req.body;
@@ -164,7 +184,6 @@ router.delete("/:id", (req, res) => {
 
           return res.redirect("/");
         });
->>>>>>> 0a1f289a0afe6cba7c3bd14d914d7ecc9e8e825e
     });
 });
 
