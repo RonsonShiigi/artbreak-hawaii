@@ -5,6 +5,7 @@ import { spacing } from "@material-ui/system";
 
 import { withStyles } from "@material-ui/core/styles";
 
+const backgroundImg = require("./assets/banner.png");
 const styles = theme => ({
   root: {
     display: "flex",
@@ -13,17 +14,25 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       height: "100vh",
       minHeight: 500,
-      maxHeight: 1300
+      maxHeight: 100
     }
   },
   main: {
     display: "flex",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: "100vh",
+    width: "100%",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: theme.spacing.unit * 3
+    backgroundImage: `url(${backgroundImg})`,
+    marginBottom: theme.spacing(3)
   },
   backdrop: {
+    display: "flex",
     position: "absolute",
+    height: "100vh",
     top: 0,
     left: 0,
     right: 0,
@@ -41,6 +50,9 @@ const styles = theme => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     zIndex: -2
+  },
+  typography: {
+    position: "relative"
   }
 });
 
