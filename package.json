@@ -11,6 +11,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bookshelf": "^0.14.2",
+    "clsx": "^1.0.4",
     "connect-redis": "^3.4.1",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
@@ -36,6 +37,7 @@
     "roboto-fontface": "^0.10.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "roboto-fontface": "^0.10.0",
     "styled-components": "^4.2.0",
     "styled-jsx": "^3.2.1",
     "typeface-roboto": "0.0.54"

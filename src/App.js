@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import withRoot from "./components/modules/withRoot";
 import Header from "./components/header";
 import Gallery from "./components/gallery";
+import Cover from "./components/cover";
 import Register from "./components/register";
 import Login from "./components/login";
 
@@ -37,6 +38,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
+        <Cover />
         <Gallery />
         <Register />
         <Login />
