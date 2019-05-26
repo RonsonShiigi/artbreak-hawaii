@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import { Typography, ButtonBase, Tab, Tabs } from "@material-ui/core";
+
+const bgUrl = require("./assets/heartbg.png");
 
 const styles = theme => ({
   root: {
+    background: `url(${bgUrl})`,
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4)
+  },
+  heading: {
+    marginTop: theme.spacing(45)
   },
   images: {
     marginTop: theme.spacing(8),
@@ -23,6 +28,7 @@ const styles = theme => ({
     padding: 0,
     borderRadius: 0,
     height: "40vh",
+    width: "50vh",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
       height: 100
@@ -91,26 +97,34 @@ const Gallery = props => {
 
   return (
     <Container className={classes.root} component="section">
-      <Typography variant="h4" marked="center" align="center" component="h2">
-        MOM HOLY FUCK!!!!{" "}
+      <Typography
+        variant="h4"
+        align="center"
+        component="h2"
+        className={classes.heading}
+      >
+        new & popular
       </Typography>
       <div className={classes.images}>
         {props.products.map((product, i) => (
           <ButtonBase
             key={i}
             className={classes.imageWrapper}
-            // style={{ width: product.width }}
+            style={{
+              width: product.width
+            }}
           >
             <div
               className={classes.imageSrc}
-              style={{ backgroundImage: `url(${product.image_url})` }}
+              style={{
+                backgroundImage: `url(${product.image_url})`
+              }}
             />
             <div className={classes.imageBackdrop} />
             <div className={classes.imageButton}>
               <Typography
-                component="h3"
-                variant="h6"
-                color="#000"
+                variant="h2"
+                color="inherit"
                 className={classes.imageTitle}
               >
                 {product.title}
