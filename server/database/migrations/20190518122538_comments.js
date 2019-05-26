@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer("user_id");
     table.integer("product_id");
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
+    table.timestamp("updated_at");
   });
 };
 
