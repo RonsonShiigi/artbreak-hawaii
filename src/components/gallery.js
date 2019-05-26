@@ -9,8 +9,11 @@ import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, ButtonBase } from "@material-ui/core";
 
+const bgUrl = require("./assets/heartbg.png");
+
 const styles = theme => ({
   root: {
+    background: `url(${bgUrl})`,
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4)
   },
@@ -103,7 +106,7 @@ const Gallery = props => {
         component="h2"
         className={classes.heading}
       >
-        MOM HOLY FUCK!!!!
+        new & popular
       </Typography>
       <div className={classes.images}>
         {props.products.map((product, i) => (
