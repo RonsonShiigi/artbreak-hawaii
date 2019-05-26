@@ -32,7 +32,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    top: 100
+    top: 80
   }
 });
 
