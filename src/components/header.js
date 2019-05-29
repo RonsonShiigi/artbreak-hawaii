@@ -2,22 +2,15 @@ import React from "react";
 import { Component } from "react";
 
 import Register from "./register";
-//react router imports
-import { Link, Switch, Route } from "react-router-dom";
-
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import ButtonBase from "@material-ui/core/ButtonBase";
 import Stars from "@material-ui/icons/Stars";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import IconButton from "@material-ui/core/IconButton";
-import ImageSearch from "@material-ui/icons/ImageSearch";
 import Typography from "@material-ui/core/Typography";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+
+import Login from "./login";
 
 import PropTypes from "prop-types";
 
@@ -85,16 +78,25 @@ class Header extends Component {
       <React.Fragment>
         <AppBar position="fixed" elevation="1">
           <Toolbar color="#000">
-            <Typography variant="h2" color="inherit" noWrap>
-              ARTBREAK-HI
-            </Typography>
+            <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
+              <Typography variant="h2" color="inherit" noWrap>
+                ARTBREAK-HI
+              </Typography>
+            </a>
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <Button variant="contained" color="secondary">
-                Login
-                <Stars className={classes.rightIcon} />
-              </Button>
+              <a
+                href="/login"
+                style={{ color: "#fff", textDecoration: "none" }}
+              >
+                <ButtonBase color="main">
+                  <Typography component="h3" variant="h6" color="inherit">
+                    Login
+                  </Typography>
+                  <Stars className={classes.rightIcon} />
+                </ButtonBase>
+              </a>
 
               {/* <Button
                 variant="contained"

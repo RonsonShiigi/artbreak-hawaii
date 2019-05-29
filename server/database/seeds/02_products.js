@@ -34,6 +34,13 @@ exports.seed = function(knex, Promise) {
             "https://i.pinimg.com/originals/75/de/e9/75dee965859cee00acde21420aafcd15.jpg",
           user_id: 4,
           price: 10.0
+        },
+        {
+          title: "My Dumb Baby",
+          description: "The best girl in the world",
+          image_url: "https://i.imgur.com/C0EA6N5.jpg",
+          user_id: 1,
+          price: 10.0
         }
       ]);
     });

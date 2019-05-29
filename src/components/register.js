@@ -44,50 +44,67 @@ function Register() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          id="email"
-          label="email"
-          key="email"
-          value={values.email}
-          onChange={handleChange("email")}
-          margin="normal"
-        />
-        <TextField
-          id="password"
-          label="password"
-          key="password"
-          value={values.password}
-          onChange={handleChange("password")}
-          margin="normal"
-        />
-        <TextField
-          id="username"
-          label="username"
-          key="username"
-          value={values.username}
-          onChange={handleChange("username")}
-          margin="normal"
-        />
-        <TextField
-          id="first_name"
-          label="first_name"
-          key="first_name"
-          value={values.first_name}
-          onChange={handleChange("first_name")}
-          margin="normal"
-        />
-        <TextField
-          id="last_name"
-          label="last_name"
-          key="last_name"
-          value={values.last_name}
-          onChange={handleChange("last_name")}
-          margin="normal"
-        />
-        <Button type="submit">Submit</Button>
-      </form>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          position: "absolute",
+          top: "20vh",
+          width: "50vh"
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="email"
+            label="email"
+            key="email"
+            value={values.email}
+            onChange={handleChange("email")}
+            margin="normal"
+          />
+          <TextField
+            id="password"
+            label="password"
+            key="password"
+            value={values.password}
+            onChange={handleChange("password")}
+            margin="normal"
+          />
+          <TextField
+            id="username"
+            label="username"
+            key="username"
+            value={values.username}
+            onChange={handleChange("username")}
+            margin="normal"
+          />
+          <TextField
+            id="first_name"
+            label="first_name"
+            key="first_name"
+            value={values.first_name}
+            onChange={handleChange("first_name")}
+            margin="normal"
+          />
+          <TextField
+            id="last_name"
+            label="last_name"
+            key="last_name"
+            value={values.last_name}
+            onChange={handleChange("last_name")}
+            margin="normal"
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </div>
     </div>
   );
 }

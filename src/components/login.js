@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Paper from "@material-ui/core/Paper";
+import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-function Login() {
+function Login(props) {
   const [values, setValues] = React.useState({
     email: "",
     password: ""
@@ -42,27 +43,46 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          id="email"
-          label="email"
-          key="email"
-          value={values.email}
-          onChange={handleChange("email")}
-          margin="normal"
-        />
-        <TextField
-          id="password"
-          label="password"
-          key="password"
-          value={values.password}
-          onChange={handleChange("password")}
-          margin="normal"
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </div>
+    <React.Fragment>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            position: "absolute",
+            top: "20vh",
+            width: "50vh"
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <TextField
+              id="email"
+              label="email"
+              key="email"
+              value={values.email}
+              onChange={handleChange("email")}
+              margin="normal"
+            />
+            <TextField
+              id="password"
+              label="password"
+              key="password"
+              value={values.password}
+              onChange={handleChange("password")}
+              margin="normal"
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </div>
+      </div>
+    </React.Fragment>
   );
 }
 export default Login;
