@@ -6,11 +6,8 @@ import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, ButtonBase, Tab, Tabs } from "@material-ui/core";
 
-const bgUrl = require("../assets/heartbg.png");
-
 const styles = theme => ({
   root: {
-    background: `url(${bgUrl})`,
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(4)
   },
@@ -20,15 +17,16 @@ const styles = theme => ({
   images: {
     marginTop: theme.spacing(8),
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    width: "100%"
   },
   imageWrapper: {
     position: "relative",
     display: "block",
     padding: 0,
     borderRadius: 0,
-    height: "40vh",
-    width: "50vh",
+    height: "25vh",
+    width: "30vh",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
       height: 100
@@ -122,11 +120,7 @@ const Gallery = props => {
             />
             <div className={classes.imageBackdrop} />
             <div className={classes.imageButton}>
-              <Typography
-                variant="h2"
-                color="inherit"
-                className={classes.imageTitle}
-              >
+              <Typography color="inherit" className={classes.imageTitle}>
                 {product.title}
                 <div className={classes.imageMarked} />
               </Typography>

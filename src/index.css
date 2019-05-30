@@ -1,3 +1,10 @@
+a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,6 +12,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.body-container {
+  width: 100vw;
+  background-color: #432330;
 }
 
 code {

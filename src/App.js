@@ -7,7 +7,7 @@ import Login from "./components/Login/login";
 import { Link } from "react-router-dom";
 
 //react router imports
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
@@ -30,7 +30,11 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Main />
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
       </div>
     );
   }

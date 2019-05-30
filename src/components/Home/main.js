@@ -24,7 +24,6 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <Cover />
         <Gallery />
       </React.Fragment>

@@ -23,7 +23,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <div class="body-container">
+        <App />
+      </div>
     </Router>
   </Provider>,
   document.getElementById("root")
