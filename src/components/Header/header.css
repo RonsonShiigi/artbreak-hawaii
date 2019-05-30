@@ -1,0 +1,10 @@
+.header-links {
+  display: flex;
+  flex-direction: row nowrap;
+  margin-left: 50px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 15px;
+}

@@ -1,22 +1,18 @@
 import React, { Component } from "react";
 
 import withRoot from "./components/modules/withRoot";
-import Main from "./components/main";
-import Header from "./components/header";
-import Register from "./components/register";
+
 import NewProduct from "./components/newProduct";
-import Login from "./components/login";
+
 import FileUpload from "./components/newProduct2";
+import Main from "./components/Home/main";
+import Header from "./components/Header/header";
+import Register from "./components/Register/register";
+import Login from "./components/Login/login";
+import { Link } from "react-router-dom";
 
 //react router imports
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
@@ -37,18 +33,15 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div>
         <Header />
-        <FileUpload />
-        <Router>
-          <div>
-            <Route exact path="/" component={Main} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/newProduct" component={FileUpload} />
-          </div>
-        </Router>
-      </React.Fragment>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/newProduct" component={FileUpload} />
+        </Switch>
+      </div>
     );
   }
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-
-import Paper from "@material-ui/core/Paper";
+import "./login.css";
 import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -43,46 +43,43 @@ function Login(props) {
   };
 
   return (
-    <React.Fragment>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            position: "absolute",
-            top: "20vh",
-            width: "50vh"
-          }}
-        >
-          <form onSubmit={handleSubmit}>
-            <TextField
-              id="email"
-              label="email"
-              key="email"
-              value={values.email}
-              onChange={handleChange("email")}
-              margin="normal"
-            />
-            <TextField
-              id="password"
-              label="password"
-              key="password"
-              value={values.password}
-              onChange={handleChange("password")}
-              margin="normal"
-            />
-            <Button type="submit">Submit</Button>
-          </form>
-        </div>
-      </div>
-    </React.Fragment>
+    <div className="container">
+      <Paper className="loginHolder">
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="email"
+            label="email"
+            key="email"
+            value={values.email}
+            onChange={handleChange("email")}
+            margin="normal"
+            variant="outlined"
+            fullWidth="true"
+          />
+          <br />
+          <TextField
+            id="password"
+            label="password"
+            key="password"
+            value={values.password}
+            onChange={handleChange("password")}
+            margin="normal"
+            variant="outlined"
+            fullWidth="true"
+          />
+          <br />
+          <Button
+            type="submit"
+            fullWidth="true"
+            color="secondary"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </form>
+      </Paper>
+    </div>
   );
 }
+
 export default Login;

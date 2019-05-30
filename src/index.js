@@ -4,8 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import Login from "./components/login";
-import Register from "./components/register";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //redux shite
 import ReduxThunk from "redux-thunk";
@@ -23,7 +22,11 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <div class="body-container">
+        <App />
+      </div>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

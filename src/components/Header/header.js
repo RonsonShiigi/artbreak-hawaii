@@ -1,23 +1,19 @@
 import React from "react";
 import { Component } from "react";
+import { Link } from "react-router-dom";
+import "./header.css";
 
-import Register from "./register";
-import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Stars from "@material-ui/icons/Stars";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 
-import Login from "./login";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Typography from "@material-ui/core/Typography";
 
 import PropTypes from "prop-types";
 
 const styles = theme => ({
   root: {
     width: "100%",
-    backgroundColor: "#000"
+    marginLeft: "5vh"
   },
   grow: {
     flexGrow: 1
@@ -36,20 +32,10 @@ const styles = theme => ({
       display: "block"
     }
   },
-
-  rightIcon: {
-    marginLeft: theme.spacing(2)
-  },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex"
-    }
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none"
     }
   }
 });
@@ -75,30 +61,27 @@ class Header extends Component {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
-        <AppBar position="fixed" elevation="1">
-          <Toolbar color="#000">
-            <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
-              <Typography variant="h2" color="inherit" noWrap>
-                ARTBREAK-HI
-              </Typography>
-            </a>
+      <div className="header-links">
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Typography variant="h2" color="inherit" noWrap>
+            ARTBREAK-HI
+          </Typography>
+        </Link>
 
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <a
-                href="/login"
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
-                <ButtonBase color="main">
-                  <Typography component="h3" variant="h6" color="inherit">
-                    Login
-                  </Typography>
-                  <Stars className={classes.rightIcon} />
-                </ButtonBase>
-              </a>
+        <ul>
+          <li>
+            <Link to="/login">
+              <Typography>Login</Typography>
+            </Link>
+          </li>
+          <li>
+            <Link to="/register">
+              <Typography>Register</Typography>
+            </Link>
+          </li>
+        </ul>
 
-              {/* <Button
+        {/* <Button
                 variant="contained"
                 color="secondary"
                 component={Link}
@@ -107,10 +90,7 @@ class Header extends Component {
                 Register
                 <Stars className={classes.rightIcon} />
               </Button> */}
-            </div>
-          </Toolbar>
-        </AppBar>
-      </React.Fragment>
+      </div>
     );
   }
 }

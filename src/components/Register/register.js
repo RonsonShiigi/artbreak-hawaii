@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "./Register.css";
 
-import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
 function Register() {
@@ -44,23 +44,8 @@ function Register() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          position: "absolute",
-          top: "20vh",
-          width: "50vh"
-        }}
-      >
+    <div className="container">
+      <Paper className="formHolder">
         <form onSubmit={handleSubmit}>
           <TextField
             id="email"
@@ -69,6 +54,8 @@ function Register() {
             value={values.email}
             onChange={handleChange("email")}
             margin="normal"
+            fullWidth="true"
+            variant="outlined"
           />
           <TextField
             id="password"
@@ -77,6 +64,8 @@ function Register() {
             value={values.password}
             onChange={handleChange("password")}
             margin="normal"
+            fullWidth="true"
+            variant="outlined"
           />
           <TextField
             id="username"
@@ -85,6 +74,8 @@ function Register() {
             value={values.username}
             onChange={handleChange("username")}
             margin="normal"
+            fullWidth="true"
+            variant="outlined"
           />
           <TextField
             id="first_name"
@@ -93,6 +84,8 @@ function Register() {
             value={values.first_name}
             onChange={handleChange("first_name")}
             margin="normal"
+            fullWidth="true"
+            variant="outlined"
           />
           <TextField
             id="last_name"
@@ -101,10 +94,19 @@ function Register() {
             value={values.last_name}
             onChange={handleChange("last_name")}
             margin="normal"
+            fullWidth="true"
+            variant="outlined"
           />
-          <Button type="submit">Submit</Button>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth="true"
+            color="secondary"
+          >
+            Submit
+          </Button>
         </form>
-      </div>
+      </Paper>
     </div>
   );
 }

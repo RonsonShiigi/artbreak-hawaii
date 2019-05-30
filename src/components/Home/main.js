@@ -1,27 +1,14 @@
 import React, { Component } from "react";
 
-import withRoot from "./modules/withRoot";
-import Header from "./header";
-import Gallery from "./gallery";
-import Cover from "./cover";
-import Register from "./register";
-import Login from "./login";
-
-//react router imports
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import withRoot from "../modules/withRoot";
+import Header from "../Header/header";
+import Gallery from "../Gallery/gallery";
+import Cover from "../Cover/cover";
 
 //actions
-import { getProducts } from "../actions/actions";
+import { getProducts } from "../../actions/actions";
 
 import { connect } from "react-redux";
-import Axios from "axios";
 
 class Main extends Component {
   constructor(props) {
@@ -37,7 +24,6 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
         <Cover />
         <Gallery />
       </React.Fragment>
