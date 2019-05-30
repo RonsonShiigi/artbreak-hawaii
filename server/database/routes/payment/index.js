@@ -9,7 +9,7 @@ router.route("/checkout").post((req, res) => {
   const buyer_id = 4; //NEED TO MAKE DYNAMIC*****************************!!!!!!!!******
   stripe.charges.create(
     {
-      amount: 7500,
+      amount: 7500 /*NEED TO MAKE DYNAMIC - either pass from front end or start off with a database pull by user_id for their checkout cart*/,
       currency: "usd",
       description: "Test Transfer two accts charge",
       source: stripeToken,
