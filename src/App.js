@@ -6,6 +6,7 @@ import Gallery from "./components/gallery";
 import Cover from "./components/cover";
 import Register from "./components/register";
 import Login from "./components/login";
+import Search from "./components/search";
 
 //react router imports
 import {
@@ -42,6 +43,7 @@ class App extends Component {
         <Gallery />
         <Register />
         <Login />
+        <Search />
       </React.Fragment>
     );
   }
@@ -52,6 +54,9 @@ const mapDispatchToProps = dispatch => {
     getProducts: () => dispatch(getProducts())
   };
 };
+
+console.log("filter data", getProducts());
+let products = [{}];
 
 export default connect(
   null,
