@@ -78,15 +78,17 @@ router
   //     }
   //   });
   // })
+
+  // upload.single("photos"),
   // POST PRODUCT
-  .post(upload.single("photos"), (req, res) => {
+  .post((req, res) => {
     console.log("hitting", req.body);
 
     const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
     const title = req.body.title;
     const description = req.body.description;
-    // const image_url = req.body.image_url;
-    const image_url = url + res.req.file.key;
+    const image_url = req.body.image_url;
+    // const image_url = url + res.req.file.key;
     const user_id = req.body.user_id;
     const price = req.body.price;
 

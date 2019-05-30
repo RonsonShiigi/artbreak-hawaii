@@ -6,6 +6,7 @@ import Header from "./components/header";
 import Register from "./components/register";
 import NewProduct from "./components/newProduct";
 import Login from "./components/login";
+import FileUpload from "./components/newProduct2";
 
 //react router imports
 import {
@@ -38,11 +39,13 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
+        <FileUpload />
         <Router>
           <div>
             <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/newProduct" component={FileUpload} />
           </div>
         </Router>
       </React.Fragment>
