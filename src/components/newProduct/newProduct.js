@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import { createProduct } from "../actions/actions";
+import { createProduct } from "../../actions/actions";
 import { connect } from "react-redux";
 
 class NewProduct extends Component {

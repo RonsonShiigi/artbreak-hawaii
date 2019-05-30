@@ -3,6 +3,8 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
+import "./newproduct.css";
+
 class FileUpload extends Component {
   constructor() {
     super();
@@ -78,47 +80,52 @@ class FileUpload extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submitFile}>
-        <input
-          label="upload file"
-          type="file"
-          onChange={this.handleFileUpload}
-        />
-        <TextField
-          id="title"
-          label="title"
-          name="title"
-          // value={values.title}
-          onChange={this.handleChange}
-          margin="normal"
-        />
-        <TextField
-          id="description"
-          label="description"
-          name="description"
-          // value={values.description}
-          onChange={this.handleChange}
-          margin="normal"
-        />
-        <TextField
-          id="price"
-          label="price"
-          name="price"
-          // value={values.price}
-          onChange={this.handleChange}
-          margin="normal"
-        />
-        <TextField
-          id="user_id"
-          label="user_id"
-          name="user_id"
-          // value={values.price}
-          onChange={this.handleChange}
-          margin="normal"
-        />
+      <div class="upload-form">
+        <form onSubmit={this.submitFile}>
+          <input
+            label="upload file"
+            type="file"
+            onChange={this.handleFileUpload}
+          />
+          <TextField
+            id="title"
+            label="title"
+            name="title"
+            fullWidth="true"
+            // value={values.title}
+            onChange={this.handleChange}
+            margin="normal"
+            fullWidth="true"
+          />
+          <TextField
+            id="description"
+            label="description"
+            name="description"
+            // value={values.description}
+            onChange={this.handleChange}
+            margin="normal"
+            fullWidth="true"
+          />
+          <TextField
+            id="price"
+            label="price"
+            name="price"
+            // value={values.price}
+            onChange={this.handleChange}
+            margin="normal"
+          />
+          <TextField
+            id="user_id"
+            label="user_id"
+            name="user_id"
+            // value={values.price}
+            onChange={this.handleChange}
+            margin="normal"
+          />
 
-        <button type="submit">Send</button>
-      </form>
+          <button type="submit">Send</button>
+        </form>
+      </div>
     );
   }
 }

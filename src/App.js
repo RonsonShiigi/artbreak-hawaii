@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import withRoot from "./components/modules/withRoot";
 
-import NewProduct from "./components/newProduct";
+import NewProduct from "./components/newProduct/newProduct";
 
-import FileUpload from "./components/newProduct2";
+import FileUpload from "./components/newProduct/newProduct2";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
@@ -19,6 +19,7 @@ import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import Axios from "axios";
+import Dashboard from "./components/Dashboard/dashboard";
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     );

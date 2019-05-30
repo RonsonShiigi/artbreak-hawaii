@@ -79,17 +79,12 @@ class Header extends Component {
               <Typography>Register</Typography>
             </Link>
           </li>
+          <li>
+            <Link to="/dashboard">
+              <Typography>Dashboard</Typography>
+            </Link>
+          </li>
         </ul>
-
-        {/* <Button
-                variant="contained"
-                color="secondary"
-                component={Link}
-                to="/register"
-              >
-                Register
-                <Stars className={classes.rightIcon} />
-              </Button> */}
       </div>
     );
   }
