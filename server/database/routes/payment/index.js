@@ -45,6 +45,12 @@ router.route("/checkout").post((req, res) => {
           return shopcart;
         })
         .then(shopcart => {
+          new req.database.ShoppingCart()
+            .where({ user_id: buyer_id })
+            .destroy()
+            .catch(err => {
+              console.log("error on destroy", err);
+            });
           shopcart.forEach(item => {
             new req.database.User()
               .where({ id: item.seller_id })
