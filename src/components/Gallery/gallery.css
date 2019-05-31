@@ -1,0 +1,10 @@
+.gallery-holder {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  padding-top: 0;
+  padding: 5vw;
+  background-color: #252525;
+  width: 100vw;
+  z-index: 2;
+}

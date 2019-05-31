@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
-import withRoot from "../modules/withRoot";
-import Header from "../Header/header";
-import Gallery from "../Gallery/gallery";
+import Gallery from "../Gallery";
 import Cover from "../Cover/cover";
 
 //actions
@@ -24,8 +22,10 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        <Cover />
-        <Gallery />
+        <div className="body-container">
+          <Cover />
+          <Gallery />
+        </div>
       </React.Fragment>
     );
   }
@@ -40,4 +40,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(withRoot(Main));
+)(Main);

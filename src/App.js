@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 
-import withRoot from "./components/modules/withRoot";
-
-import NewProduct from "./components/newProduct/newProduct";
-
-import FileUpload from "./components/newProduct/newProduct2";
+import FileUpload from "./components/newProduct/newProduct";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
-import { Link } from "react-router-dom";
 
 //react router imports
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -36,15 +31,13 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        <div className="body-container">
-          <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/newProduct" component={FileUpload} />
-            <Route path="/dashboard" component={Dashboard} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/newProduct" component={FileUpload} />
+          <Route path="/dashboard" component={Dashboard} />
+        </Switch>
       </React.Fragment>
     );
   }

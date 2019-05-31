@@ -40,7 +40,7 @@ function Login(props) {
   };
 
   return (
-    <div className="container">
+    <div className="body-container">
       <div className="loginHolder">
         <form onSubmit={handleSubmit}>
           <TextField
