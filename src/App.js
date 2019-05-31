@@ -1,28 +1,25 @@
 import React, { Component } from "react";
 
 import withRoot from "./components/modules/withRoot";
-import Header from "./components/header";
-import Gallery from "./components/gallery";
-import Cover from "./components/cover";
-import Register from "./components/register";
-import Login from "./components/login";
+import NewProduct from "./components/newProduct/newProduct";
+
+import FileUpload from "./components/newProduct/newProduct2";
+import Main from "./components/Home/main";
+import Header from "./components/Header/header";
+import Register from "./components/Register/register";
+import Login from "./components/Login/login";
+import { Link } from "react-router-dom";
 import Search from "./components/search";
 
 //react router imports
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import Axios from "axios";
+import Dashboard from "./components/Dashboard/dashboard";
 
 class App extends Component {
   constructor(props) {
@@ -37,14 +34,16 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div>
         <Header />
-        <Cover />
-        <Gallery />
-        <Register />
-        <Login />
-        <Search />
-      </React.Fragment>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/newProduct" component={FileUpload} />
+          <Route path="/dashboard" component={Dashboard} />
+        </Switch>
+      </div>
     );
   }
 }
@@ -61,4 +60,4 @@ let products = [{}];
 export default connect(
   null,
   mapDispatchToProps
-)(withRoot(App));
+)(App);

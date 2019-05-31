@@ -6,8 +6,8 @@ import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 
 import CoverLayout from "./cover-layout";
 
-const backgroundImg = require("./assets/banner.png");
-const logo = require("./assets/logo.png");
+const backgroundImg = require("../assets/banner.png");
+const logo = require("../assets/logo.png");
 
 const styles = theme => ({
   background: {
@@ -32,7 +32,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    top: 100
+    top: 80
   }
 });
 

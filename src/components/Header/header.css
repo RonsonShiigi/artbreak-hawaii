@@ -1,0 +1,16 @@
+.header-links {
+  display: flex;
+  flex-direction: column nowrap;
+  margin-left: 50px;
+}
+ul {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 15px;
+}
+li {
+  float: left;
+  margin-top: 18px;
+  padding: 5px;
+}

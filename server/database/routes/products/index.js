@@ -6,6 +6,11 @@ const AWS = require("aws-sdk");
 const multer = require("multer");
 const multer3 = require("multer-s3");
 
+const fs = require("fs");
+const fileType = require("file-type");
+const bluebird = require("bluebird");
+const multiparty = require("multiparty");
+
 //set up AWS environment
 AWS.config.update({
   region: "us-west-2",
@@ -29,6 +34,17 @@ const upload = multer({
   })
 });
 
+const uploadFile = (buffer, name, type) => {
+  const params = {
+    ACL: "public-read",
+    Body: buffer,
+    Bucket: process.env.AWS_BUCKET_NAME,
+    ContentType: type.mime,
+    Key: `${name}.${type.ext}`
+  };
+  return s3.upload(params).promise();
+};
+
 router
   .route("/")
   // GET PRODUCT
@@ -45,16 +61,34 @@ router
         res.sendStatus(500);
       });
   })
+  // .post((req, res) => {
+  //   console.log("backend hi");
+  //   const form = new multiparty.Form();
+  //   form.parse(req, async (error, fields, files) => {
+  //     if (error) throw new Error(error);
+  //     try {
+  //       const path = files.file[0].path;
+  //       const buffer = fs.readFileSync(path);
+  //       const type = fileType(buffer);
+  //       const fileName = `bucketFolder/${timestamp}-lg`;
+  //       const data = await uploadFile(buffer, fileName, type);
+  //       return res.status(200).send(data);
+  //     } catch (error) {
+  //       return res.status(400).send(error);
+  //     }
+  //   });
+  // })
 
+  // upload.single("photos"),
   // POST PRODUCT
-  .post(upload.single("photos"), (req, res) => {
-    console.log("hitting");
+  .post((req, res) => {
+    console.log("hitting", req.body);
 
     const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
     const title = req.body.title;
     const description = req.body.description;
-    // const image_url = req.body.image_url;
-    const image_url = url + res.req.file.key;
+    const image_url = req.body.image_url;
+    // const image_url = url + res.req.file.key;
     const user_id = req.body.user_id;
     const price = req.body.price;
 
@@ -72,6 +106,7 @@ router
         return res.json({ success: true });
       })
       .catch(err => {
+        console.log("you are fucking up but hitting backend");
         console.log(err);
         res.sendStatus(500);
       });
