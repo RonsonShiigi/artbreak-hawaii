@@ -8,3 +8,19 @@
   width: 100vw;
   z-index: 2;
 }
+input {
+  width: 100px;
+  height: 25px;
+  outline: none;
+  border: 1px solid #fff;
+  background: #252525;
+  color: white;
+  text-shadow: 0 0 10px rgb(73, 13, 25);
+  padding: 0 80px 0 20px;
+  transition: all 1s;
+  opacity: 0.5;
+  z-index: 5;
+  margin-left: 50px;
+  font-weight: bolder;
+  letter-spacing: 0.1em;
+}

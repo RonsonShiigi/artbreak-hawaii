@@ -6,7 +6,6 @@ import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import { Link } from "react-router-dom";
-import Search from "./components/search";
 
 //react router imports
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
