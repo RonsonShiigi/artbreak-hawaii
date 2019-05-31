@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Gallery from "../Gallery";
 import Cover from "../Cover/cover";
+import Search from "../search";
 
 //actions
 import { getProducts } from "../../actions/actions";

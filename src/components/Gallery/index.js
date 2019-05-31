@@ -88,46 +88,88 @@ const styles = theme => ({
   }
 });
 
-const Gallery = props => {
-  console.log("props in products component", props);
-  const { classes } = props;
+class Gallery extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchString: "",
+      products: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  componentDidMount(req, res) {
+    fetch("http://localhost:8080/products")
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        this.setState({ products: data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    this.refs.search.focus();
+  }
 
-  return (
-    <div className="gallery-holder">
-      <div className={classes.root} component="section">
-        <h1 className="header-title">new & popular</h1>
-        <div className={classes.images}>
-          {props.products.map((product, i) => (
-            // border around title
-            <ButtonBase
-              key={i}
-              className={classes.imageWrapper}
-              style={{
-                width: product.width
-              }}
-            >
-              {/* actual thumbnail */}
-              <div
-                className={classes.imageSrc}
+  handleChange() {
+    this.setState({
+      searchString: this.refs.search.value
+    });
+  }
+  render() {
+    let _products = this.state.products;
+    let search = this.state.searchString.trim().toLowerCase();
+    const { classes } = this.props;
+
+    if (search.length > 0) {
+      _products = _products.filter(function(product) {
+        return product.title.toLowerCase().match(search);
+      });
+    }
+    return (
+      <div className="gallery-holder">
+        <div className={classes.root} component="section">
+          <h1 className="header-title">new & popular</h1>
+          <input
+            type="text"
+            value={this.state.searchString}
+            ref="search"
+            onChange={this.handleChange}
+            placeholder="SEARCH..."
+          />
+          <div className={classes.images}>
+            {_products.map((product, i) => (
+              // border around title
+              <ButtonBase
+                key={i}
+                className={classes.imageWrapper}
                 style={{
-                  backgroundImage: `url(${product.image_url})`
+                  width: product.width
                 }}
-              />
-              {/* darkened background for each thumbnail */}
-              <div className={classes.imageBackdrop} />
-              {/* actual image title */}
-              <div className={classes.imageButton}>
-                <h2>{product.title}</h2>
-                {/* weird little black line below title */}
-                <div className={classes.imageMarked} />
-              </div>
-            </ButtonBase>
-          ))}
+              >
+                {/* actual thumbnail */}
+                <div
+                  className={classes.imageSrc}
+                  style={{
+                    backgroundImage: `url(${product.image_url})`
+                  }}
+                />
+                {/* darkened background for each thumbnail */}
+                <div className={classes.imageBackdrop} />
+                {/* actual image title */}
+                <div className={classes.imageButton}>
+                  <h2>{product.title}</h2>
+                  {/* weird little black line below title */}
+                  <div className={classes.imageMarked} />
+                </div>
+              </ButtonBase>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 function mapStateToProps(state) {
   console.log("state products", state);
