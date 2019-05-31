@@ -1,54 +1,32 @@
 import React from "react";
 import { Component } from "react";
+import { Link } from "react-router-dom";
+import "./header.css";
 
 import { withStyles } from "@material-ui/core/styles";
+
 import ButtonBase from "@material-ui/core/ButtonBase";
-import Stars from "@material-ui/icons/Stars";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 
 import PropTypes from "prop-types";
 
 const styles = theme => ({
   root: {
     width: "100%",
-    backgroundColor: "#000"
+    marginLeft: "5vh"
   },
   grow: {
     flexGrow: 1
-  },
-  button: {
-    margin: theme.spacing.unit,
-    marginLeft: 0
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
   },
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    },
-    headerBar: {
-      color: "#000000"
     }
-  },
-
-  rightIcon: {
-    marginLeft: theme.spacing(2)
   },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex"
-    }
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none"
     }
   }
 });
@@ -74,42 +52,29 @@ class Header extends Component {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
-        <AppBar position="fixed" elevation="1">
-          <Toolbar color="#000000" className="headerBar">
-            <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
-              <Typography variant="h2" color="inherit" noWrap>
-                ARTBREAK-HI
-              </Typography>
-            </a>
+      <div className="header-links">
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1>ARTBREAK-HI</h1>
+        </Link>
 
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <a
-                href="/login"
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
-                <ButtonBase color="main">
-                  <Typography component="h3" variant="h6" color="inherit">
-                    Login
-                  </Typography>
-                  <Stars className={classes.rightIcon} />
-                </ButtonBase>
-              </a>
-
-              {/* <Button
-                variant="contained"
-                color="secondary"
-                component={Link}
-                to="/register"
-              >
-                Register
-                <Stars className={classes.rightIcon} />
-              </Button> */}
-            </div>
-          </Toolbar>
-        </AppBar>
-      </React.Fragment>
+        <ul>
+          <li>
+            <Link to="/login">
+              <h2>Login</h2>
+            </Link>
+          </li>
+          <li>
+            <Link to="/register">
+              <h2>Register</h2>
+            </Link>
+          </li>
+          <li>
+            <Link to="/dashboard">
+              <h2>Dashboard</h2>
+            </Link>
+          </li>
+        </ul>
+      </div>
     );
   }
 }

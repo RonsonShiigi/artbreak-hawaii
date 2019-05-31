@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });
 
@@ -48,13 +42,8 @@ class Checkout extends Component {
       }),
       credentials: "include"
     })
-      .then(res => {
-        // return res.json();
-        console.log("hello");
-      })
-      .then(json => {
-        // console.log("json response", json);
-        console.log("Hello");
+      .then(() => {
+        console.log("HELLO");
       })
       .catch(err => {
         console.log("ERROR on TOKEN", err);

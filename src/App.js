@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 
+import FileUpload from "./components/newProduct/newProduct";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
-import ShopCart from "./components/ShoppingCart/shopping-cart";
+import ShoppingCart from "./components/ShoppingCart/shoppingCart";
 import Checkout from "./components/Checkout/checkout";
 import { Link } from "react-router-dom";
 
 //react router imports
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import Axios from "axios";
+import Dashboard from "./components/Dashboard/dashboard";
 
 class App extends Component {
   constructor(props) {
@@ -30,22 +32,18 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Header />
-
-        <Router>
-          <div>
-            <Route exact path="/" component={Main} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </div>
-        </Router>
-        <ShopCart />
-        <div> Checkout </div>
-        <Checkout />
-        {/* </React.Fragment>
-        <Main /> */}
-      </div>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/newProduct" component={FileUpload} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/cart" component={ShoppingCart} />
+          <Route path="/checkout" component={Checkout} />
+        </Switch>
+      </React.Fragment>
     );
   }
 }
@@ -55,6 +53,9 @@ const mapDispatchToProps = dispatch => {
     getProducts: () => dispatch(getProducts())
   };
 };
+
+console.log("filter data", getProducts());
+let products = [{}];
 
 export default connect(
   null,

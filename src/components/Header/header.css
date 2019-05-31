@@ -1,0 +1,21 @@
+.header-links {
+  display: flex;
+  flex-direction: column nowrap;
+  width: 100vw;
+  padding-left: 25px;
+  background-color: #252525;
+}
+ul {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 15px;
+}
+li {
+  float: left;
+  margin-top: 18px;
+  padding: 5px;
+}
+a:hover {
+  color: #bd8e8e;
+}

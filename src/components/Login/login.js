@@ -1,37 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-
-import Paper from "@material-ui/core/Paper";
-import { withStyles } from "@material-ui/core/styles";
+import "./login.css";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
-const styles = theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  formHolder: {
-    display: "flex",
-    flexDirection: "column",
-    position: "absolute",
-    top: "20vh",
-    width: "50vh"
-  },
-  formStyle: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  }
-});
 
 function Login(props) {
   const [values, setValues] = React.useState({
@@ -69,35 +40,43 @@ function Login(props) {
   };
 
   return (
-    <React.Fragment>
-      <div className="wrapper">
-        <div className="formHolder">
-          <form onSubmit={handleSubmit}>
-            <TextField
-              id="email"
-              label="email"
-              key="email"
-              value={values.email}
-              onChange={handleChange("email")}
-              margin="normal"
-              variant="outlined"
-            />
-            <br />
-            <TextField
-              id="password"
-              label="password"
-              key="password"
-              value={values.password}
-              onChange={handleChange("password")}
-              margin="normal"
-              variant="outlined"
-            />
-            <br />
-            <Button type="submit">Submit</Button>
-          </form>
-        </div>
+    <div className="container">
+      <div className="loginHolder">
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="email"
+            label="email"
+            key="email"
+            value={values.email}
+            onChange={handleChange("email")}
+            margin="normal"
+            variant="outlined"
+            fullWidth="true"
+          />
+          <br />
+          <TextField
+            id="password"
+            label="password"
+            key="password"
+            value={values.password}
+            onChange={handleChange("password")}
+            margin="normal"
+            variant="outlined"
+            fullWidth="true"
+          />
+          <br />
+          <Button
+            type="submit"
+            fullWidth="true"
+            color="secondary"
+            variant="contained"
+          >
+            Submit
+          </Button>
+        </form>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
+
 export default Login;

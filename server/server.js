@@ -22,6 +22,7 @@ const LikeRoutes = require("./database/routes/likes/index");
 const AuthRoutes = require("./database/routes/auth/index");
 const ShoppingCartRoutes = require("./database/routes/shoppingcart/index");
 const PaymentRoutes = require("./database/routes/payment/index");
+const TestRoute = require("./database/routes/newProduct/index");
 // const dashboardRoutes = require("./database/routes/dashboard/index");
 
 if (!PORT) {
@@ -78,6 +79,7 @@ app.use("/likes", LikeRoutes);
 app.use("/api", AuthRoutes);
 app.use("/cart", ShoppingCartRoutes);
 app.use("/payment", PaymentRoutes);
+app.use("/newProduct", TestRoute);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
