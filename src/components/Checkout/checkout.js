@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { Redirect } from "react-router";
+import axios from "axios";
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });
@@ -42,8 +44,8 @@ class Checkout extends Component {
       }),
       credentials: "include"
     })
-      .then(() => {
-        console.log("HELLO");
+      .then(res => {
+        window.location.replace("http://localhost:8081/");
       })
       .catch(err => {
         console.log("ERROR on TOKEN", err);

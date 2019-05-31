@@ -32,64 +32,58 @@ router.route("/checkout").post((req, res) => {
         } else {
           console.log("CHARGE", charge);
           chargeId = charge.id;
-          new req.database.ShoppingCart()
-            .where({ user_id: buyer_id })
-            .fetchAll()
-            .then(cart => {
-              const shopcart = cart.toJSON();
-              console.log("Shopcart", shopcart);
-
-              //get unique seller id values and store into uniqueSellerId Array
-              // shopcart.forEach(item => {
-              //   if (!uniqueSellerIds.includes(item.seller_id)) {
-              //     uniqueSellerIds.push(item.seller_id);
-              //   }
-              // });
-
-              return shopcart;
-            })
-            .then(shopcart => {
-              shopcart.forEach(item => {
-                new req.database.User()
-                  .where({ id: item.seller_id })
-                  .fetchAll()
-                  .then(user => {
-                    let User = user.toJSON();
-                    console.log("USERRRR", user.toJSON());
-                    console.log("USER 0", User[0].stripe_id);
-                    console.log("item", item);
-                    const stripeId = User[0].stripe_id;
-                    console.log("stripeId", stripeId);
-                    stripe.transfers
-                      .create({
-                        amount: item.price * 100,
-                        currency: "usd",
-                        source_transaction: chargeId,
-                        destination: stripeId,
-                        transfer_group: "GROUP_3"
-                      })
-                      .then(transfer => {
-                        console.log("TRANSFER DATA", transfer);
-                      })
-                      .catch(err => {
-                        console.log("TRANSFER ERROR", err);
-                      });
-                  })
-                  .catch(err => {
-                    console.log("ERRROR", err);
-                    res.send("Internal Server Error");
-                  });
-              });
-            })
-            .catch(err => {
-              "ERR", console.log(err);
-              res.send("Internal Server Error");
-            });
         }
       }
     )
     .then(() => {
-      return res.redirect("/");
+      new req.database.ShoppingCart()
+        .where({ user_id: buyer_id })
+        .fetchAll()
+        .then(cart => {
+          const shopcart = cart.toJSON();
+          console.log("Shopcart", shopcart);
+          return shopcart;
+        })
+        .then(shopcart => {
+          shopcart.forEach(item => {
+            new req.database.User()
+              .where({ id: item.seller_id })
+              .fetchAll()
+              .then(user => {
+                let User = user.toJSON();
+                console.log("USERRRR", user.toJSON());
+                console.log("USER 0", User[0].stripe_id);
+                console.log("item", item);
+                const stripeId = User[0].stripe_id;
+                console.log("stripeId", stripeId);
+                stripe.transfers
+                  .create({
+                    amount: item.price * 100,
+                    currency: "usd",
+                    source_transaction: chargeId,
+                    destination: stripeId,
+                    transfer_group: "GROUP_3"
+                  })
+                  .then(transfer => {
+                    console.log("TRANSFER DATA", transfer);
+                  })
+                  .catch(err => {
+                    console.log("TRANSFER ERROR", err);
+                  });
+              })
+              .catch(err => {
+                console.log("ERRROR", err);
+                res.send("Internal Server Error");
+              });
+          });
+        })
+        .catch(err => {
+          "ERR", console.log(err);
+          res.send("Internal Server Error");
+        });
+    })
+    .then(() => {
+      res.send("all done");
     });
 });
 

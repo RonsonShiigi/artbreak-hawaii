@@ -81,6 +81,10 @@ app.use("/cart", ShoppingCartRoutes);
 app.use("/payment", PaymentRoutes);
 app.use("/newProduct", TestRoute);
 
+app.get("/", (req, res) => {
+  console.log("HELLOOOOOOOOOOOO");
+});
+
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
