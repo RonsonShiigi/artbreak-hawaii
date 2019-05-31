@@ -32,7 +32,7 @@ const rawTheme = createMuiTheme({
       dark: green[700]
     }
   },
-  typography: {
+  h1: {
     fontFamily: "'Roboto Condensed', sans-serif",
     fontSize: 14,
     fontWeightLight: 300, // Work Sans
@@ -42,8 +42,8 @@ const rawTheme = createMuiTheme({
 });
 const fontHeader = {
   color: rawTheme.palette.text.primary,
-  fontWeight: rawTheme.typography.fontWeightMedium,
-  fontFamily: rawTheme.typography.fontFamilySecondary,
+  fontWeight: rawTheme.h1.fontWeightMedium,
+  fontFamily: rawTheme.h1.fontFamilySecondary,
   textTransform: "uppercase"
 };
 
@@ -57,51 +57,51 @@ const theme = {
       placeholder: grey[200]
     }
   },
-  typography: {
-    ...rawTheme.typography,
+  h1: {
+    ...rawTheme.h1,
     fontHeader,
     h1: {
-      ...rawTheme.typography.h1,
+      ...rawTheme.h1.h1,
       ...fontHeader,
       letterSpacing: 0,
       fontSize: 60
     },
     h2: {
-      ...rawTheme.typography.h2,
+      ...rawTheme.h1.h2,
       ...fontHeader,
       fontSize: 48
     },
     h3: {
-      ...rawTheme.typography.h3,
+      ...rawTheme.h1.h3,
       ...fontHeader,
       fontSize: 42
     },
     h4: {
-      ...rawTheme.typography.h4,
+      ...rawTheme.h1.h4,
       ...fontHeader,
       fontSize: 36
     },
     h5: {
-      ...rawTheme.typography.h5,
+      ...rawTheme.h1.h5,
       fontSize: 20,
-      fontWeight: rawTheme.typography.fontWeightLight
+      fontWeight: rawTheme.h1.fontWeightLight
     },
     h6: {
-      ...rawTheme.typography.h6,
+      ...rawTheme.h1.h6,
       ...fontHeader,
       fontSize: 18
     },
     subtitle1: {
-      ...rawTheme.typography.subtitle1,
+      ...rawTheme.h1.subtitle1,
       fontSize: 18
     },
     body1: {
-      ...rawTheme.typography.body2,
-      fontWeight: rawTheme.typography.fontWeightRegular,
+      ...rawTheme.h1.body2,
+      fontWeight: rawTheme.h1.fontWeightRegular,
       fontSize: 16
     },
     body2: {
-      ...rawTheme.typography.body1,
+      ...rawTheme.h1.body1,
       fontSize: 14
     }
   }

@@ -49,9 +49,6 @@ const styles = theme => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     zIndex: -2
-  },
-  typography: {
-    position: "relative"
   }
 });
 

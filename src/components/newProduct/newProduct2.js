@@ -91,11 +91,11 @@ class FileUpload extends Component {
             id="title"
             label="title"
             name="title"
-            fullWidth="true"
+            fullWidth={true}
             // value={values.title}
             onChange={this.handleChange}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
           />
           <TextField
             id="description"
@@ -104,7 +104,7 @@ class FileUpload extends Component {
             // value={values.description}
             onChange={this.handleChange}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
           />
           <TextField
             id="price"
@@ -113,7 +113,9 @@ class FileUpload extends Component {
             // value={values.price}
             onChange={this.handleChange}
             margin="normal"
+            fullWidth={true}
           />
+          <br />
           <TextField
             id="user_id"
             label="user_id"
@@ -121,9 +123,17 @@ class FileUpload extends Component {
             // value={values.price}
             onChange={this.handleChange}
             margin="normal"
+            fullWidth={true}
           />
 
-          <button type="submit">Send</button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            fullWidth={true}
+          >
+            Send
+          </Button>
         </form>
       </div>
     );

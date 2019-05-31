@@ -34,16 +34,18 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Header />
-        <Switch>
-          <Route exact path="/" component={Main} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/newProduct" component={FileUpload} />
-          <Route path="/dashboard" component={Dashboard} />
-        </Switch>
-      </div>
+        <div className="body-container">
+          <Switch>
+            <Route exact path="/" component={Main} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/newProduct" component={FileUpload} />
+            <Route path="/dashboard" component={Dashboard} />
+          </Switch>
+        </div>
+      </React.Fragment>
     );
   }
 }

@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
-import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, ButtonBase, Tab, Tabs } from "@material-ui/core";
+import { ButtonBase, Tab, Tabs } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -81,9 +80,9 @@ const styles = theme => ({
   imageMarked: {
     height: 3,
     width: 18,
-    background: theme.palette.common.black,
+    background: theme.palette.common.white,
     position: "absolute",
-    bottom: -2,
+    bottom: 50,
     left: "calc(50% - 9px)",
     transition: theme.transitions.create("opacity")
   }
@@ -94,15 +93,8 @@ const Gallery = props => {
   const { classes } = props;
 
   return (
-    <Container className={classes.root} component="section">
-      <Typography
-        variant="h4"
-        align="center"
-        component="h2"
-        className={classes.heading}
-      >
-        new & popular
-      </Typography>
+    <div className={classes.root} component="section">
+      <h1>new & popular</h1>
       <div className={classes.images}>
         {props.products.map((product, i) => (
           <ButtonBase
@@ -120,15 +112,13 @@ const Gallery = props => {
             />
             <div className={classes.imageBackdrop} />
             <div className={classes.imageButton}>
-              <Typography color="inherit" className={classes.imageTitle}>
-                {product.title}
-                <div className={classes.imageMarked} />
-              </Typography>
+              <h2>{product.title}</h2>
+              <div className={classes.imageMarked} />
             </div>
           </ButtonBase>
         ))}
       </div>
-    </Container>
+    </div>
     // <GridList cellheight={150} cols={4} overflow="hidden">
     //   {props.products.map((product, i) => (
     //     <GridListTile key={i}>

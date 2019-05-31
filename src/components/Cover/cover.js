@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import grey from "@material-ui/core/colors/grey";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 
 import CoverLayout from "./cover-layout";
@@ -15,10 +14,6 @@ const styles = theme => ({
     backgroundColor: grey[900],
     backgroundPosition: "center",
     top: 0
-  },
-  typography: {
-    position: "absolute",
-    top: "100"
   },
   cover: {
     display: "flex",
@@ -42,15 +37,7 @@ function Cover(props) {
     <CoverLayout>
       <div className={classes.cover}>
         <img src={logo} style={{ opacity: 0.7 }} />
-        <Typography
-          color="#000"
-          align="center"
-          variant="h2"
-          marked="center"
-          style={{ marginTop: 2 }}
-        >
-          artbreak.
-        </Typography>
+        <h1>artbreak.</h1>
         <div className={classes.arrow}>
           <KeyboardArrowDown fontSize="large" />
         </div>
