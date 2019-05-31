@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Avatar from "@material-ui/core/Avatar";
 
 import "./dashboard.css";
 
@@ -8,8 +9,9 @@ class Dashboard extends Component {
   render() {
     return (
       <div class="profile-container">
-        <div class="profile-cover">
-          <div class="profile-content">MOM HOLY FUCK</div>
+        <div class="profile-cover" />
+        <div class="profile-content">
+          <Avatar alt="default" src="/" />
         </div>
       </div>
     );
