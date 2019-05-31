@@ -1,16 +1,12 @@
 import React from "react";
 import { Component } from "react";
 
-import Register from "./register";
-import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Stars from "@material-ui/icons/Stars";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-
-import Login from "./login";
 
 import PropTypes from "prop-types";
 
@@ -34,6 +30,9 @@ const styles = theme => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
+    },
+    headerBar: {
+      color: "#000000"
     }
   },
 
@@ -77,7 +76,7 @@ class Header extends Component {
     return (
       <React.Fragment>
         <AppBar position="fixed" elevation="1">
-          <Toolbar color="#000">
+          <Toolbar color="#000000" className="headerBar">
             <a href="/" style={{ textDecoration: "none", color: "inherit" }}>
               <Typography variant="h2" color="inherit" noWrap>
                 ARTBREAK-HI

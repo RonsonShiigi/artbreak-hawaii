@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 
-import withRoot from "./components/modules/withRoot";
-import Main from "./components/main";
-import Header from "./components/header";
-import Register from "./components/register";
-import Login from "./components/login";
-import ShopCart from "./components/shopping-cart";
-import Checkout from "./components/checkout";
+import Main from "./components/Home/main";
+import Header from "./components/Header/header";
+import Register from "./components/Register/register";
+import Login from "./components/Login/login";
+import ShopCart from "./components/ShoppingCart/shopping-cart";
+import Checkout from "./components/Checkout/checkout";
+import { Link } from "react-router-dom";
 
 //react router imports
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
@@ -37,7 +30,7 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div>
         <Header />
 
         <Router>
@@ -50,7 +43,9 @@ class App extends Component {
         <ShopCart />
         <div> Checkout </div>
         <Checkout />
-      </React.Fragment>
+        {/* </React.Fragment>
+        <Main /> */}
+      </div>
     );
   }
 }

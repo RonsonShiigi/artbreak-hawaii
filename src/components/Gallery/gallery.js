@@ -6,7 +6,7 @@ import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, ButtonBase, Tab, Tabs } from "@material-ui/core";
 
-const bgUrl = require("./assets/heartbg.png");
+const bgUrl = require("../assets/heartbg.png");
 
 const styles = theme => ({
   root: {
