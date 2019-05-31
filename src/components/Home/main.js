@@ -4,6 +4,7 @@ import withRoot from "../modules/withRoot";
 import Header from "../Header/header";
 import Gallery from "../Gallery/gallery";
 import Cover from "../Cover/cover";
+import Search from "../search";
 
 //actions
 import { getProducts } from "../../actions/actions";

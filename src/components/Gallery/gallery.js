@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 
+import Search from "../search";
+
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, ButtonBase, Tab, Tabs } from "@material-ui/core";
@@ -103,6 +105,7 @@ const Gallery = props => {
       >
         new & popular
       </Typography>
+      <Search />
       <div className={classes.images}>
         {props.products.map((product, i) => (
           <ButtonBase
