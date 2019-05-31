@@ -3,5 +3,6 @@
   flex-direction: column nowrap;
   justify-content: center;
   position: absolute;
-  top: 50vh;
+  top: 20vh;
+  padding: 5vw;
 }
