@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./login.css";
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 function Login(props) {
@@ -43,8 +40,8 @@ function Login(props) {
   };
 
   return (
-    <div className="container">
-      <Paper className="loginHolder">
+    <div className="body-container">
+      <div className="loginHolder">
         <form onSubmit={handleSubmit}>
           <TextField
             id="email"
@@ -77,7 +74,7 @@ function Login(props) {
             Submit
           </Button>
         </form>
-      </Paper>
+      </div>
     </div>
   );
 }

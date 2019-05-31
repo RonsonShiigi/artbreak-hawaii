@@ -6,7 +6,6 @@ import "./header.css";
 import { withStyles } from "@material-ui/core/styles";
 
 import ButtonBase from "@material-ui/core/ButtonBase";
-import Typography from "@material-ui/core/Typography";
 
 import PropTypes from "prop-types";
 
@@ -17,14 +16,6 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1
-  },
-  button: {
-    margin: theme.spacing.unit,
-    marginLeft: 0
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
   },
   title: {
     display: "none",
@@ -63,25 +54,23 @@ class Header extends Component {
     return (
       <div className="header-links">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <Typography variant="h2" color="inherit" noWrap>
-            ARTBREAK-HI
-          </Typography>
+          <h1>ARTBREAK-HI</h1>
         </Link>
 
         <ul>
           <li>
             <Link to="/login">
-              <Typography>Login</Typography>
+              <h2>Login</h2>
             </Link>
           </li>
           <li>
             <Link to="/register">
-              <Typography>Register</Typography>
+              <h2>Register</h2>
             </Link>
           </li>
           <li>
             <Link to="/dashboard">
-              <Typography>Dashboard</Typography>
+              <h2>Dashboard</h2>
             </Link>
           </li>
         </ul>

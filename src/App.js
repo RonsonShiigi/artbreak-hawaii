@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 
-import withRoot from "./components/modules/withRoot";
-import NewProduct from "./components/newProduct/newProduct";
-
-import FileUpload from "./components/newProduct/newProduct2";
+import FileUpload from "./components/newProduct/newProduct";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
@@ -34,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Header />
         <Switch>
           <Route exact path="/" component={Main} />
@@ -43,7 +40,7 @@ class App extends Component {
           <Route path="/newProduct" component={FileUpload} />
           <Route path="/dashboard" component={Dashboard} />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }

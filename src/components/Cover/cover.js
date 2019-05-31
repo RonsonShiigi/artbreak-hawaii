@@ -1,62 +1,29 @@
 import React, { Component } from "react";
-import grey from "@material-ui/core/colors/grey";
-import { withStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import "./cover.css";
 
-import CoverLayout from "./cover-layout";
-
-const backgroundImg = require("../assets/banner.png");
 const logo = require("../assets/logo.png");
 
-const styles = theme => ({
-  background: {
-    backgroundImage: `url(${backgroundImg})`,
-    backgroundColor: grey[900],
-    backgroundPosition: "center",
-    top: 0
-  },
-  typography: {
-    position: "absolute",
-    top: "100"
-  },
-  cover: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    position: "absolute",
-    top: "25vh",
-    height: "10vh"
-  },
-  arrow: {
-    display: "flex",
-    alignItems: "center",
-    position: "relative",
-    top: 80
-  }
-});
-
-function Cover(props) {
-  const { classes } = props;
+function Cover() {
   return (
-    <CoverLayout>
-      <div className={classes.cover}>
-        <img src={logo} style={{ opacity: 0.7 }} />
-        <Typography
-          color="#000"
-          align="center"
-          variant="h2"
-          marked="center"
-          style={{ marginTop: 2 }}
-        >
-          artbreak.
-        </Typography>
-        <div className={classes.arrow}>
-          <KeyboardArrowDown fontSize="large" />
-        </div>
+    <div className="cover-holder">
+      <div className="cover-back" />
+      <h1 className="h1-title">artbreak.</h1>
+      <h2>a platform for badasses.</h2>
+      <div className="cover-arrow">
+        <Link to="/login">
+          <Button variant="contained" color="secondary" size="large">
+            Log In
+          </Button>{" "}
+        </Link>
+        <Button variant="contained" color="secondary" size="large">
+          Sign Up
+        </Button>
       </div>
-    </CoverLayout>
+    </div>
   );
 }
 
-export default withStyles(styles)(Cover);
+export default Cover;
