@@ -32,62 +32,60 @@ router.route("/checkout").post((req, res) => {
         } else {
           console.log("CHARGE", charge);
           chargeId = charge.id;
+          new req.database.ShoppingCart()
+            .where({ user_id: buyer_id })
+            .fetchAll()
+            .then(cart => {
+              const shopcart = cart.toJSON();
+              console.log("Shopcart", shopcart);
+              return shopcart;
+            })
+            .then(shopcart => {
+              new req.database.ShoppingCart()
+                .where({ user_id: buyer_id })
+                .destroy()
+                .catch(err => {
+                  console.log("error on destroy", err);
+                });
+              shopcart.forEach(item => {
+                new req.database.User()
+                  .where({ id: item.seller_id })
+                  .fetchAll()
+                  .then(user => {
+                    let User = user.toJSON();
+                    console.log("USERRRR", user.toJSON());
+                    console.log("USER 0", User[0].stripe_id);
+                    console.log("item", item);
+                    const stripeId = User[0].stripe_id;
+                    console.log("stripeId", stripeId);
+                    stripe.transfers
+                      .create({
+                        amount: item.price * 100,
+                        currency: "usd",
+                        source_transaction: chargeId,
+                        destination: stripeId,
+                        transfer_group: "GROUP_3"
+                      })
+                      .then(transfer => {
+                        console.log("TRANSFER DATA", transfer);
+                      })
+                      .catch(err => {
+                        console.log("TRANSFER ERROR", err);
+                      });
+                  })
+                  .catch(err => {
+                    console.log("ERRROR", err);
+                    res.send("Internal Server Error");
+                  });
+              });
+            })
+            .catch(err => {
+              "ERR", console.log(err);
+              res.send("Internal Server Error");
+            });
         }
       }
     )
-    .then(() => {
-      new req.database.ShoppingCart()
-        .where({ user_id: buyer_id })
-        .fetchAll()
-        .then(cart => {
-          const shopcart = cart.toJSON();
-          console.log("Shopcart", shopcart);
-          return shopcart;
-        })
-        .then(shopcart => {
-          new req.database.ShoppingCart()
-            .where({ user_id: buyer_id })
-            .destroy()
-            .catch(err => {
-              console.log("error on destroy", err);
-            });
-          shopcart.forEach(item => {
-            new req.database.User()
-              .where({ id: item.seller_id })
-              .fetchAll()
-              .then(user => {
-                let User = user.toJSON();
-                console.log("USERRRR", user.toJSON());
-                console.log("USER 0", User[0].stripe_id);
-                console.log("item", item);
-                const stripeId = User[0].stripe_id;
-                console.log("stripeId", stripeId);
-                stripe.transfers
-                  .create({
-                    amount: item.price * 100,
-                    currency: "usd",
-                    source_transaction: chargeId,
-                    destination: stripeId,
-                    transfer_group: "GROUP_3"
-                  })
-                  .then(transfer => {
-                    console.log("TRANSFER DATA", transfer);
-                  })
-                  .catch(err => {
-                    console.log("TRANSFER ERROR", err);
-                  });
-              })
-              .catch(err => {
-                console.log("ERRROR", err);
-                res.send("Internal Server Error");
-              });
-          });
-        })
-        .catch(err => {
-          "ERR", console.log(err);
-          res.send("Internal Server Error");
-        });
-    })
     .then(() => {
       res.send("all done");
     });
