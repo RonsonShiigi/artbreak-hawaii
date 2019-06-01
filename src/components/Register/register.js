@@ -2,9 +2,37 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Register.css";
 
+import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+
+const CssText = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#660d0d"
+    },
+    "& .MuiInput-underline: after": {
+      borderBottomColor: "#660d0d"
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#660d0d"
+      },
+      "&:hover fieldset": {
+        borderColor: "#660d0d"
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#660d0d"
+      }
+    }
+  }
+})(TextField);
+const CustomButton = withStyles({
+  root: {
+    backgroundColor: "#660d0d"
+  }
+})(Button);
 
 function Register() {
   const [values, setValues] = React.useState({
@@ -46,65 +74,61 @@ function Register() {
   return (
     <div className="container">
       <Paper className="formHolder">
+        <h1>Register</h1>
         <form onSubmit={handleSubmit}>
-          <TextField
+          <CssText
             id="email"
             label="email"
             key="email"
             value={values.email}
             onChange={handleChange("email")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
+          <CssText
             id="password"
             label="password"
             key="password"
             value={values.password}
             onChange={handleChange("password")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
+          <CssText
             id="username"
             label="username"
             key="username"
             value={values.username}
             onChange={handleChange("username")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
+          <CssText
             id="first_name"
             label="first_name"
             key="first_name"
             value={values.first_name}
             onChange={handleChange("first_name")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
+          <CssText
             id="last_name"
             label="last_name"
             key="last_name"
             value={values.last_name}
             onChange={handleChange("last_name")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth="true"
-            color="secondary"
-          >
+          <CustomButton type="submit" variant="contained" fullWidth={true}>
             Submit
-          </Button>
+          </CustomButton>
         </form>
       </Paper>
     </div>

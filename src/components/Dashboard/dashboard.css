@@ -1,8 +1,39 @@
+.profile-cover {
+  background-color: #565656;
+}
 .profile-container {
   display: flex;
   flex-direction: column nowrap;
-  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 13vh;
+  background-color: #252525;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 20vh;
-  padding: 5vw;
+  width: 100%;
+  background-color: #565656;
+}
+
+.user-head {
+  display: flex;
+  flex-direction: row nowrap;
+  padding-bottom: 0;
+}
+
+.username {
+  margin-left: 20px;
+}
+
+.userinfo {
+  position: relative;
+  padding: 0;
+  font-size: 11px;
 }

@@ -1,5 +1,6 @@
 .header-links {
   display: flex;
+  position: fixed;
   flex-direction: column nowrap;
   width: 100vw;
   padding-left: 25px;
@@ -17,5 +18,5 @@ li {
   padding: 5px;
 }
 a:hover {
-  color: #bd8e8e;
+  color: #660d0d;
 }

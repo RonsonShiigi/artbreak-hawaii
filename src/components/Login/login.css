@@ -5,16 +5,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("../assets/banner.png");
   z-index: -1;
 }
 
-.loginHolder {
+.formHolder {
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 20vh;
-  width: 500px;
-  padding: 5vh;
-  background-color: #fff;
+  width: 40vw;
+  padding: 2vw;
+  background-color: #eee;
 }

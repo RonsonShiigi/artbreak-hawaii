@@ -1,8 +1,46 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./login.css";
+
+import { withStyles, makeStyles, createMuiTheme } from "@material-ui/styles";
+import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+
+// custom-styled components
+const CssText = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#660d0d"
+    },
+    "& .MuiInput-underline: after": {
+      borderBottomColor: "#660d0d"
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#660d0d"
+      },
+      "&:hover fieldset": {
+        borderColor: "#660d0d"
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#660d0d"
+      }
+    }
+  }
+})(TextField);
+
+const CustomButton = withStyles({
+  root: {
+    backgroundColor: "#660d0d"
+  }
+})(Button);
+
+const styles = theme => ({
+  input: {
+    border: "1px solid #eee",
+    borderRadius: 0
+  }
+});
 
 function Login(props) {
   const [values, setValues] = React.useState({
@@ -41,9 +79,10 @@ function Login(props) {
 
   return (
     <div className="container">
-      <div className="loginHolder">
+      <Paper className="formHolder">
+        <h1 className="title">Login</h1>
         <form onSubmit={handleSubmit}>
-          <TextField
+          <CssText
             id="email"
             label="email"
             key="email"
@@ -51,10 +90,10 @@ function Login(props) {
             onChange={handleChange("email")}
             margin="normal"
             variant="outlined"
-            fullWidth="true"
+            fullWidth={true}
           />
           <br />
-          <TextField
+          <CssText
             id="password"
             label="password"
             key="password"
@@ -62,19 +101,14 @@ function Login(props) {
             onChange={handleChange("password")}
             margin="normal"
             variant="outlined"
-            fullWidth="true"
+            fullWidth={true}
           />
           <br />
-          <Button
-            type="submit"
-            fullWidth="true"
-            color="secondary"
-            variant="contained"
-          >
+          <CustomButton type="submit" fullWidth={true} variant="filled">
             Submit
-          </Button>
+          </CustomButton>
         </form>
-      </div>
+      </Paper>
     </div>
   );
 }

@@ -8,10 +8,14 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div class="profile-container">
-        <div class="profile-cover" />
-        <div class="profile-content">
-          <Avatar alt="default" src="/" />
+      <div className="profile-container">
+        <div className="profile-cover" />
+        <div className="profile-content">
+          <p className="user-head">
+            <Avatar alt="default" src="/" />{" "}
+            <h1 className="username">username</h1>
+          </p>
+          <p className="userinfo">join date(date created)</p>
         </div>
       </div>
     );
