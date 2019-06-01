@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
-import withRoot from "./components/modules/withRoot";
-
-import NewProduct from "./components/newProduct";
-
-import FileUpload from "./components/newProduct2";
+import FileUpload from "./components/newProduct/newProduct";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
@@ -20,6 +16,7 @@ import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import Axios from "axios";
+import Dashboard from "./components/Dashboard/dashboard";
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Header />
         <Switch>
           <Route exact path="/" component={Main} />
@@ -42,8 +39,9 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
           <Route path="/delete" component={Delete} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -53,6 +51,9 @@ const mapDispatchToProps = dispatch => {
     getProducts: () => dispatch(getProducts())
   };
 };
+
+console.log("filter data", getProducts());
+let products = [{}];
 
 export default connect(
   null,

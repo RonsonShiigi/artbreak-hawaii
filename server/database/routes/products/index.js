@@ -186,7 +186,7 @@ router.delete("/:id", (req, res) => {
             function(err, data) {}
           );
 
-          return res.redirect("/");
+          return res.json("success");
         });
     });
 });

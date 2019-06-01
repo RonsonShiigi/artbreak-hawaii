@@ -10,7 +10,7 @@ class Delete extends Component {
     this.state = {
       image_url: "",
       //make this dynamic
-      product_id: 6,
+      product_id: 9,
       product: ""
     };
   }
@@ -43,6 +43,9 @@ class Delete extends Component {
           .then(data => {
             console.log("you are deleting from s3 and psql");
           })
+          // .then(res => {
+          //   res.redirect("/");
+          // })
           .catch(err => {
             console.log(err);
           });

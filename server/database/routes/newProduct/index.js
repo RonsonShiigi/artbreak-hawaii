@@ -63,7 +63,8 @@ router.post("/fiyah", (request, response) => {
       const buffer = fs.readFileSync(path);
       const type = fileType(buffer);
       const timestamp = Date.now().toString();
-      const fileName = `bucketFolder/${timestamp}-lg`;
+      // const fileName = `bucketFolder/${timestamp}-lg`;
+      const fileName = timestamp;
       const data = await uploadFile(buffer, fileName, type);
       return response.status(200).send(data);
     } catch (error) {

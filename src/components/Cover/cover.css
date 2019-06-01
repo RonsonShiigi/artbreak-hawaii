@@ -1,0 +1,83 @@
+.cover-holder {
+  display: flex;
+  flex-direction: column nowrap;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  background: url("../assets/banner.png");
+}
+
+.cover-arrow {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.cover-back {
+  background-color: #000;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.25;
+  z-index: 0;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@-moz-keyframes fadein {
+  /* Firefox */
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@-webkit-keyframes fadein {
+  /* Safari and Chrome */
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+@-o-keyframes fadein {
+  /* Opera */
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 0.25;
+  }
+}
+.cover-back:hover {
+  opacity: 0;
+  transition: ease;
+}
+
+.h1-title {
+  font-size: 75px;
+  font-weight: bolder;
+  letter-spacing: 15px;
+}
