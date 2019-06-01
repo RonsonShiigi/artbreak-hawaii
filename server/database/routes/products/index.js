@@ -163,8 +163,10 @@ router.post("/:id", upload.single("photos"), (req, res) => {
 
 // DELETE PRODUCT
 router.delete("/:id", (req, res) => {
+  console.log("req", req.body);
+  console.log("req.body.image_url", req.body.body.image_url);
   const paramsId = req.params.id;
-  const key = req.body.image_url.split("/").pop();
+  const key = req.body.body.image_url.split("/").pop();
 
   Product.where({
     id: paramsId
@@ -184,7 +186,7 @@ router.delete("/:id", (req, res) => {
             function(err, data) {}
           );
 
-          return res.redirect("/");
+          return res.json("success");
         });
     });
 });

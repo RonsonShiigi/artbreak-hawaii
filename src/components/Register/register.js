@@ -88,6 +88,7 @@ function Register() {
           />
           <CssText
             id="password"
+            type="password"
             label="password"
             key="password"
             value={values.password}
