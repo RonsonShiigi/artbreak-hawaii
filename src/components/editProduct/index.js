@@ -3,9 +3,9 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import "./newproduct.css";
+import "./editProduct.css";
 
-class FileUpload extends Component {
+class FileEdit extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,7 +15,8 @@ class FileUpload extends Component {
       image_url: "",
       user_id: "",
       price: "",
-      photos: null
+      photos: null,
+      product_id: 6
     };
   }
 
@@ -37,31 +38,17 @@ class FileUpload extends Component {
 
     formData.append("file", this.state.file[0]);
     axios
-      .post("http://localhost:8080/newProduct/fiyah", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
+      .post(
+        "http://localhost:8080/products/" + this.state.product_id,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
         }
-      })
+      )
       .then(response => {
         console.log("response", response.data.key);
-        let key = response.data.key;
-        this.state.image_url = url + key;
-      })
-      .then(data => {
-        console.log("updated state", this.state);
-      })
-      .then(data => {
-        axios
-          .post("http://localhost:8080/products", this.state)
-          .then(res => {
-            console.log("response", res.data);
-          })
-          .catch(err => {
-            console.log("error in creating a new product", err);
-          });
-      })
-      .catch(error => {
-        // handle your error
       });
 
     // posting to postgresql axios request
@@ -75,7 +62,7 @@ class FileUpload extends Component {
     //   });
   };
 
-  handleFileUpload = event => {
+  handleFileEdit = event => {
     this.setState({ file: event.target.files });
   };
 
@@ -86,7 +73,7 @@ class FileUpload extends Component {
           <input
             label="upload file"
             type="file"
-            onChange={this.handleFileUpload}
+            onChange={this.handleFileEdit}
           />
           <TextField
             id="title"
@@ -141,4 +128,4 @@ class FileUpload extends Component {
   }
 }
 
-export default FileUpload;
+export default FileEdit;

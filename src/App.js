@@ -6,6 +6,7 @@ import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import Delete from "./components/Delete/delete";
+import Edit from "./components/editProduct/editProduct";
 import { Link } from "react-router-dom";
 
 //react router imports
@@ -39,6 +40,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
           <Route path="/delete" component={Delete} />
+          <Route path="/editProduct" component={Edit} />
           <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </React.Fragment>
