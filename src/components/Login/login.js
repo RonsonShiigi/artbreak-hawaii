@@ -60,6 +60,7 @@ function Login(props) {
           <TextField
             id="password"
             label="password"
+            type="password"
             key="password"
             value={values.password}
             onChange={handleChange("password")}
