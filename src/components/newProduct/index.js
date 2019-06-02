@@ -20,7 +20,7 @@ class FileUpload extends Component {
   }
 
   componentDidMount() {
-    console.log("local storage id", localStorage.getItem("userId"));
+    // console.log("local storage id", localStorage.getItem("userId"));
     this.state.user_id = localStorage.getItem("userId");
     console.log("stateId", this.state.user_id);
   }

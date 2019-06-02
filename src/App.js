@@ -25,8 +25,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("this.props", this.props);
-    console.log(">>>>>>", this.props.getProducts());
+    // console.log("this.props", this.props);
+    // console.log(">>>>>>", this.props.getProducts());
     this.props.getProducts();
   }
 

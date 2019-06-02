@@ -20,52 +20,60 @@ class Delete extends Component {
     this.state = {
       image_url: "",
       //make this dynamic
-      product_id: 9,
+      product_id: 5,
       product: "",
       user_id: ""
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.state.user_id = localStorage.getItem("userId");
+    console.log("user_id", this.state.user_id);
+  }
+
   deleteFile = e => {
     e.preventDefault();
-    console.log("you are trying to delete");
-    axios
-      .get("http://localhost:8080/products")
-      .then(res => {
-        let products = res.data;
-        products.filter(product => {
-          if (product.id === this.state.product_id) {
-            this.state.product = product;
-          }
-        });
-      })
-      .then(data => {
-        this.state.image_url = this.state.product.image_url;
-        console.log("imageURL", this.state.image_url);
-      })
-      .then(data => {
-        console.log("this is state", this.state);
-      })
-      .then(data => {
-        axios
-          .delete("http://localhost:8080/products/" + this.state.product_id, {
-            data: { body: this.state }
-          })
-          .then(data => {
-            console.log("you are deleting from s3 and psql");
-          })
-          // .then(res => {
-          //   res.redirect("/");
-          // })
-          .catch(err => {
-            console.log(err);
+    if (localStorage.getItem("userId") === null) {
+      console.log("You Must Log In");
+    } else {
+      console.log("you are trying to delete");
+      axios
+        .get("http://localhost:8080/products")
+        .then(res => {
+          let products = res.data;
+          products.filter(product => {
+            if (product.id === this.state.product_id) {
+              this.state.product = product;
+            }
           });
-      })
+        })
+        .then(data => {
+          this.state.image_url = this.state.product.image_url;
+          console.log("imageURL", this.state.image_url);
+        })
+        .then(data => {
+          console.log("this is state", this.state);
+        })
+        .then(data => {
+          axios
+            .delete("http://localhost:8080/products/" + this.state.product_id, {
+              data: { body: this.state }
+            })
+            .then(data => {
+              console.log("you are deleting from s3 and psql");
+            })
+            // .then(res => {
+            //   res.redirect("/");
+            // })
+            .catch(err => {
+              console.log(err);
+            });
+        })
 
-      .catch(err => {
-        console.log(err);
-      });
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   render() {
