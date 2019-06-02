@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
+
+import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { PresignedPost } from "aws-sdk/clients/s3";
 
+const CustomButton = withStyles({
+  root: {
+    backgroundColor: "#D88A8A",
+    "&:hover": {
+      backgroundColor: "#ffffff"
+    }
+  }
+})(Button);
 class Delete extends Component {
   constructor(props) {
     super(props);
@@ -60,10 +70,10 @@ class Delete extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Are You Sure You Want To Delete This?</h1>
+      <div className="container">
+        <h1 className="header-title">Are You Sure You Want To Delete This?</h1>
 
-        <button onClick={this.deleteFile}>Delete</button>
+        <CustomButton onClick={this.deleteFile}>Delete</CustomButton>
       </div>
     );
   }
