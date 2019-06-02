@@ -39,7 +39,16 @@ function Logout(props) {
   return (
     <div className="logoutHolder">
       <form onSubmit={handleSubmit}>
-        <Button type="submit" fullWidth="true" variant="contained">
+        <Button
+          type="submit"
+          fullWidth="true"
+          variant="contained"
+          style={{
+            input: {
+              display: "none"
+            }
+          }}
+        >
           LOGOUT U FAKA
         </Button>
       </form>

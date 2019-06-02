@@ -165,7 +165,7 @@ form {
   text-shadow: -1px 0 #cd5703;
   top: 0;
   color: white;
-  background: #565656;
+  background: transparent;
   overflow: hidden;
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim 2s infinite linear alternate-reverse;
@@ -242,7 +242,7 @@ form {
   text-shadow: 1px 0 #02444d;
   top: 0;
   color: white;
-  background: #565656;
+  background: transparent;
   overflow: hidden;
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;

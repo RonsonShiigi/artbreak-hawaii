@@ -10,7 +10,9 @@ function Cover() {
   return (
     <div className="cover-holder">
       <div className="cover-back" />
-      <h1 className="h1-title">artbreak.</h1>
+      <div className="glitch" data-text="ARTBREAK.">
+        <h1>artbreak.</h1>
+      </div>
       <h2>a platform for badasses.</h2>
       <div className="cover-arrow">
         <Link to="/login">
