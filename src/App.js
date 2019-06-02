@@ -20,6 +20,11 @@ import GalleryView from "./components/gallery-view";
 
 class App extends Component {
   componentDidMount() {
+<<<<<<< HEAD
+=======
+    // console.log("this.props", this.props);
+    // console.log(">>>>>>", this.props.getProducts());
+>>>>>>> 94e0950a3c036ff4e42e342801df0a489ee3d239
     this.props.getProducts();
   }
 

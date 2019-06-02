@@ -22,6 +22,10 @@ function Logout(props) {
       }
     })
       .then(() => {
+        window.localStorage.clear();
+        console.log("useremail gone?", localStorage.getItem("userEmail"));
+      })
+      .then(() => {
         console.log("User Logged Out...");
       })
       .catch(err => {
