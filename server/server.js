@@ -25,6 +25,7 @@ const PaymentRoutes = require("./database/routes/payment/index");
 const TestRoute = require("./database/routes/newProduct/index");
 const StripeRegRoutes = require("./database/routes/stripeReg/index");
 // const dashboardRoutes = require("./database/routes/dashboard/index");
+// const profileRoutes = require("./database/routes/profile/index");
 
 if (!PORT) {
   console.log("No Port Found");
@@ -70,7 +71,7 @@ app.use(passport.session());
 app.use(cors({ credentials: true, origin: "http://localhost:8081" }));
 
 //routing
-// app.use("/dashboard", dashboardRoutes);
+// app.use("/profile", profileRoutes);
 app.use("/users", UserRoutes);
 app.use("/products", ProductRoutes);
 app.use("/comments", CommentRoutes);
@@ -82,10 +83,6 @@ app.use("/cart", ShoppingCartRoutes);
 app.use("/payment", PaymentRoutes);
 app.use("/newProduct", TestRoute);
 app.use("/sRegistration", StripeRegRoutes);
-
-app.get("/", (req, res) => {
-  console.log("HELLOOOOOOOOOOOO");
-});
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

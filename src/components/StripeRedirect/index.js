@@ -1,2 +1,2 @@
-import StripeRedirect from "./stripeRedirect.js";
+import StripeRedirect from "./stripeRedirect";
 export default StripeRedirect;

@@ -1,0 +1,7 @@
+.logoutHolder {
+  display: flex;
+  position: relative;
+  left: 20vw;
+  padding: 5vh;
+  background-color: #252525;
+}

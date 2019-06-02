@@ -6,28 +6,23 @@ import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import ShoppingCart from "./components/ShoppingCart/shoppingCart";
-import stripeRedirect from "./components/StripeRedirect/stripeRedirect.js";
+import StripeRedirect from "./components/StripeRedirect/stripeRedirect.js";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
 import Edit from "./components/editProduct/editProduct";
-import { Link } from "react-router-dom";
 
 //react router imports
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
-import Axios from "axios";
-import Dashboard from "./components/Dashboard/dashboard";
+import profile from "./components/Profile/profile";
+import GalleryView from "./components/gallery-view";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     console.log("this.props", this.props);
     console.log(">>>>>>", this.props.getProducts());
@@ -38,17 +33,19 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
+        <StripeRedirect />
         <Switch>
           <Route exact path="/" component={Main} />
+          <Route exact path="/products/:id" component={GalleryView} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
-          <Route path="/dashboard" component={Dashboard} />
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
-          <Route path="/sRegistration" component={stripeRedirect} />
+          <Route path="/reg" component={StripeRedirect} />
+          <Route path="/profile" component={profile} />
         </Switch>
       </React.Fragment>
     );

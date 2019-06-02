@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "./cover.css";
-
-const logo = require("../assets/logo.png");
 
 function Cover() {
   return (
     <div className="cover-holder">
       <div className="cover-back" />
-      <h1 className="h1-title">artbreak.</h1>
-      <h2>a platform for badasses.</h2>
+      <div className="glitch-cover" data-text="ARTBREAK.">
+        ARTBREAK.
+      </div>
+      <div>
+        <h2>a platform.</h2>
+      </div>
       <div className="cover-arrow">
         <Link to="/login">
           <Button variant="contained" color="secondary" size="large">

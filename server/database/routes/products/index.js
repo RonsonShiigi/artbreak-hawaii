@@ -53,7 +53,6 @@ router
     return new req.database.Product()
       .fetchAll()
       .then(products => {
-        console.log("products", products);
         return res.json(products);
       })
       .catch(err => {
@@ -111,6 +110,20 @@ router
         res.sendStatus(500);
       });
   });
+
+//GET INDIVIDUAL PRODUCT
+router.get("/:id", (req, res) => {
+  return new req.database.Product()
+    .where({ id: req.params.id })
+    .fetch()
+    .then(img => {
+      return res.json(img);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {

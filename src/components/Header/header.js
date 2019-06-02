@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
+import Logout from "../Logout/logout";
 
 import { withStyles } from "@material-ui/core/styles";
 import StripeReg from "../StripeReg/stripeReg.js";
@@ -49,12 +50,12 @@ class Header extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div className="header-links">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="link-span">ARTBREAK-HI</span>
+          <div className="header-glitch" data-text="ARTBREAK-HI">
+            ARTBREAK-HI
+          </div>
         </Link>
         <StripeReg />
         <ul>
@@ -69,11 +70,12 @@ class Header extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/dashboard">
-              <h2>Dashboard</h2>
+            <Link to="/profile">
+              <h2>profile</h2>
             </Link>
           </li>
         </ul>
+        <Logout />
       </div>
     );
   }

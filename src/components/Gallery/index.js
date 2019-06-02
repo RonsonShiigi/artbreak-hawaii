@@ -1,15 +1,12 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
-import { ButtonBase, Tab, Tabs } from "@material-ui/core";
+import { ButtonBase } from "@material-ui/core";
 
 const styles = theme => ({
-  root: {
-    marginBottom: theme.spacing(4)
-  },
+  root: {},
   heading: {
     marginTop: theme.spacing(45)
   },
@@ -127,44 +124,41 @@ class Gallery extends React.Component {
       });
     }
     return (
-      <div className="gallery-holder">
-        <div className={classes.root} component="section">
-          <h1 className="header-title">new & popular</h1>
-          <input
-            type="text"
-            value={this.state.searchString}
-            ref="search"
-            onChange={this.handleChange}
-            placeholder="SEARCH..."
-          />
-          <div className={classes.images}>
-            {_products.map((product, i) => (
-              // border around title
-              <ButtonBase
-                key={i}
-                className={classes.imageWrapper}
+      <div className={classes.root} component="section">
+        <input
+          type="text"
+          value={this.state.searchString}
+          ref="search"
+          onChange={this.handleChange}
+          placeholder="SEARCH..."
+        />
+        <div className={classes.images}>
+          {_products.map((product, i) => (
+            // border around title
+            <ButtonBase
+              key={i}
+              className={classes.imageWrapper}
+              style={{
+                width: product.width
+              }}
+            >
+              {/* actual thumbnail */}
+              <div
+                className={classes.imageSrc}
                 style={{
-                  width: product.width
+                  backgroundImage: `url(${product.image_url})`
                 }}
-              >
-                {/* actual thumbnail */}
-                <div
-                  className={classes.imageSrc}
-                  style={{
-                    backgroundImage: `url(${product.image_url})`
-                  }}
-                />
-                {/* darkened background for each thumbnail */}
-                <div className={classes.imageBackdrop} />
-                {/* actual image title */}
-                <div className={classes.imageButton}>
-                  <h2>{product.title}</h2>
-                  {/* weird little black line below title */}
-                  <div className={classes.imageMarked} />
-                </div>
-              </ButtonBase>
-            ))}
-          </div>
+              />
+              {/* darkened background for each thumbnail */}
+              <div className={classes.imageBackdrop} />
+              {/* actual image title */}
+              <div className={classes.imageButton}>
+                <h2>{product.title}</h2>
+                {/* weird little black line below title */}
+                <div className={classes.imageMarked} />
+              </div>
+            </ButtonBase>
+          ))}
         </div>
       </div>
     );

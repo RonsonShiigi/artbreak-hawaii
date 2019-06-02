@@ -19,6 +19,12 @@ class FileUpload extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log("local storage id", localStorage.getItem("userId"));
+    this.state.user_id = localStorage.getItem("userId");
+    console.log("stateId", this.state.user_id);
+  }
+
   handleChange = e => {
     // setValues({ ...values, [name]: e.target.value });
     const name = e.target.name;
@@ -117,7 +123,7 @@ class FileUpload extends Component {
             fullWidth={true}
           />
           <br />
-          <TextField
+          {/* <TextField
             id="user_id"
             label="user_id"
             name="user_id"
@@ -125,7 +131,7 @@ class FileUpload extends Component {
             onChange={this.handleChange}
             margin="normal"
             fullWidth={true}
-          />
+          /> */}
 
           <Button
             type="submit"

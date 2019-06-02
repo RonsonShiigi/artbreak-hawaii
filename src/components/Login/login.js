@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "./login.css";
 
 import { withStyles } from "@material-ui/styles";
@@ -38,17 +39,26 @@ const CustomButton = withStyles({
   }
 })(Button);
 
-export default function Login(props) {
-  const [values, setValues] = React.useState({
-    email: "",
-    password: ""
-  });
+// export default function Login(props) {
+//   const [values, setValues] = React.useState({
+//     email: "",
+//     password: ""
+//   });
 
-  const handleChange = name => e => {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  handleChange = name => e => {
     this.setState({ [name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  consthandleSubmit = e => {
     e.preventDefault();
     console.log("state", this.state);
     fetch("http://localhost:8080/api/auth/login", {
@@ -62,7 +72,7 @@ export default function Login(props) {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         password: this.state.password,
-        username: this.stateusername,
+        username: this.state.username,
         email: this.state.email
       })
     })
@@ -70,50 +80,65 @@ export default function Login(props) {
         console.log("User Logged In...");
       })
       .then(data => {
-        localStorage.setItem("user", this.state.email);
+        localStorage.setItem("userEmail", this.state.email);
       })
       .then(data => {
-        let user = localStorage.getItem("user");
-        console.log("user", user);
+        let userEmail = localStorage.getItem("userEmail");
+        console.log("user", userEmail);
+        axios.get("http://localhost:8080/users").then(res => {
+          let users = res.data;
+          users.filter(user => {
+            if (user.email === userEmail) {
+              localStorage.setItem("username", user.username);
+              localStorage.setItem("userId", user.id);
+              console.log("username", localStorage.getItem("username"));
+              console.log("userId", localStorage.getItem("userId"));
+            }
+          });
+        });
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  return (
-    <div className="container">
-      <Paper className="formHolder">
-        <h1 className="form-title">Login</h1>
-        <form onSubmit={handleSubmit}>
-          <CssText
-            id="email"
-            label="email"
-            key="email"
-            value={values.email}
-            onChange={handleChange("email")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <br />
-          <CssText
-            id="password"
-            label="password"
-            type="password"
-            key="password"
-            value={values.password}
-            onChange={handleChange("password")}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
-          />
-          <br />
-          <CustomButton type="submit" fullWidth={true} variant="filled">
-            Submit
-          </CustomButton>
-        </form>
-      </Paper>
-    </div>
-  );
+  render() {
+    return (
+      <div className="container">
+        <Paper className="formHolder">
+          <h1 className="form-title">Login</h1>
+          <form onSubmit={this.handleSubmit}>
+            <CssText
+              id="email"
+              label="email"
+              key="email"
+              name="email"
+              onChange={this.handleChange("email")}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <br />
+            <CssText
+              id="password"
+              label="password"
+              type="password"
+              key="password"
+              name="password"
+              onChange={this.handleChange("password")}
+              margin="normal"
+              variant="outlined"
+              fullWidth={true}
+            />
+            <br />
+            <CustomButton type="submit" fullWidth={true} variant="filled">
+              Submit
+            </CustomButton>
+          </form>
+        </Paper>
+      </div>
+    );
+  }
 }
+
+export default Login;
