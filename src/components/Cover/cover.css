@@ -73,7 +73,7 @@
 }
 .cover-back:hover {
   opacity: 0;
-  transition: ease;
+  transition: opacity 0.5s ease-in;
 }
 
 .h1-title {

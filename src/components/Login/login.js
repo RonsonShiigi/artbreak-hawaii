@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./login.css";
 
-import { withStyles, makeStyles, createMuiTheme } from "@material-ui/styles";
+import { withStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -10,20 +10,20 @@ import Button from "@material-ui/core/Button";
 const CssText = withStyles({
   root: {
     "& label.Mui-focused": {
-      color: "#660d0d"
+      color: "#D88A8A"
     },
     "& .MuiInput-underline: after": {
-      borderBottomColor: "#660d0d"
+      borderBottomColor: "#D88A8A"
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#660d0d"
+        borderColor: "#D88A8A"
       },
       "&:hover fieldset": {
-        borderColor: "#660d0d"
+        borderColor: "#D88A8A"
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#660d0d"
+        borderColor: "#D88A8A"
       }
     }
   }
@@ -31,18 +31,14 @@ const CssText = withStyles({
 
 const CustomButton = withStyles({
   root: {
-    backgroundColor: "#660d0d"
+    backgroundColor: "#D88A8A",
+    "&:hover": {
+      backgroundColor: "#D88A8A"
+    }
   }
 })(Button);
 
-const styles = theme => ({
-  input: {
-    border: "1px solid #eee",
-    borderRadius: 0
-  }
-});
-
-function Login(props) {
+export default function Login(props) {
   const [values, setValues] = React.useState({
     email: "",
     password: ""
@@ -80,7 +76,7 @@ function Login(props) {
   return (
     <div className="container">
       <Paper className="formHolder">
-        <h1 className="title">Login</h1>
+        <h1 className="form-title">Login</h1>
         <form onSubmit={handleSubmit}>
           <CssText
             id="email"
@@ -89,8 +85,8 @@ function Login(props) {
             value={values.email}
             onChange={handleChange("email")}
             margin="normal"
-            variant="outlined"
             fullWidth={true}
+            variant="outlined"
           />
           <br />
           <CssText
@@ -113,5 +109,3 @@ function Login(props) {
     </div>
   );
 }
-
-export default Login;

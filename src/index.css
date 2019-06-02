@@ -1,8 +1,13 @@
 a {
-  color: #fff;
+  color: #978c94;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: normal;
+}
+
+a:hover {
+  color: #ffffff;
+  transition: color 0.25s ease-in;
 }
 
 body {
@@ -26,10 +31,31 @@ body {
   height: 100%;
   background-color: #252525;
 }
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.formHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 20vh;
+  width: 30vw;
+  background-color: #eee;
+  padding: 2vw;
 }
 
 h1 {
@@ -46,7 +72,17 @@ h2 {
 }
 
 .header-title {
-  color: #fff;
+  color: #c5cfc6;
   padding-left: 15px;
   letter-spacing: 10px;
+}
+
+.form-title {
+  color: #252525;
+  padding-left: 15px;
+  letter-spacing: 10px;
+}
+
+form {
+  width: 25vw;
 }

@@ -13,7 +13,9 @@ class Dashboard extends Component {
         <div className="profile-content">
           <p className="user-head">
             <Avatar alt="default" src="/" />{" "}
-            <h1 className="username">username</h1>
+            <h1 className="username" data-text="glitchy">
+              username
+            </h1>
           </p>
           <p className="userinfo">join date(date created)</p>
         </div>

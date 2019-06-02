@@ -7,34 +7,38 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
+//custom-styled components
 const CssText = withStyles({
   root: {
     "& label.Mui-focused": {
-      color: "#660d0d"
+      color: "#D88A8A"
     },
     "& .MuiInput-underline: after": {
-      borderBottomColor: "#660d0d"
+      borderBottomColor: "#D88A8A"
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: "#660d0d"
+        borderColor: "#D88A8A"
       },
       "&:hover fieldset": {
-        borderColor: "#660d0d"
+        borderColor: "#D88A8A"
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#660d0d"
+        borderColor: "#D88A8A"
       }
     }
   }
 })(TextField);
 const CustomButton = withStyles({
   root: {
-    backgroundColor: "#660d0d"
+    backgroundColor: "#D88A8A",
+    "&:hover": {
+      backgroundColor: "#ffffff"
+    }
   }
 })(Button);
 
-function Register() {
+export default function Register() {
   const [values, setValues] = React.useState({
     email: "",
     password: "",
@@ -74,7 +78,7 @@ function Register() {
   return (
     <div className="container">
       <Paper className="formHolder">
-        <h1>Register</h1>
+        <h1 className="form-title">Register</h1>
         <form onSubmit={handleSubmit}>
           <CssText
             id="email"
@@ -82,6 +86,16 @@ function Register() {
             key="email"
             value={values.email}
             onChange={handleChange("email")}
+            margin="normal"
+            fullWidth={true}
+            variant="outlined"
+          />
+          <CssText
+            id="username"
+            label="username"
+            key="username"
+            value={values.username}
+            onChange={handleChange("username")}
             margin="normal"
             fullWidth={true}
             variant="outlined"
@@ -98,18 +112,8 @@ function Register() {
             variant="outlined"
           />
           <CssText
-            id="username"
-            label="username"
-            key="username"
-            value={values.username}
-            onChange={handleChange("username")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <CssText
             id="first_name"
-            label="first_name"
+            label="first name"
             key="first_name"
             value={values.first_name}
             onChange={handleChange("first_name")}
@@ -119,7 +123,7 @@ function Register() {
           />
           <CssText
             id="last_name"
-            label="last_name"
+            label="last name"
             key="last_name"
             value={values.last_name}
             onChange={handleChange("last_name")}
@@ -135,4 +139,3 @@ function Register() {
     </div>
   );
 }
-export default Register;
