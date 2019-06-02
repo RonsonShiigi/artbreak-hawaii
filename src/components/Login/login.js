@@ -39,17 +39,26 @@ const CustomButton = withStyles({
   }
 })(Button);
 
-export default function Login(props) {
-  const [values, setValues] = React.useState({
-    email: "",
-    password: ""
-  });
+// export default function Login(props) {
+//   const [values, setValues] = React.useState({
+//     email: "",
+//     password: ""
+//   });
 
-  const handleChange = name => e => {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
+
+  handleChange = name => e => {
     this.setState({ [name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     console.log("state", this.state);
     fetch("http://localhost:8080/api/auth/login", {
@@ -93,39 +102,43 @@ export default function Login(props) {
       });
   };
 
-  return (
-    <div className="container">
-      <Paper className="formHolder">
-        <h1 className="form-title">Login</h1>
-        <form onSubmit={handleSubmit}>
-          <CssText
-            id="email"
-            label="email"
-            key="email"
-            value={values.email}
-            onChange={handleChange("email")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <br />
-          <CssText
-            id="password"
-            label="password"
-            type="password"
-            key="password"
-            value={values.password}
-            onChange={handleChange("password")}
-            margin="normal"
-            variant="outlined"
-            fullWidth={true}
-          />
-          <br />
-          <CustomButton type="submit" fullWidth={true} variant="filled">
-            Submit
-          </CustomButton>
-        </form>
-      </Paper>
-    </div>
-  );
+  render() {
+    return (
+      <div className="container">
+        <Paper className="formHolder">
+          <h1 className="form-title">Login</h1>
+          <form onSubmit={this.handleSubmit}>
+            <CssText
+              id="email"
+              label="email"
+              key="email"
+              name="email"
+              onChange={this.handleChange("email")}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <br />
+            <CssText
+              id="password"
+              label="password"
+              type="password"
+              key="password"
+              name="password"
+              onChange={this.handleChange("password")}
+              margin="normal"
+              variant="outlined"
+              fullWidth={true}
+            />
+            <br />
+            <CustomButton type="submit" fullWidth={true} variant="filled">
+              Submit
+            </CustomButton>
+          </form>
+        </Paper>
+      </div>
+    );
+  }
 }
+
+export default Login;
