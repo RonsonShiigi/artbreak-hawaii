@@ -33,7 +33,6 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        <StripeRedirect />
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/products/:id" component={GalleryView} />
@@ -44,7 +43,7 @@ class App extends Component {
           <Route path="/editProduct" component={Edit} />
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
-          <Route path="/reg" component={StripeRedirect} />
+          <Route exact path="/sRegistration" component={StripeRedirect} />
           <Route path="/profile" component={profile} />
           <Route exact path="/products/:id" component={GalleryView} />
         </Switch>

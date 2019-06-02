@@ -2,12 +2,15 @@ const express = require("express");
 const request = require("request");
 const User = require("../../models/UsersModel.js");
 const router = express.Router();
+require("dotenv").config({ path: "../../.env" });
 
 router.route("/").post((req, res) => {
-  let authcode = req.body.auth_code;
-  console.log("AUTHCODE", authcode);
+  const stripe_ck = process.env.STRIPE_SECRET_KEY;
+  console.log("STRIPE", stripe_ck);
+  const authcode = req.body.authCode;
+  const userid = req.body.userid;
 
-  var dataString = `client_secret=sk_test_9nS3sfuyze04bRNHJJD1pXjZ006wVUe7xP&code=${authcode}&grant_type=authorization_code`;
+  var dataString = `client_secret=${stripe_ck}&code=${authcode}&grant_type=authorization_code`;
   request.post(
     {
       headers: {

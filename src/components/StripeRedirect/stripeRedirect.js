@@ -14,12 +14,14 @@ class StripeRedirect extends Component {
       urlQuery.indexOf("code=") + 5,
       urlQuery.indexOf("&state")
     );
+    //get user id from local storage
     const user_id = localStorage.getItem("userId");
+    console.log("AUTHCODE", auth_code);
 
     fetch("http://localhost:8080/sRegistration/", {
       body: JSON.stringify({
         userid: user_id,
-        authcode: auth_code
+        authCode: auth_code
       }),
       headers: {
         Accept: "application/json",

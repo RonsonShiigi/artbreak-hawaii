@@ -20,10 +20,7 @@ class FileUpload extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-=======
     // console.log("local storage id", localStorage.getItem("userId"));
->>>>>>> 94e0950a3c036ff4e42e342801df0a489ee3d239
     this.state.user_id = localStorage.getItem("userId");
   }
 
@@ -35,42 +32,6 @@ class FileUpload extends Component {
 
   submitFile = event => {
     event.preventDefault();
-<<<<<<< HEAD
-
-    const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
-    // const image_url = url + res.req.file.key;
-
-    //posting to s3 axios call
-    const formData = new FormData();
-
-    formData.append("file", this.state.file[0]);
-    axios
-      .post("http://localhost:8080/newProduct/fiyah", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      })
-      .then(response => {
-        let key = response.data.key;
-        this.state.image_url = url + key;
-      })
-      .then(data => {
-        console.log("updated state", this.state);
-      })
-      .then(data => {
-        axios
-          .post("http://localhost:8080/products", this.state)
-          .then(res => {
-            console.log("response", res.data);
-          })
-          .catch(err => {
-            console.log("error in creating a new product", err);
-          });
-      })
-      .catch(error => {
-        // handle your error
-      });
-=======
     if (localStorage.getItem("userId") === null) {
       console.log("You are not logged in");
     } else {
@@ -111,7 +72,6 @@ class FileUpload extends Component {
           // handle your error
         });
     }
->>>>>>> 94e0950a3c036ff4e42e342801df0a489ee3d239
 
     // posting to postgresql axios request
     // axios

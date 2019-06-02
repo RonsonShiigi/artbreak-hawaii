@@ -52,13 +52,15 @@ class Login extends Component {
       email: "",
       password: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = name => e => {
     this.setState({ [name]: e.target.value });
   };
 
-  consthandleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
@@ -68,20 +70,24 @@ class Login extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
+        // first_name: this.state.first_name,
+        // last_name: this.state.last_name,
         password: this.state.password,
-        username: this.state.username,
+        // username: this.state.username,
         email: this.state.email
       })
     })
-      .then(() => {
-        console.log("User Logged In...");
+      .then(res => {
+        return res.clone().json();
       })
       .then(data => {
+        console.log("DATA", data);
         localStorage.setItem("userEmail", this.state.email);
+        localStorage.setItem("userId", data.id);
+        localStorage.setItem("username", data.username);
       })
       .then(data => {
+        console.log("DATA2", data);
         let userEmail = localStorage.getItem("userEmail");
         axios.get("http://localhost:8080/users").then(res => {
           let users = res.data;

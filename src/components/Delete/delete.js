@@ -32,37 +32,6 @@ class Delete extends Component {
 
   deleteFile = e => {
     e.preventDefault();
-<<<<<<< HEAD
-    axios
-      .get("http://localhost:8080/products")
-      .then(res => {
-        let products = res.data;
-        products.filter(product => {
-          if (product.id === this.state.product_id) {
-            this.state.product = product;
-          }
-        });
-      })
-      .then(data => {
-        this.state.image_url = this.state.product.image_url;
-      })
-      .then(data => {
-        console.log("this is state", this.state);
-      })
-      .then(data => {
-        axios
-          .delete("http://localhost:8080/products/" + this.state.product_id, {
-            data: { body: this.state }
-          })
-          .then(data => {
-            console.log("you are deleting from s3 and psql");
-          })
-          // .then(res => {
-          //   res.redirect("/");
-          // })
-          .catch(err => {
-            console.log(err);
-=======
     if (localStorage.getItem("userId") === null) {
       console.log("You Must Log In");
     } else {
@@ -75,7 +44,6 @@ class Delete extends Component {
             if (product.id === this.state.product_id) {
               this.state.product = product;
             }
->>>>>>> 94e0950a3c036ff4e42e342801df0a489ee3d239
           });
         })
         .then(data => {

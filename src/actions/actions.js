@@ -8,10 +8,7 @@ export const getProducts = () => {
     axios
       .get("http://localhost:8080/products")
       .then(res => {
-<<<<<<< HEAD
-=======
         // console.log("res", res);
->>>>>>> 94e0950a3c036ff4e42e342801df0a489ee3d239
         dispatch({ type: GET_ALL_PRODUCTS, payload: res.data });
       })
       .catch(err => {
@@ -26,10 +23,7 @@ export const createProduct = product => {
     axios
       .post("http://localhost:8080/products", product)
       .then(res => {
-<<<<<<< HEAD
-=======
         // console.log("response", res.data);
->>>>>>> 94e0950a3c036ff4e42e342801df0a489ee3d239
         dispatch({ type: CREATE_PRODUCT, payload: res.data });
       })
       .catch(err => {

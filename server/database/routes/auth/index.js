@@ -64,7 +64,7 @@ passport.use(
 //   //   res.render("register");
 // });
 
-const SALT_ROUNT = 12;
+const SALT_ROUND = 12;
 router.post("/auth/register", (req, res) => {
   const { username, email, first_name, last_name, password } = req.body;
 
@@ -100,25 +100,27 @@ router.post(
   passport.authenticate("local", { failureRedirect: "/" }),
   (req, res) => {
     const email = req.body.email;
+    let userData;
     // Users.where({ email });
     // let user = req.body;
+    console.log("Hello");
 
     Users.where({ email })
       .fetch()
       .then(user => {
         user = user.toJSON();
-        const userData = {
+        userData = {
           id: user.id,
           first_name: user.first_name,
           last_name: user.last_name,
           username: user.username
         };
         req.session.user = req.body;
+        return res.json(userData);
         // req.logIn(user, err => {
         //   if (err) {
         //     return next(err);
         //   } else {
-
         //     res.json(userData);
         //   }
         // });
@@ -128,8 +130,7 @@ router.post(
         console.log("err", err);
         res.sendStatus(500);
       });
-
-    res.send("AUTH");
+    // res.send("AUTH");
     // res.redirect("/");
     //grab the user on record
     //compare req.body.password to password on record
