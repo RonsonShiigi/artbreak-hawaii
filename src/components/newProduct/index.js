@@ -33,6 +33,7 @@ class FileUpload extends Component {
 
     //posting to s3 axios call
     const formData = new FormData();
+    console.log("formData", formData);
 
     formData.append("file", this.state.file[0]);
     axios
