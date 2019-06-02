@@ -91,7 +91,6 @@ router
     const user_id = req.body.user_id;
     const price = req.body.price;
 
-    console.log("post", req.body);
     return new req.database.Product({
       title,
       description,
@@ -127,7 +126,7 @@ router.get("/:id", (req, res) => {
 
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
-  console.log("fuckyou");
+  // console.log("fuckyou");
   const body = req.body;
   const paramsId = req.params.id;
 
@@ -179,30 +178,39 @@ router.post("/:id", upload.single("photos"), (req, res) => {
 router.delete("/:id", (req, res) => {
   console.log("req", req.body);
   console.log("req.body.image_url", req.body.body.image_url);
+  let user_id = Number(req.body.body.user_id);
+  let product_user_id = Number(req.body.body.product.user_id);
   const paramsId = req.params.id;
   const key = req.body.body.image_url.split("/").pop();
+  console.log("user id", user_id);
+  console.log("product_user_id", product_user_id);
 
-  Product.where({
-    id: paramsId
-  })
-    .fetch()
-    .then(product => {
-      new Product({
-        id: paramsId
-      })
-        .destroy()
-        .then(() => {
-          s3.deleteObject(
-            {
-              Bucket: process.env.AWS_BUCKET_NAME,
-              Key: key
-            },
-            function(err, data) {}
-          );
+  if (user_id === product_user_id) {
+    Product.where({
+      id: paramsId
+    })
+      .fetch()
+      .then(product => {
+        new Product({
+          id: paramsId
+        })
+          .destroy()
+          .then(() => {
+            s3.deleteObject(
+              {
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Key: key
+              },
+              function(err, data) {}
+            );
 
-          return res.json("success");
-        });
-    });
+            return res.json("success");
+          });
+      });
+  } else {
+    console.log("you are not the owner of this masterpiece");
+    res.json("you need to be the owner of artwork to delete");
+  }
 });
 
 module.exports = router;

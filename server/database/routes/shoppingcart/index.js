@@ -19,8 +19,7 @@ router
   })
   //delete shopping cart item by the id in the shopping cart.
   .delete((req, res) => {
-    console.log("THIS ID", req.body.id);
-    ShoppingCart.where({ id: req.body.id, user_id: req.params.id })
+    ShoppingCart.where({ id: req.body.id })
       .fetch()
       .then(item => {
         new ShoppingCart({ id: req.body.id }).destroy().then(() => {

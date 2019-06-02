@@ -60,7 +60,6 @@ class Login extends Component {
 
   consthandleSubmit = e => {
     e.preventDefault();
-    console.log("state", this.state);
     fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       credentials: "include",
@@ -84,15 +83,12 @@ class Login extends Component {
       })
       .then(data => {
         let userEmail = localStorage.getItem("userEmail");
-        console.log("user", userEmail);
         axios.get("http://localhost:8080/users").then(res => {
           let users = res.data;
           users.filter(user => {
             if (user.email === userEmail) {
               localStorage.setItem("username", user.username);
               localStorage.setItem("userId", user.id);
-              console.log("username", localStorage.getItem("username"));
-              console.log("userId", localStorage.getItem("userId"));
             }
           });
         });

@@ -51,7 +51,6 @@ export default function Register() {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("state", values);
     fetch("http://localhost:8080/api/auth/register", {
       method: "POST",
       headers: {

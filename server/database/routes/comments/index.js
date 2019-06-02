@@ -20,13 +20,10 @@ router
 
   // CREATE COMMENT
   .post((req, res) => {
-    console.log("hitting");
-
     const text = req.body.text;
     const user_id = req.body.user_id;
     const product_id = req.body.product_id;
 
-    console.log("post", req.body);
     return new req.database.Comment({
       text,
       user_id,

@@ -24,8 +24,8 @@ import GalleryView from "./components/gallery-view";
 
 class App extends Component {
   componentDidMount() {
-    console.log("this.props", this.props);
-    console.log(">>>>>>", this.props.getProducts());
+    // console.log("this.props", this.props);
+    // console.log(">>>>>>", this.props.getProducts());
     this.props.getProducts();
   }
 
@@ -46,6 +46,7 @@ class App extends Component {
           <Route path="/checkout" component={Checkout} />
           <Route path="/reg" component={StripeRedirect} />
           <Route path="/profile" component={profile} />
+          <Route exact path="/products/:id" component={GalleryView} />
         </Switch>
       </React.Fragment>
     );
