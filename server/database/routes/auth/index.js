@@ -154,7 +154,7 @@ router.post(
 //   res.redirect("/");
 // });
 
-router.post("/logout", (req, res) => {
+router.post("/auth/logout", (req, res) => {
   console.log("before", req.session);
   if (req.session) {
     req.session.destroy(err => {
@@ -165,7 +165,8 @@ router.post("/logout", (req, res) => {
       }
     });
   }
-  res.redirect("/");
+  // res.redirect("/");
+  res.json("success");
 });
 
 function isAuthenticated(req, res, done) {
