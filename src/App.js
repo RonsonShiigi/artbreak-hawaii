@@ -6,6 +6,8 @@ import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import ShoppingCart from "./components/ShoppingCart/shoppingCart";
+import stripeRedirect from "./components/StripeRedirect/stripeRedirect";
+
 import Checkout from "./components/Checkout/checkout";
 import { Link } from "react-router-dom";
 
@@ -42,6 +44,7 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/sRegistration" component={stripeRedirect} />
         </Switch>
       </React.Fragment>
     );

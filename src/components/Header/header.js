@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./header.css";
 
 import { withStyles } from "@material-ui/core/styles";
-
+import StripeReg from "../StripeReg/stripeReg.js";
 import ButtonBase from "@material-ui/core/ButtonBase";
 
 import PropTypes from "prop-types";
@@ -56,7 +56,7 @@ class Header extends Component {
         <Link to="/" style={{ textDecoration: "none" }}>
           <h1>ARTBREAK-HI</h1>
         </Link>
-
+        <StripeReg />
         <ul>
           <li>
             <Link to="/login">

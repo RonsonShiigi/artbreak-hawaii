@@ -23,6 +23,7 @@ const AuthRoutes = require("./database/routes/auth/index");
 const ShoppingCartRoutes = require("./database/routes/shoppingcart/index");
 const PaymentRoutes = require("./database/routes/payment/index");
 const TestRoute = require("./database/routes/newProduct/index");
+const StripeRegRoutes = require("./database/routes/stripeReg/index");
 // const dashboardRoutes = require("./database/routes/dashboard/index");
 
 if (!PORT) {
@@ -80,6 +81,7 @@ app.use("/api", AuthRoutes);
 app.use("/cart", ShoppingCartRoutes);
 app.use("/payment", PaymentRoutes);
 app.use("/newProduct", TestRoute);
+app.use("/sRegistration", StripeRegRoutes);
 
 app.get("/", (req, res) => {
   console.log("HELLOOOOOOOOOOOO");
