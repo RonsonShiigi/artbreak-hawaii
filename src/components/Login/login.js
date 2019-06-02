@@ -44,11 +44,11 @@ export default function Login(props) {
     password: ""
   });
 
-  handleChange = name => e => {
+  const handleChange = name => e => {
     this.setState({ [name]: e.target.value });
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log("state", this.state);
     fetch("http://localhost:8080/api/auth/login", {
