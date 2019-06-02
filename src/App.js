@@ -6,7 +6,7 @@ import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import ShoppingCart from "./components/ShoppingCart/shoppingCart";
-import stripeRedirect from "./components/StripeRedirect/stripeRedirect";
+import stripeRedirect from "./components/StripeRedirect/stripeRedirect.js";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
