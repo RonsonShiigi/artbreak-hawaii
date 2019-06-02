@@ -33,19 +33,12 @@ function Logout(props) {
   };
 
   return (
-    <div className="container">
-      <div className="logoutHolder">
-        <form onSubmit={handleSubmit}>
-          <Button
-            type="submit"
-            fullWidth="true"
-            color="secondary"
-            variant="contained"
-          >
-            LOGOUT U FAKA
-          </Button>
-        </form>
-      </div>
+    <div className="logoutHolder">
+      <form onSubmit={handleSubmit}>
+        <Button type="submit" fullWidth="true" variant="contained">
+          LOGOUT U FAKA
+        </Button>
+      </form>
     </div>
   );
 }
