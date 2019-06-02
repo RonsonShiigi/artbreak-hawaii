@@ -12,10 +12,10 @@ class Dashboard extends Component {
         <div className="profile-cover" />
         <div className="profile-content">
           <p className="user-head">
-            <Avatar alt="default" src="/" />{" "}
-            <h1 className="username" data-text="glitchy">
+            <Avatar alt="default" src="/" />
+            <div className="glitch" data-text="username">
               username
-            </h1>
+            </div>
           </p>
           <p className="userinfo">join date(date created)</p>
         </div>

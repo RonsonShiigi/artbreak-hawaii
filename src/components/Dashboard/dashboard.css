@@ -27,33 +27,6 @@
   flex-direction: row nowrap;
   padding-bottom: 0;
 }
-
-.username {
-  margin-left: 20px;
-  font-size: 4em;
-  color: #fff;
-}
-
-.username:hover {
-  margin-left: 20px;
-  font-size: 4em;
-  text-shadow: 3px 2px 2px #cd5703, 0px -1px 3px #eff6fa, -3px 0px 2px #02444d;
-  animation: chromaticMove 4500ms ease infinite, pulse ease 200ms infinite;
-}
-@keyframes chromaticMove {
-  0% {
-    text-shadow: 3px 2px 2px #cd5703, 0px -1px 3px #eff6fa, 0px 0px -2px #02444d;
-  }
-  50% {
-    text-shadow: 3px 2px 2px #cd5703, 0px -1px 3px #eff6fa, -3px 2px 3px #02444d;
-    transform: translateX(-1%);
-  }
-  100% {
-    text-shadow: 3px 2px 2px #cd5703, 0px -1px 3px #eff6fa, 2px -1px 2px #02444d;
-    transform: translateX(1%);
-  }
-}
-
 .userinfo {
   position: relative;
   padding: 0;

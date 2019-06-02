@@ -54,7 +54,9 @@ class Header extends Component {
     return (
       <div className="header-links">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="link-span">ARTBREAK-HI</span>
+          <div className="header-glitch" data-text="ARTBREAK-HI">
+            ARTBREAK-HI
+          </div>
         </Link>
 
         <ul>
