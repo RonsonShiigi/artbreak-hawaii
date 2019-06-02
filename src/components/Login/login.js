@@ -62,7 +62,7 @@ export default function Login(props) {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         password: this.state.password,
-        username: this.stateusername,
+        username: this.state.username,
         email: this.state.email
       })
     })
@@ -70,11 +70,22 @@ export default function Login(props) {
         console.log("User Logged In...");
       })
       .then(data => {
-        localStorage.setItem("user", this.state.email);
+        localStorage.setItem("userEmail", this.state.email);
       })
       .then(data => {
-        let user = localStorage.getItem("user");
-        console.log("user", user);
+        let userEmail = localStorage.getItem("userEmail");
+        console.log("user", userEmail);
+        axios.get("http://localhost:8080/users").then(res => {
+          let users = res.data;
+          users.filter(user => {
+            if (user.email === userEmail) {
+              localStorage.setItem("username", user.username);
+              localStorage.setItem("userId", user.id);
+              console.log("username", localStorage.getItem("username"));
+              console.log("userId", localStorage.getItem("userId"));
+            }
+          });
+        });
       })
       .catch(err => {
         console.log(err);
