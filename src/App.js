@@ -20,8 +20,6 @@ import GalleryView from "./components/gallery-view";
 
 class App extends Component {
   componentDidMount() {
-    console.log("this.props", this.props);
-    console.log(">>>>>>", this.props.getProducts());
     this.props.getProducts();
   }
 
@@ -37,7 +35,7 @@ class App extends Component {
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
           <Route path="/profile" component={profile} />
-          <Route path="/products/:id" component={GalleryView} />
+          <Route exact path="/products/:id" component={GalleryView} />
         </Switch>
       </React.Fragment>
     );

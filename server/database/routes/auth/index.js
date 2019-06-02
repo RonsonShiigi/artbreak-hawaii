@@ -51,32 +51,29 @@ passport.use(
           });
       })
       .catch(err => {
-        "auth ERRR", err;
+        console.log("auth ERRR", err);
         done(null, false);
       });
   })
 );
 
 //hello world
-router.get("/auth/register", (req, res) => {
-  console.log(req);
-  res.send("hi");
-  //   res.render("register");
-});
+// router.get("/auth/register", (req, res) => {
+//   console.log(req);
+//   res.send("hi");
+//   //   res.render("register");
+// });
 
 const SALT_ROUNT = 12;
 router.post("/auth/register", (req, res) => {
   const { username, email, first_name, last_name, password } = req.body;
-  console.log("body", req.body);
 
   bcrypt
     .genSalt(12)
     .then(salt => {
-      console.log("salt", salt);
       return bcrypt.hash(password, salt);
     })
     .then(hash => {
-      console.log("hash", hash);
       return Users.forge({
         username,
         email,
@@ -87,14 +84,13 @@ router.post("/auth/register", (req, res) => {
     })
     .then(user => {
       user = user.toJSON();
-      console.log("user", user);
+
       res.send(user);
       // res.redirect("/"); //Never send entire user obj to user
       //res.sendStatus(200)
       //res.redirect('/api/auth/secret')
     })
     .catch(err => {
-      console.log("err", err);
       res.json(err);
     });
 });
@@ -106,7 +102,7 @@ router.post(
     const email = req.body.email;
     // Users.where({ email });
     // let user = req.body;
-    console.log("sesshan", req.session);
+
     Users.where({ email })
       .fetch()
       .then(user => {
@@ -122,7 +118,7 @@ router.post(
         //   if (err) {
         //     return next(err);
         //   } else {
-        //     console.log("sdfads");
+
         //     res.json(userData);
         //   }
         // });
@@ -132,9 +128,7 @@ router.post(
         console.log("err", err);
         res.sendStatus(500);
       });
-    console.log(
-      "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&You Have Succesfully Logged In"
-    );
+
     res.send("AUTH");
     // res.redirect("/");
     //grab the user on record
@@ -144,12 +138,10 @@ router.post(
 
 // router.post("/auth/logout", (req, res) => {
 //   req.logout();
-//   console.log("loggingOff");
 //   res.redirect("/");
 // });
 
 router.post("/auth/logout", (req, res) => {
-  console.log("before", req.session);
   if (req.session) {
     req.session.destroy(err => {
       if (err) {
@@ -165,10 +157,8 @@ router.post("/auth/logout", (req, res) => {
 
 function isAuthenticated(req, res, done) {
   if (req.isAuthenticated()) {
-    console.log("authenticated");
     done();
   } else {
-    console.log("not auth....");
     console.log("req is Auth", req.isAuthenticated());
     res.redirect("/");
   }

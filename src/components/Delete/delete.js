@@ -26,7 +26,6 @@ class Delete extends Component {
 
   deleteFile = e => {
     e.preventDefault();
-    console.log("you are trying to delete");
     axios
       .get("http://localhost:8080/products")
       .then(res => {
@@ -39,7 +38,6 @@ class Delete extends Component {
       })
       .then(data => {
         this.state.image_url = this.state.product.image_url;
-        console.log("imageURL", this.state.image_url);
       })
       .then(data => {
         console.log("this is state", this.state);

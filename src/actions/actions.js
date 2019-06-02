@@ -8,7 +8,6 @@ export const getProducts = () => {
     axios
       .get("http://localhost:8080/products")
       .then(res => {
-        console.log("res", res);
         dispatch({ type: GET_ALL_PRODUCTS, payload: res.data });
       })
       .catch(err => {
@@ -23,7 +22,6 @@ export const createProduct = product => {
     axios
       .post("http://localhost:8080/products", product)
       .then(res => {
-        console.log("response", res.data);
         dispatch({ type: CREATE_PRODUCT, payload: res.data });
       })
       .catch(err => {

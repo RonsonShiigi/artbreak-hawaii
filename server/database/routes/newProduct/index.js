@@ -32,7 +32,6 @@ const uploadFile = (buffer, name, type) => {
 
 // Define POST route
 router.post("/", (request, response) => {
-  console.log("BOOGA");
   const form = new multiparty.Form();
   form.parse(request, async (error, fields, files) => {
     if (error) throw new Error(error);
@@ -52,9 +51,6 @@ router.post("/", (request, response) => {
 
 // Define POST route the ONE
 router.post("/fiyah", (request, response) => {
-  console.log("hitting backend");
-  console.log("request", request.body);
-
   const form = new multiparty.Form();
   form.parse(request, async (error, fields, files) => {
     if (error) throw new Error(error);

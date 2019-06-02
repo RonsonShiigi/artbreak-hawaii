@@ -20,14 +20,11 @@ router
 
   // CREATE MESSAGE
   .post((req, res) => {
-    console.log("hitting");
-
     const subject = req.body.subject;
     const text = req.body.text;
     const sent_to = req.body.sent_to;
     const from = req.body.from;
 
-    console.log("post", req.body);
     return new req.database.Message({
       subject,
       text,

@@ -17,7 +17,7 @@ class GalleryView extends Component {
   componentDidMount(req, res) {
     fetch("http://localhost:8080/products/11")
       .then(res => {
-        return res.clone().json();
+        return res.json();
       })
       .then(data => {
         console.log("DATAAATATATATA", data);
