@@ -88,11 +88,12 @@ form {
 }
 .glitch-cover {
   color: white;
-  font-size: 100px;
+  font-size: 150px;
+  font-weight: bolder;
   position: relative;
   margin: 0 auto;
 }
-.glitch-cover:hover:after {
+.glitch-cover:after {
   content: attr(data-text);
   position: absolute;
   left: 2px;
@@ -105,7 +106,7 @@ form {
   animation: noise-anim 2s infinite linear alternate-reverse;
 }
 
-.glitch-cover:hover:before {
+.glitch-cover:before {
   content: attr(data-text);
   position: absolute;
   left: -2px;
@@ -277,4 +278,31 @@ form {
   overflow: hidden;
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+.gallery-holder {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  padding-top: 0;
+  padding: 5vw;
+  background-color: #252525;
+  width: 100vw;
+  z-index: 2;
+}
+input {
+  width: 100px;
+  height: 25px;
+  outline: none;
+  border: 1px solid #eeeeee;
+  background: #252525;
+  color: #eeeeee;
+  text-shadow: 0 0 10px rgb(73, 13, 25);
+  padding: 0 80px 0 20px;
+  transition: all 1s;
+  opacity: 0.5;
+  z-index: 5;
+  margin-left: 50px;
+  font-weight: bolder;
+  letter-spacing: 0.1em;
 }

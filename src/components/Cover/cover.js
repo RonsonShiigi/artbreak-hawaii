@@ -1,10 +1,7 @@
-import React, { Component } from "react";
-import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "./cover.css";
-
-const logo = require("../assets/logo.png");
 
 function Cover() {
   return (
@@ -13,7 +10,9 @@ function Cover() {
       <div className="glitch-cover" data-text="ARTBREAK.">
         ARTBREAK.
       </div>
-      <h2>a platform for badasses.</h2>
+      <div>
+        <h2>a platform.</h2>
+      </div>
       <div className="cover-arrow">
         <Link to="/login">
           <Button variant="contained" color="secondary" size="large">

@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
 import "./logout.css";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 function Logout(props) {
@@ -10,9 +8,9 @@ function Logout(props) {
     password: ""
   });
 
-  const handleChange = name => e => {
-    setValues({ ...values, [name]: e.target.value });
-  };
+  // const handleChange = name => e => {
+  //   setValues({ ...values, [name]: e.target.value });
+  // };
   const handleSubmit = e => {
     e.preventDefault();
     console.log("state", values);
