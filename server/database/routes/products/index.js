@@ -114,6 +114,7 @@ router
 
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
+  console.log("fuckyou");
   const body = req.body;
   const paramsId = req.params.id;
 

@@ -44,12 +44,13 @@ export default function Login(props) {
     password: ""
   });
 
-  const handleChange = name => e => {
-    setValues({ ...values, [name]: e.target.value });
+  handleChange = name => e => {
+    this.setState({ [name]: e.target.value });
   };
-  const handleSubmit = e => {
+
+  handleSubmit = e => {
     e.preventDefault();
-    console.log("state", values);
+    console.log("state", this.state);
     fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       credentials: "include",
@@ -58,15 +59,22 @@ export default function Login(props) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        first_name: values.first_name,
-        last_name: values.last_name,
-        password: values.password,
-        username: values.username,
-        email: values.email
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        password: this.state.password,
+        username: this.stateusername,
+        email: this.state.email
       })
     })
       .then(() => {
         console.log("User Logged In...");
+      })
+      .then(data => {
+        localStorage.setItem("user", this.state.email);
+      })
+      .then(data => {
+        let user = localStorage.getItem("user");
+        console.log("user", user);
       })
       .catch(err => {
         console.log(err);

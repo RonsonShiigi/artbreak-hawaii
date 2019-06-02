@@ -1,0 +1,9 @@
+.upload-form {
+  display: flex;
+  flex-direction: column nowrap;
+  width: 25vw;
+  height: 50vh;
+  background-color: #eee;
+  padding: 5vh;
+  margin-top: 10vh;
+}
