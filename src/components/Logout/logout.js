@@ -35,7 +35,6 @@ function Logout(props) {
       <form onSubmit={handleSubmit}>
         <Button
           type="submit"
-          fullWidth="true"
           variant="contained"
           style={{
             input: {

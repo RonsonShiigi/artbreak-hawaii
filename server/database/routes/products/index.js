@@ -112,6 +112,21 @@ router
       });
   });
 
+//GET INDIVIDUAL PRODUCT
+router.get("/:id", (req, res) => {
+  return new req.database.Product()
+    .where({ id: req.params.id })
+    .fetch()
+    .then(img => {
+      console.log("OH NO", res.json(img));
+      return res.json(img);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
   console.log("fuckyou");

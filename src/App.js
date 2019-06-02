@@ -16,6 +16,7 @@ import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import profile from "./components/Profile/profile";
+import GalleryView from "./components/gallery-view";
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends Component {
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
           <Route path="/profile" component={profile} />
+          <Route path="/products/:id" component={GalleryView} />
         </Switch>
       </React.Fragment>
     );
