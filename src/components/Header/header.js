@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
+import Logout from "../Logout/logout";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -74,6 +75,7 @@ class Header extends Component {
             </Link>
           </li>
         </ul>
+        <Logout />
       </div>
     );
   }

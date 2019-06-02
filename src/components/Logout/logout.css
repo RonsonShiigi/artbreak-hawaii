@@ -9,7 +9,7 @@
   z-index: -1;
 }
 
-.loginHolder {
+.logoutHolder {
   display: flex;
   flex-direction: column;
   position: absolute;
