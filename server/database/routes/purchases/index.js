@@ -20,15 +20,12 @@ router
 
   // CREATE PURCHASE
   .post((req, res) => {
-    console.log("hitting");
-
     const product_id = req.body.product_id;
     const user_id = req.body.user_id;
     const price = req.body.price;
     const tax = req.body.tax;
     const confirmation_number = req.body.confirmation_number;
 
-    console.log("post", req.body);
     return new req.database.Purchase({
       product_id,
       user_id,

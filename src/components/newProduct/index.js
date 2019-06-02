@@ -20,9 +20,7 @@ class FileUpload extends Component {
   }
 
   componentDidMount() {
-    console.log("local storage id", localStorage.getItem("userId"));
     this.state.user_id = localStorage.getItem("userId");
-    console.log("stateId", this.state.user_id);
   }
 
   handleChange = e => {
@@ -33,13 +31,12 @@ class FileUpload extends Component {
 
   submitFile = event => {
     event.preventDefault();
-    console.log("this is state", this.state);
+
     const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
     // const image_url = url + res.req.file.key;
 
     //posting to s3 axios call
     const formData = new FormData();
-    console.log("formData", formData);
 
     formData.append("file", this.state.file[0]);
     axios
@@ -49,7 +46,6 @@ class FileUpload extends Component {
         }
       })
       .then(response => {
-        console.log("response", response.data.key);
         let key = response.data.key;
         this.state.image_url = url + key;
       })

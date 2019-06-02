@@ -13,7 +13,6 @@ function Logout(props) {
   // };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("state", values);
     fetch("http://localhost:8080/api/auth/logout", {
       method: "POST",
       credentials: "include",

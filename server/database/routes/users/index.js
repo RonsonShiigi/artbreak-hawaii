@@ -20,15 +20,12 @@ router
 
   // CREATE USER
   .post((req, res) => {
-    console.log("hitting");
-
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
 
-    console.log("post", req.body);
     return new req.database.User({
       username,
       password,

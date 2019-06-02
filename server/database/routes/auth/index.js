@@ -6,7 +6,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const Users = require("../../models/UsersModel");
 
 passport.serializeUser((user, done) => {
-  console.log("serializeUser", user);
+  "serializeUser", user;
   done(null, {
     email: user.email,
     zomg: "randomData"
@@ -14,7 +14,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  console.log("desrializing User", user);
   Users.where({ email: user.email })
     .fetch()
     .then(user => {
@@ -29,13 +28,10 @@ passport.deserializeUser((user, done) => {
 passport.use(
   "local",
   new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-    console.log("emailddddd", email);
-    console.log("lcoal is being called");
     Users.where({ email })
       .fetch()
       .then(user => {
         user = user.toJSON();
-        console.log("Uzer", user);
         // if (user.password === password) {
         //   done(null, user);
         // } else {
@@ -45,10 +41,8 @@ passport.use(
           .compare(password, user.password)
           .then(res => {
             if (res) {
-              console.log("Passwords match");
               done(null, user);
             } else {
-              console.log("passwords don't match");
               done(null, false);
             }
           })
@@ -57,7 +51,7 @@ passport.use(
           });
       })
       .catch(err => {
-        console.log("auth ERRR", err);
+        "auth ERRR", err;
         done(null, false);
       });
   })

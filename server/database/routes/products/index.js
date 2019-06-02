@@ -92,7 +92,6 @@ router
     const user_id = req.body.user_id;
     const price = req.body.price;
 
-    console.log("post", req.body);
     return new req.database.Product({
       title,
       description,
