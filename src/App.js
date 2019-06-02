@@ -9,6 +9,7 @@ import ShoppingCart from "./components/ShoppingCart/shoppingCart";
 import stripeRedirect from "./components/StripeRedirect/stripeRedirect";
 
 import Checkout from "./components/Checkout/checkout";
+import Delete from "./components/Delete/delete";
 import { Link } from "react-router-dom";
 
 //react router imports
@@ -41,6 +42,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
+          <Route path="/delete" component={Delete} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />

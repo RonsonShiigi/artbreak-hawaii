@@ -2,11 +2,43 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Register.css";
 
+import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 
-function Register() {
+//custom-styled components
+const CssText = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#D88A8A"
+    },
+    "& .MuiInput-underline: after": {
+      borderBottomColor: "#D88A8A"
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#D88A8A"
+      },
+      "&:hover fieldset": {
+        borderColor: "#D88A8A"
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#D88A8A"
+      }
+    }
+  }
+})(TextField);
+const CustomButton = withStyles({
+  root: {
+    backgroundColor: "#D88A8A",
+    "&:hover": {
+      backgroundColor: "#ffffff"
+    }
+  }
+})(Button);
+
+export default function Register() {
   const [values, setValues] = React.useState({
     email: "",
     password: "",
@@ -46,68 +78,64 @@ function Register() {
   return (
     <div className="container">
       <Paper className="formHolder">
+        <h1 className="form-title">Register</h1>
         <form onSubmit={handleSubmit}>
-          <TextField
+          <CssText
             id="email"
             label="email"
             key="email"
             value={values.email}
             onChange={handleChange("email")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
-            id="password"
-            label="password"
-            key="password"
-            value={values.password}
-            onChange={handleChange("password")}
-            margin="normal"
-            fullWidth="true"
-            variant="outlined"
-          />
-          <TextField
+          <CssText
             id="username"
             label="username"
             key="username"
             value={values.username}
             onChange={handleChange("username")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
+          <CssText
+            id="password"
+            type="password"
+            label="password"
+            key="password"
+            value={values.password}
+            onChange={handleChange("password")}
+            margin="normal"
+            fullWidth={true}
+            variant="outlined"
+          />
+          <CssText
             id="first_name"
-            label="first_name"
+            label="first name"
             key="first_name"
             value={values.first_name}
             onChange={handleChange("first_name")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <TextField
+          <CssText
             id="last_name"
-            label="last_name"
+            label="last name"
             key="last_name"
             value={values.last_name}
             onChange={handleChange("last_name")}
             margin="normal"
-            fullWidth="true"
+            fullWidth={true}
             variant="outlined"
           />
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth="true"
-            color="secondary"
-          >
+          <CustomButton type="submit" variant="contained" fullWidth={true}>
             Submit
-          </Button>
+          </CustomButton>
         </form>
       </Paper>
     </div>
   );
 }
-export default Register;

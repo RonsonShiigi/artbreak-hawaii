@@ -54,7 +54,7 @@ class Header extends Component {
     return (
       <div className="header-links">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <h1>ARTBREAK-HI</h1>
+          <span className="link-span">ARTBREAK-HI</span>
         </Link>
         <StripeReg />
         <ul>

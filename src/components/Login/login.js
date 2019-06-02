@@ -1,10 +1,44 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./login.css";
+
+import { withStyles } from "@material-ui/styles";
+import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-function Login(props) {
+// custom-styled components
+const CssText = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#D88A8A"
+    },
+    "& .MuiInput-underline: after": {
+      borderBottomColor: "#D88A8A"
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#D88A8A"
+      },
+      "&:hover fieldset": {
+        borderColor: "#D88A8A"
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#D88A8A"
+      }
+    }
+  }
+})(TextField);
+
+const CustomButton = withStyles({
+  root: {
+    backgroundColor: "#D88A8A",
+    "&:hover": {
+      backgroundColor: "#D88A8A"
+    }
+  }
+})(Button);
+
+export default function Login(props) {
   const [values, setValues] = React.useState({
     email: "",
     password: ""
@@ -41,42 +75,37 @@ function Login(props) {
 
   return (
     <div className="container">
-      <div className="loginHolder">
+      <Paper className="formHolder">
+        <h1 className="form-title">Login</h1>
         <form onSubmit={handleSubmit}>
-          <TextField
+          <CssText
             id="email"
             label="email"
             key="email"
             value={values.email}
             onChange={handleChange("email")}
             margin="normal"
+            fullWidth={true}
             variant="outlined"
-            fullWidth="true"
           />
           <br />
-          <TextField
+          <CssText
             id="password"
             label="password"
+            type="password"
             key="password"
             value={values.password}
             onChange={handleChange("password")}
             margin="normal"
             variant="outlined"
-            fullWidth="true"
+            fullWidth={true}
           />
           <br />
-          <Button
-            type="submit"
-            fullWidth="true"
-            color="secondary"
-            variant="contained"
-          >
+          <CustomButton type="submit" fullWidth={true} variant="filled">
             Submit
-          </Button>
+          </CustomButton>
         </form>
-      </div>
+      </Paper>
     </div>
   );
 }
-
-export default Login;
