@@ -6,8 +6,6 @@ import Logout from "../Logout/logout";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import ButtonBase from "@material-ui/core/ButtonBase";
-
 import PropTypes from "prop-types";
 
 const styles = theme => ({
@@ -50,8 +48,6 @@ class Header extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div className="header-links">
         <Link to="/" style={{ textDecoration: "none" }}>
@@ -72,8 +68,8 @@ class Header extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/dashboard">
-              <h2>Dashboard</h2>
+            <Link to="/profile">
+              <h2>profile</h2>
             </Link>
           </li>
         </ul>

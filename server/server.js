@@ -22,7 +22,7 @@ const LikeRoutes = require("./database/routes/likes/index");
 const AuthRoutes = require("./database/routes/auth/index");
 const ShoppingCartRoutes = require("./database/routes/shoppingcart/index.js");
 const TestRoute = require("./database/routes/newProduct/index");
-// const dashboardRoutes = require("./database/routes/dashboard/index");
+// const profileRoutes = require("./database/routes/profile/index");
 
 if (!PORT) {
   console.log("No Port Found");
@@ -68,7 +68,7 @@ app.use(passport.session());
 app.use(cors({ credentials: true, origin: "http://localhost:8081" }));
 
 //routing
-// app.use("/dashboard", dashboardRoutes);
+// app.use("/profile", profileRoutes);
 app.use("/users", UserRoutes);
 app.use("/products", ProductRoutes);
 app.use("/comments", CommentRoutes);

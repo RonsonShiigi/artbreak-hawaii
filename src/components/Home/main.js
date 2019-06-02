@@ -9,10 +9,6 @@ import { getProducts } from "../../actions/actions";
 import { connect } from "react-redux";
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     console.log("this.props", this.props);
     // console.log(">>>>>>", this.props.getProducts());
@@ -24,7 +20,10 @@ class Main extends Component {
       <React.Fragment>
         <div className="body-container">
           <Cover />
-          <Gallery />
+          <div className="gallery-holder">
+            <h1 className="header-title">new & popular</h1>
+            <Gallery />
+          </div>
         </div>
       </React.Fragment>
     );

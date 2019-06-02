@@ -7,23 +7,17 @@ import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import Delete from "./components/Delete/delete";
 import Edit from "./components/editProduct/editProduct";
-import { Link } from "react-router-dom";
 
 //react router imports
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 //actions
 import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
-import Axios from "axios";
-import Dashboard from "./components/Dashboard/dashboard";
+import profile from "./components/Profile/profile";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     console.log("this.props", this.props);
     console.log(">>>>>>", this.props.getProducts());
@@ -41,7 +35,7 @@ class App extends Component {
           <Route path="/newProduct" component={FileUpload} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/profile" component={profile} />
         </Switch>
       </React.Fragment>
     );
