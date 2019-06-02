@@ -11,10 +11,12 @@ class Delete extends Component {
       image_url: "",
       //make this dynamic
       product_id: 9,
-      product: ""
+      product: "",
+      user_id: ""
     };
   }
 
+  componentDidMount() {}
   deleteFile = e => {
     e.preventDefault();
     console.log("you are trying to delete");
