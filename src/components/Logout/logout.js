@@ -22,14 +22,7 @@ function Logout(props) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        first_name: values.first_name,
-        last_name: values.last_name,
-        password: values.password,
-        username: values.username,
-        email: values.email
-      })
+      }
     })
       .then(() => {
         console.log("User Logged Out...");
@@ -43,36 +36,13 @@ function Logout(props) {
     <div className="container">
       <div className="logoutHolder">
         <form onSubmit={handleSubmit}>
-          <TextField
-            id="email"
-            label="email"
-            key="email"
-            value={values.email}
-            onChange={handleChange("email")}
-            margin="normal"
-            variant="outlined"
-            fullWidth="true"
-          />
-          <br />
-          <TextField
-            id="password"
-            label="password"
-            type="password"
-            key="password"
-            value={values.password}
-            onChange={handleChange("password")}
-            margin="normal"
-            variant="outlined"
-            fullWidth="true"
-          />
-          <br />
           <Button
             type="submit"
             fullWidth="true"
             color="secondary"
             variant="contained"
           >
-            Submit
+            LOGOUT U FAKA
           </Button>
         </form>
       </div>
