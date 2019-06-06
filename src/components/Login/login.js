@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router";
 
 // custom-styled components
 const CssText = withStyles({
@@ -50,7 +51,8 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      fireRedirect: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -95,6 +97,10 @@ class Login extends Component {
             }
           });
         });
+      })
+      .then(data => {
+        // console.log("u r trying to redirect");
+        window.location.replace("http://localhost:8081");
       })
       .catch(err => {
         console.log(err);
