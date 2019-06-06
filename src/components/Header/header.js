@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 import Logout from "../Logout/logout";
 import HeaderMenu from "./HeaderMenu/menu";
@@ -35,8 +36,19 @@ const styles = theme => ({
 class Header extends Component {
   state = {
     auth: true,
-    anchorEl: null
+    anchorEl: null,
+    user_id: "",
+    username: ""
   };
+
+  async componentDidMount() {
+    // console.log("header console", localStorage.getItem("username"));
+    if (localStorage.getItem("username") !== null) {
+      this.state.user_id = localStorage.getItem("userId");
+      this.state.username = localStorage.getItem("username");
+    }
+    console.log("header State", this.state);
+  }
 
   handleChange = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -50,21 +62,54 @@ class Header extends Component {
     this.setState({ anchorEl: null });
   };
 
+  getUsername = () => {
+    // console.log("you are trying to get that shit");
+    return localStorage.getItem("username").toString();
+  };
+
   render() {
-    return (
-      <div className="sticky">
-        <div className="header-links">
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <div className="header-glitch" data-text="ARTBREAK-HI">
-              ARTBREAK-HI
-            </div>
-          </Link>
-          <HeaderMenu />
-          <StripeReg />
-          <Logout />
+    if (localStorage.getItem("username") === null) {
+      // console.log("user is not logged in");
+      return (
+        <div className="sticky">
+          <div className="header-links">
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <div className="header-glitch" data-text="ARTBREAK-HI">
+                ARTBREAK-HI
+              </div>
+            </Link>
+            <HeaderMenu />
+            <StripeReg />
+
+            <Link to="/login">
+              <Button variant="contained" color="secondary" size="large">
+                Log In
+              </Button>{" "}
+            </Link>
+            <Button variant="contained" color="secondary" size="large">
+              Sign Up
+            </Button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="sticky">
+          <div className="header-links">
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <div className="header-glitch" data-text="ARTBREAK-HI">
+                ARTBREAK-HI
+              </div>
+            </Link>
+            <HeaderMenu />
+            <StripeReg />
+            <h1>Welcome {this.getUsername()}</h1>
+
+            <Logout />
+          </div>
+        </div>
+      );
+    }
   }
 }
 
