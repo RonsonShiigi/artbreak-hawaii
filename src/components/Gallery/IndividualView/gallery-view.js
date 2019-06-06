@@ -18,7 +18,7 @@ class GalleryView extends Component {
     };
   }
   componentDidMount(req, res) {
-    fetch("http://localhost:8080/products/12")
+    fetch("http://localhost:8080/products/:id")
       .then(res => {
         return res.json();
       })
