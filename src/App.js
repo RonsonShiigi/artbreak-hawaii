@@ -20,7 +20,7 @@ import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import profile from "./components/Profile/profile";
-import GalleryView from "./components/gallery-view";
+import GalleryView from "./components/Gallery/IndividualView/gallery-view";
 
 class App extends Component {
   componentDidMount() {

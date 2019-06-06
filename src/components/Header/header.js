@@ -1,12 +1,13 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+
 import Logout from "../Logout/logout";
+import HeaderMenu from "./HeaderMenu/menu";
 import "./header.css";
 
 import { withStyles } from "@material-ui/core/styles";
 import StripeReg from "../StripeReg/stripeReg.js";
-import ButtonBase from "@material-ui/core/ButtonBase";
 
 import PropTypes from "prop-types";
 
@@ -58,25 +59,8 @@ class Header extends Component {
               ARTBREAK-HI
             </div>
           </Link>
-
+          <HeaderMenu />
           <StripeReg />
-          <ul>
-            <li>
-              <Link to="/login">
-                <h2>Login</h2>
-              </Link>
-            </li>
-            <li>
-              <Link to="/register">
-                <h2>Register</h2>
-              </Link>
-            </li>
-            <li>
-              <Link to="/profile">
-                <h2>profile</h2>
-              </Link>
-            </li>
-          </ul>
           <Logout />
         </div>
       </div>

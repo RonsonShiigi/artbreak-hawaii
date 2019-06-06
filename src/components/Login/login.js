@@ -130,7 +130,7 @@ class Login extends Component {
               fullWidth={true}
             />
             <br />
-            <CustomButton type="submit" fullWidth={true} variant="filled">
+            <CustomButton type="submit" fullWidth={true} variant="contained">
               Submit
             </CustomButton>
           </form>
