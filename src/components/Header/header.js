@@ -1,8 +1,8 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import "./header.css";
 import Logout from "../Logout/logout";
+import "./header.css";
 
 import { withStyles } from "@material-ui/core/styles";
 import StripeReg from "../StripeReg/stripeReg.js";
@@ -51,31 +51,34 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="header-links">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <div className="header-glitch" data-text="ARTBREAK-HI">
-            ARTBREAK-HI
-          </div>
-        </Link>
-        <StripeReg />
-        <ul>
-          <li>
-            <Link to="/login">
-              <h2>Login</h2>
-            </Link>
-          </li>
-          <li>
-            <Link to="/register">
-              <h2>Register</h2>
-            </Link>
-          </li>
-          <li>
-            <Link to="/profile">
-              <h2>profile</h2>
-            </Link>
-          </li>
-        </ul>
-        <Logout />
+      <div className="sticky">
+        <div className="header-links">
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <div className="header-glitch" data-text="ARTBREAK-HI">
+              ARTBREAK-HI
+            </div>
+          </Link>
+
+          <StripeReg />
+          <ul>
+            <li>
+              <Link to="/login">
+                <h2>Login</h2>
+              </Link>
+            </li>
+            <li>
+              <Link to="/register">
+                <h2>Register</h2>
+              </Link>
+            </li>
+            <li>
+              <Link to="/profile">
+                <h2>profile</h2>
+              </Link>
+            </li>
+          </ul>
+          <Logout />
+        </div>
       </div>
     );
   }

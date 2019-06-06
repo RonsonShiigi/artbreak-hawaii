@@ -49,7 +49,6 @@ router
   .route("/")
   // GET PRODUCT
   .get((req, res) => {
-    console.log("This is the GET /Products!!");
     return new req.database.Product()
       .fetchAll()
       .then(products => {
@@ -126,7 +125,6 @@ router.get("/:id", (req, res) => {
 
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
-  // console.log("fuckyou");
   const body = req.body;
   const paramsId = req.params.id;
 

@@ -1,12 +1,18 @@
 .header-links {
   display: flex;
-  position: fixed;
-  top: 0;
-  flex-direction: column nowrap;
+  flex-direction: row;
   width: 100%;
   padding-left: 25px;
   align-items: center;
   background-color: #252525;
+}
+.sticky {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
 }
 ul {
   display: inline;

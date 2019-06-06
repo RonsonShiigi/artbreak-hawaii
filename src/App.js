@@ -26,11 +26,11 @@ class App extends Component {
   componentDidMount() {
     this.props.getProducts();
   }
-
   render() {
     return (
       <React.Fragment>
         <Header />
+
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/products/:id" component={GalleryView} />
