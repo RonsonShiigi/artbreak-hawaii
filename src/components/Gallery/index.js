@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Collapse from "@material-ui/core/Collapse";
 
 const styles = theme => ({
@@ -138,8 +138,7 @@ class Gallery extends React.Component {
         <div className={classes.images}>
           {_products.map((product, i) => (
             // border around title
-            // <Link to={`/products/${product.id}`}>
-            <Link to="www.google.com">
+            <Link to={`/products/${product.id}`}>
               <ButtonBase
                 key={i}
                 className={classes.imageWrapper}
