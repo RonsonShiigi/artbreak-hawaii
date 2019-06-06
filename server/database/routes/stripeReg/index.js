@@ -6,7 +6,6 @@ require("dotenv").config({ path: "../../.env" });
 
 router.route("/").post((req, res) => {
   const stripe_ck = process.env.STRIPE_SECRET_KEY;
-  console.log("STRIPE", stripe_ck);
   const authcode = req.body.authCode;
   const userid = req.body.userid;
 

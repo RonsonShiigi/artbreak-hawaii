@@ -16,7 +16,6 @@ class StripeRedirect extends Component {
     );
     //get user id from local storage
     const user_id = localStorage.getItem("userId");
-    console.log("AUTHCODE", auth_code);
 
     fetch("http://localhost:8080/sRegistration/", {
       body: JSON.stringify({
