@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
 
 const styles = theme => ({
   root: {},
@@ -123,6 +129,8 @@ class Gallery extends React.Component {
         return product.title.toLowerCase().match(search);
       });
     }
+
+    const url = "/products/";
     return (
       <div className={classes.root} component="section">
         <input
@@ -157,6 +165,11 @@ class Gallery extends React.Component {
                 {/* weird little black line below title */}
                 <div className={classes.imageMarked} />
               </div>
+              <Card className="ind-card">
+                <CardHeader title={product.title} />
+                <CardMedia image={product.image_url} title={product.title} />
+                <CardContent>Some stuff</CardContent>
+              </Card>
             </ButtonBase>
           ))}
         </div>

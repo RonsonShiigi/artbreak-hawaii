@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Card from "@material-ui/core/Card";
+
+import "./gallery-view.css";
 
 class GalleryView extends Component {
   constructor(props) {
