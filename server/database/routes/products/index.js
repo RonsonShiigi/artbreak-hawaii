@@ -53,7 +53,6 @@ router
     return new req.database.Product()
       .fetchAll()
       .then(products => {
-        console.log("products", products);
         return res.json(products);
       })
       .catch(err => {
@@ -117,7 +116,6 @@ router.get("/:id", (req, res) => {
     .where({ id: req.params.id })
     .fetch()
     .then(img => {
-      console.log("OH NO", res.json(img));
       return res.json(img);
     })
     .catch(err => {

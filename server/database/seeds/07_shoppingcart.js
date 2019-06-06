@@ -22,6 +22,24 @@ exports.seed = function(knex, Promise) {
           user_id: 4,
           price: 10.0,
           seller_id: 2
+        },
+        {
+          title: "Test tickles",
+          description: "Elmo",
+          image_url:
+            "https://i.pinimg.com/originals/75/de/e9/75dee965859cee00acde21420aafcd15.jpg",
+          user_id: 4,
+          price: 20.0,
+          seller_id: 3
+        },
+        {
+          title: "Key Caps",
+          description: "Key capssssss",
+          image_url:
+            "https://i.pinimg.com/originals/75/de/e9/75dee965859cee00acde21420aafcd15.jpg",
+          user_id: 4,
+          price: 30.0,
+          seller_id: 3
         }
       ]);
     });

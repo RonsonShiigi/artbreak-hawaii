@@ -5,6 +5,8 @@ import "./header.css";
 import Logout from "../Logout/logout";
 
 import { withStyles } from "@material-ui/core/styles";
+import StripeReg from "../StripeReg/stripeReg.js";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 import PropTypes from "prop-types";
 
@@ -55,7 +57,7 @@ class Header extends Component {
             ARTBREAK-HI
           </div>
         </Link>
-
+        <StripeReg />
         <ul>
           <li>
             <Link to="/login">
