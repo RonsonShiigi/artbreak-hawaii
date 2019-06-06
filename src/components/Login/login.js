@@ -70,10 +70,7 @@ class Login extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        // first_name: this.state.first_name,
-        // last_name: this.state.last_name,
         password: this.state.password,
-        // username: this.state.username,
         email: this.state.email
       })
     })
@@ -133,7 +130,7 @@ class Login extends Component {
               fullWidth={true}
             />
             <br />
-            <CustomButton type="submit" fullWidth={true} variant="filled">
+            <CustomButton type="submit" fullWidth={true} variant="contained">
               Submit
             </CustomButton>
           </form>

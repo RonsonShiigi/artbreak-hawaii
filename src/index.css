@@ -119,6 +119,7 @@ form {
   animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
 .glitch {
+  display: flex;
   color: white;
   font-size: 45px;
   position: relative;
@@ -305,4 +306,15 @@ input {
   margin-left: 50px;
   font-weight: bolder;
   letter-spacing: 0.1em;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  body {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .glitch-cover {
+    font-size: 75px;
+  }
 }

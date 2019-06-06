@@ -21,7 +21,6 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  top: 13vh;
   background-color: #252525;
 }
 .profile-content {
@@ -29,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 20vh;
+  top: 30vh;
   width: 100%;
   background-color: transparent;
 }
@@ -38,7 +37,7 @@
 }
 .user-head {
   display: flex;
-  flex-direction: row nowrap;
+  flex-direction: column nowrap;
   position: absolute;
   top: -3vh;
   padding-bottom: 0;
@@ -46,7 +45,6 @@
 }
 .date-info {
   position: relative;
-  justify-content: flex-end;
   top: 0;
   font-style: italic;
   color: #8d8d8d;
@@ -56,9 +54,12 @@
 }
 
 .user-blurb {
-  font-size: 12px;
-  max-height: 200px;
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  max-height: 400px;
   width: 450px;
+  margin-left: 5vw;
 }
 
 #uploads-header {

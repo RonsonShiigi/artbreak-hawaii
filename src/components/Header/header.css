@@ -1,12 +1,18 @@
 .header-links {
   display: flex;
-  position: fixed;
-  top: 0;
-  flex-direction: column nowrap;
+  flex-direction: row;
   width: 100%;
   padding-left: 25px;
   align-items: center;
   background-color: #252525;
+}
+.sticky {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
 }
 ul {
   display: inline;
@@ -25,6 +31,31 @@ li {
   width: 350px;
   position: relative;
   margin: 0 auto;
+}
+
+.header-glitch:hover:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 #cd5703;
+  top: 0;
+  color: white;
+  background: #252525;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse;
+}
+.header-glitch:hover:before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 #02444d;
+  top: 0;
+  color: white;
+  background: #252525;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
 @keyframes noise-anim {
   0% {
@@ -91,18 +122,6 @@ li {
     clip: rect(80px, 9999px, 95px, 0);
   }
 }
-.header-glitch:hover:after {
-  content: attr(data-text);
-  position: absolute;
-  left: 2px;
-  text-shadow: -1px 0 #cd5703;
-  top: 0;
-  color: white;
-  background: #252525;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim 2s infinite linear alternate-reverse;
-}
 @keyframes noise-anim-2 {
   0% {
     clip: rect(35px, 9999px, 63px, 0);
@@ -168,15 +187,15 @@ li {
     clip: rect(33px, 9999px, 39px, 0);
   }
 }
-.header-glitch:hover:before {
-  content: attr(data-text);
-  position: absolute;
-  left: -2px;
-  text-shadow: 1px 0 #02444d;
-  top: 0;
-  color: white;
-  background: #252525;
-  overflow: hidden;
-  clip: rect(0, 900px, 0, 0);
-  animation: noise-anim-2 3s infinite linear alternate-reverse;
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .header-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 20vh;
+  }
+  .header-glitch {
+    font-size: 35px;
+  }
 }

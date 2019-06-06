@@ -94,4 +94,20 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// GET SPECIFIC USER
+router.get("/:id", (req, res) => {
+  const paramsID = req.params.id;
+  User.where({
+    id: paramsID
+  })
+    .fetch()
+    .then(user => {
+      return res.json(user);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

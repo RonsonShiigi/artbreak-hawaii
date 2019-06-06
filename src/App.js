@@ -20,19 +20,17 @@ import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
 import profile from "./components/Profile/profile";
-import GalleryView from "./components/gallery-view";
+import GalleryView from "./components/Gallery/IndividualView/gallery-view";
 
 class App extends Component {
   componentDidMount() {
-    // console.log("this.props", this.props);
-    // console.log(">>>>>>", this.props.getProducts());
     this.props.getProducts();
   }
-
   render() {
     return (
       <React.Fragment>
         <Header />
+
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/products/:id" component={GalleryView} />
