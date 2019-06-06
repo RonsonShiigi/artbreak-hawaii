@@ -16,7 +16,6 @@ class User extends Component {
   }
 
   componentDidMount(req, res) {
-    console.log("GALLERYVIEW", this.props);
     fetch(`http://localhost:8080/users/${this.props.match.params.id}`)
       .then(res => {
         return res.json();
