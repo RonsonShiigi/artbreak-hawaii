@@ -18,7 +18,7 @@ class GalleryView extends Component {
     };
   }
   componentDidMount(req, res) {
-    fetch("http://localhost:8080/products/:id")
+    fetch(`http://localhost:8080/products/${this.props.match.params.id}`)
       .then(res => {
         return res.json();
       })
@@ -38,7 +38,13 @@ class GalleryView extends Component {
   }
 
   render() {
-    return <div className="smoke-test">aaaaaa</div>;
+    const data = this.state;
+    console.log(data);
+    return (
+      <div className="galleryview">
+        <img src={data.image_url} />
+      </div>
+    );
   }
 }
 
