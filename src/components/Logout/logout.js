@@ -22,6 +22,11 @@ function Logout(props) {
       }
     })
       .then(() => {
+        console.log(localStorage);
+        window.localStorage.clear();
+        console.log("useremail gone?", localStorage.getItem("userEmail"));
+      })
+      .then(() => {
         console.log("User Logged Out...");
       })
       .catch(err => {
@@ -41,7 +46,7 @@ function Logout(props) {
             }
           }}
         >
-          LOGOUT U FAKA
+          LOGOUT
         </Button>
       </form>
     </div>

@@ -10,8 +10,6 @@ import { connect } from "react-redux";
 
 class Main extends Component {
   componentDidMount() {
-    console.log("this.props", this.props);
-    // console.log(">>>>>>", this.props.getProducts());
     this.props.getProducts();
   }
 

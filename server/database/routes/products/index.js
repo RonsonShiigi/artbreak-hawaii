@@ -49,11 +49,9 @@ router
   .route("/")
   // GET PRODUCT
   .get((req, res) => {
-    console.log("This is the GET /Products!!");
     return new req.database.Product()
       .fetchAll()
       .then(products => {
-        console.log("products", products);
         return res.json(products);
       })
       .catch(err => {
@@ -117,7 +115,6 @@ router.get("/:id", (req, res) => {
     .where({ id: req.params.id })
     .fetch()
     .then(img => {
-      console.log("OH NO", res.json(img));
       return res.json(img);
     })
     .catch(err => {
@@ -128,7 +125,6 @@ router.get("/:id", (req, res) => {
 
 // EDIT PRODUCT
 router.post("/:id", upload.single("photos"), (req, res) => {
-  console.log("fuckyou");
   const body = req.body;
   const paramsId = req.params.id;
 
@@ -180,30 +176,39 @@ router.post("/:id", upload.single("photos"), (req, res) => {
 router.delete("/:id", (req, res) => {
   console.log("req", req.body);
   console.log("req.body.image_url", req.body.body.image_url);
+  let user_id = Number(req.body.body.user_id);
+  let product_user_id = Number(req.body.body.product.user_id);
   const paramsId = req.params.id;
   const key = req.body.body.image_url.split("/").pop();
+  console.log("user id", user_id);
+  console.log("product_user_id", product_user_id);
 
-  Product.where({
-    id: paramsId
-  })
-    .fetch()
-    .then(product => {
-      new Product({
-        id: paramsId
-      })
-        .destroy()
-        .then(() => {
-          s3.deleteObject(
-            {
-              Bucket: process.env.AWS_BUCKET_NAME,
-              Key: key
-            },
-            function(err, data) {}
-          );
+  if (user_id === product_user_id) {
+    Product.where({
+      id: paramsId
+    })
+      .fetch()
+      .then(product => {
+        new Product({
+          id: paramsId
+        })
+          .destroy()
+          .then(() => {
+            s3.deleteObject(
+              {
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Key: key
+              },
+              function(err, data) {}
+            );
 
-          return res.json("success");
-        });
-    });
+            return res.json("success");
+          });
+      });
+  } else {
+    console.log("you are not the owner of this masterpiece");
+    res.json("you need to be the owner of artwork to delete");
+  }
 });
 
 module.exports = router;

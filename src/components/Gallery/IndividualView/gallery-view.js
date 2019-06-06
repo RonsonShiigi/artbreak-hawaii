@@ -15,16 +15,21 @@ class GalleryView extends Component {
     };
   }
   componentDidMount(req, res) {
-    fetch("http://localhost:8080/products/11")
+    fetch("http://localhost:8080/products/12")
       .then(res => {
-        return res.clone().json();
+        return res.json();
       })
       .then(data => {
         console.log("DATAAATATATATA", data);
         this.setState({
-          data
-        }).catch(err => {
-          console.log(err);
+          id: 0,
+          title: data.title,
+          description: data.description,
+          image_url: data.image_url,
+          user_id: data.user_id,
+          price: data.price,
+          created_at: data.created_at,
+          updated_at: data.updated_at
         });
       });
   }
