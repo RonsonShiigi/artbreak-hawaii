@@ -1,0 +1,6 @@
+.ind-card {
+  position: absolute;
+  top: 0;
+  left: 20vw;
+  z-index: 99;
+}

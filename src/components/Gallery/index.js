@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
+import Link from "@material-ui/core/Link";
 import Collapse from "@material-ui/core/Collapse";
 
 const styles = theme => ({
@@ -130,7 +126,6 @@ class Gallery extends React.Component {
       });
     }
 
-    const url = "/products/";
     return (
       <div className={classes.root} component="section">
         <input
@@ -143,34 +138,31 @@ class Gallery extends React.Component {
         <div className={classes.images}>
           {_products.map((product, i) => (
             // border around title
-            <ButtonBase
-              key={i}
-              className={classes.imageWrapper}
-              style={{
-                width: product.width
-              }}
-            >
-              {/* actual thumbnail */}
-              <div
-                className={classes.imageSrc}
+            <Link to={`products/${product.id}`}>
+              <ButtonBase
+                key={i}
+                className={classes.imageWrapper}
                 style={{
-                  backgroundImage: `url(${product.image_url})`
+                  width: product.width
                 }}
-              />
-              {/* darkened background for each thumbnail */}
-              <div className={classes.imageBackdrop} />
-              {/* actual image title */}
-              <div className={classes.imageButton}>
-                <h2>{product.title}</h2>
-                {/* weird little black line below title */}
-                <div className={classes.imageMarked} />
-              </div>
-              <Card className="ind-card">
-                <CardHeader title={product.title} />
-                <CardMedia image={product.image_url} title={product.title} />
-                <CardContent>Some stuff</CardContent>
-              </Card>
-            </ButtonBase>
+              >
+                {/* actual thumbnail */}
+                <div
+                  className={classes.imageSrc}
+                  style={{
+                    backgroundImage: `url(${product.image_url})`
+                  }}
+                />
+                {/* darkened background for each thumbnail */}
+                <div className={classes.imageBackdrop} />
+                {/* actual image title */}
+                <div className={classes.imageButton}>
+                  <h2>{product.title}</h2>
+                  {/* weird little black line below title */}
+                  <div className={classes.imageMarked} />
+                </div>
+              </ButtonBase>
+            </Link>
           ))}
         </div>
       </div>
