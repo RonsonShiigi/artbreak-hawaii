@@ -43,7 +43,6 @@ class App extends Component {
           <Route path="/checkout" component={Checkout} />
           <Route exact path="/sRegistration" component={StripeRedirect} />
           <Route path="/profile" component={profile} />
-          <Route exact path="/products/:id" component={GalleryView} />
         </Switch>
       </React.Fragment>
     );
