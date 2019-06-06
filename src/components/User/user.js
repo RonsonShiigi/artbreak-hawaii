@@ -4,10 +4,34 @@ import Avatar from "@material-ui/core/Avatar";
 
 import "./profile.css";
 
-class Profile extends Component {
-  state = {};
+class User extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      first_name: "",
+      last_name: "",
+      created_at: ""
+    };
+  }
 
+  componentDidMount(req, res) {
+    console.log("GALLERYVIEW", this.props);
+    fetch(`http://localhost:8080/users/${this.props.match.params.id}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        this.setState({
+          username: data.username,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          created_at: data.created_at
+        });
+      });
+  }
   render() {
+    const data = this.state;
     return (
       <div className="profile-container">
         <div className="profile-cover" />
@@ -23,8 +47,12 @@ class Profile extends Component {
                 marginRight: "25px"
               }}
             />
-            <div className="glitch" data-text="username" id="user-glitch">
-              username
+            <div
+              className="glitch"
+              data-text={`${data.username}`}
+              id="user-glitch"
+            >
+              {data.username}
               <div className="user-blurb">
                 <div className="date-info">join date: (date created)</div>A good
                 fucking composition is the result of a hierarchy consisting of
@@ -50,4 +78,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default User;
