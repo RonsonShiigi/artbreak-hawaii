@@ -1,0 +1,22 @@
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 15vh;
+  padding: 15px;
+}
+
+.left-nav {
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  position: absolute;
+  left: 0;
+}
+
+.right-nav {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 80%;
+}

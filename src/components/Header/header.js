@@ -84,7 +84,7 @@ class Header extends Component {
             <Link to="/login">
               <Button variant="contained" color="secondary" size="large">
                 Log In
-              </Button>{" "}
+              </Button>
             </Link>
             <Button variant="contained" color="secondary" size="large">
               Sign Up
@@ -101,9 +101,8 @@ class Header extends Component {
                 ARTBREAK-HI
               </div>
             </Link>
-            <HeaderMenu />
             <StripeReg />
-            <h1>Welcome {this.getUsername()}</h1>
+            <h3 className="login-welcome">Logged in as {this.getUsername()}</h3>
 
             <Logout />
           </div>
