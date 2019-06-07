@@ -29,6 +29,9 @@ function Logout(props) {
       .then(() => {
         console.log("User Logged Out...");
       })
+      .then(() => {
+        window.location.replace("http://localhost:8081");
+      })
       .catch(err => {
         console.log(err);
       });

@@ -7,6 +7,8 @@ import Register from "./components/Register/register";
 import Login from "./components/Login/login";
 import ShoppingCart from "./components/ShoppingCart/shoppingCart";
 import StripeRedirect from "./components/StripeRedirect/stripeRedirect.js";
+import User from "./components/User/user";
+import Dashboard from "./components/Dashboard/dashboard";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -19,13 +21,13 @@ import { Route, Switch } from "react-router-dom";
 import { getProducts } from "./actions/actions";
 
 import { connect } from "react-redux";
-import profile from "./components/Profile/profile";
 import GalleryView from "./components/Gallery/IndividualView/gallery-view";
 
 class App extends Component {
   componentDidMount() {
     this.props.getProducts();
   }
+
   render() {
     return (
       <React.Fragment>
@@ -34,6 +36,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/products/:id" component={GalleryView} />
+          <Route exact path="/users/:id" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
@@ -42,8 +45,7 @@ class App extends Component {
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
           <Route exact path="/sRegistration" component={StripeRedirect} />
-          <Route path="/profile" component={profile} />
-          <Route exact path="/products/:id" component={GalleryView} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </React.Fragment>
     );

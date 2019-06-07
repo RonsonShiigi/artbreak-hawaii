@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import Collapse from "@material-ui/core/Collapse";
 
 const styles = theme => ({
   root: {},
@@ -123,6 +125,7 @@ class Gallery extends React.Component {
         return product.title.toLowerCase().match(search);
       });
     }
+
     return (
       <div className={classes.root} component="section">
         <input
@@ -135,29 +138,31 @@ class Gallery extends React.Component {
         <div className={classes.images}>
           {_products.map((product, i) => (
             // border around title
-            <ButtonBase
-              key={i}
-              className={classes.imageWrapper}
-              style={{
-                width: product.width
-              }}
-            >
-              {/* actual thumbnail */}
-              <div
-                className={classes.imageSrc}
+            <Link to={`/products/${product.id}`}>
+              <ButtonBase
+                key={i}
+                className={classes.imageWrapper}
                 style={{
-                  backgroundImage: `url(${product.image_url})`
+                  width: product.width
                 }}
-              />
-              {/* darkened background for each thumbnail */}
-              <div className={classes.imageBackdrop} />
-              {/* actual image title */}
-              <div className={classes.imageButton}>
-                <h2>{product.title}</h2>
-                {/* weird little black line below title */}
-                <div className={classes.imageMarked} />
-              </div>
-            </ButtonBase>
+              >
+                {/* actual thumbnail */}
+                <div
+                  className={classes.imageSrc}
+                  style={{
+                    backgroundImage: `url(${product.image_url})`
+                  }}
+                />
+                {/* darkened background for each thumbnail */}
+                <div className={classes.imageBackdrop} />
+                {/* actual image title */}
+                <div className={classes.imageButton}>
+                  <h2>{product.title}</h2>
+                  {/* weird little black line below title */}
+                  <div className={classes.imageMarked} />
+                </div>
+              </ButtonBase>
+            </Link>
           ))}
         </div>
       </div>
