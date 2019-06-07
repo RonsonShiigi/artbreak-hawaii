@@ -13,16 +13,6 @@ function Cover() {
       <div>
         <h2>a platform.</h2>
       </div>
-      <div className="cover-arrow">
-        <Link to="/login">
-          <Button variant="contained" color="secondary" size="large">
-            Log In
-          </Button>{" "}
-        </Link>
-        <Button variant="contained" color="secondary" size="large">
-          Sign Up
-        </Button>
-      </div>
     </div>
   );
 }

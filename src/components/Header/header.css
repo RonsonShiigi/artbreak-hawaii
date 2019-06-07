@@ -6,6 +6,10 @@
   align-items: center;
   background-color: #252525;
 }
+.login-welcome {
+  padding: 20px;
+  color: #6d6b6b;
+}
 .sticky {
   display: flex;
   flex-direction: row;
