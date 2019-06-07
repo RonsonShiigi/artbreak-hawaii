@@ -30,9 +30,6 @@ router.route("/").post((req, res) => {
           .then(stripeid => {
             new User({ id: userid })
               .save({ stripe_id: stripeId })
-              .then(() => {
-                return res.redirect("http://localhost:8081/");
-              })
               .catch(err => {
                 console.log(err);
                 res.sendStatus(500);

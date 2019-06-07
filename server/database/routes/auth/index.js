@@ -84,14 +84,31 @@ router.post("/auth/register", (req, res) => {
     })
     .then(user => {
       user = user.toJSON();
-
-      res.send(user);
-      // res.redirect("/"); //Never send entire user obj to user
-      //res.sendStatus(200)
-      //res.redirect('/api/auth/secret')
+      // res.send(user);
     })
     .catch(err => {
-      res.json(err);
+      console.log("ERROR", err.detail);
+      res.send(err);
+    });
+});
+
+router.post("/auth/register/check", (req, res) => {
+  console.log("req.body", req.body);
+  Users.where({ email: req.body.email })
+    .fetchAll()
+    .then(user => {
+      const userEmail = user.toJSON();
+      if (!userEmail[0]) {
+        res.json(user);
+      } else {
+        const userData = userEmail[0].email;
+        console.log("USER", userData);
+        return res.json(userData);
+      }
+    })
+    .catch(err => {
+      console.log("ERR", err);
+      res.sendStatus(500);
     });
 });
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./stripeRedirect.css";
+import { Route, Redirect } from "react-router-dom";
 
 class StripeRedirect extends Component {
   constructor(props) {
@@ -29,8 +30,8 @@ class StripeRedirect extends Component {
       method: "POST",
       credentials: "include"
     })
-      .then(res => {
-        console.log("RES", res.body);
+      .then(() => {
+        ///some code to store state and renderdirect to antoehr page.
       })
       .catch(err => {
         console.log("ERROR", err);
@@ -38,47 +39,7 @@ class StripeRedirect extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>PROCESSING!!!</div>
-      </div>
-    );
+    return <div>{/* <Redirect to="/" /> */}</div>;
   }
 }
 
