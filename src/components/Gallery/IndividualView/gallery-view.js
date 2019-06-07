@@ -23,7 +23,6 @@ class GalleryView extends Component {
         return res.json();
       })
       .then(data => {
-        console.log("DATAAATATATATA", data);
         this.setState({
           id: 0,
           title: data.title,
@@ -42,7 +41,10 @@ class GalleryView extends Component {
     console.log(data);
     return (
       <div className="galleryview">
-        <img src={data.image_url} />
+        <h1>{data.title}</h1>
+        <a href={`${data.image_url}`} target="_blank">
+          <img src={data.image_url} className="img-style" />
+        </a>
       </div>
     );
   }
