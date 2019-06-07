@@ -8,6 +8,7 @@ import Login from "./components/Login/login";
 import ShoppingCart from "./components/ShoppingCart/shoppingCart";
 import StripeRedirect from "./components/StripeRedirect/stripeRedirect.js";
 import User from "./components/User/user";
+import Dashboard from "./components/Dashboard/dashboard";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -44,6 +45,7 @@ class App extends Component {
           <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
           <Route exact path="/sRegistration" component={StripeRedirect} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </React.Fragment>
     );
