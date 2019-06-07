@@ -24,7 +24,7 @@ class GalleryView extends Component {
       })
       .then(data => {
         this.setState({
-          id: 0,
+          id: data.id,
           title: data.title,
           description: data.description,
           image_url: data.image_url,
@@ -38,13 +38,14 @@ class GalleryView extends Component {
 
   render() {
     const data = this.state;
-    console.log(data);
+    // console.log("galleryview state", data);
     return (
       <div className="galleryview">
         <h1>{data.title}</h1>
         <a href={`${data.image_url}`} target="_blank">
           <img src={data.image_url} className="img-style" />
         </a>
+        <a href={`/delete/${this.state.id}`}>Delete This TingyMajigga</a>
       </div>
     );
   }

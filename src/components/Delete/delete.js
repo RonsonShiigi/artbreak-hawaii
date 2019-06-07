@@ -19,7 +19,7 @@ class Delete extends Component {
     this.state = {
       image_url: "",
       //make this dynamic
-      product_id: 5,
+      product_id: "",
       product: "",
       user_id: ""
     };
@@ -27,7 +27,12 @@ class Delete extends Component {
 
   componentDidMount() {
     this.state.user_id = localStorage.getItem("userId");
-    console.log("user_id", this.state.user_id);
+    let pather = window.location.pathname.split("/");
+
+    this.state.product_id = pather[2];
+
+    // console.log("user_id", this.state.user_id);
+    console.log("delete state", this.state);
   }
 
   deleteFile = e => {
@@ -41,7 +46,7 @@ class Delete extends Component {
         .then(res => {
           let products = res.data;
           products.filter(product => {
-            if (product.id === this.state.product_id) {
+            if (product.id === Number(this.state.product_id)) {
               this.state.product = product;
             }
           });
