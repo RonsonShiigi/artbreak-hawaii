@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Register.css";
 
 import { withStyles } from "@material-ui/styles";
@@ -37,102 +37,166 @@ const CustomButton = withStyles({
   }
 })(Button);
 
-export default function Register() {
-  const [values, setValues] = React.useState({
-    email: "",
-    password: "",
-    first_name: "",
-    last_name: "",
-    username: ""
-  });
+class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      first_name: "",
+      last_name: "",
+      username: "",
+      emailExist: false
+    };
 
-  const handleChange = name => e => {
-    setValues({ ...values, [name]: e.target.value });
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("userExist State", this.state.emailExist);
+  }
+
+  handleChange = e => {
+    const name = e.target.name;
+    this.setState({ [name]: e.target.value });
   };
-  const handleSubmit = e => {
+
+  handleSubmit = e => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/auth/register", {
+    fetch("http://localhost:8080/api/auth/register/check", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        first_name: values.first_name,
-        last_name: values.last_name,
-        password: values.password,
-        username: values.username,
-        email: values.email
+        email: this.state.email,
+        username: this.state.email
       })
     })
-      .then(() => {
-        console.log("User added to database");
+      .then(res => {
+        return res.json();
       })
-      .catch(err => {
-        console.log(err);
+      .then(user => {
+        console.log("USER", user[0]);
+        if (!user[0]) {
+          fetch("http://localhost:8080/api/auth/register", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              first_name: this.state.first_name,
+              last_name: this.state.last_name,
+              password: this.state.password,
+              username: this.state.username,
+              email: this.state.email
+            })
+          })
+            .then(res => {
+              console.log("RES", res);
+              console.log("User added to database");
+            })
+            .catch(err => {
+              console.log("FRONT END", err);
+            });
+        } else {
+          this.setState({ emailExist: true });
+          console.log(this.state.emailExist);
+        }
       });
   };
+  render() {
+    function UsernameError(props) {
+      return <div>Username Taken, Please use another username..</div>;
+    }
 
-  return (
-    <div className="container">
-      <Paper className="formHolder">
-        <h1 className="form-title">Register</h1>
-        <form onSubmit={handleSubmit}>
-          <CssText
-            id="email"
-            label="email"
-            key="email"
-            value={values.email}
-            onChange={handleChange("email")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <CssText
-            id="username"
-            label="username"
-            key="username"
-            value={values.username}
-            onChange={handleChange("username")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <CssText
-            id="password"
-            label="password"
-            key="password"
-            value={values.password}
-            onChange={handleChange("password")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <CssText
-            id="first_name"
-            label="first name"
-            key="first_name"
-            value={values.first_name}
-            onChange={handleChange("first_name")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <CssText
-            id="last_name"
-            label="last name"
-            key="last_name"
-            value={values.last_name}
-            onChange={handleChange("last_name")}
-            margin="normal"
-            fullWidth={true}
-            variant="outlined"
-          />
-          <CustomButton type="submit" variant="contained" fullWidth={true}>
-            Submit
-          </CustomButton>
-        </form>
-      </Paper>
-    </div>
-  );
+    function EmailError(props) {
+      return <div>Email already in use, Please enter another email..</div>;
+    }
+
+    function EmailExists(props) {
+      const emailExists = props.emailExists;
+      console.log("EMAIL EXISTS", emailExists);
+      if (emailExists) {
+        return <EmailError />;
+      } else {
+        return null;
+      }
+    }
+
+    return (
+      <div className="container">
+        <Paper className="formHolder">
+          <h1 className="form-title">Register</h1>
+          <form onSubmit={this.handleSubmit}>
+            <CssText
+              id="email"
+              label="email"
+              key="email"
+              name="email"
+              // value={values.email}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <EmailExists emailExists={this.state.emailExist} />
+            <CssText
+              id="username"
+              label="username"
+              key="username"
+              name="username"
+              // value={values.username}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <div />
+            <CssText
+              id="password"
+              label="password"
+              key="password"
+              name="password"
+              // value={values.password}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <CssText
+              id="first_name"
+              label="first name"
+              key="first_name"
+              name="first_name"
+              // value={values.first_name}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <CssText
+              id="last_name"
+              label="last name"
+              key="last_name"
+              name="last_name"
+              // value={values.last_name}
+              onChange={this.handleChange}
+              margin="normal"
+              fullWidth={true}
+              variant="outlined"
+            />
+            <CustomButton type="submit" variant="contained" fullWidth={true}>
+              Submit
+            </CustomButton>
+          </form>
+        </Paper>
+      </div>
+    );
+  }
 }
+
+export default Register;

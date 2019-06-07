@@ -26,6 +26,7 @@ router
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
 
+    new req.database.User({});
     return new req.database.User({
       username,
       password,
@@ -35,10 +36,10 @@ router
     })
       .save()
       .then(user => {
+        console.log("USER", user);
         return res.json({ success: true });
       })
       .catch(err => {
-        console.log(err);
         res.sendStatus(500);
       });
   });
