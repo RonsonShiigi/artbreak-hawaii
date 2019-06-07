@@ -46,7 +46,8 @@ class Register extends Component {
       first_name: "",
       last_name: "",
       username: "",
-      emailExist: false
+      emailExist: false,
+      usernameExist: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -55,6 +56,7 @@ class Register extends Component {
 
   componentDidMount() {
     console.log("userExist State", this.state.emailExist);
+    console.log("userExist State", this.state.usernameExist);
   }
 
   handleChange = e => {
@@ -64,6 +66,8 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ emailExist: false });
+    this.setState({ usernameExist: false });
     fetch("http://localhost:8080/api/auth/register/check", {
       method: "POST",
       headers: {
@@ -72,15 +76,15 @@ class Register extends Component {
       },
       body: JSON.stringify({
         email: this.state.email,
-        username: this.state.email
+        username: this.state.username
       })
     })
       .then(res => {
         return res.json();
       })
       .then(user => {
-        console.log("USER", user[0]);
-        if (!user[0]) {
+        console.log("USER", user);
+        if (user.email === "" && user.username === "") {
           fetch("http://localhost:8080/api/auth/register", {
             method: "POST",
             headers: {
@@ -103,8 +107,21 @@ class Register extends Component {
               console.log("FRONT END", err);
             });
         } else {
-          this.setState({ emailExist: true });
-          console.log(this.state.emailExist);
+          console.log("USERRR", user);
+          if (user.email !== "" && user.username !== "") {
+            this.setState({ emailExist: true });
+            this.setState({ usernameExist: true });
+            console.log(this.state.emailExist);
+            console.log(this.state.usernameExist);
+          } else if (user.email !== "") {
+            this.setState({ emailExist: true });
+            console.log(this.state.emailExist);
+          } else if (user.username !== "") {
+            this.setState({ usernameExist: true });
+            console.log(this.state.usernameExist);
+          } else {
+            return;
+          }
         }
       });
   };
@@ -122,6 +139,16 @@ class Register extends Component {
       console.log("EMAIL EXISTS", emailExists);
       if (emailExists) {
         return <EmailError />;
+      } else {
+        return null;
+      }
+    }
+
+    function UsernameExists(props) {
+      const usernameExists = props.userExists;
+      console.log("EMAIL EXISTS", usernameExists);
+      if (usernameExists) {
+        return <UsernameError />;
       } else {
         return null;
       }
@@ -155,6 +182,7 @@ class Register extends Component {
               fullWidth={true}
               variant="outlined"
             />
+            <UsernameExists userExists={this.state.usernameExist} />
             <div />
             <CssText
               id="password"

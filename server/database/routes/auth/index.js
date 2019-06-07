@@ -32,11 +32,6 @@ passport.use(
       .fetch()
       .then(user => {
         user = user.toJSON();
-        // if (user.password === password) {
-        //   done(null, user);
-        // } else {
-        //   done(null, false);
-        // }
         bcrypt
           .compare(password, user.password)
           .then(res => {
@@ -56,13 +51,6 @@ passport.use(
       });
   })
 );
-
-//hello world
-// router.get("/auth/register", (req, res) => {
-//   console.log(req);
-//   res.send("hi");
-//   //   res.render("register");
-// });
 
 const SALT_ROUND = 12;
 router.post("/auth/register", (req, res) => {
@@ -84,7 +72,6 @@ router.post("/auth/register", (req, res) => {
     })
     .then(user => {
       user = user.toJSON();
-      // res.send(user);
     })
     .catch(err => {
       console.log("ERROR", err.detail);
@@ -93,18 +80,38 @@ router.post("/auth/register", (req, res) => {
 });
 
 router.post("/auth/register/check", (req, res) => {
-  console.log("req.body", req.body);
+  let userUsername = req.body.username;
+  let userQuery = { email: "", username: "" };
   Users.where({ email: req.body.email })
     .fetchAll()
     .then(user => {
       const userEmail = user.toJSON();
       if (!userEmail[0]) {
-        res.json(user);
+        userQuery.email = "";
       } else {
         const userData = userEmail[0].email;
-        console.log("USER", userData);
-        return res.json(userData);
+        userQuery.email = userData;
       }
+    })
+    .then(() => {
+      Users.where({ username: userUsername })
+        .fetchAll()
+        .then(username => {
+          const userName = username.toJSON();
+          if (!userName[0]) {
+            userQuery.username = "";
+          } else {
+            const usernameData = userName[0].username;
+            userQuery.username = usernameData;
+          }
+        })
+        .then(() => {
+          return res.json(userQuery);
+        })
+        .catch(err => {
+          console.log("Error", err);
+          res.sendStatus(500);
+        });
     })
     .catch(err => {
       console.log("ERR", err);
@@ -118,9 +125,6 @@ router.post(
   (req, res) => {
     const email = req.body.email;
     let userData;
-    // Users.where({ email });
-    // let user = req.body;
-    console.log("Hello");
 
     Users.where({ email })
       .fetch()
@@ -134,30 +138,13 @@ router.post(
         };
         req.session.user = req.body;
         return res.json(userData);
-        // req.logIn(user, err => {
-        //   if (err) {
-        //     return next(err);
-        //   } else {
-        //     res.json(userData);
-        //   }
-        // });
-        console.log("Session user", req.session.user);
       })
       .catch(err => {
         console.log("err", err);
         res.sendStatus(500);
       });
-    // res.send("AUTH");
-    // res.redirect("/");
-    //grab the user on record
-    //compare req.body.password to password on record
   }
 );
-
-// router.post("/auth/logout", (req, res) => {
-//   req.logout();
-//   res.redirect("/");
-// });
 
 router.post("/auth/logout", (req, res) => {
   if (req.session) {
@@ -169,7 +156,6 @@ router.post("/auth/logout", (req, res) => {
       }
     });
   }
-  // res.redirect("/");
   res.json("success");
 });
 
