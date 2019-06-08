@@ -6,7 +6,6 @@ require("dotenv").config({ path: "../../.env" });
 
 router.route("/").post((req, res) => {
   const stripe_ck = process.env.STRIPE_SECRET_KEY;
-  console.log("STRIPE", stripe_ck);
   const authcode = req.body.authCode;
   const userid = req.body.userid;
 
@@ -31,9 +30,6 @@ router.route("/").post((req, res) => {
           .then(stripeid => {
             new User({ id: userid })
               .save({ stripe_id: stripeId })
-              .then(() => {
-                return res.redirect("http://localhost:8081/");
-              })
               .catch(err => {
                 console.log(err);
                 res.sendStatus(500);

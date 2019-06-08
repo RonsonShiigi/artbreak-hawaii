@@ -1,0 +1,36 @@
+.dashboard-container {
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 15vh;
+  padding: 20px;
+  width: 100vw;
+}
+
+.left-nav {
+  display: flex;
+  flex-direction: column;
+  max-width: 15vw;
+  position: absolute;
+  left: 0;
+}
+.left-links {
+  font-size: 16px;
+  color: #cccccc;
+  text-transform: uppercase;
+}
+
+.right-nav {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 10vw;
+  max-width: 80%;
+}
+.recents-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #eeeeee;
+  padding: 5px;
+}

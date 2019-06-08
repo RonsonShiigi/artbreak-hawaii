@@ -32,11 +32,6 @@ passport.use(
       .fetch()
       .then(user => {
         user = user.toJSON();
-        // if (user.password === password) {
-        //   done(null, user);
-        // } else {
-        //   done(null, false);
-        // }
         bcrypt
           .compare(password, user.password)
           .then(res => {
@@ -56,13 +51,6 @@ passport.use(
       });
   })
 );
-
-//hello world
-// router.get("/auth/register", (req, res) => {
-//   console.log(req);
-//   res.send("hi");
-//   //   res.render("register");
-// });
 
 const SALT_ROUND = 12;
 router.post("/auth/register", (req, res) => {
@@ -84,14 +72,67 @@ router.post("/auth/register", (req, res) => {
     })
     .then(user => {
       user = user.toJSON();
-
-      res.send(user);
-      // res.redirect("/"); //Never send entire user obj to user
-      //res.sendStatus(200)
-      //res.redirect('/api/auth/secret')
+      return res.json(user.username);
     })
     .catch(err => {
-      res.json(err);
+      console.log("ERROR", err.detail);
+      res.send(err);
+    });
+});
+
+router.post("/auth/register/check", (req, res) => {
+  let userUsername = req.body.username;
+  let userQuery = { email: "", username: "" };
+
+  //REGEX email validation function to check if email is a valid email.
+  function validateEmail(email) {
+    let check = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    return check.test(email);
+  }
+
+  //instantiating function with the email input. Returns true or false.
+  const isValidated = validateEmail(req.body.email);
+
+  console.log("ISVALID", isValidated);
+  Users.where({ email: req.body.email })
+    .fetchAll()
+    .then(user => {
+      const userEmail = user.toJSON();
+      //check if email is valid
+      if (!isValidated) {
+        userQuery.email = "ERROR";
+      } else {
+        if (!userEmail[0]) {
+          userQuery.email = "";
+        } else {
+          const userData = userEmail[0].email;
+          userQuery.email = userData;
+        }
+      }
+    })
+    .then(() => {
+      Users.where({ username: userUsername })
+        .fetchAll()
+        .then(username => {
+          const userName = username.toJSON();
+          if (!userName[0]) {
+            userQuery.username = "";
+          } else {
+            const usernameData = userName[0].username;
+            userQuery.username = usernameData;
+          }
+        })
+        .then(() => {
+          return res.json(userQuery);
+        })
+        .catch(err => {
+          console.log("Error", err);
+          res.sendStatus(500);
+        });
+    })
+    .catch(err => {
+      console.log("ERR", err);
+      res.sendStatus(500);
     });
 });
 
@@ -101,9 +142,6 @@ router.post(
   (req, res) => {
     const email = req.body.email;
     let userData;
-    // Users.where({ email });
-    // let user = req.body;
-    console.log("Hello");
 
     Users.where({ email })
       .fetch()
@@ -117,30 +155,13 @@ router.post(
         };
         req.session.user = req.body;
         return res.json(userData);
-        // req.logIn(user, err => {
-        //   if (err) {
-        //     return next(err);
-        //   } else {
-        //     res.json(userData);
-        //   }
-        // });
-        console.log("Session user", req.session.user);
       })
       .catch(err => {
         console.log("err", err);
         res.sendStatus(500);
       });
-    // res.send("AUTH");
-    // res.redirect("/");
-    //grab the user on record
-    //compare req.body.password to password on record
   }
 );
-
-// router.post("/auth/logout", (req, res) => {
-//   req.logout();
-//   res.redirect("/");
-// });
 
 router.post("/auth/logout", (req, res) => {
   if (req.session) {
@@ -152,7 +173,6 @@ router.post("/auth/logout", (req, res) => {
       }
     });
   }
-  // res.redirect("/");
   res.json("success");
 });
 

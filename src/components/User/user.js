@@ -4,10 +4,35 @@ import Avatar from "@material-ui/core/Avatar";
 
 import "./profile.css";
 
-class Profile extends Component {
-  state = {};
+class User extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      first_name: "",
+      last_name: "",
+      profileblurb: "",
+      created_at: ""
+    };
+  }
 
+  componentDidMount(req, res) {
+    fetch(`http://localhost:8080/users/${this.props.match.params.id}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        this.setState({
+          username: data.username,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          profileblurb: data.profileblurb,
+          created_at: data.created_at
+        });
+      });
+  }
   render() {
+    const data = this.state;
     return (
       <div className="profile-container">
         <div className="profile-cover" />
@@ -23,15 +48,15 @@ class Profile extends Component {
                 marginRight: "25px"
               }}
             />
-            <div className="glitch" data-text="username" id="user-glitch">
-              username
+            <div
+              className="glitch"
+              data-text={`${data.username}`}
+              id="user-glitch"
+            >
+              {data.username}
               <div className="user-blurb">
-                <div className="date-info">join date: (date created)</div>A good
-                fucking composition is the result of a hierarchy consisting of
-                clearly contrasting elements set with distinct alignments
-                containing irregular intervals of negative space. You need to
-                sit down and sketch more fucking ideas because stalking your ex
-                on facebook isn’t going to get you anywhere. Fuck. To go
+                <div className="date-info">join date: {data.created_at}</div>
+                {data.profileblurb}
                 <div className="contact-links">contact links go here</div>
               </div>
             </div>
@@ -50,4 +75,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default User;
