@@ -138,7 +138,7 @@ class Gallery extends React.Component {
         <div className={classes.images}>
           {_products.map((product, i) => (
             // border around title
-            <Link to={`/products/${product.id}`}>
+            <Link to={`/products/${product.id}`} key={i}>
               <ButtonBase
                 key={i}
                 className={classes.imageWrapper}

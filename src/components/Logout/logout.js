@@ -1,5 +1,4 @@
 import React from "react";
-import "./logout.css";
 import Button from "@material-ui/core/Button";
 
 function Logout(props) {
@@ -38,21 +37,19 @@ function Logout(props) {
   };
 
   return (
-    <div className="logoutHolder">
-      <form onSubmit={handleSubmit}>
-        <Button
-          type="submit"
-          variant="contained"
-          style={{
-            input: {
-              display: "none"
-            }
-          }}
-        >
-          LOGOUT
-        </Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <Button
+        type="submit"
+        variant="outlined"
+        style={{
+          input: {
+            display: "none"
+          }
+        }}
+      >
+        LOGOUT
+      </Button>
+    </form>
   );
 }
 
