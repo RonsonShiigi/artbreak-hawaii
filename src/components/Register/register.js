@@ -47,6 +47,7 @@ class Register extends Component {
       last_name: "",
       username: "",
       emailExist: false,
+      emailValid: true,
       usernameExist: false
     };
 
@@ -54,20 +55,19 @@ class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    console.log("userExist State", this.state.emailExist);
-    console.log("userExist State", this.state.usernameExist);
-  }
-
   handleChange = e => {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
   };
 
+  //may need to refactor using switch statements?
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({ emailExist: false });
-    this.setState({ usernameExist: false });
+    this.setState({
+      emailExist: false,
+      usernameExist: false,
+      emailValid: true
+    });
     fetch("http://localhost:8080/api/auth/register/check", {
       method: "POST",
       headers: {
@@ -83,8 +83,11 @@ class Register extends Component {
         return res.json();
       })
       .then(user => {
-        console.log("USER", user);
-        if (user.email === "" && user.username === "") {
+        if (user.email === "ERROR" && user.username !== "") {
+          this.setState({ usernameExist: true, emailValid: false });
+        } else if (user.email === "ERROR") {
+          this.setState({ emailValid: false });
+        } else if (user.email === "" && user.username === "") {
           fetch("http://localhost:8080/api/auth/register", {
             method: "POST",
             headers: {
@@ -100,27 +103,19 @@ class Register extends Component {
             })
           })
             .then(res => {
-              console.log("RES", res);
-              console.log("User added to database");
+              window.location.replace("http://localhost:8081/login");
             })
             .catch(err => {
               console.log("FRONT END", err);
             });
         } else {
-          console.log("USERRR", user);
           if (user.email !== "" && user.username !== "") {
             this.setState({ emailExist: true });
             this.setState({ usernameExist: true });
-            console.log(this.state.emailExist);
-            console.log(this.state.usernameExist);
           } else if (user.email !== "") {
             this.setState({ emailExist: true });
-            console.log(this.state.emailExist);
           } else if (user.username !== "") {
             this.setState({ usernameExist: true });
-            console.log(this.state.usernameExist);
-          } else {
-            return;
           }
         }
       });
@@ -134,9 +129,13 @@ class Register extends Component {
       return <div>Email already in use, Please enter another email..</div>;
     }
 
+    function EmailInvalid(props) {
+      return <div>Please provide a valid email address</div>;
+    }
+
     function EmailExists(props) {
       const emailExists = props.emailExists;
-      console.log("EMAIL EXISTS", emailExists);
+
       if (emailExists) {
         return <EmailError />;
       } else {
@@ -146,9 +145,18 @@ class Register extends Component {
 
     function UsernameExists(props) {
       const usernameExists = props.userExists;
-      console.log("EMAIL EXISTS", usernameExists);
+
       if (usernameExists) {
         return <UsernameError />;
+      } else {
+        return null;
+      }
+    }
+
+    function EmailValid(props) {
+      const isValid = props.emailInvalid;
+      if (!isValid) {
+        return <EmailInvalid />;
       } else {
         return null;
       }
@@ -164,19 +172,18 @@ class Register extends Component {
               label="email"
               key="email"
               name="email"
-              // value={values.email}
               onChange={this.handleChange}
               margin="normal"
               fullWidth={true}
               variant="outlined"
             />
             <EmailExists emailExists={this.state.emailExist} />
+            <EmailValid emailInvalid={this.state.emailValid} />
             <CssText
               id="username"
               label="username"
               key="username"
               name="username"
-              // value={values.username}
               onChange={this.handleChange}
               margin="normal"
               fullWidth={true}
@@ -189,7 +196,6 @@ class Register extends Component {
               label="password"
               key="password"
               name="password"
-              // value={values.password}
               onChange={this.handleChange}
               margin="normal"
               fullWidth={true}
@@ -200,7 +206,6 @@ class Register extends Component {
               label="first name"
               key="first_name"
               name="first_name"
-              // value={values.first_name}
               onChange={this.handleChange}
               margin="normal"
               fullWidth={true}
@@ -211,7 +216,6 @@ class Register extends Component {
               label="last name"
               key="last_name"
               name="last_name"
-              // value={values.last_name}
               onChange={this.handleChange}
               margin="normal"
               fullWidth={true}

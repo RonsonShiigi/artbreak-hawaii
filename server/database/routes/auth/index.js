@@ -72,6 +72,7 @@ router.post("/auth/register", (req, res) => {
     })
     .then(user => {
       user = user.toJSON();
+      return res.json(user.username);
     })
     .catch(err => {
       console.log("ERROR", err.detail);
@@ -82,15 +83,31 @@ router.post("/auth/register", (req, res) => {
 router.post("/auth/register/check", (req, res) => {
   let userUsername = req.body.username;
   let userQuery = { email: "", username: "" };
+
+  //REGEX email validation function to check if email is a valid email.
+  function validateEmail(email) {
+    let check = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    return check.test(email);
+  }
+
+  //instantiating function with the email input. Returns true or false.
+  const isValidated = validateEmail(req.body.email);
+
+  console.log("ISVALID", isValidated);
   Users.where({ email: req.body.email })
     .fetchAll()
     .then(user => {
       const userEmail = user.toJSON();
-      if (!userEmail[0]) {
-        userQuery.email = "";
+      //check if email is valid
+      if (!isValidated) {
+        userQuery.email = "ERROR";
       } else {
-        const userData = userEmail[0].email;
-        userQuery.email = userData;
+        if (!userEmail[0]) {
+          userQuery.email = "";
+        } else {
+          const userData = userEmail[0].email;
+          userQuery.email = userData;
+        }
       }
     })
     .then(() => {
