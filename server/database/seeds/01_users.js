@@ -11,7 +11,8 @@ exports.seed = function(knex, Promise) {
           password: "fart",
           first_name: "Sam",
           last_name: "Juntilla",
-          stripe_id: "acct_1Eg5XkEWUMHDF9ZA"
+          stripe_id: "acct_1Eg5XkEWUMHDF9ZA",
+          profileblurb: "i like bread"
         },
         {
           username: "cptMarvel",
@@ -19,7 +20,8 @@ exports.seed = function(knex, Promise) {
           password: "fart",
           first_name: "Captain",
           last_name: "Marvel",
-          stripe_id: "acct_1Eg5XkEWUMHDF9ZA"
+          stripe_id: "acct_1Eg5XkEWUMHDF9ZA",
+          profileblurb: "i like bread"
         },
         {
           username: "j10",
@@ -27,7 +29,8 @@ exports.seed = function(knex, Promise) {
           password: "fart",
           first_name: "Justen",
           last_name: "Nakamoto",
-          stripe_id: "acct_1Eg5U4EKjXIa5sbE"
+          stripe_id: "acct_1Eg5U4EKjXIa5sbE",
+          profileblurb: "i like bread"
         },
         {
           username: "turtleWayne",
@@ -35,7 +38,8 @@ exports.seed = function(knex, Promise) {
           password: "fart",
           first_name: "Turtle",
           last_name: "Wayne",
-          stripe_id: "acct_1Eg5TDHI3KTEQBIB"
+          stripe_id: "acct_1Eg5TDHI3KTEQBIB",
+          profileblurb: "i like bread"
         }
       ]);
     });

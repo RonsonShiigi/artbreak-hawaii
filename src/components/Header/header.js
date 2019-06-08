@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 import Logout from "../Logout/logout";
-import HeaderMenu from "./HeaderMenu/menu";
 import "./header.css";
 
 import { withStyles } from "@material-ui/core/styles";
-import StripeReg from "../StripeReg/stripeReg.js";
+// import StripeReg from "../StripeReg/stripeReg.js";
 
 import PropTypes from "prop-types";
 
@@ -63,53 +62,49 @@ class Header extends Component {
   };
 
   getUsername = () => {
-    // console.log("you are trying to get that shit");
     return localStorage.getItem("username").toString();
   };
 
   render() {
-    if (localStorage.getItem("username") === null) {
-      // console.log("user is not logged in");
-      return (
-        <div className="sticky">
-          <div className="header-links">
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <div className="header-glitch" data-text="ARTBREAK-HI">
-                ARTBREAK-HI
-              </div>
-            </Link>
-            <HeaderMenu />
-            <StripeReg />
-
-            <Link to="/login">
-              <Button variant="contained" color="secondary" size="large">
-                Log In
-              </Button>{" "}
-            </Link>
-            <Button variant="contained" color="secondary" size="large">
-              Sign Up
-            </Button>
-          </div>
+    // console.log("user is not logged in");
+    return (
+      <div className="sticky">
+        <div className="header-links">
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <div className="header-glitch" data-text="ARTBREAK-HI">
+              ARTBREAK-HI
+            </div>
+          </Link>
+          {localStorage.getItem("username") === null ? (
+            <ul>
+              <li>
+                <Link to="/login">Log In</Link>
+              </li>
+              <li>
+                <Link to="/register">Sign Up</Link>
+              </li>
+              <li>BROWSE</li>
+            </ul>
+          ) : (
+            <ul>
+              <li>
+                <Link to="/dashboard">My Dashboard</Link>
+              </li>
+              <li>MY MESSAGES</li>
+              <li>BROWSE</li>
+              <li>
+                <h3 className="login-welcome">
+                  Logged in as {this.getUsername()}
+                </h3>
+              </li>
+              <li>
+                <Logout />
+              </li>
+            </ul>
+          )}
         </div>
-      );
-    } else {
-      return (
-        <div className="sticky">
-          <div className="header-links">
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <div className="header-glitch" data-text="ARTBREAK-HI">
-                ARTBREAK-HI
-              </div>
-            </Link>
-            <HeaderMenu />
-            <StripeReg />
-            <h1>Welcome {this.getUsername()}</h1>
-
-            <Logout />
-          </div>
-        </div>
-      );
-    }
+      </div>
+    );
   }
 }
 

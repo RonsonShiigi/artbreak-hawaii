@@ -100,7 +100,7 @@ class Login extends Component {
       })
       .then(data => {
         // console.log("u r trying to redirect");
-        window.location.replace("http://localhost:8081");
+        window.location.replace("http://localhost:8081/dashboard");
       })
       .catch(err => {
         console.log(err);

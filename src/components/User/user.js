@@ -11,6 +11,7 @@ class User extends Component {
       username: "",
       first_name: "",
       last_name: "",
+      profileblurb: "",
       created_at: ""
     };
   }
@@ -25,6 +26,7 @@ class User extends Component {
           username: data.username,
           first_name: data.first_name,
           last_name: data.last_name,
+          profileblurb: data.profileblurb,
           created_at: data.created_at
         });
       });
@@ -53,12 +55,8 @@ class User extends Component {
             >
               {data.username}
               <div className="user-blurb">
-                <div className="date-info">join date: (date created)</div>A good
-                fucking composition is the result of a hierarchy consisting of
-                clearly contrasting elements set with distinct alignments
-                containing irregular intervals of negative space. You need to
-                sit down and sketch more fucking ideas because stalking your ex
-                on facebook isn’t going to get you anywhere. Fuck. To go
+                <div className="date-info">join date: {data.created_at}</div>
+                {data.profileblurb}
                 <div className="contact-links">contact links go here</div>
               </div>
             </div>
