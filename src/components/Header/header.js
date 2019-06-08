@@ -83,16 +83,19 @@ class Header extends Component {
               <li>
                 <Link to="/register">Sign Up</Link>
               </li>
+              <li>BROWSE</li>
             </ul>
           ) : (
             <ul>
               <li>
+                <Link to="/dashboard">My Dashboard</Link>
+              </li>
+              <li>MY MESSAGES</li>
+              <li>BROWSE</li>
+              <li>
                 <h3 className="login-welcome">
                   Logged in as {this.getUsername()}
                 </h3>
-              </li>
-              <li>
-                <Link to="/dashboard">My Dashboard</Link>
               </li>
               <li>
                 <Logout />

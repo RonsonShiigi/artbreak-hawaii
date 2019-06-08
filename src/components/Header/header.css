@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 5px;
   align-items: center;
-  justify-content: center;
+  padding-left: 2vw;
+  justify-content: space-between;
   background-color: #252525;
 }
 
@@ -14,12 +14,15 @@ ul {
 }
 ul li {
   margin-right: 25px;
+  padding: 5px;
   list-style-type: none;
   display: inline-block;
 }
 .login-welcome {
   padding: 20px;
-  color: #6d6b6b;
+  color: #c2bfbf;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 .sticky {
   display: flex;
