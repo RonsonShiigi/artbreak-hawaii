@@ -21,8 +21,11 @@ class FileEdit extends Component {
   }
 
   componentDidMount() {
-    console.log(localStorage.getItem("userId"));
     this.state.user_id = localStorage.getItem("userId");
+    let pather = window.location.pathname.split("/");
+
+    this.state.product_id = pather[2];
+    console.log("editstate", this.state);
   }
 
   handleChange = e => {
@@ -79,7 +82,7 @@ class FileEdit extends Component {
         .then(res => {
           let products = res.data;
           products.filter(product => {
-            if (product.id === this.state.product_id) {
+            if (product.id === Number(this.state.product_id)) {
               this.state.product = product;
             }
           });

@@ -45,7 +45,8 @@ class GalleryView extends Component {
         <a href={`${data.image_url}`} target="_blank">
           <img src={data.image_url} className="img-style" />
         </a>
-        <a href={`/delete/${this.state.id}`}>Delete This TingyMajigga</a>
+        <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
+        <a href={`/delete/${this.state.id}`}>Delete Me</a>
       </div>
     );
   }
