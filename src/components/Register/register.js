@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import Input from "@material-ui/core/Input";
 
 //custom-styled components
 const CssText = withStyles({
@@ -48,16 +49,27 @@ class Register extends Component {
       username: "",
       emailExist: false,
       emailValid: true,
-      usernameExist: false
+      usernameExist: false,
+      passwordValid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePWChange = this.handlePWChange.bind(this);
   }
 
   handleChange = e => {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
+  };
+
+  handlePWChange = e => {
+    this.setState({ passwordValid: true });
+    const name = e.target.name;
+    this.setState({ [name]: e.target.value });
+    if (e.target.value.length < 8 || e.target.value.length > 16) {
+      this.setState({ passwordValid: false });
+    }
   };
 
   //may need to refactor using switch statements?
@@ -66,7 +78,8 @@ class Register extends Component {
     this.setState({
       emailExist: false,
       usernameExist: false,
-      emailValid: true
+      emailValid: true,
+      passwordValid: true
     });
     fetch("http://localhost:8080/api/auth/register/check", {
       method: "POST",
@@ -121,6 +134,7 @@ class Register extends Component {
       });
   };
   render() {
+    const { passwordValid } = this.state;
     function UsernameError(props) {
       return <div>Username Taken, Please use another username..</div>;
     }
@@ -131,6 +145,9 @@ class Register extends Component {
 
     function EmailInvalid(props) {
       return <div>Please provide a valid email address</div>;
+    }
+    function PasswordError(props) {
+      return <div>Password must be between 8-16 characters</div>;
     }
 
     function EmailExists(props) {
@@ -161,6 +178,22 @@ class Register extends Component {
         return null;
       }
     }
+    function PasswordValid(props) {
+      const isValid = props.passwordInvalid;
+      if (!isValid) {
+        return <PasswordError />;
+      } else {
+        return null;
+      }
+    }
+
+    function submitDisabled() {
+      if (passwordValid) {
+        return false;
+      } else {
+        return true;
+      }
+    }
 
     return (
       <div className="container">
@@ -176,6 +209,7 @@ class Register extends Component {
               margin="normal"
               fullWidth={true}
               variant="outlined"
+              required={true}
             />
             <EmailExists emailExists={this.state.emailExist} />
             <EmailValid emailInvalid={this.state.emailValid} />
@@ -188,6 +222,7 @@ class Register extends Component {
               margin="normal"
               fullWidth={true}
               variant="outlined"
+              required={true}
             />
             <UsernameExists userExists={this.state.usernameExist} />
             <div />
@@ -196,11 +231,12 @@ class Register extends Component {
               label="password"
               key="password"
               name="password"
-              onChange={this.handleChange}
+              onChange={this.handlePWChange}
               margin="normal"
               fullWidth={true}
               variant="outlined"
             />
+            <PasswordValid passwordInvalid={this.state.passwordValid} />
             <CssText
               id="first_name"
               label="first name"
@@ -221,7 +257,12 @@ class Register extends Component {
               fullWidth={true}
               variant="outlined"
             />
-            <CustomButton type="submit" variant="contained" fullWidth={true}>
+            <CustomButton
+              disabled={submitDisabled()}
+              type="submit"
+              variant="contained"
+              fullWidth={true}
+            >
               Submit
             </CustomButton>
           </form>
