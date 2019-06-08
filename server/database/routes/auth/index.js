@@ -90,10 +90,9 @@ router.post("/auth/register/check", (req, res) => {
     return check.test(email);
   }
 
-  //instantiating function with the email input. Returns true or false.
+  //invoking function with the email input. Returns true or false.
   const isValidated = validateEmail(req.body.email);
 
-  console.log("ISVALID", isValidated);
   Users.where({ email: req.body.email })
     .fetchAll()
     .then(user => {
