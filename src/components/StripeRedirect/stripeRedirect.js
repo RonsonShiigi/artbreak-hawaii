@@ -39,7 +39,11 @@ class StripeRedirect extends Component {
   }
 
   render() {
-    return <div>{/* <Redirect to="/" /> */}</div>;
+    return (
+      <div>
+        <Redirect to="/" />
+      </div>
+    );
   }
 }
 
