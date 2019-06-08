@@ -15,7 +15,8 @@ class FileUpload extends Component {
       image_url: "",
       user_id: "",
       price: "",
-      photos: null
+      photos: null,
+      id: ""
     };
   }
 
@@ -50,23 +51,33 @@ class FileUpload extends Component {
           }
         })
         .then(response => {
-          console.log("response", response.data.key);
+          // console.log("response", response.data.key);
+          console.log("response", response.data);
           let key = response.data.key;
           this.state.image_url = url + key;
         })
         .then(data => {
-          console.log("updated state", this.state);
+          // console.log("updated state", this.state);
         })
         .then(data => {
           axios
             .post("http://localhost:8080/products", this.state)
             .then(res => {
               console.log("response", res.data);
+              this.state.id = res.data.id;
+            })
+            .then(data => {
+              //make dynamic
+              console.log("thenstate", this.state);
+              window.location.replace(
+                `http://localhost:8081/products/${this.state.id}`
+              );
             })
             .catch(err => {
               console.log("error in creating a new product", err);
             });
         })
+
         .catch(error => {
           // handle your error
         });
@@ -91,11 +102,6 @@ class FileUpload extends Component {
     return (
       <div class="upload-form">
         <form onSubmit={this.submitFile}>
-          <input
-            label="upload file"
-            type="file"
-            onChange={this.handleFileUpload}
-          />
           <TextField
             id="title"
             label="title"
@@ -134,6 +140,11 @@ class FileUpload extends Component {
             margin="normal"
             fullWidth={true}
           /> */}
+          <input
+            label="upload file"
+            type="file"
+            onChange={this.handleFileUpload}
+          />
 
           <Button
             type="submit"
