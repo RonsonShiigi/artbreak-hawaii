@@ -56,7 +56,14 @@ class User extends Component {
               {data.username}
               <div className="user-blurb">
                 <div className="date-info">join date: {data.created_at}</div>
-                {data.profileblurb}
+                {localStorage.userId === this.props.match.params.id ? (
+                  <div>
+                    {data.profileblurb}
+                    <p>ohfuck</p>
+                  </div>
+                ) : (
+                  <div>{data.profileblurb}</div>
+                )}
                 <div className="contact-links">contact links go here</div>
               </div>
             </div>
