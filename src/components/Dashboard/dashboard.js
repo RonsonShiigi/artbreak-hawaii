@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Gallery from "../Gallery";
+import { Link } from "react-router-dom";
 import Dashtabs from "./Dashtabs";
 import "./dashboard.css";
 
@@ -7,41 +7,49 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      user_id: 0,
+      username: ""
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:8080/products")
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        this.setState({ products: data });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  async componentDidMount() {
+    // console.log("header console", localStorage.getItem("username"));
+    if (localStorage.getItem("username") !== null) {
+      this.state.user_id = localStorage.getItem("userId");
+      this.state.username = localStorage.getItem("username");
+    }
+    console.log("header State", this.state);
   }
 
   render() {
     const { classes } = this.props;
     let products = this.state.products;
+    console.log("THIS IS LOCALSTORAGE", localStorage.userId);
     return (
       <div className="dashboard-container">
-        <div className="left-nav">
-          <ul className="left-links">
-            <h3>Dashboard</h3>
-            <li>My Profile</li>
-            <li>My Uploads</li>
-            <li>My Favorites</li>
-            <li>My Orders</li>
-          </ul>
-        </div>
-        <div className="right-nav">
-          <div className="recents-div">
-            <Dashtabs />
+        {localStorage.getItem("username") === null ? (
+          <div className="not-logged-in">
+            <h1>log tf in, heathen</h1>
           </div>
-        </div>
+        ) : (
+          <React.Fragment>
+            <div className="left-nav">
+              <ul className="left-links">
+                <h3>Dashboard</h3>
+                <li>
+                  <Link to={`users/${localStorage.userId}`}>My Profile</Link>
+                </li>
+                <li>My Uploads</li>
+                <li>My Favorites</li>
+                <li>My Orders</li>
+              </ul>
+            </div>
+            <div className="right-nav">
+              <div className="recents-div">
+                <Dashtabs />
+              </div>
+            </div>
+          </React.Fragment>
+        )}
       </div>
     );
   }
