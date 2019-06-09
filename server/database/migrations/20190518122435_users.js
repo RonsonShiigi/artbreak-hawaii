@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
     table.string("last_name");
     table.string("stripe_id");
     table.string("profileblurb");
+    table.string("contactlinks");
     table.string("avatarurl");
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
     table.timestamp("updated_at");

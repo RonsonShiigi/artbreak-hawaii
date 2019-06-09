@@ -21,10 +21,10 @@ class FileEdit extends Component {
   }
 
   componentDidMount() {
-    this.state.user_id = localStorage.getItem("userId");
+    this.setState({ user_id: localStorage.getItem("userId") });
     let pather = window.location.pathname.split("/");
+    this.setState({ product_id: pather[2] });
 
-    this.state.product_id = pather[2];
     console.log("editstate", this.state);
   }
 

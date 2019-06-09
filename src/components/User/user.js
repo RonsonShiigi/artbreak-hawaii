@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Gallery from "../Gallery";
+import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";
+import Edit from "@material-ui/icons/Edit";
 
 import "./profile.css";
 
@@ -12,6 +14,8 @@ class User extends Component {
       first_name: "",
       last_name: "",
       profileblurb: "",
+      contactlinks: "",
+      avatarurl: "",
       created_at: ""
     };
   }
@@ -27,12 +31,15 @@ class User extends Component {
           first_name: data.first_name,
           last_name: data.last_name,
           profileblurb: data.profileblurb,
+          contactlinks: data.contactlinks,
+          avatarurl: data.avatarurl,
           created_at: data.created_at
         });
       });
   }
   render() {
     const data = this.state;
+
     return (
       <div className="profile-container">
         <div className="profile-cover" />
@@ -56,8 +63,20 @@ class User extends Component {
               {data.username}
               <div className="user-blurb">
                 <div className="date-info">join date: {data.created_at}</div>
-                {data.profileblurb}
-                <div className="contact-links">contact links go here</div>
+                <div>{data.profileblurb} </div>
+                {localStorage.userId === this.props.match.params.id ? (
+                  <React.Fragment>
+                    <div className="edit-icon">
+                      <Edit />
+                    </div>
+                    <div className="edit-div">
+                      <EditUser />
+                    </div>
+                  </React.Fragment>
+                ) : (
+                  ""
+                )}
+                <div className="contact-links">{data.contactlinks}</div>
               </div>
             </div>
           </div>

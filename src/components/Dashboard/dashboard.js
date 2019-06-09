@@ -12,18 +12,13 @@ class Dashboard extends Component {
     };
   }
   async componentDidMount() {
-    // console.log("header console", localStorage.getItem("username"));
     if (localStorage.getItem("username") !== null) {
       this.state.user_id = localStorage.getItem("userId");
       this.state.username = localStorage.getItem("username");
     }
-    console.log("header State", this.state);
   }
 
   render() {
-    const { classes } = this.props;
-    let products = this.state.products;
-    console.log("THIS IS LOCALSTORAGE", localStorage.userId);
     return (
       <div className="dashboard-container">
         {localStorage.getItem("username") === null ? (

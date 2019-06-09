@@ -52,7 +52,8 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      fireRedirect: false
+      fireRedirect: false,
+      verifyEmailPw: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -77,30 +78,35 @@ class Login extends Component {
       })
     })
       .then(res => {
-        return res.clone().json();
-      })
-      .then(data => {
-        console.log("DATA", data);
-        localStorage.setItem("userEmail", this.state.email);
-        localStorage.setItem("userId", data.id);
-        localStorage.setItem("username", data.username);
-      })
-      .then(data => {
-        console.log("DATA2", data);
-        let userEmail = localStorage.getItem("userEmail");
-        axios.get("http://localhost:8080/users").then(res => {
-          let users = res.data;
-          users.filter(user => {
-            if (user.email === userEmail) {
-              localStorage.setItem("username", user.username);
-              localStorage.setItem("userId", user.id);
-            }
-          });
-        });
-      })
-      .then(data => {
-        // console.log("u r trying to redirect");
-        window.location.replace("http://localhost:8081/dashboard");
+        if (res.status === 401) {
+          this.setState({ verifyEmailPw: false });
+          return;
+        } else {
+          let data = res.clone().json();
+          console.log("ddata", data);
+
+          localStorage.setItem("userEmail", this.state.email);
+          localStorage.setItem("userId", data.id);
+          localStorage.setItem("username", data.username);
+
+          let userEmail = localStorage.getItem("userEmail");
+
+          axios
+            .get("http://localhost:8080/users")
+            .then(res => {
+              let users = res.data;
+              users.filter(user => {
+                if (user.email === userEmail) {
+                  localStorage.setItem("username", user.username);
+                  localStorage.setItem("userId", user.id);
+                }
+              });
+            })
+            .catch(err => {
+              console.log("Error", err);
+            });
+        }
+        window.location.replace("http://localhost:8081");
       })
       .catch(err => {
         console.log(err);
@@ -108,6 +114,18 @@ class Login extends Component {
   };
 
   render() {
+    function EmailPWError(props) {
+      return <div>User Email or Password not found!</div>;
+    }
+    function EmailPWExists(props) {
+      const isVerified = props.eExists;
+
+      if (!isVerified) {
+        return <EmailPWError />;
+      } else {
+        return null;
+      }
+    }
     return (
       <div className="container">
         <Paper className="formHolder">
@@ -123,6 +141,7 @@ class Login extends Component {
               fullWidth={true}
               variant="outlined"
             />
+
             <br />
             <CssText
               id="password"
@@ -135,7 +154,9 @@ class Login extends Component {
               variant="outlined"
               fullWidth={true}
             />
+            <EmailPWExists eExists={this.state.verifyEmailPw} />
             <br />
+
             <CustomButton type="submit" fullWidth={true} variant="contained">
               Submit
             </CustomButton>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 
 import Logout from "../Logout/logout";
 import "./header.css";
@@ -41,12 +40,10 @@ class Header extends Component {
   };
 
   async componentDidMount() {
-    // console.log("header console", localStorage.getItem("username"));
     if (localStorage.getItem("username") !== null) {
       this.state.user_id = localStorage.getItem("userId");
       this.state.username = localStorage.getItem("username");
     }
-    console.log("header State", this.state);
   }
 
   handleChange = event => {
@@ -66,7 +63,6 @@ class Header extends Component {
   };
 
   render() {
-    // console.log("user is not logged in");
     return (
       <div className="sticky">
         <div className="header-links">
@@ -109,9 +105,5 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(Header);

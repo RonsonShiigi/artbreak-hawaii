@@ -32,7 +32,7 @@ class Delete extends Component {
     this.state.product_id = pather[2];
 
     // console.log("user_id", this.state.user_id);
-    console.log("delete state", this.state);
+    // console.log("delete state", this.state);
   }
 
   deleteFile = e => {
