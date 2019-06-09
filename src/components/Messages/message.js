@@ -37,7 +37,7 @@ class ChatScreen extends Component {
     // });
     const chatManager = new Chatkit.ChatManager({
       instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
-      userId: "justen",
+      userId: localStorage.getItem("username"),
       tokenProvider: new Chatkit.TokenProvider({
         url: "http://localhost:8080/authenticate"
       })
