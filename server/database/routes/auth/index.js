@@ -159,7 +159,6 @@ router.post("/auth/login", passport.authenticate("local"), (req, res) => {
     .catch(err => {
       console.log("err", err);
       return res.json(401);
-      // res.sendStatus(500);
     });
 });
 
