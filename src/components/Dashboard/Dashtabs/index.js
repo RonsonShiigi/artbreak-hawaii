@@ -15,7 +15,7 @@ function Dashtabs() {
   const [index, onChange] = useState(0);
 
   return (
-    <div>
+    <div className="tabsdiv">
       <Tabs value={index} onChange={(e, val) => onChange(val)}>
         <Tab label="Recents" disableRipple />
         <Tab label="Favorites" disableRipple />

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Card from "@material-ui/core/Card";
 
 import "./gallery-view.css";
 
@@ -42,8 +41,8 @@ class GalleryView extends Component {
     return (
       <div className="galleryview">
         <h1>{data.title}</h1>
-        <a href={`${data.image_url}`} target="_blank">
-          <img src={data.image_url} className="img-style" />
+        <a href={`${data.image_url}`} target="_blank" rel="noopener noreferrer">
+          <img src={data.image_url} className="img-style" alt="" />
         </a>
         <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
         <a href={`/delete/${this.state.id}`}>Delete Me</a>

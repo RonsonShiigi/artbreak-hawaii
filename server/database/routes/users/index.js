@@ -20,23 +20,14 @@ router
 
   // CREATE USER
   .post((req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    const email = req.body.email;
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
+    const body = req.body;
 
     new req.database.User({});
     return new req.database.User({
-      username,
-      password,
-      email,
-      first_name,
-      last_name
+      body
     })
       .save()
       .then(user => {
-        console.log("USER", user);
         return res.json({ success: true });
       })
       .catch(err => {
@@ -64,6 +55,9 @@ router.put("/:id", (req, res) => {
             email: body.email,
             first_name: body.first_name,
             last_name: body.last_name,
+            profileblurb: body.profileblurb,
+            avatarurl: body.avatarurl,
+            contactlinks: body.contactlinks,
             updated_at: new Date()
           },
           {

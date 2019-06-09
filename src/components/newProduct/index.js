@@ -20,7 +20,8 @@ class FileUpload extends Component {
   }
 
   componentDidMount() {
-    this.state.user_id = localStorage.getItem("userId");
+    this.setState({ user_id: localStorage.getItem("userId") });
+    // this.state.user_id = localStorage.getItem("userId");
   }
 
   handleChange = e => {
@@ -52,7 +53,8 @@ class FileUpload extends Component {
         .then(response => {
           console.log("response", response.data.key);
           let key = response.data.key;
-          this.state.image_url = url + key;
+          this.setState({ image_url: url + key });
+          // this.state.image_url = url + key;
         })
         .then(data => {
           console.log("updated state", this.state);
