@@ -7,14 +7,12 @@ class EditUser extends Component {
     this.state = {
       avatarurl: "",
       contactlinks: "",
-      profileblurb: ""
+      profileblurb: "",
+      user_id: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.editUser = this.editUser.bind(this);
   }
-  // componentDidMount() {
-  //   this.setState({ user_id: localStorage.getItem("userId") });
-  // }
 
   handleChange = e => {
     const name = e.target.name;
@@ -23,16 +21,14 @@ class EditUser extends Component {
 
   editUser = e => {
     e.preventDefault();
-    const user_id = localStorage.getItem("userId");
-    console.log("userid", user_id);
+    console.log("userid", this.state.user_id);
     console.log("HITTTTTTT");
     fetch(`http://localhost:8080/users/5`, {
       method: "POST",
-      credentials: "include",
-      // headers: {
-      //   Accept: "application/json",
-      //   "Content-Type": "application/json"
-      // },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         avatarurl: this.state.avatarurl,
         contactlinks: this.state.contactlinks,
