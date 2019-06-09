@@ -3,9 +3,9 @@
   flex-direction: row;
   width: 100%;
   align-items: center;
-  padding-left: 2vw;
+  margin-top: 6vh;
+  margin-left: 2vw;
   justify-content: space-between;
-  background-color: #252525;
 }
 
 ul {
@@ -30,6 +30,7 @@ ul li {
   justify-content: center;
   position: fixed;
   width: 100%;
+  max-height: 5vh;
   z-index: 99;
 }
 .header-glitch {

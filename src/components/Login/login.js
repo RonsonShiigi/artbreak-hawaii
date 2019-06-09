@@ -106,7 +106,7 @@ class Login extends Component {
               console.log("Error", err);
             });
         }
-        window.location.replace("http://localhost:8081");
+        window.location.replace("http://localhost:8080/dashboard");
       })
       .catch(err => {
         console.log(err);

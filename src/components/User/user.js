@@ -61,22 +61,17 @@ class User extends Component {
               id="user-glitch"
             >
               {data.username}
+              <div className="date-info">join date: {data.created_at}</div>
               <div className="user-blurb">
-                <div className="date-info">join date: {data.created_at}</div>
-                <div>{data.profileblurb} </div>
+                <p>{data.profileblurb}</p>
+                <p>{data.contactlinks}</p>
                 {localStorage.userId === this.props.match.params.id ? (
-                  <React.Fragment>
-                    <div className="edit-icon">
-                      <Edit />
-                    </div>
-                    <div className="edit-div">
-                      <EditUser />
-                    </div>
-                  </React.Fragment>
+                  <div className="edit-div">
+                    <EditUser />
+                  </div>
                 ) : (
                   ""
                 )}
-                <div className="contact-links">{data.contactlinks}</div>
               </div>
             </div>
           </div>
