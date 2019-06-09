@@ -58,7 +58,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-console.log("filter data", getProducts());
 let products = [{}];
 
 export default connect(

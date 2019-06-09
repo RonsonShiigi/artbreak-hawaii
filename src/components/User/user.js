@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Gallery from "../Gallery";
+import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";
 
 import "./profile.css";
@@ -56,8 +57,15 @@ class User extends Component {
               {data.username}
               <div className="user-blurb">
                 <div className="date-info">join date: {data.created_at}</div>
-                {data.profileblurb}
-                <div className="contact-links">contact links go here</div>
+                {localStorage.userId === this.props.match.params.id ? (
+                  <div>
+                    {data.profileblurb}
+                    <EditUser />
+                  </div>
+                ) : (
+                  <div>{data.profileblurb}</div>
+                )}
+                <div className="contact-links">{data.contactlinks}</div>
               </div>
             </div>
           </div>
