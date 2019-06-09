@@ -36,10 +36,10 @@ router
   });
 
 // EDIT USER
-router.put("/:id", (req, res) => {
+router.post("/:id", (req, res) => {
   const body = req.body;
   const paramsId = req.params.id;
-
+  console.log(body);
   User.where({
     id: paramsId
   })
@@ -50,15 +50,15 @@ router.put("/:id", (req, res) => {
       })
         .save(
           {
-            username: body.username,
-            password: body.password,
-            email: body.email,
-            first_name: body.first_name,
-            last_name: body.last_name,
+            // username: body.username,
+            // password: body.password,
+            // email: body.email,
+            // first_name: body.first_name,
+            // last_name: body.last_name,
             profileblurb: body.profileblurb,
             avatarurl: body.avatarurl,
-            contactlinks: body.contactlinks,
-            updated_at: new Date()
+            contactlinks: body.contactlinks
+            // updated_at: new Date()
           },
           {
             patch: true

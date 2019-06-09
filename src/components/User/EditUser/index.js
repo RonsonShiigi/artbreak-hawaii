@@ -18,7 +18,19 @@ class EditUser extends Component {
     this.setState({ [name]: e.target.value });
   };
   editUser = e => {
-    fetch(`http://localhost:8080/users`);
+    fetch(`http://localhost:8080/users/${this.props.match.params.id}`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        avatarurl: this.state.avatarurl,
+        contactlinks: this.state.contactlinks,
+        profileblurb: this.state.profileblurb
+      })
+    });
   };
 
   render() {
