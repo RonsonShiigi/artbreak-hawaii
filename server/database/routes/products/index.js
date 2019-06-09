@@ -100,7 +100,8 @@ router
       .save()
       .then(products => {
         console.log("You have posted to the database and s3");
-        return res.json({ success: true });
+        console.log("products from server", products);
+        return res.json(products);
       })
       .catch(err => {
         console.log("you are fucking up but hitting backend");
