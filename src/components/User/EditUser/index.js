@@ -18,6 +18,7 @@ class EditUser extends Component {
     this.setState({ [name]: e.target.value });
   };
   editUser = e => {
+    e.preventDefault();
     fetch(`http://localhost:8080/users/${this.props.match.params.id}`, {
       method: "POST",
       credentials: "include",
