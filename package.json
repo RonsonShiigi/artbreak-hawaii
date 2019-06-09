@@ -6,6 +6,8 @@
     "@material-ui/core": "^4.0.0",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.0.0",
+    "@pusher/chatkit-client": "^1.5.0",
+    "@pusher/chatkit-server": "^1.1.0",
     "aws-sdk": "^2.462.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
