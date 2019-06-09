@@ -90,7 +90,9 @@ class Header extends Component {
               <li>
                 <Link to="/dashboard">My Dashboard</Link>
               </li>
-              <li>MY MESSAGES</li>
+              <li>
+                <Link to="/messages">My Messages</Link>
+              </li>
               <li>BROWSE</li>
               <li>
                 <h3 className="login-welcome">
