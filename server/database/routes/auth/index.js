@@ -31,19 +31,23 @@ passport.use(
     Users.where({ email })
       .fetch()
       .then(user => {
-        user = user.toJSON();
-        bcrypt
-          .compare(password, user.password)
-          .then(res => {
-            if (res) {
-              done(null, user);
-            } else {
-              done(null, false);
-            }
-          })
-          .catch(err => {
-            console.log("bcrypt err", err);
-          });
+        if (user === null) {
+          done(null, false);
+        } else {
+          user = user.toJSON();
+          bcrypt
+            .compare(password, user.password)
+            .then(res => {
+              if (res) {
+                done(null, user);
+              } else {
+                done(null, false);
+              }
+            })
+            .catch(err => {
+              console.log("bcrypt err", err);
+            });
+        }
       })
       .catch(err => {
         console.log("auth ERRR", err);
@@ -135,32 +139,29 @@ router.post("/auth/register/check", (req, res) => {
     });
 });
 
-router.post(
-  "/auth/login",
-  passport.authenticate("local", { failureRedirect: "/" }),
-  (req, res) => {
-    const email = req.body.email;
-    let userData;
+router.post("/auth/login", passport.authenticate("local"), (req, res) => {
+  const email = req.body.email;
+  let userData;
 
-    Users.where({ email })
-      .fetch()
-      .then(user => {
-        user = user.toJSON();
-        userData = {
-          id: user.id,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          username: user.username
-        };
-        req.session.user = req.body;
-        return res.json(userData);
-      })
-      .catch(err => {
-        console.log("err", err);
-        res.sendStatus(500);
-      });
-  }
-);
+  Users.where({ email })
+    .fetch()
+    .then(user => {
+      user = user.toJSON();
+      userData = {
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        username: user.username
+      };
+      req.session.user = req.body;
+      return res.json(userData);
+    })
+    .catch(err => {
+      console.log("err", err);
+      return res.json(401);
+      // res.sendStatus(500);
+    });
+});
 
 router.post("/auth/logout", (req, res) => {
   if (req.session) {
