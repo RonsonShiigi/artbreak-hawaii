@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 
 class EditUser extends Component {
   constructor(props) {
@@ -8,6 +9,8 @@ class EditUser extends Component {
       contactlinks: "",
       profileblurb: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.editUser = this.editUser.bind(this);
   }
   componentDidMount() {
     this.setState({ user_id: localStorage.getItem("userId") });
@@ -17,12 +20,17 @@ class EditUser extends Component {
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
   };
+
   editUser = e => {
-    fetch(`http://localhost:8080/users/${this.props.match.params.id}`, {
+    e.preventDefault();
+    const user_id = localStorage.getItem("userId");
+    console.log("userid", user_id);
+    console.log("HITTTTTTT");
+    fetch(`http://localhost:8080/users/5`, {
       method: "POST",
       credentials: "include",
       headers: {
-        Accept: "application/json",
+        " Accept": "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -30,6 +38,8 @@ class EditUser extends Component {
         contactlinks: this.state.contactlinks,
         profileblurb: this.state.profileblurb
       })
+    }).catch(err => {
+      console.log("ERROR", err);
     });
   };
 
