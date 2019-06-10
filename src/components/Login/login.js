@@ -83,7 +83,6 @@ class Login extends Component {
           return;
         } else {
           let data = res.clone().json();
-          console.log("ddata", data);
 
           localStorage.setItem("userEmail", this.state.email);
           localStorage.setItem("userId", data.id);
@@ -102,11 +101,13 @@ class Login extends Component {
                 }
               });
             })
+            .then(() => {
+              window.location.replace("http://localhost:8081");
+            })
             .catch(err => {
               console.log("Error", err);
             });
         }
-        window.location.replace("http://localhost:8081");
       })
       .catch(err => {
         console.log(err);
