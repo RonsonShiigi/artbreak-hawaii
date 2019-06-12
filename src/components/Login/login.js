@@ -6,8 +6,7 @@ import { withStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Redirect } from "react-router";
-
+import { Link } from "react-router-dom";
 // custom-styled components
 const CssText = withStyles({
   root: {
@@ -40,12 +39,6 @@ const CustomButton = withStyles({
   }
 })(Button);
 
-// export default function Login(props) {
-//   const [values, setValues] = React.useState({
-//     email: "",
-//     password: ""
-//   });
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -53,10 +46,22 @@ class Login extends Component {
       email: "",
       password: "",
       fireRedirect: false,
-      verifyEmailPw: true
+      verifyEmailPw: true,
+      pwReset: null,
+      resetSuccess: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.location.pwReset) {
+      this.setState({ pwReset: true });
+    }
+
+    if (this.props.location.resetSuccess) {
+      this.setState({ resetSuccess: true });
+    }
   }
 
   handleChange = name => e => {
@@ -83,7 +88,6 @@ class Login extends Component {
           return;
         } else {
           let data = res.clone().json();
-          console.log("ddata", data);
 
           localStorage.setItem("userEmail", this.state.email);
           localStorage.setItem("userId", data.id);
@@ -102,11 +106,13 @@ class Login extends Component {
                 }
               });
             })
+            .then(() => {
+              window.location.replace("http://localhost:8081");
+            })
             .catch(err => {
               console.log("Error", err);
             });
         }
-        window.location.replace("http://localhost:8080/dashboard");
       })
       .catch(err => {
         console.log(err);
@@ -114,9 +120,12 @@ class Login extends Component {
   };
 
   render() {
+    const { verifyEmailPw, resetSuccess, pwReset } = this.state;
+
     function EmailPWError(props) {
       return <div>User Email or Password not found!</div>;
     }
+
     function EmailPWExists(props) {
       const isVerified = props.eExists;
 
@@ -126,10 +135,45 @@ class Login extends Component {
         return null;
       }
     }
+
+    function ResetPWMessage(props) {
+      return (
+        <div>
+          A link has been sent the provided email address to reset your password
+        </div>
+      );
+    }
+
+    function ResetPassword(props) {
+      const checkPwReset = props.resetPassword;
+
+      if (checkPwReset) {
+        return <ResetPWMessage />;
+      } else {
+        return null;
+      }
+    }
+
+    function ResetSuccessMsg() {
+      return <div>Password has been successfully changed</div>;
+    }
+
+    function ResetSuccess(props) {
+      const resetSuccess = props.isSuccess;
+
+      if (resetSuccess) {
+        return <ResetSuccessMsg />;
+      } else {
+        return null;
+      }
+    }
+
     return (
       <div className="container">
         <Paper className="formHolder">
           <h1 className="form-title">Login</h1>
+          <ResetPassword resetPassword={pwReset} />
+          <ResetSuccess isSuccess={resetSuccess} />
           <form onSubmit={this.handleSubmit}>
             <CssText
               id="email"
@@ -154,12 +198,15 @@ class Login extends Component {
               variant="outlined"
               fullWidth={true}
             />
-            <EmailPWExists eExists={this.state.verifyEmailPw} />
+            <EmailPWExists eExists={verifyEmailPw} />
             <br />
 
             <CustomButton type="submit" fullWidth={true} variant="contained">
               Submit
             </CustomButton>
+            <br />
+            <br />
+            <Link to="/forgotPassword">Forgot Password</Link>
           </form>
         </Paper>
       </div>

@@ -32,21 +32,14 @@ class EditUser extends Component {
         contactlinks: this.state.contactlinks,
         profileblurb: this.state.profileblurb
       })
-    })
-      .then(e =>
-        window.location.replace(
-          `http://localhost:8081/users/${localStorage.getItem("userId")}`
-        )
-      )
-      .catch(err => {
-        console.log("ERROR", err);
-      });
+    }).catch(err => {
+      console.log("ERROR", err);
+    });
   };
 
   render() {
     return (
       <React.Fragment>
-        <Edit />
         <form onSubmit={this.editUser} className="user-edit">
           <input
             type="text"

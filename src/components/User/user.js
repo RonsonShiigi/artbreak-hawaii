@@ -16,8 +16,16 @@ class User extends Component {
       profileblurb: "",
       contactlinks: "",
       avatarurl: "",
-      created_at: ""
+      created_at: "",
+      editHidden: true
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    console.log("THIS SHOULD BE UNHIDDEN");
+    this.setState({ editHidden: false });
+    console.log(this.state);
   }
 
   componentDidMount(req, res) {
@@ -33,12 +41,17 @@ class User extends Component {
           profileblurb: data.profileblurb,
           contactlinks: data.contactlinks,
           avatarurl: data.avatarurl,
-          created_at: data.created_at
+          created_at: data.created_at,
+          editHidden: true
         });
       });
   }
   render() {
     const data = this.state;
+    const style =
+      this.state.editHidden === true
+        ? { display: "none" }
+        : { display: "block" };
 
     return (
       <div className="profile-container">
@@ -66,8 +79,11 @@ class User extends Component {
                 <p>{data.profileblurb}</p>
                 <p>{data.contactlinks}</p>
                 {localStorage.userId === this.props.match.params.id ? (
-                  <div className="edit-div">
-                    <EditUser />
+                  <div className="edit-holder">
+                    <Edit onClick={this.handleChange} />
+                    <div className="edit-div" style={style}>
+                      <EditUser />
+                    </div>
                   </div>
                 ) : (
                   ""
