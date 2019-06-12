@@ -16,7 +16,7 @@ class Checkout extends Component {
     this.onToken = this.onToken.bind(this);
   }
   componentDidMount = e => {
-    const userId = 4;
+    const userId = 4; //NEED TO MAKE DYNAMIC!!!!
     fetch(`http://localhost:8080/cart/${userId}`)
       .then(res => {
         return res.json();

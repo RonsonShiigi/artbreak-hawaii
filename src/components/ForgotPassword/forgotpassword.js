@@ -44,7 +44,9 @@ class ForgotPassword extends Component {
     super(props);
     this.state = {
       email: "",
-      isValid: true
+      isValid: true,
+      isProvided: true,
+      emailSent: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,10 +56,86 @@ class ForgotPassword extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log("HITTTTS");
+    this.setState({ isProvided: true });
+    this.setState({ isValid: true });
+    this.setState({ emailSent: null });
+    fetch("http://localhost:8080/resetPassword", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: this.state.email
+      })
+    })
+      .then(res => {
+        const data = res.json();
+        return data;
+      })
+      .then(data => {
+        const message = data.message;
+        switch (message) {
+          case "No Email Provided":
+            this.setState({ isProvided: false });
+            break;
+          case "Email Not Found":
+            this.setState({ isValid: false });
+            break;
+          case "200":
+            this.setState({ emailSent: true });
+            break;
+          default:
+            this.setSate({ emailSent: false });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
+    function EmailInvalid(props) {
+      return <div>User Email Not Found!</div>;
+    }
+    function EmailValid(props) {
+      const isVerified = props.eValid;
+      if (!isVerified) {
+        return <EmailInvalid />;
+      } else {
+        return null;
+      }
+    }
+    function EmailProvided(props) {
+      return <div>Please provide an email address</div>;
+    }
+    function EmailIsProvided(props) {
+      const isProvided = props.eProvided;
+
+      if (!isProvided) {
+        return <EmailProvided />;
+      } else {
+        return null;
+      }
+    }
+
+    function EmailError(props) {
+      return <div>An unknown error occured, please try again later. </div>;
+    }
+
+    function EmailSent(props) {
+      const checkSent = props.eSent;
+      if (checkSent) {
+        //passing props to component login through react router so msg can show
+        return <Redirect to={{ pathname: "/login", pwReset: true }} />;
+      } else if (checkSent === false) {
+        return <EmailError />;
+      } else {
+        return null;
+      }
+    }
+
     return (
       <div className="container">
         <Paper className="formHolder">
@@ -74,7 +152,9 @@ class ForgotPassword extends Component {
               variant="outlined"
             />
             <br />
-
+            <EmailValid eValid={this.state.isValid} />
+            <EmailIsProvided eProvided={this.state.isProvided} />
+            <EmailSent eSent={this.state.emailSent} />
             <CustomButton type="submit" fullWidth={true} variant="contained">
               Submit
             </CustomButton>
