@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import { Redirect } from "react-router";
-import axios from "axios";
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });

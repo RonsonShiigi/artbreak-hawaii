@@ -28,6 +28,8 @@ const ResetPasswordRoutes = require("./database/routes/resetPassword/index");
 // const dashboardRoutes = require("./database/routes/dashboard/index");
 // const profileRoutes = require("./database/routes/profile/index");
 
+const Chatkit = require("@pusher/chatkit-server");
+
 if (!PORT) {
   console.log("No Port Found");
 }
@@ -88,4 +90,36 @@ app.use("/resetPassword", ResetPasswordRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
+});
+
+const chatkit = new Chatkit.default({
+  instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
+  key:
+    "dae503cc-9ed8-44db-b461-2f0ff8cef16c:4DDTg7WpOVt3IAqqGfoicXMNDMjX2/OxCHOKQ299nmo="
+});
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+app.post("/users", (req, res) => {
+  const { username } = req.body;
+  chatkit
+    .createUser({
+      id: username,
+      name: username
+    })
+    .then(() => res.sendStatus(201))
+    .catch(error => {
+      if (error.error === "services/chatkit/user_already_exists") {
+        res.sendStatus(200);
+      } else {
+        res.status(error.status).json(error);
+      }
+    });
+});
+
+app.post("/authenticate", (req, res) => {
+  const authData = chatkit.authenticate({ userId: req.query.user_id });
+  res.status(authData.status).send(authData.body);
 });

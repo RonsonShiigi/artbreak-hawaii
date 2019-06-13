@@ -8,8 +8,6 @@ import "./header.css";
 import { withStyles } from "@material-ui/core/styles";
 // import StripeReg from "../StripeReg/stripeReg.js";
 
-import PropTypes from "prop-types";
-
 const styles = theme => ({
   root: {
     width: "100%",
@@ -86,7 +84,9 @@ class Header extends Component {
               <li>
                 <Link to="/dashboard">My Dashboard</Link>
               </li>
-              <li>MY MESSAGES</li>
+              <li>
+                <Link to="/messages">My Messages</Link>
+              </li>
               <li>BROWSE</li>
               <li>
                 <h3 className="login-welcome">

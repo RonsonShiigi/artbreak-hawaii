@@ -1,12 +1,38 @@
 .galleryview {
   display: flex;
-  align-items: center;
-  align-content: center;
-  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 10vh;
+  height: 100%;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 
 .img-style {
-  max-width: 500px;
+  position: relative;
+  max-height: 450px;
+  padding-left: 2vw;
+}
+
+.view-inner {
+  display: flex;
+  position: fixed;
+  padding: 1vw;
+  top: 15%;
+  bottom: 25%;
+  border-radius: 20px;
+  background: rgba(68, 67, 67);
+}
+
+.img-info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2vw;
+}
+
+.img-links {
+  display: flex;
 }

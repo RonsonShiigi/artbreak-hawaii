@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Gallery from "../Gallery";
 import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";
+import Edit from "@material-ui/icons/Edit";
 
 import "./profile.css";
 
@@ -13,8 +14,18 @@ class User extends Component {
       first_name: "",
       last_name: "",
       profileblurb: "",
-      created_at: ""
+      contactlinks: "",
+      avatarurl: "",
+      created_at: "",
+      editHidden: true
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    console.log("THIS SHOULD BE HIDDEN");
+    this.setState({ editHidden: !this.state.editHidden });
+    console.log(this.state);
   }
 
   componentDidMount(req, res) {
@@ -28,12 +39,17 @@ class User extends Component {
           first_name: data.first_name,
           last_name: data.last_name,
           profileblurb: data.profileblurb,
-          created_at: data.created_at
+          contactlinks: data.contactlinks,
+          avatarurl: data.avatarurl,
+          created_at: data.created_at,
+          editHidden: true
         });
       });
   }
   render() {
     const data = this.state;
+    const style = this.state.editHidden === true ? { display: "none" } : {};
+
     return (
       <div className="profile-container">
         <div className="profile-cover" />
@@ -55,17 +71,20 @@ class User extends Component {
               id="user-glitch"
             >
               {data.username}
+              <div className="date-info">join date: {data.created_at}</div>
               <div className="user-blurb">
-                <div className="date-info">join date: {data.created_at}</div>
+                <p>{data.profileblurb}</p>
+                <p>{data.contactlinks}</p>
                 {localStorage.userId === this.props.match.params.id ? (
-                  <div>
-                    {data.profileblurb}
-                    <EditUser />
+                  <div className="edit-holder">
+                    <Edit onClick={this.handleChange} />
+                    <div className="edit-div" style={style}>
+                      <EditUser />
+                    </div>
                   </div>
                 ) : (
-                  <div>{data.profileblurb}</div>
+                  ""
                 )}
-                <div className="contact-links">{data.contactlinks}</div>
               </div>
             </div>
           </div>
