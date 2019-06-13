@@ -16,21 +16,22 @@ class BuyerCheckout extends Component {
   componentDidMount = e => {
     const tokenUrl = new URLSearchParams(document.location.search.substring(1));
     const token = tokenUrl.get("tkn");
+    console.log("TOKEN", token);
     if (token) {
       this.setState({ uriToken: token });
     }
-    fetch(`http://localhost:8080/invoice/${token}`)
-      .then(res => {
-        return res.json();
-      })
-      .then(itemsData => {
-        console.log("ITEMS DATA", itemsData);
-        this.setState({ items: itemsData });
-        console.log("This State", this.state.items);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // fetch(`http://localhost:8080/invoice/${token}`)
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .then(itemsData => {
+    //     console.log("ITEMS DATA", itemsData);
+    //     this.setState({ items: itemsData });
+    //     console.log("This State", this.state.items);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   onToken(token) {
@@ -55,20 +56,53 @@ class BuyerCheckout extends Component {
   }
 
   render() {
-    const { items } = this.state;
+    const { uriToken, items } = this.state;
+    console.log("ITEMS", items);
+    console.log("TKN", uriToken);
     let total = 0;
     return (
       <div>
-        {items}
-        <div>
-          <StripeCheckout
-            key="stripe-cehckout"
-            token={this.onToken}
-            stripeKey="pk_test_dFwJK6MxVB2Jj5XDUuaFAoIl00oVxjFN1t"
-          />
-        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        Hello
       </div>
     );
+    //   <div>
+    // <h2>ArtBreak Invoice<h2>
+    //     <div>Total:$ {items[0].}</div>
+
+    // <div>
+    //   <StripeCheckout
+    //     key="stripe-checkout"
+    //     token={this.onToken}
+    //     stripeKey="pk_test_dFwJK6MxVB2Jj5XDUuaFAoIl00oVxjFN1t"
+    //   />
+    // </div>;
+    //   </div>
   }
 }
 
