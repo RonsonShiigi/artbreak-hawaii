@@ -85,7 +85,7 @@ router.post("/auth/register", (req, res) => {
 });
 
 router.post("/auth/register/check", (req, res) => {
-  let userUsername = req.body.username;
+  const userUsername = req.body.username;
   let userQuery = { email: "", username: "" };
 
   //REGEX email validation function to check if email is a valid email.
