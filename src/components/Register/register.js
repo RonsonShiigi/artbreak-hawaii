@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
 
 //custom-styled components
 const CssText = withStyles({
@@ -81,6 +80,9 @@ class Register extends Component {
       emailValid: true,
       passwordValid: true
     });
+    const emailLowercase = this.state.email.toLowerCase();
+    console.log("TOLOWERCASE", emailLowercase);
+
     fetch("http://localhost:8080/api/auth/register/check", {
       method: "POST",
       headers: {
@@ -88,7 +90,7 @@ class Register extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: this.state.email,
+        email: emailLowercase,
         username: this.state.username
       })
     })
@@ -112,7 +114,7 @@ class Register extends Component {
               last_name: this.state.last_name,
               password: this.state.password,
               username: this.state.username,
-              email: this.state.email
+              email: emailLowercase
             })
           })
             .then(res => {

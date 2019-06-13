@@ -70,6 +70,8 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const emailLowercase = this.state.email.toLowerCase();
+
     fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       credentials: "include",
@@ -79,7 +81,7 @@ class Login extends Component {
       },
       body: JSON.stringify({
         password: this.state.password,
-        email: this.state.email
+        email: emailLowercase
       })
     })
       .then(res => {
