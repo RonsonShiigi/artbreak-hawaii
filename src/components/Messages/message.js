@@ -82,7 +82,10 @@ class ChatScreen extends Component {
   render() {
     const styles = {
       container: {
-        height: "100vh",
+        height: "90vh",
+        width: "100%",
+        position: "absolute",
+        top: "10vh",
         display: "flex",
         flexDirection: "column"
       },
@@ -93,7 +96,7 @@ class ChatScreen extends Component {
       whosOnlineListContainer: {
         width: "15%",
         padding: 20,
-        backgroundColor: "#2c303b",
+        backgroundColor: "#0e0e0e",
         color: "white"
       },
       chatListContainer: {

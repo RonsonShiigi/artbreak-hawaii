@@ -94,7 +94,7 @@ class Gallery extends React.Component {
     this.state = {
       searchString: "",
       products: [],
-      viewHidden: false
+      show: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -122,7 +122,8 @@ class Gallery extends React.Component {
 
   viewImg() {
     console.log("pls view img");
-    this.setState({ viewHidden: !this.state.viewHidden });
+    this.setState({ show: !this.state.show });
+    console.log(this.state.show);
   }
 
   render() {
@@ -136,7 +137,8 @@ class Gallery extends React.Component {
       });
     }
 
-    const style = this.state.viewHidden === true ? { display: "none" } : {};
+    const style = this.state.show === true ? { display: "none" } : {};
+
     return (
       <div className={classes.root} component="section">
         <input
@@ -146,10 +148,19 @@ class Gallery extends React.Component {
           onChange={this.handleChange}
           placeholder="SEARCH..."
         />
+
         <div className={classes.images}>
           {_products.map((product, i) => (
-            // border around title
-            <Link to={`/products/${product.id}`} key={i}>
+            // <Link to={`/products/${product.id}`} key={i}>
+            <div key={i}>
+              {/* {product.id === } */}
+              <Modal show={this.state.show} handleClose={this.viewImg}>
+                <img
+                  src={`${product.image_url}`}
+                  className="ind-img"
+                  onClick={this.viewImg}
+                />
+              </Modal>
               <ButtonBase
                 key={i}
                 className={classes.imageWrapper}
@@ -158,29 +169,37 @@ class Gallery extends React.Component {
                   width: product.width
                 }}
               >
-                {/* actual thumbnail */}
                 <div
                   className={classes.imageSrc}
                   style={{
                     backgroundImage: `url(${product.image_url})`
                   }}
                 />
-                {/* darkened background for each thumbnail */}
                 <div className={classes.imageBackdrop} />
-                {/* actual image title */}
                 <div className={classes.imageButton}>
                   <h2>{product.title}</h2>
-                  {/* weird little black line below title */}
                   <div className={classes.imageMarked} />
                 </div>
               </ButtonBase>
-            </Link>
+            </div>
+            //</Link>
           ))}
         </div>
       </div>
     );
   }
 }
+
+const Modal = ({ children, show, handleClose }) => {
+  const viewStatus = show ? {} : { display: "none" };
+  return (
+    <div style={viewStatus}>
+      <div className="ind-view">
+        <div className="view-inner">{children}</div>
+      </div>
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
   console.log("state products", state);
