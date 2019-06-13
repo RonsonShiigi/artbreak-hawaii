@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard/dashboard";
 import Messages from "./components/Messages/message";
 import ForgotPassword from "./components/ForgotPassword/forgotpassword";
 import ResetPassword from "./components/ResetPassword/resetPassword";
+import Invoice from "./components/Invoice/invoice";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path="/messages" component={Messages} />
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/resetPassword" component={ResetPassword} />
+          <Route path="/invoice" component={Invoice} />
         </Switch>
       </React.Fragment>
     );

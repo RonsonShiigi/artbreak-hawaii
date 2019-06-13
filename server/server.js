@@ -25,6 +25,7 @@ const PaymentRoutes = require("./database/routes/payment/index");
 const TestRoute = require("./database/routes/newProduct/index");
 const StripeRegRoutes = require("./database/routes/stripeReg/index");
 const ResetPasswordRoutes = require("./database/routes/resetPassword/index");
+const InvoiceRoutes = require("./database/routes/invoice/index");
 // const dashboardRoutes = require("./database/routes/dashboard/index");
 // const profileRoutes = require("./database/routes/profile/index");
 
@@ -87,6 +88,7 @@ app.use("/payment", PaymentRoutes);
 app.use("/newProduct", TestRoute);
 app.use("/sRegistration", StripeRegRoutes);
 app.use("/resetPassword", ResetPasswordRoutes);
+app.use("/invoice", InvoiceRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

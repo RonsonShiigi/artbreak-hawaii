@@ -19,18 +19,18 @@ class BuyerCheckout extends Component {
     if (token) {
       this.setState({ uriToken: token });
     }
-    // fetch(`http://localhost:8080/cart/${userId}`)
-    //   .then(res => {
-    //     return res.json();
-    //   })
-    //   .then(itemsData => {
-    //     console.log("ITEMS DATA", itemsData);
-    //     this.setState({ items: itemsData });
-    //     console.log("This State", this.state.items);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    fetch(`http://localhost:8080/invoice/${token}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(itemsData => {
+        console.log("ITEMS DATA", itemsData);
+        this.setState({ items: itemsData });
+        console.log("This State", this.state.items);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   onToken(token) {

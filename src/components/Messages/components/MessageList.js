@@ -1,44 +1,47 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class MessagesList extends Component {
   render() {
     const styles = {
       container: {
-        overflowY: 'scroll',
-        flex: 1,
+        overflow: "scroll",
+        width: "80vw"
       },
       ul: {
-        listStyle: 'none',
+        listStyle: "none",
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "wrap"
       },
       li: {
-        marginTop: 13,
-        marginBottom: 13,
+        marginTop: 2,
+        marginBottom: 2
       },
       senderUsername: {
-        fontWeight: 'bold',
+        fontWeight: "bold"
       },
-      message: { fontSize: 15 },
-    }
+      message: { fontSize: 15 }
+    };
     return (
       <div
         style={{
           ...this.props.style,
-          ...styles.container,
+          ...styles.container
         }}
       >
         <ul style={styles.ul}>
           {this.props.messages.map((message, index) => (
             <li key={index} style={styles.li}>
               <div>
-                <span style={styles.senderUsername}>{message.senderId}</span>{' '}
+                <span style={styles.senderUsername}>{message.senderId}</span>{" "}
               </div>
               <p style={styles.message}>{message.text}</p>
             </li>
           ))}
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default MessagesList
+export default MessagesList;
