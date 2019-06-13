@@ -15,6 +15,7 @@ router.post("/", (req, res) => {
     const buyerEmail = req.body.email;
     const price = req.body.price;
     const description = req.body.description;
+    const token = crypto.randomBytes(20).toString("hex");
 
     let status = "";
     console.log("req.body", req.body);
@@ -23,7 +24,8 @@ router.post("/", (req, res) => {
       user_id,
       buyerEmail,
       price,
-      description
+      description,
+      token
     })
       .save()
       .then(invoices => {
@@ -43,9 +45,11 @@ router.post("/", (req, res) => {
           to: `${buyerEmail}`,
           subject: "Invoice from ArtBreak Hi",
           text:
-            `Hi, you are cool......\n\n` +
-            `you are purchasing ${description} \n\n` +
-            `Your total price will be ${price}`
+            `Hello, Thank you for using Artbreak......\n\n` +
+            `Your purchase will consist of  ${description} \n\n` +
+            `Your total price will be $${price} \n\n` +
+            `Please buy your shit here http://localhost:8081/buyercheckout/?tkn=${token} \n\n` +
+            `Tell your mama i say hello`
         };
 
         transporter.sendMail(mailOptions, (error, response) => {
