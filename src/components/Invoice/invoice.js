@@ -26,11 +26,28 @@ class Invoice extends Component {
     this.setState({ [name]: e.target.value });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    if (localStorage.getItem("userId") === null) {
+      console.log("You are not logged in");
+    } else {
+      console.log("this is invoice state", this.state);
+      axios
+        .post("http://localhost:8080/invoice", this.state)
+        .then(res => {
+          console.log("response", res.data);
+        })
+        .catch(err => {
+          console.log("you fucked up", err);
+        });
+    }
+  };
+
   render() {
     return (
       <div className="invoice-form">
         <h1>Send Invoice to Buyer</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <TextField
             id="email"
             label="email of buyer"
