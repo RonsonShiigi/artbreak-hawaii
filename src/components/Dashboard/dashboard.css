@@ -38,3 +38,8 @@
 .tab-container {
   padding-top: 20px;
 }
+
+.tabsdiv {
+  position: fixed;
+  left: 15vw;
+}
