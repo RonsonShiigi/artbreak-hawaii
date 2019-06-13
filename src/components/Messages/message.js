@@ -4,6 +4,8 @@ import MessageList from "./components/MessageList";
 import SendMessageForm from "./components/SendMessageForm";
 import TypingIndicator from "./components/TypingIndicator";
 import WhosOnlineList from "./components/WhosOnlineList";
+import { ActionViewColumn } from "material-ui/svg-icons";
+import { wrap } from "module";
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -82,25 +84,40 @@ class ChatScreen extends Component {
   render() {
     const styles = {
       container: {
-        height: "100vh",
+        height: "88vh",
+        width: "100vw",
+        marginTop: "105px",
         display: "flex",
-        flexDirection: "column"
+        flex: 1,
+        flexDirection: "column",
+        flexWrap: "wrap",
+        background: "white",
+        overflow: "auto"
       },
       chatContainer: {
         display: "flex",
-        flex: 1
+        flex: 1,
+        overflow: "auto"
       },
       whosOnlineListContainer: {
         width: "15%",
         padding: 20,
         backgroundColor: "#2c303b",
-        color: "white"
+        color: "white",
+        flexDirection: "column"
       },
       chatListContainer: {
         padding: 20,
-        width: "85%",
         display: "flex",
-        flexDirection: "column"
+        height: "auto",
+        flexDirection: "column",
+        background: "white",
+        flexWrap: "columnWrap"
+      },
+      li: {
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "columnWrap"
       }
     };
 
