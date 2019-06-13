@@ -23,8 +23,8 @@ class User extends Component {
   }
 
   handleChange(event) {
-    console.log("THIS SHOULD BE UNHIDDEN");
-    this.setState({ editHidden: false });
+    console.log("THIS SHOULD BE HIDDEN");
+    this.setState({ editHidden: !this.state.editHidden });
     console.log(this.state);
   }
 
@@ -48,10 +48,7 @@ class User extends Component {
   }
   render() {
     const data = this.state;
-    const style =
-      this.state.editHidden === true
-        ? { display: "none" }
-        : { display: "block" };
+    const style = this.state.editHidden === true ? { display: "none" } : {};
 
     return (
       <div className="profile-container">
