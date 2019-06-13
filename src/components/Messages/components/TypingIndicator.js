@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class TypingIndicator extends Component {
   render() {
@@ -7,12 +7,12 @@ class TypingIndicator extends Component {
         <div>
           {`${this.props.usersWhoAreTyping
             .slice(0, 2)
-            .join(' and ')} is typing`}
+            .join(" and ")} is typing ...`}
         </div>
-      )
+      );
     }
-    return <div />
+    return <div />;
   }
 }
 
-export default TypingIndicator
+export default TypingIndicator;

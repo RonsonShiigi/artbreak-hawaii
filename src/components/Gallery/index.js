@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import GalleryView from "./IndividualView/gallery-view";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {},
@@ -131,6 +129,12 @@ class Gallery extends React.Component {
     let search = this.state.searchString.trim().toLowerCase();
     const { classes } = this.props;
 
+    let isModal = !!(
+      classes.state &&
+      classes.state.modal &&
+      this.previousClasses !== classes
+    );
+
     if (search.length > 0) {
       _products = _products.filter(function(product) {
         return product.title.toLowerCase().match(search);
@@ -138,6 +142,25 @@ class Gallery extends React.Component {
     }
 
     const style = this.state.show === true ? { display: "none" } : {};
+
+    const Modal = ({ match, history }) => {
+      let product = _products[parseInt(match.params.id, 10)];
+      let back = e => {
+        e.stopPropagation();
+        history.goBack();
+      };
+
+      return (
+        <div onClick={back} className="ind-view">
+          <div className="modal">
+            <div className="view-inner">
+              <h1>{product.title}</h1>
+              <img src={`${product.image_url}`} />
+            </div>
+          </div>
+        </div>
+      );
+    };
 
     return (
       <div className={classes.root} component="section">
@@ -150,19 +173,16 @@ class Gallery extends React.Component {
         />
 
         <div className={classes.images}>
-          {_products.map((product, i) => (
-            // <Link to={`/products/${product.id}`} key={i}>
-            <div key={i}>
-              {/* {product.id === } */}
-              <Modal show={this.state.show} handleClose={this.viewImg}>
-                <img
-                  src={`${product.image_url}`}
-                  className="ind-img"
-                  onClick={this.viewImg}
-                />
-              </Modal>
+          {_products.map(product => (
+            <Link
+              to={{
+                pathname: `/products/${product.id}`,
+                state: { modal: true }
+              }}
+              key={product.id}
+            >
               <ButtonBase
-                key={i}
+                key={product.id}
                 className={classes.imageWrapper}
                 onClick={this.viewImg}
                 style={{
@@ -181,25 +201,13 @@ class Gallery extends React.Component {
                   <div className={classes.imageMarked} />
                 </div>
               </ButtonBase>
-            </div>
-            //</Link>
+            </Link>
           ))}
         </div>
       </div>
     );
   }
 }
-
-const Modal = ({ children, show, handleClose }) => {
-  const viewStatus = show ? {} : { display: "none" };
-  return (
-    <div style={viewStatus}>
-      <div className="ind-view">
-        <div className="view-inner">{children}</div>
-      </div>
-    </div>
-  );
-};
 
 function mapStateToProps(state) {
   console.log("state products", state);

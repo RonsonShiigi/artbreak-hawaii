@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class SendMessageForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      text: '',
-    }
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
+      text: ""
+    };
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onSubmit(e) {
-    e.preventDefault()
-    this.props.onSubmit(this.state.text)
-    this.setState({ text: '' })
+    e.preventDefault();
+    this.props.onSubmit(this.state.text);
+    this.setState({ text: "" });
   }
 
   onChange(e) {
-    this.setState({ text: e.target.value })
+    this.setState({ text: e.target.value });
     if (this.props.onChange) {
-      this.props.onChange()
+      this.props.onChange();
     }
   }
 
@@ -27,21 +27,24 @@ class SendMessageForm extends Component {
     const styles = {
       container: {
         padding: 20,
-        borderTop: '1px #4C758F solid',
-        marginBottom: 20,
+        borderTop: "1px #4C758F solid",
+        marginBottom: 20
       },
       form: {
-        display: 'flex',
+        display: "flex",
+        width: "auto"
       },
       input: {
-        color: 'inherit',
-        background: 'none',
-        outline: 'none',
-        border: 'none',
+        width: "auto",
+        color: "black",
+        background: "none",
+        outline: "none",
+        border: "none",
+        textShadow: "none",
         flex: 1,
-        fontSize: 16,
-      },
-    }
+        fontSize: 16
+      }
+    };
     return (
       <div style={styles.container}>
         <div>
@@ -56,8 +59,8 @@ class SendMessageForm extends Component {
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default SendMessageForm
+export default SendMessageForm;
