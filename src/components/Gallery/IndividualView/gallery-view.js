@@ -13,9 +13,12 @@ class GalleryView extends Component {
       user_id: 0,
       price: "",
       created_at: 0,
-      updated_at: 0
+      updated_at: 0,
+      modalOpened: false
     };
+    this.toggleModal = this.toggleModal.bind(this);
   }
+
   componentDidMount(req, res) {
     fetch(`http://localhost:8080/products/${this.props.match.params.id}`)
       .then(res => {
@@ -34,18 +37,46 @@ class GalleryView extends Component {
         });
       });
   }
+  toggleModal() {
+    this.setState({ modalOpened: !this.state.modalOpened });
+  }
 
   render() {
     const data = this.state;
     // console.log("galleryview state", data);
     return (
       <div className="galleryview">
-        <h1>{data.title}</h1>
-        <a href={`${data.image_url}`} target="_blank" rel="noopener noreferrer">
-          <img src={data.image_url} className="img-style" alt="" />
-        </a>
-        <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
-        <a href={`/delete/${this.state.id}`}>Delete Me</a>
+        <div className="view-inner">
+          <a
+            href={`${data.image_url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={data.image_url} className="img-style" alt="" />
+          </a>
+          <div className="img-info">
+            <h1>{data.title}</h1>
+            {data.description}
+            <br />${data.price}
+            <br />
+            {data.created_at}
+            <br />
+            {localStorage.userId === this.props.match.params.id ? (
+              <div className="img-links">
+                <ul>
+                  <li>
+                    <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
+                  </li>
+                  <li>
+                    <a href={`/delete/${this.state.id}`}>Delete Me</a>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </div>
     );
   }

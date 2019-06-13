@@ -15,8 +15,7 @@ class EditUser extends Component {
   }
 
   handleChange = e => {
-    const name = e.target.name;
-    this.setState({ [name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   editUser = e => {
@@ -57,7 +56,7 @@ class EditUser extends Component {
             onChange={this.handleChange}
             className="contact-input"
           />
-          <input type="submit" label="Edit Profile" variant="outlined" />
+          <input type="submit" variant="outlined" />
         </form>
       </React.Fragment>
     );
