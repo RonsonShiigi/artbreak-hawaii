@@ -16,6 +16,8 @@ exports.up = function(knex, Promise) {
     table.string("profileblurb");
     table.string("contactlinks");
     table.string("avatarurl");
+    table.string("resetPasswordToken");
+    table.string("resetPasswordExpires");
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
     table.timestamp("updated_at");
   });

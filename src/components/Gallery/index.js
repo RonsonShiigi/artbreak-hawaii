@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import GalleryView from "./IndividualView/gallery-view";
+
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import Collapse from "@material-ui/core/Collapse";
 
 const styles = theme => ({
   root: {},
@@ -92,9 +93,12 @@ class Gallery extends React.Component {
     super(props);
     this.state = {
       searchString: "",
-      products: []
+      products: [],
+      viewHidden: false
     };
+
     this.handleChange = this.handleChange.bind(this);
+    this.viewImg = this.viewImg.bind(this);
   }
   componentDidMount(req, res) {
     fetch("http://localhost:8080/products")
@@ -115,6 +119,12 @@ class Gallery extends React.Component {
       searchString: this.refs.search.value
     });
   }
+
+  viewImg() {
+    console.log("pls view img");
+    this.setState({ viewHidden: !this.state.viewHidden });
+  }
+
   render() {
     let _products = this.state.products;
     let search = this.state.searchString.trim().toLowerCase();
@@ -126,6 +136,7 @@ class Gallery extends React.Component {
       });
     }
 
+    const style = this.state.viewHidden === true ? { display: "none" } : {};
     return (
       <div className={classes.root} component="section">
         <input
@@ -142,6 +153,7 @@ class Gallery extends React.Component {
               <ButtonBase
                 key={i}
                 className={classes.imageWrapper}
+                onClick={this.viewImg}
                 style={{
                   width: product.width
                 }}

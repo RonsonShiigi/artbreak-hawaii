@@ -90,7 +90,8 @@ form {
   color: white;
   font-size: 150px;
   font-weight: bolder;
-  position: relative;
+  position: absolute;
+  top: 10vh;
   margin: 0 auto;
 }
 .glitch-cover:after {

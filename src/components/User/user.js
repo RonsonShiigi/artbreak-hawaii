@@ -16,8 +16,16 @@ class User extends Component {
       profileblurb: "",
       contactlinks: "",
       avatarurl: "",
-      created_at: ""
+      created_at: "",
+      editHidden: true
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    console.log("THIS SHOULD BE HIDDEN");
+    this.setState({ editHidden: !this.state.editHidden });
+    console.log(this.state);
   }
 
   componentDidMount(req, res) {
@@ -33,12 +41,14 @@ class User extends Component {
           profileblurb: data.profileblurb,
           contactlinks: data.contactlinks,
           avatarurl: data.avatarurl,
-          created_at: data.created_at
+          created_at: data.created_at,
+          editHidden: true
         });
       });
   }
   render() {
     const data = this.state;
+    const style = this.state.editHidden === true ? { display: "none" } : {};
 
     return (
       <div className="profile-container">
@@ -61,22 +71,20 @@ class User extends Component {
               id="user-glitch"
             >
               {data.username}
+              <div className="date-info">join date: {data.created_at}</div>
               <div className="user-blurb">
-                <div className="date-info">join date: {data.created_at}</div>
-                <div>{data.profileblurb} </div>
+                <p>{data.profileblurb}</p>
+                <p>{data.contactlinks}</p>
                 {localStorage.userId === this.props.match.params.id ? (
-                  <React.Fragment>
-                    <div className="edit-icon">
-                      <Edit />
-                    </div>
-                    <div className="edit-div">
+                  <div className="edit-holder">
+                    <Edit onClick={this.handleChange} />
+                    <div className="edit-div" style={style}>
                       <EditUser />
                     </div>
-                  </React.Fragment>
+                  </div>
                 ) : (
                   ""
                 )}
-                <div className="contact-links">{data.contactlinks}</div>
               </div>
             </div>
           </div>

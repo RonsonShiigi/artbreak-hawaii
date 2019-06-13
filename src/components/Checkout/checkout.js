@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
-import { Redirect } from "react-router";
-import axios from "axios";
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });
@@ -16,7 +14,7 @@ class Checkout extends Component {
     this.onToken = this.onToken.bind(this);
   }
   componentDidMount = e => {
-    const userId = 4;
+    const userId = 4; //NEED TO MAKE DYNAMIC!!!!
     fetch(`http://localhost:8080/cart/${userId}`)
       .then(res => {
         return res.json();

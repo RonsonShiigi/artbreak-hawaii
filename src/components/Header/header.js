@@ -8,8 +8,6 @@ import "./header.css";
 import { withStyles } from "@material-ui/core/styles";
 // import StripeReg from "../StripeReg/stripeReg.js";
 
-import PropTypes from "prop-types";
-
 const styles = theme => ({
   root: {
     width: "100%",
