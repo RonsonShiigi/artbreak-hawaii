@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ReactModal from "react-modal";
 
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
@@ -92,11 +93,13 @@ class Gallery extends React.Component {
     this.state = {
       searchString: "",
       products: [],
-      show: true
+      showModal: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.viewImg = this.viewImg.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   componentDidMount(req, res) {
     fetch("http://localhost:8080/products")
@@ -124,16 +127,18 @@ class Gallery extends React.Component {
     console.log(this.state.show);
   }
 
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
   render() {
     let _products = this.state.products;
     let search = this.state.searchString.trim().toLowerCase();
     const { classes } = this.props;
-
-    let isModal = !!(
-      classes.state &&
-      classes.state.modal &&
-      this.previousClasses !== classes
-    );
 
     if (search.length > 0) {
       _products = _products.filter(function(product) {
@@ -142,25 +147,6 @@ class Gallery extends React.Component {
     }
 
     const style = this.state.show === true ? { display: "none" } : {};
-
-    const Modal = ({ match, history }) => {
-      let product = _products[parseInt(match.params.id, 10)];
-      let back = e => {
-        e.stopPropagation();
-        history.goBack();
-      };
-
-      return (
-        <div onClick={back} className="ind-view">
-          <div className="modal">
-            <div className="view-inner">
-              <h1>{product.title}</h1>
-              <img src={`${product.image_url}`} />
-            </div>
-          </div>
-        </div>
-      );
-    };
 
     return (
       <div className={classes.root} component="section">
@@ -176,15 +162,14 @@ class Gallery extends React.Component {
           {_products.map(product => (
             <Link
               to={{
-                pathname: `/products/${product.id}`,
-                state: { modal: true }
+                pathname: `/products/${product.id}`
               }}
               key={product.id}
             >
               <ButtonBase
                 key={product.id}
                 className={classes.imageWrapper}
-                onClick={this.viewImg}
+                onClick={this.handleOpenModal}
                 style={{
                   width: product.width
                 }}

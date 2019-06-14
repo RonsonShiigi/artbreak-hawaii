@@ -139,7 +139,11 @@ class ForgotPassword extends Component {
     return (
       <div className="container">
         <Paper className="formHolder">
-          <h1 className="form-title">Forgot Password</h1>
+          <h1 className="forget-title">Forgetting something?</h1>
+          <p className="pw-blurb">
+            No problem. Just enter the email associated with your account below
+            and we'll get you set up with a new password!
+          </p>
           <form onSubmit={this.handleSubmit}>
             <CssText
               id="email"

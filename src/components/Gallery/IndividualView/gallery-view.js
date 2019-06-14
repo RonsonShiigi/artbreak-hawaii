@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactModal from "react-modal";
 
 import "./gallery-view.css";
 
@@ -13,10 +14,8 @@ class GalleryView extends Component {
       user_id: 0,
       price: "",
       created_at: 0,
-      updated_at: 0,
-      modalOpened: false
+      updated_at: 0
     };
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount(req, res) {
@@ -36,9 +35,6 @@ class GalleryView extends Component {
           updated_at: data.updated_at
         });
       });
-  }
-  toggleModal() {
-    this.setState({ modalOpened: !this.state.modalOpened });
   }
 
   render() {
