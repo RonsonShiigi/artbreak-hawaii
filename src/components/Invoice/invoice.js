@@ -37,6 +37,9 @@ class Invoice extends Component {
         .then(res => {
           console.log("response", res.data);
         })
+        .then(
+          window.location.replace("http://localhost:8081/invoiceconfirmation")
+        )
         .catch(err => {
           console.log("you fucked up", err);
         });
