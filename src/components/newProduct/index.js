@@ -77,11 +77,12 @@ class FileUpload extends Component {
             })
             .catch(err => {
               console.log("error in creating a new product", err);
+              window.location.replace("http://localhost:8081/errorNewProduct");
             });
         })
 
         .catch(error => {
-          // handle your error
+          window.location.replace("http://localhost:8081/errorNewProduct");
         });
     }
 
@@ -102,7 +103,7 @@ class FileUpload extends Component {
 
   render() {
     return (
-      <div class="upload-form">
+      <div className="upload-form">
         <form onSubmit={this.submitFile}>
           <TextField
             id="title"

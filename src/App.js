@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import FileUpload from "./components/newProduct/newProduct";
+import NewProduct_Error from "./components/newProduct/error";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
@@ -45,6 +46,7 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/newProduct" component={FileUpload} />
+          <Route path="/errorNewProduct" component={NewProduct_Error} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
           <Route path="/cart" component={ShoppingCart} />
