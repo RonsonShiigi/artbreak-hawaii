@@ -4,8 +4,13 @@
   width: 100%;
   align-items: center;
   margin-top: 6vh;
-  margin-left: 2vw;
+  padding-left: 2vw;
+  padding-top: 1vh;
   justify-content: space-between;
+  align-content: center;
+  background-color: #0e0e0e;
+  font-family: "Roboto", sans-serif;
+  position: absolute;
 }
 
 ul {
@@ -30,8 +35,9 @@ ul li {
   justify-content: center;
   position: fixed;
   width: 100%;
-  max-height: 5vh;
+  height: 5vh;
   z-index: 99;
+  background-color: #0e0e0e;
 }
 .header-glitch {
   color: white;

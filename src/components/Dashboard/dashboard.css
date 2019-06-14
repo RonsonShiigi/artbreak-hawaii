@@ -42,4 +42,5 @@
 .tabsdiv {
   position: fixed;
   left: 15vw;
+  padding-right: 1vw;
 }

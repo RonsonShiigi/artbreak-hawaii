@@ -40,7 +40,7 @@ function Logout(props) {
     <form onSubmit={handleSubmit}>
       <Button
         type="submit"
-        variant="outlined"
+        variant="contained"
         style={{
           input: {
             display: "none"

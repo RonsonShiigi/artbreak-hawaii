@@ -235,6 +235,7 @@ class Register extends Component {
               margin="normal"
               fullWidth={true}
               variant="outlined"
+              type="password"
             />
             <PasswordValid passwordInvalid={this.state.passwordValid} />
             <CssText

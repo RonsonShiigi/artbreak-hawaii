@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import GalleryView from "./IndividualView/gallery-view";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ReactModal from "react-modal";
 
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
 import { ButtonBase } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {},
@@ -94,11 +93,13 @@ class Gallery extends React.Component {
     this.state = {
       searchString: "",
       products: [],
-      viewHidden: false
+      showModal: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.viewImg = this.viewImg.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   componentDidMount(req, res) {
     fetch("http://localhost:8080/products")
@@ -122,7 +123,16 @@ class Gallery extends React.Component {
 
   viewImg() {
     console.log("pls view img");
-    this.setState({ viewHidden: !this.state.viewHidden });
+    this.setState({ show: !this.state.show });
+    console.log(this.state.show);
+  }
+
+  handleOpenModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -136,7 +146,8 @@ class Gallery extends React.Component {
       });
     }
 
-    const style = this.state.viewHidden === true ? { display: "none" } : {};
+    const style = this.state.show === true ? { display: "none" } : {};
+
     return (
       <div className={classes.root} component="section">
         <input
@@ -146,31 +157,32 @@ class Gallery extends React.Component {
           onChange={this.handleChange}
           placeholder="SEARCH..."
         />
+
         <div className={classes.images}>
-          {_products.map((product, i) => (
-            // border around title
-            <Link to={`/products/${product.id}`} key={i}>
+          {_products.map(product => (
+            <Link
+              to={{
+                pathname: `/products/${product.id}`
+              }}
+              key={product.id}
+            >
               <ButtonBase
-                key={i}
+                key={product.id}
                 className={classes.imageWrapper}
-                onClick={this.viewImg}
+                onClick={this.handleOpenModal}
                 style={{
                   width: product.width
                 }}
               >
-                {/* actual thumbnail */}
                 <div
                   className={classes.imageSrc}
                   style={{
                     backgroundImage: `url(${product.image_url})`
                   }}
                 />
-                {/* darkened background for each thumbnail */}
                 <div className={classes.imageBackdrop} />
-                {/* actual image title */}
                 <div className={classes.imageButton}>
                   <h2>{product.title}</h2>
-                  {/* weird little black line below title */}
                   <div className={classes.imageMarked} />
                 </div>
               </ButtonBase>
