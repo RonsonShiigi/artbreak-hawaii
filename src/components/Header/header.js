@@ -6,7 +6,7 @@ import Logout from "../Logout/logout";
 import "./header.css";
 
 import { withStyles } from "@material-ui/core/styles";
-// import StripeReg from "../StripeReg/stripeReg.js";
+import StripeReg from "../StripeReg/stripeReg.js";
 
 const styles = theme => ({
   root: {
@@ -69,6 +69,7 @@ class Header extends Component {
               ARTBREAK-HI
             </div>
           </Link>
+          <StripeReg />
           {localStorage.getItem("username") === null ? (
             <ul>
               <li>
