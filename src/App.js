@@ -15,6 +15,7 @@ import ResetPassword from "./components/ResetPassword/resetPassword";
 import Invoice from "./components/Invoice/invoice";
 import BuyerCheckout from "./components/BuyerCheckout/buyercheckout";
 import Invoice_Confirmation from "./components/Invoice/invoice_confirmation";
+import PaymentConfirmation from "./components/PaymentConfirmation/paymentConfirmation";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -57,6 +58,7 @@ class App extends Component {
           <Route path="/resetPassword" component={ResetPassword} />
           <Route path="/invoice" component={Invoice} />
           <Route path="/buyercheckout" component={BuyerCheckout} />
+          <Route path="/paymentConfirmation" component={PaymentConfirmation} />
           <Route path="/invoiceConfirmation" component={Invoice_Confirmation} />
         </Switch>
       </React.Fragment>

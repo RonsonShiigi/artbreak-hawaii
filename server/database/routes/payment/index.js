@@ -17,41 +17,65 @@ router.route("/checkout").post((req, res) => {
       return stripeAcct;
     })
     .then(account => {
-      console.log("ACCOUNT", account);
-      console.log("PARSE", parseInt(total, 10));
-      if (account) {
-        stripe.charges
-          .create({
-            amount: parseInt(total, 10),
-            currency: "usd",
-            source: stripeToken,
-            transfer_data: {
-              amount: 10,
-              destination: account
-            }
-          })
-          .then(charge => {
-            console.log("CHARGE", charge);
-            console.log("TOKEN", uriToken);
-            console.log("CHARGE.PAID", charge.paid);
-            new Invoice()
-              .where({ token: uriToken })
-              .save({ paid: true })
-              .then(() => {
-                console.log("PAIDDDD");
-                return res.json({ message: "Payment Success" });
-              })
-              .catch(err => {
-                console.log("err", err);
-                return res.json({ message: "500" });
-              });
-          })
-          .catch(err => {
-            res.json({ message: "Payment Error" });
-          });
-      } else {
-        return res.json({ message: "500" });
-      }
+      const totalAmt = parseInt(total, 10) * 100;
+      const transferTotal = totalAmt - totalAmt * 0.035;
+
+      stripe.charges
+        .create({
+          amount: totalAmt,
+          currency: "usd",
+          source: stripeToken,
+          transfer_data: {
+            destination: account,
+            amount: transferTotal
+          }
+        })
+        .then(function(charge) {
+          console.log("CHARGE", charge);
+          const chargeId = charge.id;
+          new Invoice()
+            .where({ token: uriToken })
+            .save(
+              { paid: true, charge_id: chargeId, purchased_at: new Date() },
+              { patch: true }
+            )
+            .then(() => {
+              return res.json({ message: "Payment Success" });
+            })
+            .catch(err => {
+              console.log("err", err);
+              return res.json({ message: "500" });
+            });
+        });
+      // stripe.charges
+      //   .create({
+      //     amount: parseInt(total, 10),
+      //     currency: "usd",
+      //     source: stripeToken,
+      //     transfer_data: {
+      //       amount: 10,
+      //       destination: account
+      //     }
+      //   })
+      //   .then(charge => {
+      //     console.log("CHARGE", charge);
+      //     console.log("TOKEN", uriToken);
+      //     console.log("CHARGE.PAID", charge.paid);
+      //     return new Invoice()
+      //       .where({ token: uriToken })
+      //       .save({ paid: true })
+      //       .then(() => {
+      //         console.log("PAIDDDD");
+      //         return res.json({ message: "Payment Success" });
+      //       })
+      //       .catch(err => {
+      //         console.log("err", err);
+      //         return res.json({ message: "500" });
+      //       });
+      //   })
+      //   .catch(err => {
+      //     return res.json({ message: "Payment Error" });
+      //   });
     })
     .catch(err => {
       return res.json({ message: "500" });

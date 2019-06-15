@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { Redirect } from "react-router";
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });
@@ -15,11 +16,13 @@ class BuyerCheckout extends Component {
       uriToken: null,
       artist: "",
       error: false,
-      buyerEmail: ""
+      buyerEmail: "",
+      redirect: false
     };
     this.onToken = this.onToken.bind(this);
   }
   componentDidMount = e => {
+    this.setState({ redirect: false });
     const tokenUrl = new URLSearchParams(document.location.search.substring(1));
     const token = tokenUrl.get("tkn");
     if (token) {
@@ -71,17 +74,58 @@ class BuyerCheckout extends Component {
       credentials: "include"
     })
       .then(res => {
-        window.location.replace("http://localhost:8081/");
+        const resData = res.json();
+        return resData;
+      })
+      .then(data => {
+        const { message } = data;
+        console.log("MESSAGE", message);
+        switch (message) {
+          case "Payment Success":
+            this.setState({ redirect: true });
+            break;
+          case "500":
+            this.setState({ error: true });
+            break;
+          default:
+            return;
+        }
       })
       .catch(err => {
         console.log("ERROR on TOKEN", err);
+        this.setState({ error: true });
       });
   }
 
   render() {
-    const { uriToken, paid, price, name } = this.state;
-    console.log("THIS TOKEN", uriToken);
-    console.log("THIS PAID", paid);
+    const { uriToken, paid, price, name, redirect, error } = this.state;
+
+    function CheckRedirect(props) {
+      const checkRedirect = props.isRedirect;
+      if (checkRedirect && !error) {
+        return (
+          <Redirect
+            to={{
+              pathname: "/paymentConfirmation",
+              error: false,
+              paid: true
+            }}
+          />
+        );
+      } else if (checkRedirect && error) {
+        return (
+          <Redirect
+            to={{
+              pathname: "/paymentConfirmation",
+              error: false,
+              paid: null
+            }}
+          />
+        );
+      } else {
+        return null;
+      }
+    }
     return (
       <div>
         <br />
@@ -106,7 +150,7 @@ class BuyerCheckout extends Component {
         <br />
         <br />
         {paid ? (
-          <div> Hello </div>
+          <h1> This Invoice Has Already Been Paid</h1>
         ) : (
           <div>
             <h2>ArtBreak Invoice</h2>
@@ -126,6 +170,7 @@ class BuyerCheckout extends Component {
             />
           </div>
         )}
+        <CheckRedirect isRedirect={this.state.redirect} />
       </div>
     );
   }
