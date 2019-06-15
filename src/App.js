@@ -48,7 +48,7 @@ class App extends Component {
           <Route exact path="/users/:id" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/newProduct" component={FileUpload} />
+          <Route path="/upload" component={FileUpload} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
           <Route path="/cart" component={ShoppingCart} />

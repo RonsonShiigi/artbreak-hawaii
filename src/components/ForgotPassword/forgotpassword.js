@@ -2,42 +2,6 @@ import React, { Component } from "react";
 import "./forgotpassword.css";
 
 import { Redirect } from "react-router";
-import { withStyles } from "@material-ui/styles";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-
-// custom-styled components
-const CssText = withStyles({
-  root: {
-    "& label.Mui-focused": {
-      color: "#D88A8A"
-    },
-    "& .MuiInput-underline: after": {
-      borderBottomColor: "#D88A8A"
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#D88A8A"
-      },
-      "&:hover fieldset": {
-        borderColor: "#D88A8A"
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#D88A8A"
-      }
-    }
-  }
-})(TextField);
-
-const CustomButton = withStyles({
-  root: {
-    backgroundColor: "#D88A8A",
-    "&:hover": {
-      backgroundColor: "#D88A8A"
-    }
-  }
-})(Button);
 
 class ForgotPassword extends Component {
   constructor(props) {
@@ -138,14 +102,15 @@ class ForgotPassword extends Component {
 
     return (
       <div className="container">
-        <Paper className="formHolder">
+        <div className="form-holder">
           <h1 className="forget-title">Forgetting something?</h1>
           <p className="pw-blurb">
             No problem. Just enter the email associated with your account below
             and we'll get you set up with a new password!
           </p>
           <form onSubmit={this.handleSubmit}>
-            <CssText
+            <input
+              type="text"
               id="email"
               label="email"
               key="email"
@@ -159,11 +124,11 @@ class ForgotPassword extends Component {
             <EmailValid eValid={this.state.isValid} />
             <EmailIsProvided eProvided={this.state.isProvided} />
             <EmailSent eSent={this.state.emailSent} />
-            <CustomButton type="submit" fullWidth={true} variant="contained">
+            <button type="submit" fullWidth={true} variant="contained">
               Submit
-            </CustomButton>
+            </button>
           </form>
-        </Paper>
+        </div>
       </div>
     );
   }
