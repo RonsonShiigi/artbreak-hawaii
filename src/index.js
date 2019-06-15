@@ -1,16 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-//redux shite
+//redux
 import ReduxThunk from "redux-thunk";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import reducers from "./reducers/reducers";
+
+require("typeface-roboto");
 
 const store = createStore(
   reducers,
