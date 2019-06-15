@@ -87,33 +87,22 @@ class Login extends Component {
       .then(res => {
         if (res.status === 401) {
           this.setState({ verifyEmailPw: false });
-          return;
         } else {
-          let data = res.clone().json();
-
+          const data = res.clone().json();
+          console.log("RES", data);
+          return data;
+        }
+      })
+      .then(data => {
+        console.log("DATA", data);
+        if (!data) {
+        } else {
           localStorage.setItem("userEmail", this.state.email);
           localStorage.setItem("userId", data.id);
           localStorage.setItem("username", data.username);
-
-          let userEmail = localStorage.getItem("userEmail");
-
-          axios
-            .get("http://localhost:8080/users")
-            .then(res => {
-              let users = res.data;
-              users.filter(user => {
-                if (user.email === userEmail) {
-                  localStorage.setItem("username", user.username);
-                  localStorage.setItem("userId", user.id);
-                }
-              });
-            })
-            .then(() => {
-              window.location.replace("http://localhost:8081");
-            })
-            .catch(err => {
-              console.log("Error", err);
-            });
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("userId", data.id);
+          window.location.replace("http://localhost:8081");
         }
       })
       .catch(err => {
