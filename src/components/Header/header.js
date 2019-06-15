@@ -72,12 +72,14 @@ class Header extends Component {
           {localStorage.getItem("username") === null ? (
             <ul>
               <li>
+                <h3 className="login-welcome">You are not logged in.</h3>
+              </li>
+              <li>
                 <Link to="/login">Log In</Link>
               </li>
               <li>
                 <Link to="/register">Sign Up</Link>
               </li>
-              <li>BROWSE</li>
             </ul>
           ) : (
             <ul>
@@ -87,7 +89,6 @@ class Header extends Component {
               <li>
                 <Link to="/messages">My Messages</Link>
               </li>
-              <li>BROWSE</li>
               <li>
                 <h3 className="login-welcome">
                   Logged in as {this.getUsername()}
