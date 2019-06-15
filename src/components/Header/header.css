@@ -23,6 +23,15 @@ ul li {
   list-style-type: none;
   display: inline-block;
 }
+
+.logged-out {
+  margin: 0;
+  padding: 15px;
+  position: relative;
+  left: 0;
+  top: -1vh;
+}
+
 .login-welcome {
   padding: 20px;
   color: #c2bfbf;
