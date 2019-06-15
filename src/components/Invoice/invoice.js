@@ -50,6 +50,26 @@ class Invoice extends Component {
     // console.log("ijen", this.state);
     return (
       <div className="invoice-form">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <h1>Send Invoice to Buyer</h1>
         <form onSubmit={this.handleSubmit}>
           <TextField

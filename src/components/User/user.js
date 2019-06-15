@@ -51,7 +51,7 @@ class User extends Component {
     const style = this.state.editHidden === true ? { display: "none" } : {};
 
     return (
-      <div className="profile-container">
+      <div className="container">
         <div className="profile-cover" />
         <div className="profile-content">
           <div className="user-head">
@@ -74,7 +74,6 @@ class User extends Component {
               <div className="date-info">join date: {data.created_at}</div>
               <div className="user-blurb">
                 <p>{data.profileblurb}</p>
-                <p>{data.contactlinks}</p>
                 {localStorage.userId === this.props.match.params.id ? (
                   <div className="edit-holder">
                     <Edit onClick={this.handleChange} />

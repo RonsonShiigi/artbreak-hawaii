@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactModal from "react-modal";
 
 import "./gallery-view.css";
 

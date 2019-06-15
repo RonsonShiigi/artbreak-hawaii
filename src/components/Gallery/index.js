@@ -15,8 +15,7 @@ const styles = theme => ({
   images: {
     marginTop: theme.spacing(8),
     display: "flex",
-    flexWrap: "wrap",
-    width: "100%"
+    width: "100vh"
   },
   imageWrapper: {
     position: "relative",
@@ -169,7 +168,6 @@ class Gallery extends React.Component {
               <ButtonBase
                 key={product.id}
                 className={classes.imageWrapper}
-                onClick={this.handleOpenModal}
                 style={{
                   width: product.width
                 }}

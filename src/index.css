@@ -4,12 +4,10 @@ a {
   text-transform: uppercase;
   font-weight: normal;
 }
-
 a:hover {
   color: #ffffff;
   transition: color 0.25s ease-in;
 }
-
 body {
   margin: 0;
   font-family: "Roboto", "Helvetica Neue", sans-serif;
@@ -21,7 +19,6 @@ body {
   overflow-x: hidden;
   background-color: #252525;
 }
-
 .body-container {
   display: flex;
   flex-direction: column;
@@ -41,21 +38,21 @@ body {
   justify-content: center;
   z-index: -1;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.formHolder {
+.form-holder {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-content: center;
   position: absolute;
-  top: 20vh;
-  width: 30vw;
+  top: 15vh;
+  width: 25vw;
   background-color: #eee;
   padding: 2vw;
+  height: 100%;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 h1 {
@@ -65,26 +62,19 @@ h1 {
   padding: 0;
   font-size: 45px;
 }
-
 h2 {
   text-transform: uppercase;
   font-size: 20px;
 }
-
 .header-title {
   color: #c5cfc6;
   padding-left: 15px;
   letter-spacing: 10px;
 }
-
 .form-title {
   color: #252525;
   padding-left: 15px;
-  letter-spacing: 10px;
-}
-
-form {
-  width: 25vw;
+  letter-spacing: 5px;
 }
 .glitch-cover {
   color: white;
@@ -106,7 +96,6 @@ form {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim 2s infinite linear alternate-reverse;
 }
-
 .glitch-cover:before {
   content: attr(data-text);
   position: absolute;
@@ -203,7 +192,6 @@ form {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim 2s infinite linear alternate-reverse;
 }
-
 @keyframes noise-anim-2 {
   0% {
     clip: rect(35px, 9999px, 63px, 0);
@@ -281,34 +269,56 @@ form {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
-
 .gallery-holder {
   position: absolute;
   top: 100vh;
   left: 0;
-  padding-top: 0;
   padding: 5vw;
   background-color: #252525;
   width: 100vw;
   z-index: 2;
 }
+form {
+  width: 100%;
+}
 input {
-  width: 100px;
-  height: 25px;
-  outline: none;
-  border: 1px solid #eeeeee;
-  background: #252525;
-  color: #eeeeee;
-  text-shadow: 0 0 10px rgb(73, 13, 25);
-  padding: 0 80px 0 20px;
-  transition: all 1s;
-  opacity: 0.5;
-  z-index: 5;
-  margin-left: 50px;
-  font-weight: bolder;
-  letter-spacing: 0.1em;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #232323;
+  box-sizing: border-box;
+  color: #252525;
+  display: block;
+  outline: none !important;
+  margin-bottom: 30px;
+  font-size: 20px;
+  padding-bottom: 15px;
+  padding-left: 50px;
+  width: 100%;
 }
 
+button {
+  background-color: #252525;
+  border: 0;
+  border-radius: 25px;
+  display: block;
+  font-size: 20px;
+  height: 56px;
+  margin: 0 auto;
+  width: 100%;
+  outline: none !important;
+  color: #eee;
+}
+
+button:active {
+  box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.3);
+}
+
+button.animate {
+  opacity: 0;
+  transform: translateY(-150px) scale(20);
+  transition: width 250ms 200ms, transform 350ms 1350ms, opacity 350ms 1550ms;
+  width: 56px;
+}
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   body {
     display: flex;
@@ -318,4 +328,15 @@ input {
   .glitch-cover {
     font-size: 75px;
   }
+}
+.svg-icon {
+  left: 0;
+  width: 25px;
+  position: relative;
+  top: 30px;
+}
+
+.error-div {
+  padding-bottom: 5vh;
+  color: #df3636;
 }

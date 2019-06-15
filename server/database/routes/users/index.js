@@ -97,7 +97,15 @@ router.get("/:id", (req, res) => {
   })
     .fetch()
     .then(user => {
-      return res.json(user);
+      const userData = user.toJSON();
+      const userDataObj = {
+        user_id: userData.id,
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        username: userData.username
+      };
+      console.log("USERDATA", userDataObj);
+      return res.json(userDataObj);
     })
     .catch(err => {
       console.log(err);

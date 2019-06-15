@@ -78,5 +78,33 @@ router.get("/", (req, res) => {
       res.sendStatus(500);
     });
 });
+router.get("/:token", (req, res) => {
+  const invToken = req.params.token;
+  if (!invToken) {
+    res.json({ message: "Invalid link" });
+  } else {
+    Invoice.where({ token: invToken })
+      .fetchAll()
+      .then(inv => {
+        const invoice = inv.toJSON();
+        if (!invoice[0]) {
+          res.json({ message: "No Invoice Found" });
+        } else {
+          const invData = {
+            user_id: invoice[0].user_id,
+            paid: invoice[0].paid,
+            price: invoice[0].price,
+            description: invoice[0].description
+          };
+          console.log("INVOICE DATA", invData);
+          return res.json(invData);
+        }
+      })
+      .catch(err => {
+        console.log("ERROR", err);
+        res.json({ message: "500" });
+      });
+  }
+});
 
 module.exports = router;

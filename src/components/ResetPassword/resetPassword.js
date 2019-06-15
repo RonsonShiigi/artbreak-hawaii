@@ -157,7 +157,7 @@ class ResetPassword extends Component {
 
     return (
       <div className="container">
-        <Paper className="formHolder">
+        <Paper className="form-holder">
           <h1 className="form-title">Reset Password</h1>
           <TokenExpired token={tokenExpired} />
           <form onSubmit={this.handleSubmit}>

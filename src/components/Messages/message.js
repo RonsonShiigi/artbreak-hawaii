@@ -18,6 +18,7 @@ class ChatScreen extends Component {
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.sendTypingEvent = this.sendTypingEvent.bind(this);
+    // this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this);
   }
 
   sendTypingEvent() {
@@ -33,52 +34,73 @@ class ChatScreen extends Component {
     });
   }
 
-  componentDidMount() {
-    // this.setState({
-    //   currentUser: localStorage.getItem("username")
-    // });
-    const chatManager = new Chatkit.ChatManager({
-      instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
-      userId: localStorage.getItem("username"),
-      tokenProvider: new Chatkit.TokenProvider({
-        url: "http://localhost:8080/authenticate"
-      })
-    });
+  // onUsernameSubmitted(username) {
 
-    chatManager
-      .connect()
-      .then(currentUser => {
-        this.setState({ currentUser });
-        return currentUser.subscribeToRoom({
-          roomId: "19438031",
-          messageLimit: 100,
-          hooks: {
-            onMessage: message => {
-              this.setState({
-                messages: [...this.state.messages, message]
-              });
-            },
-            onUserStartedTyping: user => {
-              this.setState({
-                usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name]
-              });
-            },
-            onUserStoppedTyping: user => {
-              this.setState({
-                usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
-                  username => username !== user.name
-                )
-              });
-            },
-            onPresenceChange: () => this.forceUpdate(),
-            onUserJoined: () => this.forceUpdate()
-          }
+  // }
+
+  componentDidMount() {
+    const localUsername = localStorage.getItem("username");
+    fetch("http://localhost:8080/chatusers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username: localUsername })
+    })
+      .then(response => {
+        const chatManager = new Chatkit.ChatManager({
+          instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
+          userId: localStorage.getItem("username"),
+          tokenProvider: new Chatkit.TokenProvider({
+            url: "http://localhost:8080/authenticate"
+          })
         });
-      })
-      .then(currentRoom => {
-        this.setState({ currentRoom });
+
+        chatManager
+          .connect()
+          .then(currentUser => {
+            this.setState({ currentUser });
+            return currentUser.subscribeToRoom({
+              roomId: "19438031",
+              messageLimit: 100,
+              hooks: {
+                onMessage: message => {
+                  this.setState({
+                    messages: [...this.state.messages, message]
+                  });
+                },
+                onUserStartedTyping: user => {
+                  this.setState({
+                    usersWhoAreTyping: [
+                      ...this.state.usersWhoAreTyping,
+                      user.name
+                    ]
+                  });
+                },
+                onUserStoppedTyping: user => {
+                  this.setState({
+                    usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                      username => username !== user.name
+                    )
+                  });
+                },
+                onPresenceChange: () => this.forceUpdate(),
+                onUserJoined: () => this.forceUpdate()
+              }
+            });
+          })
+          .then(currentRoom => {
+            this.setState({ currentRoom });
+          })
+          .catch(error => console.error("error", error));
       })
       .catch(error => console.error("error", error));
+    console.log("anything");
+    this.setState({
+      currentUser: localStorage.getItem("username")
+    });
+    // this.onUsernameSubmitted(this.state.currentUser);
+    console.log("this.state curr user", this.state.currentUser);
   }
 
   render() {
