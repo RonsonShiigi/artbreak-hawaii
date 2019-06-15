@@ -6,11 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 function Dashtabs() {
   function TabContainer(props) {
-    return (
-      <Typography component="div" className="tab-container">
-        {props.children}
-      </Typography>
-    );
+    return <div className="tab-container">{props.children}</div>;
   }
   const [index, onChange] = useState(0);
 

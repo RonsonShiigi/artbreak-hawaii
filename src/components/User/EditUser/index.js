@@ -5,7 +5,6 @@ class EditUser extends Component {
     super(props);
     this.state = {
       avatarurl: "",
-      contactlinks: "",
       profileblurb: "",
       user_id: ""
     };
@@ -47,7 +46,7 @@ class EditUser extends Component {
             onChange={this.handleChange}
             className="blurb-input"
           />
-          <input type="submit" variant="outlined" />
+          <button type="submit">AY</button>
         </form>
       </React.Fragment>
     );

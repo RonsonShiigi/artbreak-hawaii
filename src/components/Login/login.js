@@ -207,9 +207,7 @@ class Login extends Component {
             <EmailPWExists eExists={verifyEmailPw} />
             <br />
 
-            <button type="submit" fullWidth={true} variant="contained">
-              Submit
-            </button>
+            <button type="submit">Submit</button>
             <br />
             <Link to="/forgotPassword">Forgot your password?</Link>
           </form>
