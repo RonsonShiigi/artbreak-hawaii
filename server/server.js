@@ -102,7 +102,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/users", (req, res) => {
+app.post("/chatusers", (req, res) => {
   const { username } = req.body;
   chatkit
     .createUser({
