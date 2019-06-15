@@ -47,6 +47,7 @@ class Invoice extends Component {
   };
 
   render() {
+    // console.log("ijen", this.state);
     return (
       <div className="invoice-form">
         <br />

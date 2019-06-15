@@ -75,11 +75,12 @@ class FileUpload extends Component {
             })
             .catch(err => {
               console.log("error in creating a new product", err);
+              window.location.replace("http://localhost:8081/errorNewProduct");
             });
         })
 
         .catch(error => {
-          // handle your error
+          window.location.replace("http://localhost:8081/errorNewProduct");
         });
     }
 

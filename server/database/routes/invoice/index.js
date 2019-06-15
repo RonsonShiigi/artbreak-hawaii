@@ -67,6 +67,17 @@ router.post("/", (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  return new Invoice()
+    .fetchAll()
+    .then(invoices => {
+      return res.json(invoices);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 router.get("/:token", (req, res) => {
   const invToken = req.params.token;
   if (!invToken) {
