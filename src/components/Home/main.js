@@ -16,7 +16,7 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="body-container">
+        <div className="container">
           <Cover />
           <div className="gallery-holder">
             <h1 className="header-title">new & popular</h1>

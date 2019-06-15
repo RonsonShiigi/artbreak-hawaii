@@ -8,6 +8,9 @@ function Cover() {
       <div className="glitch-cover" data-text="ARTBREAK.">
         ARTBREAK.
       </div>
+      <div className="stmt">
+        <h1>PEEKABOO, BITCH!!!</h1>
+      </div>
     </div>
   );
 }

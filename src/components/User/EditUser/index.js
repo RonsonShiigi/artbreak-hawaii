@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Edit from "@material-ui/icons/Edit";
 
 class EditUser extends Component {
   constructor(props) {
@@ -42,19 +41,11 @@ class EditUser extends Component {
         <form onSubmit={this.editUser} className="user-edit">
           <input
             type="text"
-            placeholder="eeeHHHH"
+            placeholder={JSON.stringify(this.state.profileblurb)}
             name="profileblurb"
             value={this.state.profileblurb}
             onChange={this.handleChange}
             className="blurb-input"
-          />
-          <input
-            type="text"
-            placeholder="contact links"
-            name="contactlinks"
-            value={this.state.contactlinks}
-            onChange={this.handleChange}
-            className="contact-input"
           />
           <input type="submit" variant="outlined" />
         </form>

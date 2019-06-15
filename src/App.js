@@ -12,6 +12,9 @@ import Dashboard from "./components/Dashboard/dashboard";
 import Messages from "./components/Messages/message";
 import ForgotPassword from "./components/ForgotPassword/forgotpassword";
 import ResetPassword from "./components/ResetPassword/resetPassword";
+import Invoice from "./components/Invoice/invoice";
+import Invoice_Confirmation from "./components/Invoice/invoice_confirmation";
+import Error from "./components/404";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -26,6 +29,8 @@ import { getProducts } from "./actions/actions";
 import { connect } from "react-redux";
 import GalleryView from "./components/Gallery/IndividualView/gallery-view";
 
+require("typeface-roboto");
+
 class App extends Component {
   componentDidMount() {
     this.props.getProducts();
@@ -37,12 +42,13 @@ class App extends Component {
         <Header />
 
         <Switch>
+          <Route path="/404" component={Error} />
           <Route exact path="/" component={Main} />
           <Route exact path="/products/:id" component={GalleryView} />
           <Route exact path="/users/:id" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/newProduct" component={FileUpload} />
+          <Route path="/upload" component={FileUpload} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
           <Route path="/cart" component={ShoppingCart} />
@@ -52,6 +58,8 @@ class App extends Component {
           <Route path="/messages" component={Messages} />
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/resetPassword" component={ResetPassword} />
+          <Route path="/invoice" component={Invoice} />
+          <Route path="/invoiceConfirmation" component={Invoice_Confirmation} />
         </Switch>
       </React.Fragment>
     );

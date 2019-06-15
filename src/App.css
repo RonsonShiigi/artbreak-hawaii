@@ -5,6 +5,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 .container {
   flex: 1 0 auto;
@@ -18,7 +19,6 @@ body {
   bottom: 0;
   width: 100%;
 }
-
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   body {
     display: flex;

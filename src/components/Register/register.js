@@ -7,37 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 
-//custom-styled components
-const CssText = withStyles({
-  root: {
-    "& label.Mui-focused": {
-      color: "#D88A8A"
-    },
-    "& .MuiInput-underline: after": {
-      borderBottomColor: "#D88A8A"
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#D88A8A"
-      },
-      "&:hover fieldset": {
-        borderColor: "#D88A8A"
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#D88A8A"
-      }
-    }
-  }
-})(TextField);
-const CustomButton = withStyles({
-  root: {
-    backgroundColor: "#D88A8A",
-    "&:hover": {
-      backgroundColor: "#ffffff"
-    }
-  }
-})(Button);
-
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -140,14 +109,24 @@ class Register extends Component {
     }
 
     function EmailError(props) {
-      return <div>Email already in use, Please enter another email..</div>;
+      return (
+        <div className="error-div">
+          Email already in use, Please enter another email..
+        </div>
+      );
     }
 
     function EmailInvalid(props) {
-      return <div>Please provide a valid email address</div>;
+      return (
+        <div className="error-div">Please provide a valid email address</div>
+      );
     }
     function PasswordError(props) {
-      return <div>Password must be between 8-16 characters</div>;
+      return (
+        <div className="error-div">
+          Password must be between 8-16 characters
+        </div>
+      );
     }
 
     function EmailExists(props) {
@@ -197,12 +176,16 @@ class Register extends Component {
 
     return (
       <div className="container">
-        <Paper className="formHolder">
+        <div className="form-holder">
           <h1 className="form-title">Register</h1>
           <form onSubmit={this.handleSubmit}>
-            <CssText
+            <svg class="svg-icon" viewBox="0 0 20 20">
+              <path d="M16.999,4.975L16.999,4.975C16.999,4.975,16.999,4.975,16.999,4.975c-0.419-0.4-0.979-0.654-1.604-0.654H4.606c-0.584,0-1.104,0.236-1.514,0.593C3.076,4.928,3.05,4.925,3.037,4.943C3.034,4.945,3.035,4.95,3.032,4.953C2.574,5.379,2.276,5.975,2.276,6.649v6.702c0,1.285,1.045,2.329,2.33,2.329h10.79c1.285,0,2.328-1.044,2.328-2.329V6.649C17.724,5.989,17.441,5.399,16.999,4.975z M15.396,5.356c0.098,0,0.183,0.035,0.273,0.055l-5.668,4.735L4.382,5.401c0.075-0.014,0.145-0.045,0.224-0.045H15.396z M16.688,13.351c0,0.712-0.581,1.294-1.293,1.294H4.606c-0.714,0-1.294-0.582-1.294-1.294V6.649c0-0.235,0.081-0.445,0.192-0.636l6.162,5.205c0.096,0.081,0.215,0.122,0.334,0.122c0.118,0,0.235-0.041,0.333-0.12l6.189-5.171c0.099,0.181,0.168,0.38,0.168,0.6V13.351z" />
+            </svg>
+            <input
+              type="text"
               id="email"
-              label="email"
+              placeholder="email"
               key="email"
               name="email"
               onChange={this.handleChange}
@@ -213,9 +196,33 @@ class Register extends Component {
             />
             <EmailExists emailExists={this.state.emailExist} />
             <EmailValid emailInvalid={this.state.emailValid} />
-            <CssText
+            <svg
+              class="svg-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="44"
+              height="40"
+              viewBox="0 0 44 40"
+            >
+              <g
+                stroke="#252525"
+                fill="none"
+                stroke-width="3.538"
+                transform="translate(0 -1012.362)"
+              >
+                <ellipse
+                  ry="8.09"
+                  rx="8.244"
+                  cy="1022.221"
+                  cx="21.555"
+                  stroke-linecap="round"
+                />
+                <path d="M1.858 1046.4c-.79 4.74 3.805 4.11 3.805 4.11H37.88s4.846.936 4.312-3.854c-.533-4.79-6.076-10.937-20.04-11.043-13.964-.106-19.504 6.047-20.294 10.786z" />
+              </g>
+            </svg>
+            <input
+              type="text"
               id="username"
-              label="username"
+              placeholder="username"
               key="username"
               name="username"
               onChange={this.handleChange}
@@ -226,47 +233,55 @@ class Register extends Component {
             />
             <UsernameExists userExists={this.state.usernameExist} />
             <div />
-            <CssText
+            <svg
+              class="svg-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="44"
+              height="46"
+              viewBox="0 0 44 46"
+            >
+              <g
+                transform="translate(-28.15 -974.678)"
+                stroke="#252525"
+                fill="none"
+                stroke-width="3.509"
+              >
+                <rect
+                  ry="3.136"
+                  y="995.18"
+                  x="29.903"
+                  height="23.743"
+                  width="40.491"
+                  stroke-linecap="round"
+                />
+                <path d="M49.386 1004.406v4.788" stroke-linecap="round" />
+                <path d="M37.073 994.83s-1.39-18.398 12.97-18.398c14.36 0 12.207 18.397 12.207 18.397" />
+              </g>
+            </svg>
+            <input
+              type="text"
               id="password"
-              label="password"
+              placeholder="password"
               key="password"
               name="password"
               onChange={this.handlePWChange}
               margin="normal"
               fullWidth={true}
               variant="outlined"
+              type="password"
             />
             <PasswordValid passwordInvalid={this.state.passwordValid} />
-            <CssText
-              id="first_name"
-              label="first name"
-              key="first_name"
-              name="first_name"
-              onChange={this.handleChange}
-              margin="normal"
-              fullWidth={true}
-              variant="outlined"
-            />
-            <CssText
-              id="last_name"
-              label="last name"
-              key="last_name"
-              name="last_name"
-              onChange={this.handleChange}
-              margin="normal"
-              fullWidth={true}
-              variant="outlined"
-            />
-            <CustomButton
+
+            <button
               disabled={submitDisabled()}
               type="submit"
               variant="contained"
               fullWidth={true}
             >
               Submit
-            </CustomButton>
+            </button>
           </form>
-        </Paper>
+        </div>
       </div>
     );
   }

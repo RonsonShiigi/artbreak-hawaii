@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./gallery-view.css";
 
-class GalleryView extends Component {
+class TestComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -77,4 +77,4 @@ class GalleryView extends Component {
   }
 }
 
-export default GalleryView;
+export default TestComponent;
