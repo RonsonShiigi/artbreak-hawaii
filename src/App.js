@@ -14,6 +14,7 @@ import ForgotPassword from "./components/ForgotPassword/forgotpassword";
 import ResetPassword from "./components/ResetPassword/resetPassword";
 import Invoice from "./components/Invoice/invoice";
 import Invoice_Confirmation from "./components/Invoice/invoice_confirmation";
+import Error from "./components/404";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -39,6 +40,7 @@ class App extends Component {
         <Header />
 
         <Switch>
+          <Route path="/404" component={Error} />
           <Route exact path="/" component={Main} />
           <Route exact path="/products/:id" component={GalleryView} />
           <Route exact path="/users/:id" component={User} />

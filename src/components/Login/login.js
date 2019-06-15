@@ -206,7 +206,7 @@ class Login extends Component {
             </CustomButton>
             <br />
             <br />
-            <Link to="/forgotPassword">Forgot Password</Link>
+            <Link to="/forgotPassword">Forgot your password?</Link>
           </form>
         </Paper>
       </div>

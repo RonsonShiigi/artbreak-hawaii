@@ -82,11 +82,10 @@ class Delete extends Component {
 
   render() {
     return (
-      <div className="container">
+      <React.Fragment>
         <h1 className="header-title">Are You Sure You Want To Delete This?</h1>
-
         <CustomButton onClick={this.deleteFile}>Delete</CustomButton>
-      </div>
+      </React.Fragment>
     );
   }
 }

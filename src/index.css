@@ -4,12 +4,10 @@ a {
   text-transform: uppercase;
   font-weight: normal;
 }
-
 a:hover {
   color: #ffffff;
   transition: color 0.25s ease-in;
 }
-
 body {
   margin: 0;
   font-family: "Roboto", "Helvetica Neue", sans-serif;
@@ -21,7 +19,6 @@ body {
   overflow-x: hidden;
   background-color: #252525;
 }
-
 .body-container {
   display: flex;
   flex-direction: column;
@@ -41,12 +38,10 @@ body {
   justify-content: center;
   z-index: -1;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 .formHolder {
   display: flex;
   flex-direction: column;
@@ -57,7 +52,6 @@ code {
   background-color: #eee;
   padding: 2vw;
 }
-
 h1 {
   font-weight: bold;
   text-transform: uppercase;
@@ -65,26 +59,19 @@ h1 {
   padding: 0;
   font-size: 45px;
 }
-
 h2 {
   text-transform: uppercase;
   font-size: 20px;
 }
-
 .header-title {
   color: #c5cfc6;
   padding-left: 15px;
   letter-spacing: 10px;
 }
-
 .form-title {
   color: #252525;
   padding-left: 15px;
   letter-spacing: 10px;
-}
-
-form {
-  width: 25vw;
 }
 .glitch-cover {
   color: white;
@@ -106,7 +93,6 @@ form {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim 2s infinite linear alternate-reverse;
 }
-
 .glitch-cover:before {
   content: attr(data-text);
   position: absolute;
@@ -203,7 +189,6 @@ form {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim 2s infinite linear alternate-reverse;
 }
-
 @keyframes noise-anim-2 {
   0% {
     clip: rect(35px, 9999px, 63px, 0);
@@ -281,22 +266,23 @@ form {
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
-
 .gallery-holder {
   position: absolute;
   top: 100vh;
   left: 0;
-  padding-top: 0;
   padding: 5vw;
   background-color: #252525;
   width: 100vw;
   z-index: 2;
 }
+form {
+  min-width: 135px;
+}
 input {
-  width: 100px;
+  min-width: 135px;
   height: 25px;
   outline: none;
-  border: 1px solid #eeeeee;
+  border: none;
   background: #252525;
   color: #eeeeee;
   text-shadow: 0 0 10px rgb(73, 13, 25);
@@ -308,7 +294,6 @@ input {
   font-weight: bolder;
   letter-spacing: 0.1em;
 }
-
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   body {
     display: flex;

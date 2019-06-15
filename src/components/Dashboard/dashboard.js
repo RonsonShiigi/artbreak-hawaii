@@ -20,7 +20,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className="dashboard-container">
+      <div className="container">
         {localStorage.getItem("username") === null ? (
           <div className="not-logged-in">
             <h1>log tf in, heathen</h1>
@@ -35,13 +35,11 @@ class Dashboard extends Component {
                 </li>
                 <li>My Uploads</li>
                 <li>My Favorites</li>
-                <li>My Orders</li>
+                <li>My Orders/Invoices</li>
               </ul>
             </div>
             <div className="right-nav">
-              <div className="recents-div">
-                <Dashtabs />
-              </div>
+              <Dashtabs />
             </div>
           </React.Fragment>
         )}
