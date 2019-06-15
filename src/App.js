@@ -29,6 +29,8 @@ import { getProducts } from "./actions/actions";
 import { connect } from "react-redux";
 import GalleryView from "./components/Gallery/IndividualView/gallery-view";
 
+require("typeface-roboto");
+
 class App extends Component {
   componentDidMount() {
     this.props.getProducts();
