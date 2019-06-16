@@ -4,6 +4,8 @@ import MessageList from "./components/MessageList";
 import SendMessageForm from "./components/SendMessageForm";
 import TypingIndicator from "./components/TypingIndicator";
 import WhosOnlineList from "./components/WhosOnlineList";
+import RoomList from "./components/RoomList";
+
 import { ActionViewColumn } from "material-ui/svg-icons";
 import { wrap } from "module";
 
@@ -14,11 +16,12 @@ class ChatScreen extends Component {
       currentUser: {},
       currentRoom: {},
       messages: [],
-      usersWhoAreTyping: []
+      usersWhoAreTyping: [],
+      joinableRooms: [],
+      joinedRooms: []
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.sendTypingEvent = this.sendTypingEvent.bind(this);
-    // this.onUsernameSubmitted = this.onUsernameSubmitted.bind(this);
   }
 
   sendTypingEvent() {
@@ -33,10 +36,6 @@ class ChatScreen extends Component {
       roomId: this.state.currentRoom.id
     });
   }
-
-  // onUsernameSubmitted(username) {
-
-  // }
 
   componentDidMount() {
     const localUsername = localStorage.getItem("username");
@@ -60,6 +59,18 @@ class ChatScreen extends Component {
           .connect()
           .then(currentUser => {
             this.setState({ currentUser });
+
+            // GETTING ROOMS
+            currentUser
+              .getJoinableRooms()
+              .then(joinedRooms => {
+                this.setState({
+                  joinedRooms: currentUser.rooms
+                });
+              })
+              .catch(err => console.log("error on joinableRooms: ", err));
+
+            // GENERAL ROOM
             return currentUser.subscribeToRoom({
               roomId: "19438031",
               messageLimit: 100,
@@ -95,12 +106,9 @@ class ChatScreen extends Component {
           .catch(error => console.error("error", error));
       })
       .catch(error => console.error("error", error));
-    console.log("anything");
     this.setState({
       currentUser: localStorage.getItem("username")
     });
-    // this.onUsernameSubmitted(this.state.currentUser);
-    console.log("this.state curr user", this.state.currentUser);
   }
 
   render() {
@@ -123,13 +131,15 @@ class ChatScreen extends Component {
       },
       whosOnlineListContainer: {
         width: "15%",
-        padding: 20,
+        paddingTop: 50,
+        paddingLeft: 10,
         backgroundColor: "#2c303b",
         color: "white",
         flexDirection: "column"
       },
       chatListContainer: {
-        padding: 20,
+        paddingTop: 50,
+        paddingLeft: 15,
         display: "flex",
         height: "auto",
         flexDirection: "column",
@@ -151,6 +161,10 @@ class ChatScreen extends Component {
               currentUser={this.state.currentUser}
               users={this.state.currentRoom.users}
             />
+            <RoomList
+              rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
+            />
+            {/* <button onClick="privateChat()">jew</button> */}
           </aside>
           <section style={styles.chatListContainer}>
             <MessageList
