@@ -11,8 +11,6 @@ class User extends Component {
     super(props);
     this.state = {
       username: "",
-      first_name: "",
-      last_name: "",
       profileblurb: "",
       contactlinks: "",
       avatarurl: "",
@@ -36,8 +34,6 @@ class User extends Component {
       .then(data => {
         this.setState({
           username: data.username,
-          first_name: data.first_name,
-          last_name: data.last_name,
           profileblurb: data.profileblurb,
           contactlinks: data.contactlinks,
           avatarurl: data.avatarurl,

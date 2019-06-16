@@ -33,6 +33,9 @@ class Dashboard extends Component {
                 <li>
                   <Link to={`users/${localStorage.userId}`}>My Profile</Link>
                 </li>
+                <li>
+                  <Link to="/upload">Add New Piece</Link>
+                </li>
                 <li>My Uploads</li>
                 <li>My Favorites</li>
                 <li>My Orders/Invoices</li>

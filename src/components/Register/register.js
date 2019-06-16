@@ -12,8 +12,6 @@ class Register extends Component {
     this.state = {
       email: "",
       password: "",
-      first_name: "",
-      last_name: "",
       username: "",
       emailExist: false,
       emailValid: true,
@@ -79,8 +77,6 @@ class Register extends Component {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              first_name: this.state.first_name,
-              last_name: this.state.last_name,
               password: this.state.password,
               username: this.state.username,
               email: emailLowercase
