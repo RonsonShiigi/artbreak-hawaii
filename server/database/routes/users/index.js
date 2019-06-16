@@ -94,7 +94,8 @@ router.get("/:id", (req, res) => {
       const userData = user.toJSON();
       const userDataObj = {
         user_id: userData.id,
-        username: userData.username
+        first_name: userData.first_name,
+        stripeSignUp: userData.stripe_signup
       };
       console.log("USERDATA", userDataObj);
       return res.json(userDataObj);
