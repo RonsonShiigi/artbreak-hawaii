@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
       table.string("stripe_id");
       table.string("profileblurb");
       table.string("avatarurl");
+      table.string("stripe_signup");
       table.string("resetPasswordToken");
       table.string("resetPasswordExpires");
       table.timestamp("created_at").defaultTo(knex.raw("now()"));

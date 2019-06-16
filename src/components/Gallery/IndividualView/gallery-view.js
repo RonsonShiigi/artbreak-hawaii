@@ -12,7 +12,6 @@ class GalleryView extends Component {
       description: "",
       image_url: "",
       user_id: 0,
-      price: "",
       created_at: 0,
       updated_at: 0
     };
@@ -30,7 +29,6 @@ class GalleryView extends Component {
           description: data.description,
           image_url: data.image_url,
           user_id: data.user_id,
-          price: data.price,
           created_at: data.created_at,
           updated_at: data.updated_at
         });
@@ -54,7 +52,6 @@ class GalleryView extends Component {
           <div className="img-info">
             <h1>{data.title}</h1>
             {data.description}
-            <br />${data.price}
             <br />
             {data.created_at}
             <br />

@@ -24,20 +24,24 @@ router.route("/").post((req, res) => {
       } else {
         const bodyObj = JSON.parse(body);
         const stripeId = bodyObj.stripe_user_id;
+        console.log("STRIPE", stripeId);
         new req.database.User()
           .where({ id: userid })
           .fetch()
           .then(stripeid => {
             new User({ id: userid })
-              .save({ stripe_id: stripeId })
+              .save({ stripe_id: stripeId, stripe_signup: true })
+              .then(() => {
+                res.json({ message: "Success" });
+              })
               .catch(err => {
                 console.log(err);
-                res.sendStatus(500);
+                res.json({ message: "500" });
               });
           })
           .catch(err => {
             console.log(err);
-            res.sendStatus(500);
+            res.json({ message: "500" });
           });
       }
     }

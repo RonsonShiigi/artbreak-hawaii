@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
@@ -15,7 +15,8 @@ const styles = theme => ({
   images: {
     marginTop: theme.spacing(8),
     display: "flex",
-    width: "100vh"
+    position: "relative",
+    left: "0"
   },
   imageWrapper: {
     position: "relative",
@@ -26,7 +27,7 @@ const styles = theme => ({
     width: "30vh",
     [theme.breakpoints.down("sm")]: {
       width: "100% !important",
-      height: 100
+      height: "100%"
     },
     "&:hover": {
       zIndex: 1
@@ -121,7 +122,6 @@ class Gallery extends React.Component {
   }
 
   viewImg() {
-    console.log("pls view img");
     this.setState({ show: !this.state.show });
     console.log(this.state.show);
   }
@@ -145,7 +145,7 @@ class Gallery extends React.Component {
       });
     }
 
-    const style = this.state.show === true ? { display: "none" } : {};
+    // const style = this.state.show === true ? { display: "none" } : {};
 
     return (
       <div className={classes.root} component="section">

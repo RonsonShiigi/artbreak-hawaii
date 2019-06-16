@@ -5,7 +5,10 @@ import { Route, Redirect } from "react-router-dom";
 class StripeRedirect extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      redirect: false,
+      error: false
+    };
   }
 
   componentDidMount() {
@@ -30,8 +33,22 @@ class StripeRedirect extends Component {
       method: "POST",
       credentials: "include"
     })
-      .then(() => {
-        ///some code to store state and renderdirect to antoehr page.
+      .then(res => {
+        const data = res.json();
+        return data;
+      })
+      .then(msgData => {
+        const message = msgData.message;
+        switch (message) {
+          case "Success":
+            this.setState({ redirect: true });
+            break;
+          case "500":
+            break;
+          default:
+            return null;
+        }
+        console.log("Data", msgData);
       })
       .catch(err => {
         console.log("ERROR", err);
@@ -39,7 +56,15 @@ class StripeRedirect extends Component {
   }
 
   render() {
-    return <div>{/* <Redirect to="/" /> */}</div>;
+    const { redirect, error } = this.state;
+    console.log("THIS", redirect);
+    return (
+      <div>
+        {redirect ? (
+          <Redirect to={{ pathname: "/Dashboard", error: error }} />
+        ) : null}
+      </div>
+    );
   }
 }
 
