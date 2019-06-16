@@ -26,9 +26,8 @@ class SendMessageForm extends Component {
   render() {
     const styles = {
       container: {
-        padding: 20,
-        borderTop: "1px #4C758F solid",
-        marginBottom: 20
+        paddingTop: 25,
+        borderTop: "1px #4C758F solid"
       },
       form: {
         display: "flex",
@@ -42,7 +41,9 @@ class SendMessageForm extends Component {
         border: "none",
         textShadow: "none",
         flex: 1,
-        fontSize: 16
+        fontSize: 16,
+        padding: 0,
+        paddingLeft: 20
       }
     };
     return (
@@ -55,6 +56,7 @@ class SendMessageForm extends Component {
               onChange={this.onChange}
               value={this.state.text}
               style={styles.input}
+              autoFocus
             />
           </form>
         </div>
