@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
     table.string("description");
     table.string("image_url");
     table.integer("user_id");
-    table.decimal("price");
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
     table.timestamp("updated_at");
   });

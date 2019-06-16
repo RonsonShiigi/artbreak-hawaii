@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
     table.string("first_name");
     table.string("last_name");
     table.string("stripe_id");
+    table.boolean("stripe_signup").defaultTo("false");
     table.string("profileblurb");
     table.string("contactlinks");
     table.string("avatarurl");
