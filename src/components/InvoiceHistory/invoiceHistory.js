@@ -36,7 +36,7 @@ class InvoiceHistory extends Component {
       <div className="historyContainer">
         <h1>Invoice History</h1>
         {invoiceList.map(invoice => (
-          <div className="invoiceContainer">
+          <div className="invoiceContainer" key={invoice.id}>
             <div className="buyerEmail">Buyer Email: {invoice.buyerEmail}</div>
             <div className="purchased">Purchased:{invoice.paid.toString()}</div>
             <div className="price"> Price:${invoice.price}</div>
