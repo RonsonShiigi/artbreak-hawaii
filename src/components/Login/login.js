@@ -33,6 +33,8 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const emailLowercase = this.state.email.toLowerCase();
+
     fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       credentials: "include",
@@ -42,39 +44,28 @@ class Login extends Component {
       },
       body: JSON.stringify({
         password: this.state.password,
-        email: this.state.email
+        email: emailLowercase
       })
     })
       .then(res => {
         if (res.status === 401) {
           this.setState({ verifyEmailPw: false });
-          return;
         } else {
-          let data = res.clone().json();
-
+          const data = res.clone().json();
+          console.log("RES", data);
+          return data;
+        }
+      })
+      .then(data => {
+        console.log("DATA", data);
+        if (!data) {
+        } else {
           localStorage.setItem("userEmail", this.state.email);
           localStorage.setItem("userId", data.id);
           localStorage.setItem("username", data.username);
-
-          let userEmail = localStorage.getItem("userEmail");
-
-          axios
-            .get("http://localhost:8080/users")
-            .then(res => {
-              let users = res.data;
-              users.filter(user => {
-                if (user.email === userEmail) {
-                  localStorage.setItem("username", user.username);
-                  localStorage.setItem("userId", user.id);
-                }
-              });
-            })
-            .then(() => {
-              window.location.replace("http://localhost:8081");
-            })
-            .catch(err => {
-              console.log("Error", err);
-            });
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("userId", data.id);
+          window.location.replace("http://localhost:8081");
         }
       })
       .catch(err => {
@@ -216,9 +207,7 @@ class Login extends Component {
             <EmailPWExists eExists={verifyEmailPw} />
             <br />
 
-            <button type="submit" fullWidth={true} variant="contained">
-              Submit
-            </button>
+            <button type="submit">Submit</button>
             <br />
             <Link to="/forgotPassword">Forgot your password?</Link>
           </form>

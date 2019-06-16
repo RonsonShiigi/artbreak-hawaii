@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import FileUpload from "./components/newProduct/newProduct";
+import NewProduct_Error from "./components/newProduct/error";
 import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
@@ -13,7 +14,10 @@ import Messages from "./components/Messages/message";
 import ForgotPassword from "./components/ForgotPassword/forgotpassword";
 import ResetPassword from "./components/ResetPassword/resetPassword";
 import Invoice from "./components/Invoice/invoice";
+import BuyerCheckout from "./components/BuyerCheckout/buyercheckout";
 import Invoice_Confirmation from "./components/Invoice/invoice_confirmation";
+import InvoiceHistory from "./components/InvoiceHistory/invoiceHistory";
+import PaymentConfirmation from "./components/PaymentConfirmation/paymentConfirmation";
 import Error from "./components/404";
 
 import Checkout from "./components/Checkout/checkout";
@@ -48,6 +52,8 @@ class App extends Component {
           <Route exact path="/users/:id" component={User} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+
+          <Route path="/errorNewProduct" component={NewProduct_Error} />
           <Route path="/upload" component={FileUpload} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
@@ -59,7 +65,10 @@ class App extends Component {
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/resetPassword" component={ResetPassword} />
           <Route path="/invoice" component={Invoice} />
+          <Route path="/buyercheckout" component={BuyerCheckout} />
+          <Route path="/paymentConfirmation" component={PaymentConfirmation} />
           <Route path="/invoiceConfirmation" component={Invoice_Confirmation} />
+          <Route path="/invoiceHistory" component={InvoiceHistory} />
         </Switch>
       </React.Fragment>
     );

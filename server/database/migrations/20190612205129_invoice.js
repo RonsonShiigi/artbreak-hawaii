@@ -5,8 +5,9 @@ exports.up = function(knex, Promise) {
     table.string("description");
     table.decimal("price");
     table.string("buyerEmail");
-    table.boolean("paid").defaultTo("false");
+    table.boolean("paid");
     table.string("token");
+    table.string("charge_id");
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
     table.timestamp("purchased_at");
   });

@@ -50,15 +50,9 @@ router.post("/:id", (req, res) => {
       })
         .save(
           {
-            // username: body.username,
-            // password: body.password,
-            // email: body.email,
-            // first_name: body.first_name,
-            // last_name: body.last_name,
             profileblurb: body.profileblurb,
             avatarurl: body.avatarurl,
             contactlinks: body.contactlinks
-            // updated_at: new Date()
           },
           {
             patch: true
@@ -97,7 +91,14 @@ router.get("/:id", (req, res) => {
   })
     .fetch()
     .then(user => {
-      return res.json(user);
+      const userData = user.toJSON();
+      const userDataObj = {
+        user_id: userData.id,
+        first_name: userData.first_name,
+        stripeSignUp: userData.stripe_signup
+      };
+      console.log("USERDATA", userDataObj);
+      return res.json(userDataObj);
     })
     .catch(err => {
       console.log(err);

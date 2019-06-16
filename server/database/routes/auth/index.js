@@ -58,7 +58,7 @@ passport.use(
 
 const SALT_ROUND = 12;
 router.post("/auth/register", (req, res) => {
-  const { username, email, first_name, last_name, password } = req.body;
+  const { username, email, password } = req.body;
 
   bcrypt
     .genSalt(12)
@@ -69,8 +69,6 @@ router.post("/auth/register", (req, res) => {
       return Users.forge({
         username,
         email,
-        first_name,
-        last_name,
         password: hash
       }).save();
     })
@@ -85,7 +83,7 @@ router.post("/auth/register", (req, res) => {
 });
 
 router.post("/auth/register/check", (req, res) => {
-  let userUsername = req.body.username;
+  const userUsername = req.body.username;
   let userQuery = { email: "", username: "" };
 
   //REGEX email validation function to check if email is a valid email.
@@ -149,8 +147,6 @@ router.post("/auth/login", passport.authenticate("local"), (req, res) => {
       user = user.toJSON();
       userData = {
         id: user.id,
-        first_name: user.first_name,
-        last_name: user.last_name,
         username: user.username
       };
       req.session.user = req.body;
