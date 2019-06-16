@@ -23,11 +23,12 @@ exports.up = function(knex, Promise) {
     .then(function() {
       return knex.schema
         .createTable("comments", table => {
-          table.increments("comment_id").primary();
+          table.increments("id").primary();
           table.string("text").notNullable();
-          table.timestamp("created_at");
+          table.timestamp("created_at").defaultTo(knex.raw("now()"));
           table.timestamp("updated_at");
           table.integer("user_id").unsigned();
+          table.integer("product_id");
           table.foreign("user_id").references("users.id");
         })
         .then(function() {

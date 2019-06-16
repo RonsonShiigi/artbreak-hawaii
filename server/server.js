@@ -75,7 +75,7 @@ app.use(passport.session());
 app.use(cors({ credentials: true, origin: "http://localhost:8081" }));
 
 //routing
-// app.use("/profile", profileRoutes);
+
 app.use("/users", UserRoutes);
 app.use("/products", ProductRoutes);
 app.use("/comments", CommentRoutes);
