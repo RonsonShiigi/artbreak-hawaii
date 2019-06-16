@@ -69,7 +69,9 @@ class BuyerCheckout extends Component {
         stripeToken: token.id,
         total: this.state.price,
         userId: this.state.artist,
-        uriToken: this.state.uriToken
+        uriToken: this.state.uriToken,
+        purchasedItem: this.state.description,
+        buyerEmail: this.state.buyerEmail
       }),
       credentials: "include"
     })

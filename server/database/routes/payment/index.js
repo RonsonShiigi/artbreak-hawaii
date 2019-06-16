@@ -5,20 +5,33 @@ require("dotenv").config({ path: "../../.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const User = require("../../models/UsersModel.js");
 const Invoice = require("../../models/InvoiceModel");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 router.route("/checkout").post((req, res) => {
-  const { stripeToken, total, userId, uriToken } = req.body;
+  const {
+    stripeToken,
+    total,
+    userId,
+    uriToken,
+    purchasedItem,
+    buyerEmail
+  } = req.body;
+  let username;
+  let sellerEmail;
 
   User.where({ id: userId })
     .fetchAll()
     .then(user => {
       const userData = user.toJSON();
       const stripeAcct = userData[0].stripe_id;
+      username = userData[0].username;
+      sellerEmail = userData[0].email;
       return stripeAcct;
     })
     .then(account => {
       const totalAmt = parseInt(total, 10) * 100;
-      const transferTotal = totalAmt - totalAmt * 0.035;
+      const transferTotal = totalAmt - totalAmt * 0.04;
 
       stripe.charges
         .create({
@@ -31,8 +44,8 @@ router.route("/checkout").post((req, res) => {
           }
         })
         .then(function(charge) {
-          console.log("CHARGE", charge);
           const chargeId = charge.id;
+          const billingEmail = charge.billing_details.name;
           new Invoice()
             .where({ token: uriToken })
             .save(
@@ -40,7 +53,59 @@ router.route("/checkout").post((req, res) => {
               { patch: true }
             )
             .then(() => {
-              return res.json({ message: "Payment Success" });
+              const transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                  user: `${process.env.GMAIL_ACCT}`,
+                  pass: `${process.env.GMAIL_PW}`
+                }
+              });
+
+              //email message confirmation to buyer of purchase
+              const buyerConfirmation = {
+                from: "ArtBreakUserProvisioning@gmail.com",
+                to: `${billingEmail}`,
+                subject: `ArtBreak Payment Confirmation #: ${chargeId}`,
+                text: `Thank you for your recent purchase from ${username}! Your credit card was charge for a total of $ ${total} for your recent purchase: ${purchasedItem}.\n\n`
+              };
+
+              //email messsage confirmation to seller of purchase of product
+              const sellerConfirmation = {
+                from: "ArtBreakUserProvisioning@gmail.com",
+                to: `${sellerEmail}`,
+                subject: `ArtBreak Payment Confirmation of Bought Item ${purchasedItem} #: ${chargeId}`,
+                text: `Congratulations! ${billingEmail} has purchased ${purchasedItem} for a total of $ ${total}!\n\n`
+              };
+
+              //send email to buyer
+              transporter.sendMail(buyerConfirmation, (error, response) => {
+                if (error) {
+                  return res.json({
+                    message: "Buyer Confrimation Email Error"
+                  });
+                } else {
+                  return res.json({
+                    message: "200"
+                  });
+                }
+              });
+
+              //send email to seller
+              transporter.sendMail(sellerConfirmation, (error, response) => {
+                if (error) {
+                  return res.json({
+                    message: "Seller Confirmation Email Error"
+                  });
+                } else {
+                  return res.json({
+                    message: "200"
+                  });
+                }
+              });
+
+              return res.json({
+                message: "Payment Success"
+              });
             })
             .catch(err => {
               console.log("err", err);
