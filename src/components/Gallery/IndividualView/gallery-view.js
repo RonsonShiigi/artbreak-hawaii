@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Comments from "../../Comments/comments";
 
 import "./gallery-view.css";
 
@@ -37,6 +38,7 @@ class GalleryView extends Component {
   }
 
   render() {
+    console.log(this.props);
     const data = this.state;
     // console.log("galleryview state", data);
     return (
@@ -70,6 +72,7 @@ class GalleryView extends Component {
             ) : (
               ""
             )}
+            <Comments product_id={this.props.match.params.id} />
           </div>
         </div>
       </div>
