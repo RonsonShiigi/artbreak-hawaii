@@ -88,14 +88,12 @@ router
     const image_url = req.body.image_url;
     // const image_url = url + res.req.file.key;
     const user_id = req.body.user_id;
-    const price = req.body.price;
 
     return new req.database.Product({
       title,
       description,
       image_url,
-      user_id,
-      price
+      user_id
     })
       .save()
       .then(products => {
@@ -152,7 +150,6 @@ router.post("/:id", upload.single("photos"), (req, res) => {
             description: req.body.description,
             image_url: image_url,
             user_id: req.body.user_id,
-            price: req.body.price,
             updated_at: new Date()
           },
           {
