@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import "./historystyles.css";
+
 class InvoiceHistory extends Component {
   constructor() {
     super();
@@ -33,17 +35,25 @@ class InvoiceHistory extends Component {
     let invoiceList = this.state.invoices;
     console.log("il", invoiceList);
     return (
-      <div className="form-holder">
-        <h1>Invoice History</h1>
+      <div className="invoice-holder">
         {invoiceList.map(invoice => (
-          <div className="invoiceContainer" key={invoice.id}>
-            <div className="buyerEmail">Buyer Email: {invoice.buyerEmail}</div>
-            <div className="purchased">Purchased:{invoice.paid.toString()}</div>
-            <div className="price"> Price:${invoice.price}</div>
-            <div className="created_at">Invoice Sent: {invoice.created_at}</div>
-            <div className="purchased_at">
-              Purchased At: {invoice.purchased_at}
-            </div>
+          <div className="invoice-container" key={invoice.id}>
+            {invoice.paid.toString() === "true" ? (
+              <div className="paid">paid</div>
+            ) : (
+              <div className="paid" style={{ backgroundColor: "#8B0000" }}>
+                unpaid
+              </div>
+            )}
+            <ul className="invoice-receipt">
+              <li>
+                <b className="invoice-email">{invoice.buyerEmail}</b>
+              </li>
+              <li>Price: ${invoice.price}</li>
+              <li>Purchased: {invoice.purchased_at}</li>
+              <li>Description: {invoice.description}</li>
+              <li>Sent: {invoice.created_at}</li>
+            </ul>
           </div>
         ))}
       </div>

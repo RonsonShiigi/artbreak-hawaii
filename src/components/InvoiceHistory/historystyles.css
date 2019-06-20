@@ -1,0 +1,45 @@
+.history-header {
+  color: #eee;
+  padding-left: 2vh;
+}
+
+.invoice-holder {
+  display: flex;
+  flex-flow: row wrap;
+  position: absolute;
+  width: 90vw;
+}
+.invoice-container {
+  display: flex;
+  background-color: #eee;
+  color: #252525;
+  padding: 1vw;
+  margin-left: 2vw;
+  font-size: 16px;
+  line-height: 12px;
+  margin-bottom: 2vh;
+}
+
+.invoice-receipt {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.invoice-email {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 20px;
+  margin-bottom: -5px;
+}
+
+.paid {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 5px;
+  letter-spacing: 4px;
+  background-color: #228b22;
+  color: #ccc;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bolder;
+}

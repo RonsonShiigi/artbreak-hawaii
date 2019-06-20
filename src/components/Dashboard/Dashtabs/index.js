@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Gallery from "../../Gallery";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
+import InvoiceHistory from "../../InvoiceHistory/invoiceHistory";
 
 function Dashtabs() {
   function TabContainer(props) {
@@ -29,7 +29,7 @@ function Dashtabs() {
       )}
       {index === 2 && (
         <TabContainer>
-          This is where my orders would go... IF I HAD ANY
+          <InvoiceHistory />
         </TabContainer>
       )}
     </div>
