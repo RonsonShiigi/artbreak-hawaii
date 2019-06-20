@@ -30,6 +30,8 @@ exports.up = function(knex, Promise) {
           table.integer("user_id").unsigned();
           table.integer("product_id");
           table.foreign("user_id").references("users.id");
+          table.string("username").unsigned();
+          table.foreign("username").references("users.username");
         })
         .then(function() {
           return knex.schema.createTable("messages", table => {
