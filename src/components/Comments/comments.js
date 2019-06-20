@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 
 class Comments extends Component {
   constructor(props) {
@@ -82,16 +80,17 @@ class Comments extends Component {
           </div>
         ))}
 
-        <div className="formContainer">
+        <div className="comment-holder">
           <h1>Talk Shit Here</h1>
           <form onSubmit={this.handleSubmit}>
-            <TextField
+            <textarea
+              className="comment-form"
               id="text"
-              label="Comment Here"
+              placeholder="Comment Here"
               name="text"
               onChange={this.handleChange}
             />
-            <Button type="submit">Send Now =></Button>
+            <button type="submit">Send Now =></button>
           </form>
         </div>
       </div>
