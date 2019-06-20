@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Modal from "react-modal";
 
 import { withStyles } from "@material-ui/core/styles";
 import "./gallery.css";
@@ -15,7 +14,9 @@ const styles = theme => ({
   images: {
     marginTop: theme.spacing(8),
     display: "flex",
+    flexWrap: "wrap",
     position: "relative",
+    paddingLeft: "2vh",
     left: "0"
   },
   imageWrapper: {
@@ -95,11 +96,6 @@ class Gallery extends React.Component {
       products: [],
       showModal: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.viewImg = this.viewImg.bind(this);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   componentDidMount(req, res) {
     fetch("http://localhost:8080/products")
@@ -115,24 +111,24 @@ class Gallery extends React.Component {
     this.refs.search.focus();
   }
 
-  handleChange() {
+  handleChange = () => {
     this.setState({
       searchString: this.refs.search.value
     });
-  }
+  };
 
-  viewImg() {
+  viewImg = () => {
     this.setState({ show: !this.state.show });
     console.log(this.state.show);
-  }
+  };
 
-  handleOpenModal() {
+  handleOpenModal = () => {
     this.setState({ showModal: true });
-  }
+  };
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false });
-  }
+  };
 
   render() {
     let _products = this.state.products;
@@ -159,32 +155,35 @@ class Gallery extends React.Component {
 
         <div className={classes.images}>
           {_products.map(product => (
-            <Link
-              to={{
-                pathname: `/products/${product.id}`
-              }}
-              key={product.id}
-            >
-              <ButtonBase
-                key={product.id}
-                className={classes.imageWrapper}
-                style={{
-                  width: product.width
+            <div>
+              <Link
+                to={{
+                  pathname: `/products/${product.id}`
                 }}
+                key={product.id}
               >
-                <div
-                  className={classes.imageSrc}
+                <ButtonBase
+                  key={product.id}
+                  className={classes.imageWrapper}
+                  onClick={this.handleOpenModal}
                   style={{
-                    backgroundImage: `url(${product.image_url})`
+                    width: product.width
                   }}
-                />
-                <div className={classes.imageBackdrop} />
-                <div className={classes.imageButton}>
-                  <h2>{product.title}</h2>
-                  <div className={classes.imageMarked} />
-                </div>
-              </ButtonBase>
-            </Link>
+                >
+                  <div
+                    className={classes.imageSrc}
+                    style={{
+                      backgroundImage: `url(${product.image_url})`
+                    }}
+                  />
+                  <div className={classes.imageBackdrop} />
+                  <div className={classes.imageButton}>
+                    <h2>{product.title}</h2>
+                    <div className={classes.imageMarked} />
+                  </div>
+                </ButtonBase>
+              </Link>
+            </div>
           ))}
         </div>
       </div>

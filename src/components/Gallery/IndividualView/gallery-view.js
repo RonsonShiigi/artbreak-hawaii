@@ -41,7 +41,7 @@ class GalleryView extends Component {
     // console.log("galleryview state", data);
     return (
       <div className="galleryview">
-        <div className="view-inner">
+        <section className="view-inner">
           <a
             href={`${data.image_url}`}
             target="_blank"
@@ -50,28 +50,30 @@ class GalleryView extends Component {
             <img src={data.image_url} className="img-style" alt="" />
           </a>
           <div className="img-info">
-            <h1>{data.title}</h1>
-            {data.description}
-            <br />
-            {data.created_at}
-            <br />
-            {localStorage.userId === this.props.match.params.id ? (
-              <div className="img-links">
-                <ul>
-                  <li>
-                    <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
-                  </li>
-                  <li>
-                    <a href={`/delete/${this.state.id}`}>Delete Me</a>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              ""
-            )}
+            <div className="title-desc">
+              <h1>{data.title}</h1>
+              {localStorage.userId === this.props.match.params.id ? (
+                <div className="img-links">
+                  <ul>
+                    <li>
+                      <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
+                    </li>
+                    <li>
+                      <a href={`/delete/${this.state.id}`}>Delete Me</a>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                ""
+              )}
+              {data.description}
+              <br />
+              {data.created_at}
+              <br />
+            </div>
             <Comments product_id={this.props.match.params.id} />
           </div>
-        </div>
+        </section>
       </div>
     );
   }
