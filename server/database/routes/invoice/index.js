@@ -18,7 +18,6 @@ router.post("/", (req, res) => {
     const token = crypto.randomBytes(20).toString("hex");
 
     let status = "";
-    console.log("req.body", req.body);
 
     return new Invoice({
       user_id,
@@ -94,7 +93,8 @@ router.get("/:token", (req, res) => {
             user_id: invoice[0].user_id,
             paid: invoice[0].paid,
             price: invoice[0].price,
-            description: invoice[0].description
+            description: invoice[0].description,
+            buyerEmail: invoice[0].buyerEmail
           };
           console.log("INVOICE DATA", invData);
           return res.json(invData);

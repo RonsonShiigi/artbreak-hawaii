@@ -70,7 +70,9 @@ class Dashboard extends Component {
                     <StripeReg />
                     {error ? <div>Internal Error, please try again</div> : null}
                   </div>
-                ) : null}
+                ) : (
+                  <Link to="/invoice">CREATE AN INVOICE</Link>
+                )}
               </div>
             </div>
             <div className="right-nav">
