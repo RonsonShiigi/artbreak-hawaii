@@ -29,7 +29,7 @@
 
 .img-info {
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   align-items: center;
   width: 100%;
   margin-top: -5vh;
@@ -51,5 +51,12 @@
   position: absolute;
   flex-flow: column nowrap;
   line-height: 15px;
-  left: 1vh;
+  left: 15vh;
+  margin-top: 5vh;
+}
+
+.comments-div {
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
 }

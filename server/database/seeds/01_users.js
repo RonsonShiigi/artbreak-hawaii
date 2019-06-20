@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex("users").insert([
         {
           username: "samszys",
-          email: "juntillaaaaa@hawaii.edu",
+          email: "juntilla@hawaii.edu",
           password: "fart",
           stripe_id: "acct_1Eg5XkEWUMHDF9ZA",
           profileblurb: "i like bread"
