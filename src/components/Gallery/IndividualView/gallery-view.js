@@ -70,8 +70,11 @@ class GalleryView extends Component {
               <br />
               {data.created_at}
               <br />
+
+              <div className="comments">
+                <Comments product_id={this.props.match.params.id} />
+              </div>
             </div>
-            <Comments product_id={this.props.match.params.id} />
           </div>
         </section>
       </div>

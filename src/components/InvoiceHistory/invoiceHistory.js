@@ -33,7 +33,7 @@ class InvoiceHistory extends Component {
     let invoiceList = this.state.invoices;
     console.log("il", invoiceList);
     return (
-      <div className="historyContainer">
+      <div className="form-holder">
         <h1>Invoice History</h1>
         {invoiceList.map(invoice => (
           <div className="invoiceContainer" key={invoice.id}>

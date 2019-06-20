@@ -1,7 +1,9 @@
 .header-links {
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  flex-flow: row nowrap;
+  flex-basis: 1;
+  width: 100vw;
+  max-height: 25vh;
   align-items: center;
   margin-top: 6vh;
   padding-left: 2vw;
@@ -10,7 +12,7 @@
   align-content: center;
   background-color: #0e0e0e;
   font-family: "Roboto", sans-serif;
-  position: absolute;
+  position: fixed;
 }
 
 ul {
@@ -43,7 +45,7 @@ ul li {
   align-items: center;
   justify-content: center;
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 5vh;
   z-index: 99;
   background-color: #0e0e0e;

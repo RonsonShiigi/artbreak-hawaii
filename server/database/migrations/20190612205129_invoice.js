@@ -8,6 +8,8 @@ exports.up = function(knex, Promise) {
     table.boolean("paid");
     table.string("token");
     table.string("charge_id");
+    table.string("refund_id");
+    table.boolean("refund");
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
     table.timestamp("purchased_at");
   });

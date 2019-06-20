@@ -45,6 +45,7 @@ router.route("/checkout").post((req, res) => {
         })
         .then(function(charge) {
           const chargeId = charge.id;
+          console.log("CHARGE", charge);
           const billingEmail = charge.billing_details.name;
           new Invoice()
             .where({ token: uriToken })
@@ -233,5 +234,57 @@ router.route("/checkout").post((req, res) => {
 //       res.send("all done");
 //     });
 // });
+
+router.route("/refund").post((req, res) => {
+  const chargeId = req.body.charge_id;
+  const refundTotal = req.body.amount;
+  let invId;
+
+  Invoice.where({ charge_id: req.body.charge_id })
+    .fetchAll()
+    .then(data => {
+      const invoiceData = data.toJSON();
+      return invoiceData;
+    })
+    .then(invData => {
+      if (!invData) {
+        //if no invoice data returned, data not found
+        return res.json({ message: "Refund not available" });
+      } else {
+        //check if the refund total is less than the paid amount
+        const paidAmt = invData[0].price;
+        invId = invData[0].id;
+        if (refundTotal >= paidAmt) {
+          return res.json({ message: "Refund more than payment" });
+        } else {
+          //create the refund
+          stripe.refunds.create(
+            {
+              charge: chargeId
+            },
+            (err, refund) => {
+              if (err) {
+                res.json({ message: "Refund Error" });
+              } else {
+                //save the refund id to invoice table
+                new Invoice()
+                  .where({ id: invId })
+                  .save({ refund_id: refund.id, refund: true }, { patch: true })
+                  .then(() => {
+                    res.json({ message: "Success" });
+                  })
+                  .catch(err => {
+                    res.json({ message: "Unknown Error" });
+                  });
+              }
+            }
+          );
+        }
+      }
+    })
+    .catch(err => {
+      console.log("ERR", err);
+    });
+});
 
 module.exports = router;

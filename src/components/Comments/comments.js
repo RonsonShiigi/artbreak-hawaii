@@ -38,7 +38,7 @@ class Comments extends Component {
     let commentsList = this.state.comments;
     // console.log("comments state", this.state);
     return (
-      <div className="commentsContainer">
+      <div className="comments-container">
         <h1>Comments</h1>
 
         {commentsList.map(comment => (
