@@ -30,15 +30,12 @@ class Delete extends Component {
     let pather = window.location.pathname.split("/");
 
     this.state.product_id = pather[2];
-
-    // console.log("user_id", this.state.user_id);
-    // console.log("delete state", this.state);
   }
 
   deleteFile = e => {
     e.preventDefault();
     if (localStorage.getItem("userId") === null) {
-      console.log("You Must Log In");
+      console.log("You have to be logged in to delete this!");
     } else {
       console.log("you are trying to delete");
       axios
@@ -66,9 +63,6 @@ class Delete extends Component {
             .then(data => {
               console.log("you are deleting from s3 and psql");
             })
-            // .then(res => {
-            //   res.redirect("/");
-            // })
             .catch(err => {
               console.log(err);
             });

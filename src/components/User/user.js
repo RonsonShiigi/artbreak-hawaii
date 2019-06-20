@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Gallery from "../Gallery";
 import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";
-import Edit from "@material-ui/icons/Edit";
 
 import "./profile.css";
 
@@ -72,7 +71,7 @@ class User extends Component {
                 <p>{data.profileblurb}</p>
                 {localStorage.userId === this.props.match.params.id ? (
                   <div className="edit-holder">
-                    <Edit onClick={this.handleChange} />
+                    <div onClick={this.handleChange}>wharglbargl</div>
                     <div className="edit-div" style={style}>
                       <EditUser />
                     </div>
