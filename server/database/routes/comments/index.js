@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../../models/CommentsModel.js");
+const User = require("../../models/UsersModel");
 
 router
   .route("/")
@@ -21,21 +22,36 @@ router
   // CREATE COMMENT
   .post((req, res) => {
     const text = req.body.text;
-    const user_id = req.body.user_id;
+    const user_id = Number(req.body.user_id);
+    console.log(user_id);
     const product_id = req.body.product_id;
-
-    return new req.database.Comment({
-      text,
-      user_id,
-      product_id
-    })
-      .save()
-      .then(comment => {
-        return res.json({ success: true });
+    User.where({ id: user_id })
+      .fetchAll()
+      .then(data => {
+        const userData = data.toJSON();
+        console.log(data);
+        const username = userData[0].username;
+        console.log(username);
+        return username;
+      })
+      .then(username => {
+        return new req.database.Comment({
+          text,
+          user_id,
+          product_id,
+          username
+        })
+          .save()
+          .then(comment => {
+            return res.json({ success: true });
+          })
+          .catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+          });
       })
       .catch(err => {
         console.log(err);
-        res.sendStatus(500);
       });
   });
 
