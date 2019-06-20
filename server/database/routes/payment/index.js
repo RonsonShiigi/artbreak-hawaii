@@ -15,7 +15,7 @@ router.route("/checkout").post((req, res) => {
     userId,
     uriToken,
     purchasedItem,
-    buyerEmail
+    buyerE
   } = req.body;
   let username;
   let sellerEmail;

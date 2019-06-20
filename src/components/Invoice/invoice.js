@@ -47,52 +47,35 @@ class Invoice extends Component {
   };
 
   render() {
-    // console.log("ijen", this.state);
     return (
-      <div className="invoice-form">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h1>Send Invoice to Buyer</h1>
-        <form onSubmit={this.handleSubmit}>
-          <TextField
-            id="email"
-            label="email of buyer"
-            name="email"
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="description"
-            label="description"
-            name="description"
-            onChange={this.handleChange}
-          />
-          <TextField
-            id="price"
-            label="price"
-            name="price"
-            onChange={this.handleChange}
-          />
+      <div className="container">
+        <div className="invoice-form">
+          <br />
+          <br />
+          <h1>Send Invoice to Buyer</h1>
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              id="email"
+              label="email of buyer"
+              name="email"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="description"
+              label="description"
+              name="description"
+              onChange={this.handleChange}
+            />
+            <TextField
+              id="price"
+              label="price"
+              name="price"
+              onChange={this.handleChange}
+            />
 
-          <Button type="submit">Send Now =></Button>
-        </form>
+            <Button type="submit">Send Now =></Button>
+          </form>
+        </div>
       </div>
     );
   }

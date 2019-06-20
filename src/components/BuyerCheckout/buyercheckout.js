@@ -17,12 +17,12 @@ class BuyerCheckout extends Component {
       artist: "",
       error: false,
       buyerEmail: "",
-      redirect: false
+      redirect: false,
+      isLoggedIn: false
     };
     this.onToken = this.onToken.bind(this);
   }
   componentDidMount = e => {
-    this.setState({ redirect: false });
     const tokenUrl = new URLSearchParams(document.location.search.substring(1));
     const token = tokenUrl.get("tkn");
     if (token) {
@@ -33,6 +33,7 @@ class BuyerCheckout extends Component {
         return res.json();
       })
       .then(itemsData => {
+        console.log("THIS ITEMSDATA", itemsData);
         this.setState({ userId: itemsData.user_id });
         this.setState({ paid: itemsData.paid });
         this.setState({ price: itemsData.price });
@@ -58,45 +59,48 @@ class BuyerCheckout extends Component {
   };
 
   onToken(token) {
-    console.log("onToken", token);
-    fetch("http://localhost:8080/payment/checkout", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        stripeToken: token.id,
-        total: this.state.price,
-        userId: this.state.artist,
-        uriToken: this.state.uriToken,
-        purchasedItem: this.state.description,
-        buyerEmail: this.state.buyerEmail
-      }),
-      credentials: "include"
-    })
-      .then(res => {
-        const resData = res.json();
-        return resData;
+    if (localStorage.getItem("userId") === null) {
+      console.log("You are not logged in");
+    } else {
+      console.log("onToken", token);
+      fetch("http://localhost:8080/payment/checkout", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          stripeToken: token.id,
+          total: this.state.price,
+          userId: this.state.artist,
+          uriToken: this.state.uriToken,
+          purchasedItem: this.state.description,
+          buyerE: this.state.buyerEmail
+        }),
+        credentials: "include"
       })
-      .then(data => {
-        const { message } = data;
-        console.log("MESSAGE", message);
-        switch (message) {
-          case "Payment Success":
-            this.setState({ redirect: true });
-            break;
-          case "500":
-            this.setState({ error: true });
-            break;
-          default:
-            return;
-        }
-      })
-      .catch(err => {
-        console.log("ERROR on TOKEN", err);
-        this.setState({ error: true });
-      });
+        .then(res => {
+          const resData = res.json();
+          return resData;
+        })
+        .then(data => {
+          const { message } = data;
+          switch (message) {
+            case "Payment Success":
+              this.setState({ redirect: true });
+              break;
+            case "500":
+              this.setState({ error: true });
+              break;
+            default:
+              return;
+          }
+        })
+        .catch(err => {
+          console.log("ERROR on TOKEN", err);
+          this.setState({ error: true });
+        });
+    }
   }
 
   render() {
@@ -129,52 +133,38 @@ class BuyerCheckout extends Component {
       }
     }
     return (
-      <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        {paid ? (
-          <h1> This Invoice Has Already Been Paid</h1>
+      <div className="container">
+        {!uriToken ? (
+          <div>ACCESS DENIED</div>
         ) : (
           <div>
-            <h2>ArtBreak Invoice</h2>
-            <div>You are purchasing commissioned art from {name}!</div>
-            <br />
-            <br />
-            Total owed for Invoice # {uriToken} is:
-            <br />$ {price}
-            <br />
-            If you are ready to checkout, please click on below to submit your
-            payment through Stripe! below:
-            <br />
-            <StripeCheckout
-              key="stripe-checkout"
-              token={this.onToken}
-              stripeKey="pk_test_dFwJK6MxVB2Jj5XDUuaFAoIl00oVxjFN1t"
-            />
+            {paid ? (
+              <h1> This Invoice Has Already Been Paid</h1>
+            ) : (
+              <div>
+                <h2>ArtBreak Invoice</h2>
+                <div>You are purchasing commissioned art from {name}!</div>
+                <br />
+                <br />
+                Total owed for Invoice # {uriToken} is:
+                <br />$ {price}
+                <br />
+                If you are ready to checkout, please click on below to submit
+                your payment through Stripe! below:
+                <br />
+                <StripeCheckout
+                  key="stripe-checkout"
+                  token={this.onToken}
+                  stripeKey={process.env.REACT_APP_STRIPE_PK}
+                />
+              </div>
+            )}
+            <CheckRedirect isRedirect={this.state.redirect} />
           </div>
         )}
-        <CheckRedirect isRedirect={this.state.redirect} />
       </div>
     );
   }
 }
+
 export default BuyerCheckout;
