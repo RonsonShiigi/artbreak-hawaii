@@ -5,6 +5,7 @@ require("dotenv").config({ path: "../../.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const User = require("../../models/UsersModel.js");
 const Invoice = require("../../models/InvoiceModel");
+const Refund = require("../../models/RefundsModel");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
@@ -156,10 +157,15 @@ router.route("/refund").post((req, res) => {
                 console.log("ERRR", err);
                 res.json({ message: "Refund Error" });
               } else {
-                //save the refund id to invoice table
-                new Invoice()
-                  .where({ id: invId })
-                  .save({ refund_id: refund.id, refund: true }, { patch: true })
+                new Refund()
+                  .save(
+                    {
+                      invoice_id: invId,
+                      refund_id: refund.id,
+                      amount: refundTotal
+                    },
+                    { patch: true }
+                  )
                   .then(() => {
                     res.json({ message: "Success" });
                   })
