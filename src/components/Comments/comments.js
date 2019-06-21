@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import "./comments.css";
+
 class Comments extends Component {
   constructor(props) {
     super(props);
@@ -70,6 +72,20 @@ class Comments extends Component {
 
     return (
       <div className="comments-container">
+        <div className="comment-holder">
+          <form onSubmit={this.handleSubmit}>
+            <textarea
+              className="comment-form"
+              id="text"
+              placeholder="Leave a comment..."
+              name="text"
+              onChange={this.handleChange}
+            />
+            <button type="submit" className="cmmt-button">
+              Send
+            </button>
+          </form>
+        </div>
         <h1>Comments</h1>
 
         {commentsList.map(comment => (
@@ -79,20 +95,6 @@ class Comments extends Component {
             <div clasName="when">{comment.created_at}</div>
           </div>
         ))}
-
-        <div className="comment-holder">
-          <h1>Talk Shit Here</h1>
-          <form onSubmit={this.handleSubmit}>
-            <textarea
-              className="comment-form"
-              id="text"
-              placeholder="Comment Here"
-              name="text"
-              onChange={this.handleChange}
-            />
-            <button type="submit">Send Now =></button>
-          </form>
-        </div>
       </div>
     );
   }
