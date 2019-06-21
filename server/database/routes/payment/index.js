@@ -237,8 +237,10 @@ router.route("/checkout").post((req, res) => {
 
 router.route("/refund").post((req, res) => {
   const chargeId = req.body.charge_id;
-  const refundTotal = req.body.amount;
+  let refundTotal = req.body.amount;
+  refundTotal = parseInt(refundTotal, 10) * 100;
   let invId;
+  console.log("REFUND TOTAL", refundTotal);
 
   Invoice.where({ charge_id: req.body.charge_id })
     .fetchAll()
@@ -252,7 +254,9 @@ router.route("/refund").post((req, res) => {
         return res.json({ message: "Refund not available" });
       } else {
         //check if the refund total is less than the paid amount
-        const paidAmt = invData[0].price;
+        let paidAmt = invData[0].price;
+        paidAmt = parseInt(paidAmt, 10) * 100;
+        console.log("PAID AMT", paidAmt);
         invId = invData[0].id;
         if (refundTotal >= paidAmt) {
           return res.json({ message: "Refund more than payment" });
@@ -260,10 +264,13 @@ router.route("/refund").post((req, res) => {
           //create the refund
           stripe.refunds.create(
             {
-              charge: chargeId
+              amount: refundTotal,
+              charge: chargeId,
+              reverse_transfer: true
             },
             (err, refund) => {
               if (err) {
+                console.log("ERRR", err);
                 res.json({ message: "Refund Error" });
               } else {
                 //save the refund id to invoice table
