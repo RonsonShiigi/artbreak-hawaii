@@ -60,7 +60,6 @@ class Dashboard extends Component {
                   <Link to="/upload">Add New Piece</Link>
                 </li>
                 <li>Favorites</li>
-                <li>Orders/Invoices</li>
               </ul>
               <br />
               <div>
