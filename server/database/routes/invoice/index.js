@@ -61,6 +61,7 @@ router.post("/", (req, res) => {
         });
       })
       .catch(err => {
+        return res.json({ message: "401" });
         console.log("you are fucking up trying to create a new invoice", err);
       });
   }
