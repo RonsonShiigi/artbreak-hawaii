@@ -68,9 +68,8 @@ class GalleryView extends Component {
               )}
               {data.description}
               <br />
-              {data.created_at}
+              <span className="created-at">{data.created_at}</span>
               <br />
-
               <div className="comments">
                 <Comments product_id={this.props.match.params.id} />
               </div>

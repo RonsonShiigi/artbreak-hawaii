@@ -47,16 +47,20 @@
 
 .title-desc {
   display: flex;
-  position: absolute;
+  position: relative;
   flex-flow: column nowrap;
   line-height: 15px;
-  left: 15vh;
-  margin-top: 5vh;
+  background-color: #1d1d1d;
+  margin-top: -5vh;
+  padding: 2vw;
+  padding-top: 0;
+  width: 95%;
 }
 
 .comments-div {
   display: flex;
   flex-flow: column nowrap;
   position: relative;
+  align-items: center;
   background-color: #1d1d1d;
 }
