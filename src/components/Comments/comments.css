@@ -81,3 +81,8 @@
   font-weight: 900;
   font-size: 16px;
 }
+
+.cmmt-date {
+  font-size: 11px;
+  font-style: italic;
+}

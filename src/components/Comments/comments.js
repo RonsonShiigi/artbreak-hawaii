@@ -97,7 +97,7 @@ class Comments extends Component {
                 <Link to={`/users/${comment.user_id}`}>{comment.username}</Link>
               </span>
               <br />
-              {comment.created_at}
+              <span className="cmmt-date">{comment.created_at}</span>
             </div>
           </div>
         ))}
