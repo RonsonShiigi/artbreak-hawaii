@@ -35,7 +35,7 @@
   color: #eeeeee;
   background-color: #1d1d1d;
   font-size: 14px;
-  z-index: 99;
+  z-index: 4;
 }
 
 .img-links {
@@ -63,4 +63,9 @@
   position: relative;
   align-items: center;
   background-color: #1d1d1d;
+}
+
+.img-desc {
+  font-size: 16px;
+  margin-bottom: -5px;
 }

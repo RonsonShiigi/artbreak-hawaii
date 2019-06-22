@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import "./comments.css";
@@ -89,10 +90,15 @@ class Comments extends Component {
         <h1>Comments</h1>
 
         {commentsList.map(comment => (
-          <div className="box">
-            <div className="body">{comment.text}</div>
-            <div className="username">{comment.username}</div>
-            <div clasName="when">{comment.created_at}</div>
+          <div className="cmmt">
+            <div className="cmmt-body">{comment.text}</div>
+            <div className="cmmt-info">
+              <span className="cmmt-user">
+                <Link to={`/users/${comment.user_id}`}>{comment.username}</Link>
+              </span>
+              <br />
+              <span className="cmmt-date">{comment.created_at}</span>
+            </div>
           </div>
         ))}
       </div>

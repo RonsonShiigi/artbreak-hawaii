@@ -39,3 +39,50 @@
   left: 25vw;
   height: 5vh;
 }
+
+.cmmt {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.cmmt-body {
+  width: 95%;
+  background: #424242;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.cmmt-body:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid #424242;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #424242;
+  border-bottom: 10px solid transparent;
+  left: 19px;
+  bottom: -19px;
+}
+
+.cmmt-info {
+  margin-bottom: 20px;
+  padding-top: 5px;
+}
+
+.cmmt-user {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.cmmt-date {
+  font-size: 11px;
+  font-style: italic;
+}

@@ -147,6 +147,7 @@ class Gallery extends React.Component {
       <div className={classes.root} component="section">
         <input
           type="text"
+          className="searchbar"
           value={this.state.searchString}
           ref="search"
           onChange={this.handleChange}
