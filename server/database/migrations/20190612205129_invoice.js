@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
       table.string("description");
       table.decimal("price");
       table.string("buyerEmail");
-      table.boolean("paid");
+      table.boolean("paid").defaultTo("false");
       table.string("token");
       table.string("charge_id");
       table.boolean("refund");
@@ -19,7 +19,7 @@ exports.up = function(knex, Promise) {
       table.timestamp("purchased_at");
     })
     .then(function() {
-      knex.schema.createTable("refunds", table => {
+      return knex.schema.createTable("refunds", table => {
         table.increments("id").primary();
         table.integer("invoice_id").unsigned();
         table
@@ -39,5 +39,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable("invoices");
+  return knex.schema.dropTable("invoices").dropTable("refunds");
 };

@@ -51,7 +51,13 @@ router.route("/checkout").post((req, res) => {
           new Invoice()
             .where({ token: uriToken })
             .save(
-              { paid: true, charge_id: chargeId, purchased_at: new Date() },
+              {
+                paid: true,
+                charge_id: chargeId,
+                purchased_at: new Date(),
+                refund_available: parseFloat(totalAmt / 100),
+                refund: false
+              },
               { patch: true }
             )
             .then(() => {
@@ -138,12 +144,14 @@ router.route("/refund").post((req, res) => {
         //if no invoice data returned, data not found
         return res.json({ message: "Refund not available" });
       } else {
-        //check if the refund total is less than the paid amount
-        let paidAmt = invData[0].price;
-        paidAmt = parseInt(paidAmt, 10) * 100;
+        //check if the refund total is greater than or equal to refund available
+        let refundAvailble = invData[0].refund_available;
+        refundAvailble = parseInt(refundAvailble, 10) * 100;
         invId = invData[0].id;
-        if (refundTotal >= paidAmt) {
-          return res.json({ message: "Refund more than payment" });
+        if (refundTotal > refundAvailble) {
+          return res.json({
+            message: "Refund total more than refund available"
+          });
         } else {
           //create the refund
           stripe.refunds.create(
