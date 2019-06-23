@@ -141,6 +141,7 @@ router.route("/refund").post((req, res) => {
       return invoiceData;
     })
     .then(invData => {
+      console.log("INV Data", invData);
       if (!invData) {
         //if no invoice data returned, data not found
         return res.json({ message: "Refund not available" });
@@ -191,7 +192,7 @@ router.route("/refund").post((req, res) => {
                         res.json({ message: "Success" });
                       })
                       .catch(err => {
-                        res.json({ message: "unknown Error" });
+                        res.json({ message: "Unknown Error" });
                       });
                   })
                   .catch(err => {

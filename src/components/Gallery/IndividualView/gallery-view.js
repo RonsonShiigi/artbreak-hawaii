@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Comments from "../../Comments/comments";
-import Likes from "../../likes/likes";
+import Likes from "../../Likes/likes";
 
 import "./gallery-view.css";
 

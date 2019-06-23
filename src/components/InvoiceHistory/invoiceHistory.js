@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import InvoiceReceipt from "../InvoiceReceipt";
 
 import "./historystyles.css";
 
@@ -45,7 +46,7 @@ class InvoiceHistory extends Component {
                 unpaid
               </div>
             )}
-            <ul className="invoice-receipt">
+            {/* <ul className="invoice-receipt">
               <li>
                 <b className="invoice-email">{invoice.buyerEmail}</b>
               </li>
@@ -54,6 +55,17 @@ class InvoiceHistory extends Component {
               <li>Description: {invoice.description}</li>
               <li>Sent: {invoice.created_at}</li>
             </ul>
+          </div> */}
+            <InvoiceReceipt
+              buyerEmail={invoice.buyerEmail}
+              invoice={invoice.charge_id}
+              price={invoice.price}
+              purchased_at={invoice.purchased_at}
+              description={invoice.description}
+              created_at={invoice.created_at}
+              available_refund={invoice.refund_available}
+              paid={invoice.paid}
+            />
           </div>
         ))}
       </div>
