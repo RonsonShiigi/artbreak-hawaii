@@ -27,11 +27,11 @@ exports.seed = function(knex, Promise) {
           profileblurb: "i like bread"
         },
         {
-          username: "turtleWayne",
-          email: "turutleWayne@gmail.com",
+          username: "sam, but better",
+          email: "sams@gmail.com",
           password: "fart",
           stripe_id: "acct_1Eg5TDHI3KTEQBIB",
-          profileblurb: "i like bread"
+          profileblurb: "i REALLY like bread"
         }
       ]);
     });

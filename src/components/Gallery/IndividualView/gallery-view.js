@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comments from "../../Comments/comments";
-import Likes from "../../Likes/likes";
+import Likes from "../../Likes/Likes";
+import { Link } from "react-router-dom";
 
 import "./gallery-view.css";
 
@@ -14,7 +15,8 @@ class GalleryView extends Component {
       image_url: "",
       user_id: 0,
       created_at: 0,
-      updated_at: 0
+      updated_at: 0,
+      username: ""
     };
   }
 
@@ -31,7 +33,8 @@ class GalleryView extends Component {
           image_url: data.image_url,
           user_id: data.user_id,
           created_at: data.created_at,
-          updated_at: data.updated_at
+          updated_at: data.updated_at,
+          username: data.username
         });
       });
   }
@@ -70,7 +73,9 @@ class GalleryView extends Component {
               <span className="img-desc">{data.description}</span>
               <br />
               <span className="cmmt-date">
-                posted by {data.user_id} at {data.created_at}
+                posted by{" "}
+                <Link to={`users/${data.user_id}`}>{data.username}</Link> at{" "}
+                {data.created_at}
               </span>
               <br />
               <div className="likes">
