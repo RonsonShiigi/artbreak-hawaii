@@ -45,18 +45,20 @@ class GalleryView extends Component {
     // console.log("galleryview state", data);
     return (
       <div className="galleryview">
-        <section className="view-inner">
-          <a
-            href={`${data.image_url}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={data.image_url} className="img-style" alt="" />
-          </a>
+        <div className="view-inner">
+          <div className="img-holder">
+            <a
+              href={`${data.image_url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={data.image_url} className="img-style" alt="" />
+            </a>
+          </div>
           <div className="img-info">
             <div className="title-desc">
               <h1>{data.title}</h1>
-              {localStorage.userId === this.props.match.params.id ? (
+              {localStorage.userId === data.user_id ? (
                 <div className="img-links">
                   <ul>
                     <li>
@@ -87,7 +89,7 @@ class GalleryView extends Component {
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     );
   }

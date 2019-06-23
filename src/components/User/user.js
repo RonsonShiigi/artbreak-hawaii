@@ -21,9 +21,7 @@ class User extends Component {
   }
 
   handleChange(event) {
-    console.log("THIS SHOULD BE HIDDEN");
     this.setState({ editHidden: !this.state.editHidden });
-    console.log(this.state);
   }
 
   componentDidMount(req, res) {
@@ -74,7 +72,7 @@ class User extends Component {
                   <div className="edit-holder">
                     <div onClick={this.handleChange}>wharglbargl</div>
                     <div className="edit-div" style={style}>
-                      <EditUser />
+                      <EditUser profileblurb={this.props.profileblurb} />
                     </div>
                   </div>
                 ) : (
