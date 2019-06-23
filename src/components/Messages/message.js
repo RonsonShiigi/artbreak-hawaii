@@ -28,7 +28,7 @@ class ChatScreen extends Component {
   }
 
   sendTypingEvent() {
-    this.state.currentUser.isTypingIn({ roomId: "19441064" });
+    this.state.currentUser.isTypingIn({ roomId: this.state.currentRoom.id });
     // .catch(error => console.error("error", error));
   }
 
@@ -76,23 +76,21 @@ class ChatScreen extends Component {
               usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
                 username => username !== user.name
               )
-            }).then(room => {
-              console.log("room.id", room.id);
-              this.setState({
-                roomId: room.id
-              });
-              this.getRooms();
             });
           },
           onPresenceChange: () => this.forceUpdate(),
           onUserJoined: () => this.forceUpdate()
         }
       })
+      .then(currentRoom => {
+        this.setState({ currentRoom });
+      })
       .catch(err => console.log("error on subscribing to room: ", err));
   }
 
   componentDidMount() {
     const localUsername = localStorage.getItem("username");
+    // this.setState({ currentRoom
     fetch("http://localhost:8080/chatusers", {
       method: "POST",
       headers: {
@@ -154,7 +152,7 @@ class ChatScreen extends Component {
         background: "white",
         flexWrap: "columnWrap",
         paddingLeft: 30,
-        width: "100vw"
+        width: "81vw"
       },
       li: {
         display: "flex",
@@ -162,7 +160,7 @@ class ChatScreen extends Component {
         flexWrap: "columnWrap"
       }
     };
-
+    console.log("state", this.state);
     return (
       <div style={styles.container}>
         <div style={styles.chatContainer}>

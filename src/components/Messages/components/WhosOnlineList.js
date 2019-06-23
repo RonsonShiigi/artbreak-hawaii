@@ -8,7 +8,7 @@ class WhosOnlineList extends Component {
           if (user.id === this.props.currentUser.id) {
             return (
               <WhosOnlineListItem key={index} presenceState="online">
-                {user.name} (You)
+                {user.name} (you)
               </WhosOnlineListItem>
             );
           }
