@@ -70,17 +70,18 @@ class GalleryView extends Component {
               ) : (
                 ""
               )}
-              <span className="img-desc">{data.description}</span>
+              <span className="img-desc">
+                {" "}
+                <Likes product_id={this.props.match.params.id} />
+                {data.description}
+              </span>
               <br />
               <span className="cmmt-date">
                 posted by{" "}
-                <Link to={`users/${data.user_id}`}>{data.username}</Link> at{" "}
+                <Link to={`/users/${data.user_id}`}>{data.username}</Link> at{" "}
                 {data.created_at}
               </span>
               <br />
-              <div className="likes">
-                <Likes product_id={this.props.match.params.id} />
-              </div>
               <div className="comments">
                 <Comments product_id={this.props.match.params.id} />
               </div>
