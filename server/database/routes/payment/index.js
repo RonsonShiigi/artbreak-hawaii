@@ -132,8 +132,9 @@ router.route("/refund").post((req, res) => {
   let refundTotal = req.body.amount;
   refundTotal = parseInt(refundTotal, 10) * 100;
   let invId;
+  let userId;
 
-  Invoice.where({ charge_id: req.body.charge_id })
+  Invoice.where({ charge_id: chargeId })
     .fetchAll()
     .then(data => {
       const invoiceData = data.toJSON();
@@ -146,8 +147,12 @@ router.route("/refund").post((req, res) => {
       } else {
         //check if the refund total is greater than or equal to refund available
         let refundAvailble = invData[0].refund_available;
+        console.log("TYPE OF", refundAvailble);
         refundAvailble = parseInt(refundAvailble, 10) * 100;
         invId = invData[0].id;
+        userId = invData[0].user_id;
+        console.log("REFUND AVAILABLE", refundAvailble);
+        console.log("REFUND TOTAL", refundTotal);
         if (refundTotal > refundAvailble) {
           return res.json({
             message: "Refund total more than refund available"
@@ -166,16 +171,28 @@ router.route("/refund").post((req, res) => {
                 res.json({ message: "Refund Error" });
               } else {
                 new Refund()
-                  .save(
-                    {
-                      invoice_id: invId,
-                      refund_id: refund.id,
-                      amount: refundTotal
-                    },
-                    { patch: true }
-                  )
+                  .save({
+                    invoice_id: invId,
+                    refund_id: refund.id,
+                    amount: refundTotal / 100,
+                    user_id: userId
+                  })
                   .then(() => {
-                    res.json({ message: "Success" });
+                    const newRefundAvailable = refundAvailble - refundTotal;
+                    new Invoice({ id: invId })
+                      .save(
+                        {
+                          refund_available: newRefundAvailable / 100,
+                          refund: true
+                        },
+                        { patch: true }
+                      )
+                      .then(() => {
+                        res.json({ message: "Success" });
+                      })
+                      .catch(err => {
+                        res.json({ message: "unknown Error" });
+                      });
                   })
                   .catch(err => {
                     res.json({ message: "Unknown Error" });
