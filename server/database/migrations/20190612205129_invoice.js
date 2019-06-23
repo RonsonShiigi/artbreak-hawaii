@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
     table.string("description");
     table.decimal("price");
     table.string("buyerEmail");
-    table.boolean("paid");
+    table.boolean("paid").defaultTo("false");
     table.string("token");
     table.string("charge_id");
     table.string("refund_id");

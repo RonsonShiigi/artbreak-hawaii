@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Gallery from "../../Gallery";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import InvoiceHistory from "../../InvoiceHistory/invoiceHistory";
+import Gallery from "../../Gallery";
 
 function Dashtabs() {
   function TabContainer(props) {
