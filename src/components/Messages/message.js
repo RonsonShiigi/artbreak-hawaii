@@ -13,6 +13,7 @@ class ChatScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      roomId: null,
       currentUser: {},
       currentRoom: {},
       messages: [],
@@ -22,96 +23,114 @@ class ChatScreen extends Component {
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.sendTypingEvent = this.sendTypingEvent.bind(this);
+    this.subscribeToRoom = this.subscribeToRoom.bind(this);
+    this.getRooms = this.getRooms.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   sendTypingEvent() {
-    this.state.currentUser
-      .isTypingIn({ roomId: this.state.currentRoom.id })
-      .catch(error => console.error("error", error));
+    this.state.currentUser.isTypingIn({ roomId: this.state.currentRoom.id });
+    // .catch(error => console.error("error", error));
   }
 
   sendMessage(text) {
     this.state.currentUser.sendMessage({
       text,
-      roomId: this.state.currentRoom.id
+      roomId: this.state.roomId
     });
+  }
+
+  getRooms() {
+    this.currentUser
+      .getJoinableRooms()
+      .then(joinableRooms => {
+        this.setState({
+          joinableRooms,
+          joinedRooms: this.currentUser.rooms
+        });
+      })
+      .catch(err => console.log("error on joinableRooms: ", err));
+  }
+
+  subscribeToRoom(roomId) {
+    this.setState({ messages: [] });
+    this.setState({ roomId: roomId });
+    console.log("stateROOM ID", this.state.roomId);
+
+    this.currentUser
+      .subscribeToRoom({
+        roomId: roomId,
+        messageLimit: 100,
+        hooks: {
+          onMessage: message => {
+            this.setState({
+              messages: [...this.state.messages, message]
+            });
+          },
+          onUserStartedTyping: user => {
+            this.setState({
+              usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name]
+            });
+          },
+          onUserStoppedTyping: user => {
+            this.setState({
+              usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                username => username !== user.name
+              )
+            });
+          },
+          onPresenceChange: () => this.forceUpdate(),
+          onUserJoined: () => this.forceUpdate()
+        }
+      })
+      .then(currentRoom => {
+        this.setState({ currentRoom });
+      })
+      .catch(err => console.log("error on subscribing to room: ", err));
+  }
+
+  createRoom(name) {
+    this.currentUser
+      .createRoom({
+        name
+      })
+      .then(room => this.subscribeToRoom(this.state.room.id))
+      .catch(err => console.log("error with createRoom: ", err));
   }
 
   componentDidMount() {
     const localUsername = localStorage.getItem("username");
+    // this.setState({ currentRoom
     fetch("http://localhost:8080/chatusers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ username: localUsername })
-    })
-      .then(response => {
-        const chatManager = new Chatkit.ChatManager({
-          instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
-          userId: localStorage.getItem("username"),
-          tokenProvider: new Chatkit.TokenProvider({
-            url: "http://localhost:8080/authenticate"
-          })
-        });
+    }).then(response => {
+      const chatManager = new Chatkit.ChatManager({
+        instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
+        userId: localStorage.getItem("username"),
+        tokenProvider: new Chatkit.TokenProvider({
+          url: "http://localhost:8080/authenticate"
+        })
+      });
 
-        chatManager
-          .connect()
-          .then(currentUser => {
-            this.setState({ currentUser });
-
-            // GETTING ROOMS
-            currentUser
-              .getJoinableRooms()
-              .then(joinedRooms => {
-                this.setState({
-                  joinedRooms: currentUser.rooms
-                });
-              })
-              .catch(err => console.log("error on joinableRooms: ", err));
-
-            // GENERAL ROOM
-            return currentUser.subscribeToRoom({
-              roomId: "19438031",
-              messageLimit: 100,
-              hooks: {
-                onMessage: message => {
-                  this.setState({
-                    messages: [...this.state.messages, message]
-                  });
-                },
-                onUserStartedTyping: user => {
-                  this.setState({
-                    usersWhoAreTyping: [
-                      ...this.state.usersWhoAreTyping,
-                      user.name
-                    ]
-                  });
-                },
-                onUserStoppedTyping: user => {
-                  this.setState({
-                    usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
-                      username => username !== user.name
-                    )
-                  });
-                },
-                onPresenceChange: () => this.forceUpdate(),
-                onUserJoined: () => this.forceUpdate()
-              }
-            });
-          })
-          .then(currentRoom => {
-            this.setState({ currentRoom });
-          })
-          .catch(error => console.error("error", error));
-      })
-      .catch(error => console.error("error", error));
-    this.setState({
-      currentUser: localStorage.getItem("username")
+      chatManager
+        .connect()
+        .then(currentUser => {
+          this.currentUser = currentUser;
+          this.setState({ currentUser: currentUser });
+          this.getRooms();
+          this.subscribeToRoom("19450544");
+        })
+        .catch(err => console.log("error on connecting: ", err));
     });
   }
 
   render() {
+    console.log("curr user", this.state);
+    console.log("this.props", this.props);
     const styles = {
       container: {
         height: "88vh",
@@ -138,13 +157,15 @@ class ChatScreen extends Component {
         flexDirection: "column"
       },
       chatListContainer: {
-        paddingTop: 50,
+        paddingTop: 55,
         paddingLeft: 15,
         display: "flex",
         height: "auto",
         flexDirection: "column",
         background: "white",
-        flexWrap: "columnWrap"
+        flexWrap: "columnWrap",
+        paddingLeft: 30,
+        width: "81vw"
       },
       li: {
         display: "flex",
@@ -162,12 +183,13 @@ class ChatScreen extends Component {
               users={this.state.currentRoom.users}
             />
             <RoomList
+              subscribeToRoom={this.subscribeToRoom}
               rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
             />
-            {/* <button onClick="privateChat()">jew</button> */}
           </aside>
           <section style={styles.chatListContainer}>
             <MessageList
+              roomId={this.state.roomId}
               messages={this.state.messages}
               style={styles.chatList}
             />

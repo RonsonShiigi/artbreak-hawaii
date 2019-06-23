@@ -18,7 +18,7 @@ class MessagesList extends Component {
   render() {
     const styles = {
       container: {
-        overflow: "scroll",
+        overflow: "auto",
         width: "80vw"
       },
       ul: {
