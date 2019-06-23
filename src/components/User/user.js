@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Gallery from "../Gallery";
+import UserGallery from "./userGallery";
 import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";
 
@@ -88,7 +89,7 @@ class User extends Component {
             UPLOADS
           </div>
           <div className="user-uploads">
-            <Gallery />
+            <UserGallery />
           </div>
         </div>
       </div>
