@@ -25,6 +25,7 @@ class ChatScreen extends Component {
     this.sendTypingEvent = this.sendTypingEvent.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getRooms.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   sendTypingEvent() {
@@ -88,6 +89,15 @@ class ChatScreen extends Component {
       .catch(err => console.log("error on subscribing to room: ", err));
   }
 
+  createRoom(name) {
+    this.currentUser
+      .createRoom({
+        name
+      })
+      .then(room => this.subscribeToRoom(this.state.room.id))
+      .catch(err => console.log("error with createRoom: ", err));
+  }
+
   componentDidMount() {
     const localUsername = localStorage.getItem("username");
     // this.setState({ currentRoom
@@ -112,12 +122,15 @@ class ChatScreen extends Component {
           this.currentUser = currentUser;
           this.setState({ currentUser: currentUser });
           this.getRooms();
+          this.subscribeToRoom("19450544");
         })
         .catch(err => console.log("error on connecting: ", err));
     });
   }
 
   render() {
+    console.log("curr user", this.state);
+    console.log("this.props", this.props);
     const styles = {
       container: {
         height: "88vh",
@@ -160,7 +173,7 @@ class ChatScreen extends Component {
         flexWrap: "columnWrap"
       }
     };
-    console.log("state", this.state);
+
     return (
       <div style={styles.container}>
         <div style={styles.chatContainer}>
@@ -173,7 +186,6 @@ class ChatScreen extends Component {
               subscribeToRoom={this.subscribeToRoom}
               rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
             />
-            {/* <button onClick="privateChat()">jew</button> */}
           </aside>
           <section style={styles.chatListContainer}>
             <MessageList

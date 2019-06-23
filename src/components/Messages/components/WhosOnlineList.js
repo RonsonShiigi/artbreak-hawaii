@@ -1,9 +1,34 @@
 import React, { Component } from "react";
+import ChatScreen from "../message";
 
 class WhosOnlineList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: this.props.currentUser
+    };
+  }
+  createRoom() {
+    this.props.currentUser
+      .createRoom({
+        name: "Conversation with Justen & Jew",
+        private: true,
+        addUserIds: ["justen", "jew"],
+        customData: { foo: 42 }
+      })
+      .then(room => {
+        console.log(`Created room called ${room.name}`);
+      })
+      .catch(err => {
+        console.log(`Error creating room ${err}`);
+      });
+  }
+  click = e => {
+    this.createRoom();
+  };
   renderUsers() {
     return (
-      <ul>
+      <ul onClick={this.click}>
         {this.props.users.map((user, index) => {
           if (user.id === this.props.currentUser.id) {
             return (
