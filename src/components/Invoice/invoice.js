@@ -83,6 +83,7 @@ class Invoice extends Component {
             <input
               id="price"
               label="price"
+              type="number"
               name="price"
               placeholder="price"
               onChange={this.handleChange}
