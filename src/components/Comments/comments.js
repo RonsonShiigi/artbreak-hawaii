@@ -87,6 +87,7 @@ class Comments extends Component {
             </button>
           </form>
         </div>
+
         <h1>Comments</h1>
 
         {commentsList.map(comment => (

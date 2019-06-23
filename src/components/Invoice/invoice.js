@@ -28,6 +28,12 @@ class Invoice extends Component {
     e.preventDefault();
     if (localStorage.getItem("userId") === null) {
       console.log("You are not logged in");
+    } else if (
+      this.state.email === "" ||
+      this.state.price === "" ||
+      this.state.description === ""
+    ) {
+      window.location.replace("http://localhost:8081/invoiceError");
     } else {
       console.log("this is invoice state", this.state);
       axios

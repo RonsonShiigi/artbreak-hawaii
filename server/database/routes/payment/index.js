@@ -5,6 +5,7 @@ require("dotenv").config({ path: "../../.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const User = require("../../models/UsersModel.js");
 const Invoice = require("../../models/InvoiceModel");
+const Refund = require("../../models/RefundsModel");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
@@ -50,7 +51,13 @@ router.route("/checkout").post((req, res) => {
           new Invoice()
             .where({ token: uriToken })
             .save(
-              { paid: true, charge_id: chargeId, purchased_at: new Date() },
+              {
+                paid: true,
+                charge_id: chargeId,
+                purchased_at: new Date(),
+                refund_available: parseFloat(totalAmt / 100),
+                refund: false
+              },
               { patch: true }
             )
             .then(() => {
@@ -125,8 +132,9 @@ router.route("/refund").post((req, res) => {
   let refundTotal = req.body.amount;
   refundTotal = parseInt(refundTotal, 10) * 100;
   let invId;
+  let userId;
 
-  Invoice.where({ charge_id: req.body.charge_id })
+  Invoice.where({ charge_id: chargeId })
     .fetchAll()
     .then(data => {
       const invoiceData = data.toJSON();
@@ -137,12 +145,18 @@ router.route("/refund").post((req, res) => {
         //if no invoice data returned, data not found
         return res.json({ message: "Refund not available" });
       } else {
-        //check if the refund total is less than the paid amount
-        let paidAmt = invData[0].price;
-        paidAmt = parseInt(paidAmt, 10) * 100;
+        //check if the refund total is greater than or equal to refund available
+        let refundAvailble = invData[0].refund_available;
+        console.log("TYPE OF", refundAvailble);
+        refundAvailble = parseInt(refundAvailble, 10) * 100;
         invId = invData[0].id;
-        if (refundTotal >= paidAmt) {
-          return res.json({ message: "Refund more than payment" });
+        userId = invData[0].user_id;
+        console.log("REFUND AVAILABLE", refundAvailble);
+        console.log("REFUND TOTAL", refundTotal);
+        if (refundTotal > refundAvailble) {
+          return res.json({
+            message: "Refund total more than refund available"
+          });
         } else {
           //create the refund
           stripe.refunds.create(
@@ -156,12 +170,29 @@ router.route("/refund").post((req, res) => {
                 console.log("ERRR", err);
                 res.json({ message: "Refund Error" });
               } else {
-                //save the refund id to invoice table
-                new Invoice()
-                  .where({ id: invId })
-                  .save({ refund_id: refund.id, refund: true }, { patch: true })
+                new Refund()
+                  .save({
+                    invoice_id: invId,
+                    refund_id: refund.id,
+                    amount: refundTotal / 100,
+                    user_id: userId
+                  })
                   .then(() => {
-                    res.json({ message: "Success" });
+                    const newRefundAvailable = refundAvailble - refundTotal;
+                    new Invoice({ id: invId })
+                      .save(
+                        {
+                          refund_available: newRefundAvailable / 100,
+                          refund: true
+                        },
+                        { patch: true }
+                      )
+                      .then(() => {
+                        res.json({ message: "Success" });
+                      })
+                      .catch(err => {
+                        res.json({ message: "unknown Error" });
+                      });
                   })
                   .catch(err => {
                     res.json({ message: "Unknown Error" });

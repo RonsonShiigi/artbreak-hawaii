@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Comments from "../../Comments/comments";
+import Likes from "../../Likes/likes";
 
 import "./gallery-view.css";
 
@@ -72,6 +73,9 @@ class GalleryView extends Component {
                 posted by {data.user_id} at {data.created_at}
               </span>
               <br />
+              <div className="likes">
+                <Likes product_id={this.props.match.params.id} />
+              </div>
               <div className="comments">
                 <Comments product_id={this.props.match.params.id} />
               </div>
