@@ -22,6 +22,7 @@ import PaymentConfirmation from "./components/PaymentConfirmation/paymentConfirm
 import Refund from "./components/Refund/";
 import RefundConfirmation from "./components/RefundConfirmation/";
 import Error from "./components/404";
+import CheckoutError from "./components/BuyerCheckout/error";
 
 import Checkout from "./components/Checkout/checkout";
 import Delete from "./components/Delete/delete";
@@ -75,6 +76,7 @@ class App extends Component {
           <Route path="/refund" component={Refund} />
           <Route path="/refundConfirmation" component={RefundConfirmation} />
           <Route path="/invoiceError" component={InvoiceError} />
+          <Route path="/checkoutError" component={CheckoutError} />
         </Switch>
       </React.Fragment>
     );

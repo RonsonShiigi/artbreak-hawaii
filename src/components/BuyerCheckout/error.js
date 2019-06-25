@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PaymentConfirmation = () => {
+const CheckoutError = () => {
   return (
     <div className="container">
       <h1>
-        Thank you for your purchase! A confirmation email has been sent to the
-        provided email.
+        Checkout Error Occurred, Please Contact
+        ArtbreakUserProvisioning@gmail.com
       </h1>
       <Link to="/"> Browse Some Moar!!</Link>
     </div>
   );
 };
 
-export default PaymentConfirmation;
+export default CheckoutError;

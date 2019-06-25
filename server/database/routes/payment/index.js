@@ -17,10 +17,12 @@ router.route("/checkout").post((req, res) => {
     userId,
     uriToken,
     purchasedItem,
-    buyerE
+    buyerE,
+    billingE
   } = req.body;
   let username;
   let sellerEmail;
+  const billingEmail = billingE;
 
   User.where({ id: userId })
     .fetchAll()
@@ -47,7 +49,6 @@ router.route("/checkout").post((req, res) => {
         })
         .then(function(charge) {
           const chargeId = charge.id;
-          const billingEmail = charge.billing_details.name;
           new Invoice()
             .where({ token: uriToken })
             .save(
@@ -88,26 +89,18 @@ router.route("/checkout").post((req, res) => {
               //send email to buyer
               transporter.sendMail(buyerConfirmation, (error, response) => {
                 if (error) {
-                  return res.json({
-                    message: "Buyer Confrimation Email Error"
-                  });
+                  console.log("buyerConfirmation Error", error);
                 } else {
-                  return res.json({
-                    message: "200"
-                  });
+                  return;
                 }
               });
 
               //send email to seller
               transporter.sendMail(sellerConfirmation, (error, response) => {
                 if (error) {
-                  return res.json({
-                    message: "Seller Confirmation Email Error"
-                  });
+                  console.log("sellerConfirmation Error", error);
                 } else {
-                  return res.json({
-                    message: "200"
-                  });
+                  return;
                 }
               });
 

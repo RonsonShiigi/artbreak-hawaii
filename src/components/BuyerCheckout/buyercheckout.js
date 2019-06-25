@@ -33,7 +33,6 @@ class BuyerCheckout extends Component {
         return res.json();
       })
       .then(itemsData => {
-        console.log("THIS ITEMSDATA", itemsData);
         this.setState({ userId: itemsData.user_id });
         this.setState({ paid: itemsData.paid });
         this.setState({ price: itemsData.price });
@@ -58,49 +57,45 @@ class BuyerCheckout extends Component {
       });
   };
 
-  onToken(token) {
-    if (localStorage.getItem("userId") === null) {
-      console.log("You are not logged in");
-    } else {
-      console.log("onToken", token);
-      fetch("http://localhost:8080/payment/checkout", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          stripeToken: token.id,
-          total: this.state.price,
-          userId: this.state.artist,
-          uriToken: this.state.uriToken,
-          purchasedItem: this.state.description,
-          buyerE: this.state.buyerEmail
-        }),
-        credentials: "include"
+  onToken(token, addresses) {
+    fetch("http://localhost:8080/payment/checkout", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        stripeToken: token.id,
+        billingE: token.email,
+        total: this.state.price,
+        userId: this.state.artist,
+        uriToken: this.state.uriToken,
+        purchasedItem: this.state.description,
+        buyerE: this.state.buyerEmail
+      }),
+      credentials: "include"
+    })
+      .then(res => {
+        const resData = res.json();
+        return resData;
       })
-        .then(res => {
-          const resData = res.json();
-          return resData;
-        })
-        .then(data => {
-          const { message } = data;
-          switch (message) {
-            case "Payment Success":
-              this.setState({ redirect: true });
-              break;
-            case "500":
-              this.setState({ error: true });
-              break;
-            default:
-              return;
-          }
-        })
-        .catch(err => {
-          console.log("ERROR on TOKEN", err);
-          this.setState({ error: true });
-        });
-    }
+      .then(data => {
+        const { message } = data;
+        switch (message) {
+          case "Payment Success":
+            this.setState({ redirect: true });
+            break;
+          case "500":
+            this.setState({ error: true });
+            break;
+          default:
+            return;
+        }
+      })
+      .catch(err => {
+        console.log("ERROR on TOKEN", err);
+        this.setState({ error: true });
+      });
   }
 
   render() {
@@ -109,25 +104,9 @@ class BuyerCheckout extends Component {
     function CheckRedirect(props) {
       const checkRedirect = props.isRedirect;
       if (checkRedirect && !error) {
-        return (
-          <Redirect
-            to={{
-              pathname: "/paymentConfirmation",
-              error: false,
-              paid: true
-            }}
-          />
-        );
+        return <Redirect to="/paymentConfirmation" />;
       } else if (checkRedirect && error) {
-        return (
-          <Redirect
-            to={{
-              pathname: "/paymentConfirmation",
-              error: false,
-              paid: null
-            }}
-          />
-        );
+        return <Redirect to="/checkoutError" />;
       } else {
         return null;
       }
@@ -156,6 +135,10 @@ class BuyerCheckout extends Component {
                   key="stripe-checkout"
                   token={this.onToken}
                   stripeKey={process.env.REACT_APP_STRIPE_PK}
+                  billingAddress
+                  shippingAddress
+                  name={name}
+                  amount={price * 100}
                 />
               </div>
             )}
