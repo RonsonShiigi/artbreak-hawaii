@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comments from "../../Comments/comments";
 import Likes from "../../Likes/likes";
+import { Link } from "react-router-dom";
 
 import "./gallery-view.css";
 
@@ -14,7 +15,8 @@ class GalleryView extends Component {
       image_url: "",
       user_id: 0,
       created_at: 0,
-      updated_at: 0
+      updated_at: 0,
+      username: ""
     };
   }
 
@@ -31,7 +33,8 @@ class GalleryView extends Component {
           image_url: data.image_url,
           user_id: data.user_id,
           created_at: data.created_at,
-          updated_at: data.updated_at
+          updated_at: data.updated_at,
+          username: data.username
         });
       });
   }
@@ -42,18 +45,20 @@ class GalleryView extends Component {
     // console.log("galleryview state", data);
     return (
       <div className="galleryview">
-        <section className="view-inner">
-          <a
-            href={`${data.image_url}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={data.image_url} className="img-style" alt="" />
-          </a>
+        <div className="view-inner">
+          <div className="img-holder">
+            <a
+              href={`${data.image_url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={data.image_url} className="img-style" alt="" />
+            </a>
+          </div>
           <div className="img-info">
             <div className="title-desc">
               <h1>{data.title}</h1>
-              {localStorage.userId === this.props.match.params.id ? (
+              {localStorage.userId === data.user_id ? (
                 <div className="img-links">
                   <ul>
                     <li>
@@ -67,19 +72,24 @@ class GalleryView extends Component {
               ) : (
                 ""
               )}
-              <span className="img-desc">{data.description}</span>
-              <br />
-              <span className="cmmt-date">{data.created_at}</span>
-              <br />
-              <div className="likes">
+              <span className="img-desc">
+                {" "}
                 <Likes product_id={this.props.match.params.id} />
-              </div>
+                {data.description}
+              </span>
+              <br />
+              <span className="cmmt-date">
+                posted by{" "}
+                <Link to={`/users/${data.user_id}`}>{data.username}</Link> at{" "}
+                {data.created_at}
+              </span>
+              <br />
               <div className="comments">
                 <Comments product_id={this.props.match.params.id} />
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     );
   }

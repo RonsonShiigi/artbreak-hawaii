@@ -10,6 +10,11 @@ exports.up = function(knex, Promise) {
         .foreign("user_id")
         .references("users.id")
         .onDelete("cascade");
+      table.string("username").unsigned();
+      table
+        .foreign("username")
+        .references("users.username")
+        .onDelete("cascade");
       table.timestamp("created_at").defaultTo(knex.raw("now()"));
       table.timestamp("updated_at");
     })

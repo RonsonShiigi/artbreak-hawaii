@@ -9,7 +9,7 @@
 
 .comment-form {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   font-family: "Roboto", "Helvetica", sans-serif;
   font-size: 16px;
   background-color: transparent;
@@ -21,6 +21,7 @@
   position: relative;
   top: -2vh;
   left: 2vw;
+  width: 95%;
 }
 
 ::-webkit-input-placeholder {
@@ -34,10 +35,6 @@
   border-radius: 0;
   width: 20%;
   text-transform: uppercase;
-  position: relative;
-  top: -7vh;
-  left: 25vw;
-  height: 5vh;
 }
 
 .cmmt {

@@ -60,20 +60,25 @@ class Dashboard extends Component {
                   <Link to="/upload">Add New Piece</Link>
                 </li>
                 <li>Favorites</li>
+
+                <br />
+                <div>
+                  {!stripeReg ? (
+                    <div className="stripe-button">
+                      Become A Seller! <br />
+                      Sign up for Stripe Below:
+                      <StripeReg />
+                      {error ? (
+                        <div>Internal Error, please try again</div>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <li>
+                      <Link to="/invoice">CREATE AN INVOICE</Link>
+                    </li>
+                  )}
+                </div>
               </ul>
-              <br />
-              <div>
-                {!stripeReg ? (
-                  <div className="stripe-button">
-                    Become A Seller! <br />
-                    Sign up for Stripe Below:
-                    <StripeReg />
-                    {error ? <div>Internal Error, please try again</div> : null}
-                  </div>
-                ) : (
-                  <Link to="/invoice">CREATE AN INVOICE</Link>
-                )}
-              </div>
             </div>
             <div className="right-nav">
               <Dashtabs />

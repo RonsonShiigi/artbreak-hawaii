@@ -31,7 +31,10 @@ exports.up = function(knex, Promise) {
           table.integer("product_id");
           table.foreign("user_id").references("users.id");
           table.string("username").unsigned();
-          table.foreign("username").references("users.username");
+          table
+            .foreign("username")
+            .references("users.username")
+            .onDelete("cascade");
         })
         .then(function() {
           return knex.schema.createTable("messages", table => {
@@ -42,7 +45,10 @@ exports.up = function(knex, Promise) {
             table.timestamp("created_at");
             table.timestamp("updated_at");
             table.integer("user_id").unsigned();
-            table.foreign("user_id").references("users.id");
+            table
+              .foreign("user_id")
+              .references("users.id")
+              .onDelete("cascade");
           });
         });
     });
@@ -50,7 +56,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema
-    .dropTable("comments")
     .dropTable("messages")
+    .dropTable("comments")
     .dropTable("users");
 };

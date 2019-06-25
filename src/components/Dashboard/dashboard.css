@@ -37,6 +37,7 @@
 
 .stripe-button {
   padding-left: 10px;
+  padding-top: 2vh;
   color: #cccccc;
   line-height: 15px;
   text-transform: uppercase;
