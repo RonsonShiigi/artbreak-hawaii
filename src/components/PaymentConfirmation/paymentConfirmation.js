@@ -24,36 +24,34 @@ class PaymentConfirmation extends Component {
     const { isPaid, isError } = this.state;
 
     return (
-      <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        {isPaid && !isError ? (
-          <div className="container">
-            <h1>
-              Thank you for your purchase! A confirmation email has been sent to
-              the provided email.
-            </h1>
-            <Link to="/"> Browse Some Moar!!</Link>
-          </div>
-        ) : (
-          <h1>
-            Internal Error Occured, Please Email us at
-            ArtBreakHIUserProvisioning@gmail.com.
-          </h1>
-        )}
+      <div className="container">
+        <div className="paper-holder">
+          {isPaid && !isError ? (
+            <React.Fragment>
+              <h1 className="emoji">🎊🎊🎊</h1>
+              <h1>
+                Thank you for your purchase
+                <b>
+                  <i>!</i>
+                </b>
+              </h1>
+              <span className="confirmation-msg">
+                A confirmation email has been sent to the provided email.
+              </span>
+
+              <Link to="/"> Browse Some Moar!!</Link>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <h1 className="emoji">😵</h1>
+              <h1>Payment failed.</h1>
+              <span className="confirmation-msg">
+                Please contact us at ArtBreakHIUserProvisioning@gmail.com.
+              </span>
+              <Link to="/dashboard">Return to dashboard</Link>
+            </React.Fragment>
+          )}
+        </div>
       </div>
     );
   }

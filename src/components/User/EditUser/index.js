@@ -29,24 +29,31 @@ class EditUser extends Component {
         contactlinks: this.state.contactlinks,
         profileblurb: this.state.profileblurb
       })
-    }).catch(err => {
-      console.log("ERROR", err);
-    });
+    })
+      .then(
+        window.location.replace(
+          `http://localhost:8081/users/${localStorage.getItem("userId")}`
+        )
+      )
+      .catch(err => {
+        console.log("ERROR", err);
+      });
   };
 
   render() {
     return (
       <React.Fragment>
         <form onSubmit={this.editUser} className="user-edit">
-          <input
-            type="text"
-            placeholder={JSON.stringify(this.props.profileblurb)}
+          <textarea
+            placeholder="write something about yourself"
             name="profileblurb"
             value={this.state.profileblurb}
             onChange={this.handleChange}
             className="blurb-input"
           />
-          <button type="submit">AY</button>
+          <button type="submit" className="btn">
+            SAVE CHANGES
+          </button>
         </form>
       </React.Fragment>
     );

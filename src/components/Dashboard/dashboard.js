@@ -45,8 +45,18 @@ class Dashboard extends Component {
     return (
       <div className="container">
         {localStorage.getItem("username") === null ? (
-          <div className="not-logged-in">
-            <h1>log tf in, heathen</h1>
+          <div className="paper-holder">
+            <h1>
+              Please{" "}
+              <Link to="/login">
+                <b>log in</b>
+              </Link>
+              <b>
+                <i>!</i>
+              </b>
+            </h1>
+            <span className="confirmation-msg">It'll be fun, promise!</span>
+            <Link to="/register">Don't have an account yet?</Link>
           </div>
         ) : (
           <React.Fragment>
@@ -59,7 +69,6 @@ class Dashboard extends Component {
                 <li>
                   <Link to="/upload">Add New Piece</Link>
                 </li>
-                <li>Favorites</li>
 
                 <br />
                 <div>
