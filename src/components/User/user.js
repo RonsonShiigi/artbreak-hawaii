@@ -66,7 +66,6 @@ class User extends Component {
             >
               {data.username}
               <div className="date-info">
-                join date: {data.created_at}
                 <svg class="svg-icon" viewBox="0 0 20 20">
                   <path
                     fill="#ccc"
