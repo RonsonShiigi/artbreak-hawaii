@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Comments from "../../Comments/comments";
-import Likes from "../../Likes/Likes";
+import Likes from "../../likes/likes";
 import { Link } from "react-router-dom";
 
 import "./gallery-view.css";
