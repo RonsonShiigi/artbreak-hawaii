@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 class Login extends Component {
@@ -194,7 +193,6 @@ class Login extends Component {
               </g>
             </svg>
             <input
-              type="text"
               id="password"
               label="password"
               type="password"

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ChatScreen from "../message";
 
 class WhosOnlineList extends Component {
   constructor(props) {

@@ -6,7 +6,7 @@ import Main from "./components/Home/main";
 import Header from "./components/Header/header";
 import Register from "./components/Register/register";
 import Login from "./components/Login/login";
-import ShoppingCart from "./components/ShoppingCart/shoppingCart";
+
 import StripeRedirect from "./components/StripeRedirect/stripeRedirect.js";
 import User from "./components/User/user";
 import Dashboard from "./components/Dashboard/dashboard";
@@ -61,7 +61,6 @@ class App extends Component {
           <Route path="/upload" component={FileUpload} />
           <Route path="/delete" component={Delete} />
           <Route path="/editProduct" component={Edit} />
-          <Route path="/cart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
           <Route exact path="/sRegistration" component={StripeRedirect} />
           <Route path="/dashboard" component={Dashboard} />
@@ -88,8 +87,6 @@ const mapDispatchToProps = dispatch => {
     getProducts: () => dispatch(getProducts())
   };
 };
-
-let products = [{}];
 
 export default connect(
   null,

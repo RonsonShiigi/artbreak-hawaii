@@ -9,8 +9,6 @@ class RoomList extends React.Component {
           <ul>
             <h3>Your Rooms:</h3>
             {this.props.rooms.map(room => {
-              // console.log("props", this.props.roomId);
-              // console.log("woo", room.id);
               const activeColor =
                 this.props.roomId === room.id ? "#FFFFFF" : "#B0B0B0";
               const activeBold = this.props.roomId === room.id ? "bold" : "";

@@ -27,9 +27,9 @@ class Likes extends Component {
         let counter = this.state.like_count;
         this.state.likes_array.map(like => {
           if (Number(like.product_id) === Number(this.state.product_id)) {
-            counter++;
+            return counter++;
           }
-          this.setState({ like_count: counter });
+          return this.setState({ like_count: counter });
         });
       })
       .then(data => {
@@ -38,7 +38,7 @@ class Likes extends Component {
             Number(like.user_id) === Number(this.state.user_id) &&
             Number(like.product_id) === Number(this.state.product_id)
           ) {
-            this.setState({ has_liked: true });
+            return this.setState({ has_liked: true });
           }
         });
       });

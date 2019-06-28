@@ -132,7 +132,6 @@ class FileEdit extends Component {
             fullWidth={true}
             onChange={this.handleChange}
             margin="normal"
-            fullWidth={true}
           />
           <TextField
             id="description"

@@ -2,11 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 function Logout(props) {
-  const [values, setValues] = React.useState({
-    email: "",
-    password: ""
-  });
-
   const handleSubmit = e => {
     e.preventDefault();
     fetch("http://localhost:8080/api/auth/logout", {

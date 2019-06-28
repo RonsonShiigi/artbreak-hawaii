@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Refund from "../Refund";
 import { Redirect } from "react-router";
 
 class InvoiceReceipt extends Component {
@@ -19,15 +17,7 @@ class InvoiceReceipt extends Component {
   }
 
   componentDidMount() {
-    const {
-      invoice,
-      price,
-      puchased_at,
-      description,
-      created_at,
-      available_refund,
-      paid
-    } = this.props;
+    const { invoice, price, description, available_refund, paid } = this.props;
     this.setState({
       invoice: invoice,
       price: price,
