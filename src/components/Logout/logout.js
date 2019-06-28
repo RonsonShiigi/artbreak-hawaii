@@ -7,9 +7,6 @@ function Logout(props) {
     password: ""
   });
 
-  // const handleChange = name => e => {
-  //   setValues({ ...values, [name]: e.target.value });
-  // };
   const handleSubmit = e => {
     e.preventDefault();
     fetch("http://localhost:8080/api/auth/logout", {

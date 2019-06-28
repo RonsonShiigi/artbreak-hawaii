@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Gallery from "../Gallery";
 import UserGallery from "./userGallery";
 import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";

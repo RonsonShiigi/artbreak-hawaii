@@ -6,9 +6,6 @@ import TypingIndicator from "./components/TypingIndicator";
 import WhosOnlineList from "./components/WhosOnlineList";
 import RoomList from "./components/RoomList";
 
-import { ActionViewColumn } from "material-ui/svg-icons";
-import { wrap } from "module";
-
 class ChatScreen extends Component {
   constructor(props) {
     super(props);
@@ -159,7 +156,6 @@ class ChatScreen extends Component {
       },
       chatListContainer: {
         paddingTop: 55,
-        paddingLeft: 15,
         display: "flex",
         height: "auto",
         flexDirection: "column",

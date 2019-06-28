@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./stripeRedirect.css";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class StripeRedirect extends Component {
   constructor(props) {

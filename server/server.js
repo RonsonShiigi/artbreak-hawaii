@@ -20,7 +20,6 @@ const PurchaseRoutes = require("./database/routes/purchases/index");
 const MessageRoutes = require("./database/routes/messages/index");
 const LikeRoutes = require("./database/routes/likes/index");
 const AuthRoutes = require("./database/routes/auth/index");
-const ShoppingCartRoutes = require("./database/routes/shoppingcart/index");
 const PaymentRoutes = require("./database/routes/payment/index");
 const TestRoute = require("./database/routes/newProduct/index");
 const StripeRegRoutes = require("./database/routes/stripeReg/index");

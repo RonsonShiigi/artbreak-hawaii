@@ -28,46 +28,10 @@ class FileEdit extends Component {
   }
 
   handleChange = e => {
-    // setValues({ ...values, [name]: e.target.value });
     const name = e.target.name;
     this.setState({ [name]: e.target.value });
   };
 
-  // submitFile = event => {
-  //   event.preventDefault();
-  //   console.log("this is state", this.state);
-  //   const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
-  //   // const image_url = url + res.req.file.key;
-
-  //   //posting to s3 axios call
-  //   const formData = new FormData();
-  //   console.log("formData", formData);
-
-  //   formData.append("file", this.state.file[0]);
-  //   axios
-  //     .post(
-  //       "http://localhost:8080/products/" + this.state.product_id,
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data"
-  //         }
-  //       }
-  //     )
-  //     .then(response => {
-  //       console.log("response", response.data.key);
-  //     });
-
-  //   // posting to postgresql axios request
-  //   // axios
-  //   //   .post("http://localhost:8080/products", this.state)
-  //   //   .then(res => {
-  //   //     console.log("response", res.data);
-  //   //   })
-  //   //   .catch(err => {
-  //   //     console.log("error in creating a new product", err);
-  //   //   });
-  // };
   editFile = e => {
     e.preventDefault();
     if (this.state.user_id === null) {
@@ -106,9 +70,6 @@ class FileEdit extends Component {
             .then(data => {
               console.log("you are deleting from s3 and psql");
             })
-            // .then(res => {
-            //   res.redirect("/");
-            // })
             .catch(err => {
               console.log(err);
             });
@@ -141,7 +102,7 @@ class FileEdit extends Component {
                 });
             })
             .catch(error => {
-              // handle your error
+              console.log(error);
             });
         })
 
@@ -169,7 +130,6 @@ class FileEdit extends Component {
             label="title"
             name="title"
             fullWidth={true}
-            // value={values.title}
             onChange={this.handleChange}
             margin="normal"
             fullWidth={true}
@@ -178,20 +138,11 @@ class FileEdit extends Component {
             id="description"
             label="description"
             name="description"
-            // value={values.description}
             onChange={this.handleChange}
             margin="normal"
             fullWidth={true}
           />
           <br />
-          {/* <TextField
-            id="user_id"
-            label="user_id"
-            name="user_id"
-            onChange={this.handleChange}
-            margin="normal"
-            fullWidth={true}
-          /> */}
 
           <Button
             type="submit"

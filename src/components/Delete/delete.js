@@ -3,7 +3,6 @@ import axios from "axios";
 
 import { withStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
-import { PresignedPost } from "aws-sdk/clients/s3";
 
 const CustomButton = withStyles({
   root: {
@@ -26,10 +25,10 @@ class Delete extends Component {
   }
 
   componentDidMount() {
-    this.state.user_id = localStorage.getItem("userId");
+    this.setState({ user_id: localStorage.getItem("userId") });
     let pather = window.location.pathname.split("/");
 
-    this.state.product_id = pather[2];
+    this.setState({ product_id: pather[2] });
   }
 
   deleteFile = e => {

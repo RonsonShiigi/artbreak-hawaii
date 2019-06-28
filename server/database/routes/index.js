@@ -9,7 +9,6 @@ const PurchaseRoutes = require("./purchases");
 const MessageRoutes = require("./messages");
 const LikeRoutes = require("./likes");
 const AuthRoutes = require("./auth");
-const ShoppingCartRoutes = require("./shoppingcart");
 const PaymentRoutes = require("./payment");
 const TestRoute = require("./newProduct");
 const StripeRegRoutes = require("./stripeReg");

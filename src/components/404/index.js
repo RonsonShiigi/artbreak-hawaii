@@ -6,7 +6,11 @@ class Error extends Component {
     return (
       <div className="container">
         <div className="paper-holder">
-          <h1 className="emoji">😵😵😵</h1>
+          <h1 className="emoji">
+            <span role="img" aria-label="dead face emoji">
+              😵😵😵
+            </span>
+          </h1>
           <h1>404!</h1>
           <span className="confirmation-msg">
             This isn't the page you're looking for!

@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import "./Register.css";
 
-import { withStyles } from "@material-ui/styles";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -257,7 +252,6 @@ class Register extends Component {
               </g>
             </svg>
             <input
-              type="text"
               id="password"
               placeholder="password"
               key="password"

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
-
 class Invoice_Confirmation extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +33,11 @@ class Invoice_Confirmation extends Component {
           </div>
         ) : (
           <div className="paper-holder">
-            <h1 className="emoji">🎉🎉🎉</h1>
+            <h1 className="emoji">
+              <span role="img" aria-label="party popper">
+                🎉🎉🎉
+              </span>
+            </h1>
             <h1>
               Congratulations
               <b>

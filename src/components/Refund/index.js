@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
 
-import axios from "axios";
-
 class Refund extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +64,7 @@ class Refund extends Component {
             this.setState({ overRefund: true });
             break;
           case "Refund Error":
-            console.log("NOOOOOO");
+            console.log("Refund Error");
             break;
           case "Success":
             this.setState({ redirectSuccess: true });
@@ -74,8 +72,6 @@ class Refund extends Component {
           case "Unknown Error":
             console.log("Unknown Error");
             break;
-          case "Refund Error":
-            console.log("Refund Error");
           default:
             return;
         }
@@ -88,12 +84,10 @@ class Refund extends Component {
 
   render() {
     const {
-      chargeId,
       description,
       invoiceNumber,
       availableRefund,
       redirect,
-      amount,
       overRefund,
       redirectSuccess
     } = this.state;

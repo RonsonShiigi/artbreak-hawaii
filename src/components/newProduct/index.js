@@ -63,7 +63,7 @@ class FileUpload extends Component {
             .post("http://localhost:8080/products", this.state)
             .then(res => {
               console.log("response", res.data);
-              this.state.id = res.data.id;
+              this.setState({ id: res.data.id });
             })
             .then(data => {
               //make dynamic
