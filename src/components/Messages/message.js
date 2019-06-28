@@ -8,6 +8,7 @@ import RoomList from "./components/RoomList";
 
 import { ActionViewColumn } from "material-ui/svg-icons";
 import { wrap } from "module";
+import { join } from "bluebird";
 
 class ChatScreen extends Component {
   constructor(props) {
@@ -44,10 +45,19 @@ class ChatScreen extends Component {
     this.currentUser
       .getJoinableRooms()
       .then(joinableRooms => {
-        this.setState({
-          joinableRooms,
-          joinedRooms: this.currentUser.rooms
-        });
+        this.setState(
+          {
+            joinableRooms,
+            joinedRooms: this.currentUser.rooms
+          },
+          () => {
+            localStorage.setItem(
+              "joinedRooms",
+              JSON.stringify(this.state.joinedRooms)
+            );
+          }
+        );
+        console.log(">>>>>>", joinableRooms);
       })
       .catch(err => console.log("error on joinableRooms: ", err));
   }
@@ -55,7 +65,6 @@ class ChatScreen extends Component {
   subscribeToRoom(roomId) {
     this.setState({ messages: [] });
     this.setState({ roomId: roomId });
-    console.log("stateROOM ID", this.state.roomId);
 
     this.currentUser
       .subscribeToRoom({
@@ -87,6 +96,7 @@ class ChatScreen extends Component {
         this.setState({ currentRoom });
       })
       .catch(err => console.log("error on subscribing to room: ", err));
+    this.forceUpdate(this.getRooms());
   }
 
   createRoom(name) {
@@ -108,6 +118,7 @@ class ChatScreen extends Component {
       },
       body: JSON.stringify({ username: localUsername })
     }).then(response => {
+      console.log("res>>>", response);
       const chatManager = new Chatkit.ChatManager({
         instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
         userId: localStorage.getItem("username"),
@@ -130,11 +141,12 @@ class ChatScreen extends Component {
   }
 
   render() {
+    console.log(this.state.joinedRooms.length);
     // console.log("curr user", this.state);
     // console.log("this.props", this.props);
     const styles = {
       container: {
-        height: "88vh",
+        height: "85vh",
         width: "100vw",
         marginTop: "105px",
         display: "flex",
@@ -153,7 +165,7 @@ class ChatScreen extends Component {
         width: "15%",
         paddingTop: 50,
         paddingLeft: 10,
-        backgroundColor: "#2c303b",
+        backgroundColor: "#252525",
         color: "white",
         flexDirection: "column"
       },

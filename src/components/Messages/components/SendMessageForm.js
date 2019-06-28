@@ -31,6 +31,7 @@ class SendMessageForm extends Component {
       },
       form: {
         display: "flex",
+        flexDirection: "column",
         width: "auto"
       },
       input: {
@@ -48,7 +49,7 @@ class SendMessageForm extends Component {
     };
     return (
       <div style={styles.container}>
-        <div>
+        <div className="inputDiv">
           <form onSubmit={this.onSubmit} style={styles.form}>
             <input
               type="text"

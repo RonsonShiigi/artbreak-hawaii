@@ -23,7 +23,11 @@ class WhosOnlineList extends Component {
       })
       .then(room => {
         this.setState({ roomId: room.id }, () => {
-          this.props.subscribeToRoom(JSON.stringify(room.id));
+          console.log(
+            "ROOMI D BEFORE SUBSCRIBE",
+            JSON.stringify(this.state.roomId)
+          );
+          this.props.subscribeToRoom(this.state.roomId);
         });
         console.log("yeet", this.state.roomId);
       })
@@ -78,7 +82,6 @@ class WhosOnlineListItem extends Component {
         alignItems: "center",
         marginTop: 5,
         marginBottom: 5,
-        paddingTop: 2,
         paddingBottom: 2,
         cursor: "pointer"
       },
@@ -96,7 +99,7 @@ class WhosOnlineListItem extends Component {
             style={{
               ...styles.div,
               backgroundColor:
-                this.props.presenceState === "online" ? "#4ca64c" : "#414756"
+                this.props.presenceState === "online" ? "#4ca64c" : "#464646"
             }}
           />
           {this.props.children}
