@@ -21,7 +21,7 @@ class StripeRedirect extends Component {
     //get user id from local storage
     const user_id = localStorage.getItem("userId");
 
-    fetch("http://35.167.36.255:8080/sRegistration/", {
+    fetch("http://localhost:8080/sRegistration/", {
       body: JSON.stringify({
         userid: user_id,
         authCode: auth_code

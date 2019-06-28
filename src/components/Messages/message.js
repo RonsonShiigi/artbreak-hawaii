@@ -98,7 +98,7 @@ class ChatScreen extends Component {
 
   componentDidMount() {
     const localUsername = localStorage.getItem("username");
-    fetch("http://35.167.36.255:8080/chatusers", {
+    fetch("http://localhost:8080/chatusers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -109,7 +109,7 @@ class ChatScreen extends Component {
         instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
         userId: localStorage.getItem("username"),
         tokenProvider: new Chatkit.TokenProvider({
-          url: "http://35.167.36.255:8080/authenticate"
+          url: "http://localhost:8080/authenticate"
         })
       });
 

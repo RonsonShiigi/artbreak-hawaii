@@ -43,7 +43,7 @@ class FileUpload extends Component {
 
       formData.append("file", this.state.file[0]);
       axios
-        .post("http://35.167.36.255:8080/newProduct/fiyah", formData, {
+        .post("http://localhost:8080/newProduct/fiyah", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -60,7 +60,7 @@ class FileUpload extends Component {
         })
         .then(data => {
           axios
-            .post("http://35.167.36.255:8080/products", this.state)
+            .post("http://localhost:8080/products", this.state)
             .then(res => {
               console.log("response", res.data);
               this.setState({ id: res.data.id });
@@ -69,23 +69,23 @@ class FileUpload extends Component {
               //make dynamic
               console.log("thenstate", this.state);
               window.location.replace(
-                `http://35.167.36.255:8081/products/${this.state.id}`
+                `http://localhost:8081/products/${this.state.id}`
               );
             })
             .catch(err => {
               console.log("error in creating a new product", err);
-              window.location.replace("http://35.167.36.255:8081/errorNewProduct");
+              window.location.replace("http://localhost:8081/errorNewProduct");
             });
         })
 
         .catch(error => {
-          window.location.replace("http://35.167.36.255:8081/errorNewProduct");
+          window.location.replace("http://localhost:8081/errorNewProduct");
         });
     }
 
     // posting to postgresql axios request
     // axios
-    //   .post("http://35.167.36.255:8080/products", this.state)
+    //   .post("http://localhost:8080/products", this.state)
     //   .then(res => {
     //     console.log("response", res.data);
     //   })

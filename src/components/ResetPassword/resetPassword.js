@@ -73,7 +73,7 @@ class ResetPassword extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { uriToken, password } = this.state;
-    fetch("http://35.167.36.255:8080/resetPassword/update", {
+    fetch("http://localhost:8080/resetPassword/update", {
       method: "POST",
       credentials: "include",
       headers: {

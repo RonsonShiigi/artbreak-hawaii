@@ -58,7 +58,7 @@ app.use(decorator);
 app.use(
   session({
     store: new RedisStore({
-      host: "35.167.36.255",
+      host: "localhost",
       port: 6379,
       url: process.env.REDIS_HOSTNAME
     }),
@@ -71,7 +71,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //cors issue
-app.use(cors({ credentials: true, origin: "http://35.167.36.255:8081" }));
+app.use(cors({ credentials: true, origin: "http://localhost:8081" }));
 
 //routing
 

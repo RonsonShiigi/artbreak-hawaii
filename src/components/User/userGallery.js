@@ -97,7 +97,7 @@ class UserGallery extends React.Component {
   }
   componentDidMount(req, res) {
     this.setState({ user_id: localStorage.getItem("userId") });
-    fetch("http://35.167.36.255:8080/products")
+    fetch("http://localhost:8080/products")
       .then(res => {
         return res.json();
       })

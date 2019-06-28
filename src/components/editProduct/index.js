@@ -41,7 +41,7 @@ class FileEdit extends Component {
       const url = "https://s3-us-west-2.amazonaws.com/artbreakjeh/";
       const formData = new FormData();
       axios
-        .get("http://35.167.36.255:8080/products")
+        .get("http://localhost:8080/products")
         .then(res => {
           let products = res.data;
           products.filter(product => {
@@ -64,7 +64,7 @@ class FileEdit extends Component {
         })
         .then(data => {
           axios
-            .delete("http://35.167.36.255:8080/products/" + this.state.product_id, {
+            .delete("http://localhost:8080/products/" + this.state.product_id, {
               data: { body: this.state }
             })
             .then(data => {
@@ -78,7 +78,7 @@ class FileEdit extends Component {
           console.log("this is state", this.state);
           formData.append("file", this.state.file[0]);
           axios
-            .post("http://35.167.36.255:8080/newProduct/fiyah", formData, {
+            .post("http://localhost:8080/newProduct/fiyah", formData, {
               headers: {
                 "Content-Type": "multipart/form-data"
               }
@@ -93,7 +93,7 @@ class FileEdit extends Component {
             })
             .then(data => {
               axios
-                .post("http://35.167.36.255:8080/products", this.state)
+                .post("http://localhost:8080/products", this.state)
                 .then(res => {
                   console.log("response", res.data);
                 })
