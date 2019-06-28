@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Comments from "../../Comments/comments";
+import Likes from "../../Likes/Likes";
+import { Link } from "react-router-dom";
 
 import "./gallery-view.css";
 
@@ -11,9 +14,9 @@ class GalleryView extends Component {
       description: "",
       image_url: "",
       user_id: 0,
-      price: "",
       created_at: 0,
-      updated_at: 0
+      updated_at: 0,
+      username: ""
     };
   }
 
@@ -29,47 +32,62 @@ class GalleryView extends Component {
           description: data.description,
           image_url: data.image_url,
           user_id: data.user_id,
-          price: data.price,
           created_at: data.created_at,
-          updated_at: data.updated_at
+          updated_at: data.updated_at,
+          username: data.username
         });
       });
   }
 
   render() {
+    console.log(this.props);
     const data = this.state;
     // console.log("galleryview state", data);
     return (
       <div className="galleryview">
         <div className="view-inner">
-          <a
-            href={`${data.image_url}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={data.image_url} className="img-style" alt="" />
-          </a>
+          <div className="img-holder">
+            <a
+              href={`${data.image_url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={data.image_url} className="img-style" alt="" />
+            </a>
+          </div>
           <div className="img-info">
-            <h1>{data.title}</h1>
-            {data.description}
-            <br />${data.price}
-            <br />
-            {data.created_at}
-            <br />
-            {localStorage.userId === this.props.match.params.id ? (
-              <div className="img-links">
-                <ul>
-                  <li>
-                    <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
-                  </li>
-                  <li>
-                    <a href={`/delete/${this.state.id}`}>Delete Me</a>
-                  </li>
-                </ul>
+            <div className="title-desc">
+              <h1>{data.title}</h1>
+              {localStorage.userId === data.user_id ? (
+                <div className="img-links">
+                  <ul>
+                    <li>
+                      <a href={`/editProduct/${this.state.id}`}>Edit Here</a>
+                    </li>
+                    <li>
+                      <a href={`/delete/${this.state.id}`}>Delete Me</a>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                ""
+              )}
+              <span className="img-desc">
+                {" "}
+                <Likes product_id={this.props.match.params.id} />
+                {data.description}
+              </span>
+              <br />
+              <span className="cmmt-date">
+                posted by{" "}
+                <Link to={`/users/${data.user_id}`}>{data.username}</Link> at{" "}
+                {data.created_at}
+              </span>
+              <br />
+              <div className="comments">
+                <Comments product_id={this.props.match.params.id} />
               </div>
-            ) : (
-              ""
-            )}
+            </div>
           </div>
         </div>
       </div>

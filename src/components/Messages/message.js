@@ -94,13 +94,13 @@ class ChatScreen extends Component {
       .createRoom({
         name
       })
-      .then(room => this.subscribeToRoom(this.state.room.id))
+      .then(this.subscribeToRoom(this.state.room.id))
       .catch(err => console.log("error with createRoom: ", err));
+    console.log("roomid", this.state.roomId);
   }
 
   componentDidMount() {
     const localUsername = localStorage.getItem("username");
-    // this.setState({ currentRoom
     fetch("http://localhost:8080/chatusers", {
       method: "POST",
       headers: {
@@ -122,15 +122,16 @@ class ChatScreen extends Component {
           this.currentUser = currentUser;
           this.setState({ currentUser: currentUser });
           this.getRooms();
-          this.subscribeToRoom("19450544");
+          // Auto join the General chat room when user clicks on My Messages
+          this.subscribeToRoom("19451739");
         })
         .catch(err => console.log("error on connecting: ", err));
     });
   }
 
   render() {
-    console.log("curr user", this.state);
-    console.log("this.props", this.props);
+    // console.log("curr user", this.state);
+    // console.log("this.props", this.props);
     const styles = {
       container: {
         height: "88vh",
@@ -181,10 +182,12 @@ class ChatScreen extends Component {
             <WhosOnlineList
               currentUser={this.state.currentUser}
               users={this.state.currentRoom.users}
+              subscribeToRoom={this.subscribeToRoom}
             />
             <RoomList
               subscribeToRoom={this.subscribeToRoom}
               rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}
+              roomId={this.state.roomId}
             />
           </aside>
           <section style={styles.chatListContainer}>

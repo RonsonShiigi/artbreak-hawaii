@@ -9,33 +9,43 @@ exports.seed = function(knex, Promise) {
           title: "d",
           description: "Sam's Cool Meme",
           image_url: "https://i.imgur.com/CC4EFLz.jpg",
-          user_id: 1
+          user_id: 1,
+          username: "samszys"
         },
         {
           title: "Ho Bags",
           description: "Sam's Cool Sexy Couple",
           image_url: "https://i.imgur.com/4kSDdjn.jpg",
-          user_id: 1
+          user_id: 1,
+          username: "samszys"
         },
         {
-          title: "Turtle Tinder",
-          description: "Tinder for Turtles",
-          image_url:
-            "https://66.media.tumblr.com/4a009c5a1ab2ce75f795d8c3b3ec4a00/tumblr_nwj96rihEP1qz9v0to4_640.jpg",
-          user_id: 4
+          title: "Low-Effort Meme Team",
+          description: "The ho bags, but cuter",
+          image_url: "https://i.imgur.com/k6uPXOc.png",
+          user_id: 4,
+          username: "sam, but better"
         },
         {
-          title: "Turtles in Snake Farting Like Crazy",
-          description: "Turtles in Snake",
-          image_url:
-            "https://i.pinimg.com/originals/75/de/e9/75dee965859cee00acde21420aafcd15.jpg",
-          user_id: 4
+          title: "Spooky Hair Witch",
+          description: "She got hair. She a witch",
+          image_url: "https://i.imgur.com/btz6oKK.png",
+          user_id: 4,
+          username: "sam, but better"
         },
         {
           title: "My Dumb Baby",
           description: "The best girl in the world",
           image_url: "https://i.imgur.com/C0EA6N5.jpg",
-          user_id: 1
+          user_id: 1,
+          username: "samszys"
+        },
+        {
+          title: "*breathes* BOI",
+          description: "I don't draw men, just manlier women",
+          image_url: "https://i.imgur.com/Tn07oSS.png",
+          user_id: 1,
+          username: "samszys"
         }
       ]);
     });

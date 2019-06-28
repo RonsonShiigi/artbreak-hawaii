@@ -54,28 +54,31 @@ class Dashboard extends Component {
               <ul className="left-links">
                 <h3>Dashboard</h3>
                 <li>
-                  <Link to={`users/${localStorage.userId}`}>My Profile</Link>
+                  <Link to={`users/${localStorage.userId}`}>Profile</Link>
                 </li>
                 <li>
                   <Link to="/upload">Add New Piece</Link>
                 </li>
-                <li>My Uploads</li>
-                <li>My Favorites</li>
-                <li>My Orders/Invoices</li>
-              </ul>
-              <br />
-              <div>
-                {!stripeReg ? (
-                  <div>
-                    <div className="left-links">
+                <li>Favorites</li>
+
+                <br />
+                <div>
+                  {!stripeReg ? (
+                    <div className="stripe-button">
                       Become A Seller! <br />
                       Sign up for Stripe Below:
+                      <StripeReg />
+                      {error ? (
+                        <div>Internal Error, please try again</div>
+                      ) : null}
                     </div>
-                    <StripeReg />
-                    {error ? <div>Internal Error, please try again</div> : null}
-                  </div>
-                ) : null}
-              </div>
+                  ) : (
+                    <li>
+                      <Link to="/invoice">CREATE AN INVOICE</Link>
+                    </li>
+                  )}
+                </div>
+              </ul>
             </div>
             <div className="right-nav">
               <Dashtabs />

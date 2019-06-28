@@ -41,7 +41,7 @@ class PaymentConfirmation extends Component {
         <br />
         <br />
         {isPaid && !isError ? (
-          <div>
+          <div className="container">
             <h1>
               Thank you for your purchase! A confirmation email has been sent to
               the provided email.

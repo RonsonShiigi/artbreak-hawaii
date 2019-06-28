@@ -40,7 +40,7 @@ class EditUser extends Component {
         <form onSubmit={this.editUser} className="user-edit">
           <input
             type="text"
-            placeholder={JSON.stringify(this.state.profileblurb)}
+            placeholder={JSON.stringify(this.props.profileblurb)}
             name="profileblurb"
             value={this.state.profileblurb}
             onChange={this.handleChange}

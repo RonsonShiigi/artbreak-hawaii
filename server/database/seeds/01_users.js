@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex("users").insert([
         {
           username: "samszys",
-          email: "juntillaaaaa@hawaii.edu",
+          email: "juntilla@hawaii.edu",
           password: "fart",
           stripe_id: "acct_1Eg5XkEWUMHDF9ZA",
           profileblurb: "i like bread"
@@ -27,11 +27,11 @@ exports.seed = function(knex, Promise) {
           profileblurb: "i like bread"
         },
         {
-          username: "turtleWayne",
-          email: "turutleWayne@gmail.com",
+          username: "sam, but better",
+          email: "sams@gmail.com",
           password: "fart",
           stripe_id: "acct_1Eg5TDHI3KTEQBIB",
-          profileblurb: "i like bread"
+          profileblurb: "i REALLY like bread"
         }
       ]);
     });

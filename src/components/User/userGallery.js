@@ -88,22 +88,29 @@ const styles = theme => ({
   }
 });
 
-class Gallery extends React.Component {
+class UserGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchString: "",
       products: [],
-      showModal: false
+      showModal: false,
+      user_id: ""
     };
   }
   componentDidMount(req, res) {
+    this.setState({ user_id: localStorage.getItem("userId") });
     fetch("http://localhost:8080/products")
       .then(res => {
         return res.json();
       })
       .then(data => {
-        this.setState({ products: data });
+        let arr = data.filter(product => {
+          if (Number(product.user_id) === Number(this.state.user_id)) {
+            return product;
+          }
+        });
+        this.setState({ products: arr });
       })
       .catch(err => {
         console.log(err);
@@ -134,6 +141,7 @@ class Gallery extends React.Component {
     let _products = this.state.products;
     let search = this.state.searchString.trim().toLowerCase();
     const { classes } = this.props;
+    console.log("products", _products);
 
     if (search.length > 0) {
       _products = _products.filter(function(product) {
@@ -199,4 +207,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Gallery));
+export default connect(mapStateToProps)(withStyles(styles)(UserGallery));

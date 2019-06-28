@@ -152,7 +152,6 @@ router.post("/:id", upload.single("photos"), (req, res) => {
             description: req.body.description,
             image_url: image_url,
             user_id: req.body.user_id,
-            price: req.body.price,
             updated_at: new Date()
           },
           {

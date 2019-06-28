@@ -2,28 +2,28 @@ import React from "react";
 
 class RoomList extends React.Component {
   render() {
-    const styles = {
-      room: {
-        color: "#ff0000"
-      }
-    };
+    const styles = {};
     return (
       <div style={styles.container}>
         <div className="rooms-list">
           <ul>
-            <h3>Your rooms:</h3>
+            <h3>Your Rooms:</h3>
             {this.props.rooms.map(room => {
+              // console.log("props", this.props.roomId);
+              // console.log("woo", room.id);
+              const activeColor =
+                this.props.roomId === room.id ? "#FFFFFF" : "#B0B0B0";
+              const activeBold = this.props.roomId === room.id ? "bold" : "";
+
               return (
-                <li
-                  key={room.id}
-                  className={"room"}
-                  style={{
-                    color: this.props.roomId === room.id ? "#ff0000" : "#00ff00"
-                  }}
-                >
+                <li key={room.id} className={"room"}>
                   <a
                     href="#"
                     onClick={() => this.props.subscribeToRoom(room.id)}
+                    style={{
+                      color: activeColor,
+                      fontWeight: activeBold
+                    }}
                   >
                     {room.name}
                   </a>

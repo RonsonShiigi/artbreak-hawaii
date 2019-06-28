@@ -17,6 +17,7 @@ import Invoice from "./components/Invoice/invoice";
 import BuyerCheckout from "./components/BuyerCheckout/buyercheckout";
 import Invoice_Confirmation from "./components/Invoice/invoice_confirmation";
 import InvoiceHistory from "./components/InvoiceHistory/invoiceHistory";
+import InvoiceError from "./components/Invoice/error";
 import PaymentConfirmation from "./components/PaymentConfirmation/paymentConfirmation";
 import Error from "./components/404";
 
@@ -69,6 +70,7 @@ class App extends Component {
           <Route path="/paymentConfirmation" component={PaymentConfirmation} />
           <Route path="/invoiceConfirmation" component={Invoice_Confirmation} />
           <Route path="/invoiceHistory" component={InvoiceHistory} />
+          <Route path="/invoiceError" component={InvoiceError} />
         </Switch>
       </React.Fragment>
     );

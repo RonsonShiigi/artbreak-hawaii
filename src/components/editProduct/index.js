@@ -14,7 +14,6 @@ class FileEdit extends Component {
       description: "",
       image_url: "",
       user_id: "",
-      price: "",
       photos: null,
       product_id: 8
     };
@@ -186,21 +185,11 @@ class FileEdit extends Component {
             margin="normal"
             fullWidth={true}
           />
-          <TextField
-            id="price"
-            label="price"
-            name="price"
-            // value={values.price}
-            onChange={this.handleChange}
-            margin="normal"
-            fullWidth={true}
-          />
           <br />
           {/* <TextField
             id="user_id"
             label="user_id"
             name="user_id"
-            // value={values.price}
             onChange={this.handleChange}
             margin="normal"
             fullWidth={true}

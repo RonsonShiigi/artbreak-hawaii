@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Gallery from "../Gallery";
+import UserGallery from "./userGallery";
 import EditUser from "./EditUser";
 import Avatar from "@material-ui/core/Avatar";
-import Edit from "@material-ui/icons/Edit";
 
 import "./profile.css";
 
@@ -21,9 +21,7 @@ class User extends Component {
   }
 
   handleChange(event) {
-    console.log("THIS SHOULD BE HIDDEN");
     this.setState({ editHidden: !this.state.editHidden });
-    console.log(this.state);
   }
 
   componentDidMount(req, res) {
@@ -72,9 +70,9 @@ class User extends Component {
                 <p>{data.profileblurb}</p>
                 {localStorage.userId === this.props.match.params.id ? (
                   <div className="edit-holder">
-                    <Edit onClick={this.handleChange} />
+                    <div onClick={this.handleChange}>wharglbargl</div>
                     <div className="edit-div" style={style}>
-                      <EditUser />
+                      <EditUser profileblurb={this.props.profileblurb} />
                     </div>
                   </div>
                 ) : (
@@ -89,7 +87,7 @@ class User extends Component {
             UPLOADS
           </div>
           <div className="user-uploads">
-            <Gallery />
+            <UserGallery />
           </div>
         </div>
       </div>
