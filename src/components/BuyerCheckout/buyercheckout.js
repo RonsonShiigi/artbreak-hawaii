@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { Redirect } from "react-router";
 
+import "./buyercheckout.css";
+
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });
 
@@ -33,7 +35,6 @@ class BuyerCheckout extends Component {
         return res.json();
       })
       .then(itemsData => {
-        console.log("THIS ITEMSDATA", itemsData);
         this.setState({ userId: itemsData.user_id });
         this.setState({ paid: itemsData.paid });
         this.setState({ price: itemsData.price });
@@ -58,49 +59,45 @@ class BuyerCheckout extends Component {
       });
   };
 
-  onToken(token) {
-    if (localStorage.getItem("userId") === null) {
-      console.log("You are not logged in");
-    } else {
-      console.log("onToken", token);
-      fetch("http://localhost:8080/payment/checkout", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          stripeToken: token.id,
-          total: this.state.price,
-          userId: this.state.artist,
-          uriToken: this.state.uriToken,
-          purchasedItem: this.state.description,
-          buyerE: this.state.buyerEmail
-        }),
-        credentials: "include"
+  onToken(token, addresses) {
+    fetch("http://localhost:8080/payment/checkout", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        stripeToken: token.id,
+        billingE: token.email,
+        total: this.state.price,
+        userId: this.state.artist,
+        uriToken: this.state.uriToken,
+        purchasedItem: this.state.description,
+        buyerE: this.state.buyerEmail
+      }),
+      credentials: "include"
+    })
+      .then(res => {
+        const resData = res.json();
+        return resData;
       })
-        .then(res => {
-          const resData = res.json();
-          return resData;
-        })
-        .then(data => {
-          const { message } = data;
-          switch (message) {
-            case "Payment Success":
-              this.setState({ redirect: true });
-              break;
-            case "500":
-              this.setState({ error: true });
-              break;
-            default:
-              return;
-          }
-        })
-        .catch(err => {
-          console.log("ERROR on TOKEN", err);
-          this.setState({ error: true });
-        });
-    }
+      .then(data => {
+        const { message } = data;
+        switch (message) {
+          case "Payment Success":
+            this.setState({ redirect: true });
+            break;
+          case "500":
+            this.setState({ error: true });
+            break;
+          default:
+            return;
+        }
+      })
+      .catch(err => {
+        console.log("ERROR on TOKEN", err);
+        this.setState({ error: true });
+      });
   }
 
   render() {
@@ -109,59 +106,55 @@ class BuyerCheckout extends Component {
     function CheckRedirect(props) {
       const checkRedirect = props.isRedirect;
       if (checkRedirect && !error) {
-        return (
-          <Redirect
-            to={{
-              pathname: "/paymentConfirmation",
-              error: false,
-              paid: true
-            }}
-          />
-        );
+        return <Redirect to="/paymentConfirmation" />;
       } else if (checkRedirect && error) {
-        return (
-          <Redirect
-            to={{
-              pathname: "/paymentConfirmation",
-              error: false,
-              paid: null
-            }}
-          />
-        );
+        return <Redirect to="/checkoutError" />;
       } else {
         return null;
       }
     }
     return (
       <div className="container">
-        {!uriToken ? (
-          <div>ACCESS DENIED</div>
-        ) : (
-          <div>
-            {paid ? (
-              <h1> This Invoice Has Already Been Paid</h1>
-            ) : (
-              <div>
-                <h2>ArtBreak Invoice</h2>
-                <div>You are purchasing commissioned art from {name}!</div>
-                <br />
-                <br />
-                Total owed for Invoice # {uriToken} is:
-                <br />$ {price}
-                <br />
-                If you are ready to checkout, please click on below to submit
-                your payment through Stripe! below:
-                <br />
-                <StripeCheckout
-                  key="stripe-checkout"
-                  token={this.onToken}
-                  stripeKey={process.env.REACT_APP_STRIPE_PK}
-                />
-              </div>
-            )}
-            <CheckRedirect isRedirect={this.state.redirect} />
-          </div>
-        )}
+        <div className="paper-holder">
+          {!uriToken ? (
+            <h1>ACCESS DENIED</h1>
+          ) : (
+            <React.Fragment>
+              {paid ? (
+                <h1> This Invoice Has Already Been Paid</h1>
+              ) : (
+                <React.Fragment>
+                  <h1 className="emoji">🎊🎊🎊</h1>
+                  <h1>
+                    Hooray
+                    <b>
+                      <i>!</i>
+                    </b>
+                  </h1>
+                  <h2>You are purchasing commissioned art from {name}!</h2>
+                  <h3 className="invoice-head">Invoice #{uriToken}</h3>
+                  <h1>total: ${price}</h1>
+                  <p className="confirmation-msg">
+                    If you are ready to checkout, please click the button below
+                    to submit your payment through Stripe!
+                  </p>
+                  <StripeCheckout
+                    key="stripe-checkout"
+                    token={this.onToken}
+                    stripeKey={process.env.REACT_APP_STRIPE_PK}
+                    billingAddress
+                    shippingAddress
+                    name={name}
+                    amount={price * 100}
+                  >
+                    <button className="checkout-button">Pay With Card</button>
+                  </StripeCheckout>
+                </React.Fragment>
+              )}
+              <CheckRedirect isRedirect={this.state.redirect} />
+            </React.Fragment>
+          )}
+        </div>
       </div>
     );
   }

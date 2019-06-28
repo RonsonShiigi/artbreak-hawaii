@@ -68,7 +68,7 @@ class Checkout extends Component {
         </div>
         <div>
           <StripeCheckout
-            key="stripe-cehckout"
+            key="stripe-checkout"
             token={this.onToken}
             stripeKey="pk_test_dFwJK6MxVB2Jj5XDUuaFAoIl00oVxjFN1t"
           />

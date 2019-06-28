@@ -11,7 +11,6 @@ function Cover() {
           <i>!</i>
         </b>
       </div>
-      <div className="stmt">An empowering mission statement goes here.</div>
     </div>
   );
 }
