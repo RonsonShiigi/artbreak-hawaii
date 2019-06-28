@@ -13,21 +13,15 @@ function Dashtabs() {
   return (
     <div className="tabsdiv">
       <Tabs value={index} onChange={(e, val) => onChange(val)}>
-        <Tab label="Recents" disableRipple />
         <Tab label="Favorites" disableRipple />
         <Tab label="My Orders" disableRipple />
       </Tabs>
       {index === 0 && (
         <TabContainer>
-          This is where my recents would go... IF I HAD ANY
-        </TabContainer>
-      )}
-      {index === 1 && (
-        <TabContainer>
           <Gallery />
         </TabContainer>
       )}
-      {index === 2 && (
+      {index === 1 && (
         <TabContainer>
           <InvoiceHistory />
         </TabContainer>

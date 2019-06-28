@@ -55,6 +55,23 @@ code {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
+.paper-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 25vh;
+  background-color: #eee;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 5vw;
+  border-radius: 15px;
+}
+
+.emoji {
+  margin: 0;
+  font-size: 75px;
+}
+
 h1 {
   font-weight: bold;
   text-transform: uppercase;
@@ -339,4 +356,11 @@ button.animate {
 .error-div {
   padding-bottom: 5vh;
   color: #df3636;
+}
+
+.confirmation-msg {
+  position: relative;
+  top: -3vh;
+  font-size: 16px;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }

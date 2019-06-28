@@ -10,6 +10,7 @@ const fs = require("fs");
 const fileType = require("file-type");
 const bluebird = require("bluebird");
 const multiparty = require("multiparty");
+console.log("process.env", process.env);
 
 //set up AWS environment
 AWS.config.update({

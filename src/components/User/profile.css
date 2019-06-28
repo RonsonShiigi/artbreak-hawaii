@@ -1,18 +1,9 @@
-.contact-links {
-  display: flex;
-  justify-items: center;
-  padding-top: 15px;
-  font-size: 12px;
-  max-height: 200px;
-  width: 450px;
-}
-
 .profile-cover {
   position: absolute;
-  top: 32vh;
+  top: 26vh;
   background-color: #565656;
   width: 100%;
-  height: 25vh;
+  height: 35vh;
 }
 
 .profile-content {
@@ -20,30 +11,16 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 30vh;
-  width: 100%;
+  left: 25vw;
+  top: 20vh;
   background-color: transparent;
+  z-index: 5;
 }
 #user-glitch {
   font-size: 75px;
 }
 .user-head {
-  display: flex;
-  flex-direction: column nowrap;
-  position: absolute;
-  top: -5vh;
-  padding-bottom: 0;
   height: 20vh;
-}
-.date-info {
-  position: relative;
-  top: 5vh;
-  left: 10vh;
-  font-style: italic;
-  color: #8d8d8d;
-  margin-top: 0;
-  padding: 0;
-  font-size: 11px;
 }
 
 .user-blurb {
@@ -67,7 +44,7 @@
   align-content: space-around;
   width: 100%;
   position: relative;
-  top: 15vh;
+  top: 20vh;
 }
 
 .user-uploads {
@@ -78,23 +55,33 @@
 }
 
 .edit-div {
-  position: absolute;
-  top: 0;
-  left: 20vw;
+  position: relative;
+  width: 450px;
+  top: -20vh;
+  left: 35vw;
   opacity: 0.7;
 }
-
 .user-edit {
-  max-width: 300px;
-  background-color: #1d1d1d;
+  width: 450px;
 }
+
 .blurb-input {
-  width: 250px;
   height: 50px;
-  padding-bottom: 5px;
+  width: 450px;
   margin-bottom: 5px;
+  padding: 5px;
   border: 0;
+  resize: none;
+  background-color: #1d1d1d;
+  color: #eee;
 }
-.contact-input {
-  width: 250px;
+
+.blurb-input::placeholder {
+  font-size: 11px;
+  color: #eee;
+}
+
+.btn {
+  border-radius: 0px;
+  max-width: 450px;
 }
