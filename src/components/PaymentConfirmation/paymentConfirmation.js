@@ -22,7 +22,11 @@ const PaymentConfirmation = () => {
         </div>
       ) : (
         <div className="paper-holder">
-          <h1 className="emoji">🎊🎊🎊</h1>
+          <h1 className="emoji">
+            <span role="img" aria-label="confetti emoji">
+              🎊🎊🎊
+            </span>
+          </h1>
           <h1>
             Thank you for your purchase
             <b>

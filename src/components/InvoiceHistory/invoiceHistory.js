@@ -46,16 +46,6 @@ class InvoiceHistory extends Component {
                 unpaid
               </div>
             )}
-            {/* <ul className="invoice-receipt">
-              <li>
-                <b className="invoice-email">{invoice.buyerEmail}</b>
-              </li>
-              <li>Price: ${invoice.price}</li>
-              <li>Purchased: {invoice.purchased_at}</li>
-              <li>Description: {invoice.description}</li>
-              <li>Sent: {invoice.created_at}</li>
-            </ul>
-          </div> */}
             <InvoiceReceipt
               buyerEmail={invoice.buyerEmail}
               invoice={invoice.charge_id}

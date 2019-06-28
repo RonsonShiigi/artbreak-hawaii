@@ -101,7 +101,7 @@ class BuyerCheckout extends Component {
   }
 
   render() {
-    const { uriToken, paid, price, name, redirect, error } = this.state;
+    const { uriToken, paid, price, name, error } = this.state;
 
     function CheckRedirect(props) {
       const checkRedirect = props.isRedirect;
@@ -124,7 +124,11 @@ class BuyerCheckout extends Component {
                 <h1> This Invoice Has Already Been Paid</h1>
               ) : (
                 <React.Fragment>
-                  <h1 className="emoji">🎊🎊🎊</h1>
+                  <h1 className="emoji">
+                    <span role="img" aria-label="confetti emoji">
+                      🎊🎊🎊
+                    </span>
+                  </h1>
                   <h1>
                     Hooray
                     <b>
