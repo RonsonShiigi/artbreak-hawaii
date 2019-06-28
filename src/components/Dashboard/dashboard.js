@@ -26,7 +26,7 @@ class Dashboard extends Component {
     if (localStorage.getItem("username") !== null) {
       this.state.user_id = localStorage.getItem("userId");
       this.state.username = localStorage.getItem("username");
-      fetch(`http://localhost:8080/users/${this.state.user_id}`)
+      fetch(`http://35.167.36.255:8080/users/${this.state.user_id}`)
         .then(res => {
           const data = res.json();
           return data;

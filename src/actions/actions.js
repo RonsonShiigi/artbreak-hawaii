@@ -6,7 +6,7 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const getProducts = () => {
   return dispatch => {
     axios
-      .get("http://localhost:8080/products")
+      .get("http://35.167.36.255:8080/products")
       .then(res => {
         dispatch({ type: GET_ALL_PRODUCTS, payload: res.data });
       })
@@ -20,7 +20,7 @@ export const createProduct = product => {
   // console.log("action:create product", product);
   return dispatch => {
     axios
-      .post("http://localhost:8080/products", product)
+      .post("http://35.167.36.255:8080/products", product)
       .then(res => {
         dispatch({ type: CREATE_PRODUCT, payload: res.data });
       })

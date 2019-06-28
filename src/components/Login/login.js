@@ -34,7 +34,7 @@ class Login extends Component {
     e.preventDefault();
     const emailLowercase = this.state.email.toLowerCase();
 
-    fetch("http://localhost:8080/api/auth/login", {
+    fetch("http://35.167.36.255:8080/api/auth/login", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -64,7 +64,7 @@ class Login extends Component {
           localStorage.setItem("username", data.username);
           localStorage.setItem("username", data.username);
           localStorage.setItem("userId", data.id);
-          window.location.replace("http://localhost:8081");
+          window.location.replace("http://35.167.36.255:8081");
         }
       })
       .catch(err => {

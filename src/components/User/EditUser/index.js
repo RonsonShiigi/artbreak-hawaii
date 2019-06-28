@@ -18,7 +18,7 @@ class EditUser extends Component {
 
   editUser = e => {
     e.preventDefault();
-    fetch(`http://localhost:8080/users/${localStorage.getItem("userId")}`, {
+    fetch(`http://35.167.36.255:8080/users/${localStorage.getItem("userId")}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -32,7 +32,7 @@ class EditUser extends Component {
     })
       .then(
         window.location.replace(
-          `http://localhost:8081/users/${localStorage.getItem("userId")}`
+          `http://35.167.36.255:8081/users/${localStorage.getItem("userId")}`
         )
       )
       .catch(err => {

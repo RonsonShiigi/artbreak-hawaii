@@ -18,7 +18,7 @@ class Likes extends Component {
     this.setState({ user_id: localStorage.getItem("userId") });
 
     axios
-      .get("http://localhost:8080/likes")
+      .get("http://35.167.36.255:8080/likes")
       .then(res => {
         let likesArr = res.data;
         this.setState({ likes_array: likesArr });
@@ -66,7 +66,7 @@ class Likes extends Component {
     };
 
     axios
-      .post("http://localhost:8080/likes", data)
+      .post("http://35.167.36.255:8080/likes", data)
       .then(data => {
         this.setState({ has_liked: true });
       })
