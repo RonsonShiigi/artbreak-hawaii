@@ -45,7 +45,7 @@ class Invoice extends Component {
           window.location.replace("http://localhost:8081/invoiceconfirmation")
         )
         .catch(err => {
-          console.log("you fucked up", err);
+          console.log(err);
         });
     }
   };

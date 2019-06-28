@@ -62,7 +62,7 @@ class Comments extends Component {
           window.location.reload();
         })
         .catch(err => {
-          console.log("you fucked up", err);
+          console.log(err);
         });
     }
   };

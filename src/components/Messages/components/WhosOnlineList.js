@@ -5,27 +5,41 @@ class WhosOnlineList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: this.props.currentUser
+      roomId: null,
+      currentUser: this.props.currentUser,
+      clickedUser: ""
     };
   }
+
   createRoom() {
+    // console.log(this.subscribeToRoom(this.state.roomId));
+    console.log(this.props.currentUser.id);
+    console.log(this.state.clickedUser);
     this.props.currentUser
       .createRoom({
-        name: "Conversation with Justen & Jew",
+        name: this.state.clickedUser,
         private: true,
-        addUserIds: ["justen", "jew"],
-        customData: { foo: 42 }
+        addUserIds: [this.props.currentUser.id, this.state.clickedUser]
       })
       .then(room => {
-        console.log(`Created room called ${room.name}`);
+        this.setState({ roomId: room.id }, () => {
+          this.props.subscribeToRoom(JSON.stringify(room.id));
+        });
+        console.log("yeet", this.state.roomId);
       })
       .catch(err => {
         console.log(`Error creating room ${err}`);
       });
+    // console.log(this.state.roomId);
   }
   click = e => {
-    this.createRoom();
+    var clickedUser = e.target.innerText || e.target.textContent;
+    this.setState({ clickedUser: clickedUser }, () => {
+      this.createRoom();
+    });
+    console.log(this.state.clickedUser);
   };
+
   renderUsers() {
     return (
       <ul onClick={this.click}>
@@ -65,7 +79,8 @@ class WhosOnlineListItem extends Component {
         marginTop: 5,
         marginBottom: 5,
         paddingTop: 2,
-        paddingBottom: 2
+        paddingBottom: 2,
+        cursor: "pointer"
       },
       div: {
         borderRadius: "50%",

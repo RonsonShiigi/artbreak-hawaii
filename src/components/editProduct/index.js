@@ -95,9 +95,7 @@ class FileEdit extends Component {
           if (
             Number(this.state.user_id) !== Number(this.state.product.user_id)
           ) {
-            throw new Error(
-              "YOU FUCKED UP, you are not the owner of this product so you cant fucking edit it"
-            );
+            throw new Error("ERROR: User unauthorized.");
           }
         })
         .then(data => {
