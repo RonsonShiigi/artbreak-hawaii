@@ -82,12 +82,12 @@ class FileEdit extends Component {
           let products = res.data;
           products.filter(product => {
             if (product.id === Number(this.state.product_id)) {
-              this.state.product = product;
+              this.setState({ product: product });
             }
           });
         })
         .then(data => {
-          this.state.image_url = this.state.product.image_url;
+          this.setState({ image_url: this.state.product.image_url });
           console.log("imageURL", this.state.image_url);
         })
         .then(data => {
@@ -127,7 +127,7 @@ class FileEdit extends Component {
             .then(response => {
               console.log("response", response.data.key);
               let key = response.data.key;
-              this.state.image_url = url + key;
+              this.setState({ image_url: url + key });
             })
             .then(data => {
               console.log("updated state", this.state);
