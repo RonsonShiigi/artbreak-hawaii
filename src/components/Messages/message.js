@@ -26,7 +26,6 @@ class ChatScreen extends Component {
     this.sendTypingEvent = this.sendTypingEvent.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getRooms.bind(this);
-    this.createRoom = this.createRoom.bind(this);
   }
 
   sendTypingEvent() {
@@ -97,16 +96,6 @@ class ChatScreen extends Component {
       })
       .catch(err => console.log("error on subscribing to room: ", err));
     this.forceUpdate(this.getRooms());
-  }
-
-  createRoom(name) {
-    this.currentUser
-      .createRoom({
-        name
-      })
-      .then(this.subscribeToRoom(this.state.room.id))
-      .catch(err => console.log("error with createRoom: ", err));
-    console.log("roomid", this.state.roomId);
   }
 
   componentDidMount() {
