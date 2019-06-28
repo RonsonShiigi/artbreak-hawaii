@@ -1,0 +1,15 @@
+.checkout-button {
+  border-radius: 0;
+  padding: 2vh;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.invoice-footer {
+  width: 100%;
+  position: relative;
+  color: #1e1e1e;
+  font-weight: bolder;
+  z-index: 1;
+  opacity: 0.5;
+}

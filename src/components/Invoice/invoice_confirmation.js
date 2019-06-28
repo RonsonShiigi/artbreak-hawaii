@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 
 class Invoice_Confirmation extends Component {
   constructor(props) {
@@ -18,8 +17,49 @@ class Invoice_Confirmation extends Component {
   render() {
     return (
       <div className="container">
-        <h1>You Have Succesfully Sent Your Invoice</h1>
-        <a href={`http://localhost:8081/dashboard`}>Return To Dashboard</a>
+        {localStorage.getItem("username") === null ? (
+          <div className="paper-holder">
+            <h1>
+              Please{" "}
+              <Link to="/login">
+                <b>log in</b>
+              </Link>
+              <b>
+                <i>!</i>
+              </b>
+            </h1>
+            <span className="confirmation-msg">
+              H-How did you even get here...?
+            </span>
+            <Link to="/register">Don't have an account yet?</Link>
+          </div>
+        ) : (
+          <div className="paper-holder">
+            <h1 className="emoji">🎉🎉🎉</h1>
+            <h1>
+              Congratulations
+              <b>
+                <i>!</i>
+              </b>
+            </h1>
+            <span className="confirmation-msg">
+              Your invoice has been sent. Yay, you! What's next?
+            </span>
+            <br />
+            <ul>
+              <li>
+                {" "}
+                <Link to="/dashboard">Return To Dashboard</Link>
+              </li>
+              <li>
+                <b>OR</b>
+              </li>
+              <li>
+                <Link to="/invoice">Send another invoice</Link>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     );
   }

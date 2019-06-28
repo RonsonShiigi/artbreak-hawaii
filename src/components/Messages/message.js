@@ -31,6 +31,7 @@ class ChatScreen extends Component {
   sendTypingEvent() {
     this.state.currentUser.isTypingIn({ roomId: this.state.currentRoom.id });
     // .catch(error => console.error("error", error));
+    this.forceUpdate(this.getRooms());
   }
 
   sendMessage(text) {
@@ -38,6 +39,7 @@ class ChatScreen extends Component {
       text,
       roomId: this.state.roomId
     });
+    this.forceUpdate(this.getRooms());
   }
 
   getRooms() {
@@ -136,7 +138,7 @@ class ChatScreen extends Component {
     const styles = {
       container: {
         height: "85vh",
-        width: "100vw",
+        width: "120vw",
         marginTop: "105px",
         display: "flex",
         flex: 1,
@@ -152,21 +154,20 @@ class ChatScreen extends Component {
       },
       whosOnlineListContainer: {
         width: "15%",
-        paddingTop: 50,
+        paddingTop: 40,
         paddingLeft: 10,
         backgroundColor: "#252525",
         color: "white",
         flexDirection: "column"
       },
       chatListContainer: {
-        paddingTop: 55,
+        paddingTop: 40,
         paddingLeft: 15,
         display: "flex",
         height: "auto",
         flexDirection: "column",
         background: "white",
         flexWrap: "columnWrap",
-        paddingLeft: 30,
         width: "81vw"
       },
       li: {

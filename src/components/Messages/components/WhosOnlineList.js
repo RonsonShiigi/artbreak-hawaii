@@ -17,7 +17,7 @@ class WhosOnlineList extends Component {
     console.log(this.state.clickedUser);
     this.props.currentUser
       .createRoom({
-        name: this.state.clickedUser,
+        name: this.state.clickedUser + " & " + this.props.currentUser.id,
         private: true,
         addUserIds: [this.props.currentUser.id, this.state.clickedUser]
       })

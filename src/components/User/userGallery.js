@@ -12,7 +12,6 @@ const styles = theme => ({
     marginTop: theme.spacing(45)
   },
   images: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexWrap: "wrap",
     position: "relative",
@@ -92,9 +91,7 @@ class UserGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchString: "",
       products: [],
-      showModal: false,
       user_id: ""
     };
   }
@@ -115,53 +112,20 @@ class UserGallery extends React.Component {
       .catch(err => {
         console.log(err);
       });
-    this.refs.search.focus();
   }
-
-  handleChange = () => {
-    this.setState({
-      searchString: this.refs.search.value
-    });
-  };
 
   viewImg = () => {
     this.setState({ show: !this.state.show });
     console.log(this.state.show);
   };
 
-  handleOpenModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  handleCloseModal = () => {
-    this.setState({ showModal: false });
-  };
-
   render() {
     let _products = this.state.products;
-    let search = this.state.searchString.trim().toLowerCase();
     const { classes } = this.props;
     console.log("products", _products);
 
-    if (search.length > 0) {
-      _products = _products.filter(function(product) {
-        return product.title.toLowerCase().match(search);
-      });
-    }
-
-    // const style = this.state.show === true ? { display: "none" } : {};
-
     return (
       <div className={classes.root} component="section">
-        <input
-          type="text"
-          className="searchbar"
-          value={this.state.searchString}
-          ref="search"
-          onChange={this.handleChange}
-          placeholder="SEARCH..."
-        />
-
         <div className={classes.images}>
           {_products.map(product => (
             <div>

@@ -9,11 +9,12 @@ class InvoiceError extends Component {
     };
   }
   render() {
-    console.log("hisam");
     return (
       <div className="container">
-        <h1> Please Fill Out All Fields of Invoice</h1>
-        <a href="http://localhost:8081/invoice">Try Again</a>
+        <div className="paper-holder">
+          <h1> Please Fill Out All Fields of Invoice</h1>
+          <Link to="/invoice">Try Again</Link>
+        </div>
       </div>
     );
   }
