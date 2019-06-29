@@ -45,7 +45,7 @@ class Register extends Component {
     const emailLowercase = this.state.email.toLowerCase();
     console.log("TOLOWERCASE", emailLowercase);
 
-    fetch("http://35.167.36.255:8080/api/auth/register/check", {
+    fetch("http://localhost:8080/api/auth/register/check", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -65,7 +65,7 @@ class Register extends Component {
         } else if (user.email === "ERROR") {
           this.setState({ emailValid: false });
         } else if (user.email === "" && user.username === "") {
-          fetch("http://35.167.36.255:8080/api/auth/register", {
+          fetch("http://localhost:8080/api/auth/register", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -78,7 +78,7 @@ class Register extends Component {
             })
           })
             .then(res => {
-              window.location.replace("http://35.167.36.255:8081/login");
+              window.location.replace("http://localhost:8081/login");
             })
             .catch(err => {
               console.log("FRONT END", err);

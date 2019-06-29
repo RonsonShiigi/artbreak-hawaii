@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
             `Hello, Thank you for using Artbreak......\n\n` +
             `Your purchase will consist of  ${description} \n\n` +
             `Your total price will be $${price} \n\n` +
-            `Please buy your shit here http://35.167.36.255:8081/buyercheckout/?tkn=${token} \n\n` +
+            `Please buy your shit here http://localhost:8081/buyercheckout/?tkn=${token} \n\n` +
             `Tell your mama i say hello`
         };
 

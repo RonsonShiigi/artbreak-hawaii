@@ -33,16 +33,16 @@ class Invoice extends Component {
       this.state.price === "" ||
       this.state.description === ""
     ) {
-      window.location.replace("http://35.167.36.255:8081/invoiceError");
+      window.location.replace("http://localhost:8081/invoiceError");
     } else {
       console.log("this is invoice state", this.state);
       axios
-        .post("http://35.167.36.255:8080/invoice", this.state)
+        .post("http://localhost:8080/invoice", this.state)
         .then(res => {
           console.log("response", res.data);
         })
         .then(
-          window.location.replace("http://35.167.36.255:8081/invoiceconfirmation")
+          window.location.replace("http://localhost:8081/invoiceconfirmation")
         )
         .catch(err => {
           console.log(err);

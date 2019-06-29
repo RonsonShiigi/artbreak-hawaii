@@ -15,7 +15,7 @@ class Checkout extends Component {
   }
   componentDidMount = e => {
     const userId = 4; //NEED TO MAKE DYNAMIC!!!!
-    fetch(`http://35.167.36.255:8080/cart/${userId}`)
+    fetch(`http://localhost:8080/cart/${userId}`)
       .then(res => {
         return res.json();
       })
@@ -31,7 +31,7 @@ class Checkout extends Component {
 
   onToken(token) {
     console.log("onToken", token);
-    fetch("http://35.167.36.255:8080/payment/checkout", {
+    fetch("http://localhost:8080/payment/checkout", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -43,7 +43,7 @@ class Checkout extends Component {
       credentials: "include"
     })
       .then(res => {
-        window.location.replace("http://35.167.36.255:8081/");
+        window.location.replace("http://localhost:8081/");
       })
       .catch(err => {
         console.log("ERROR on TOKEN", err);

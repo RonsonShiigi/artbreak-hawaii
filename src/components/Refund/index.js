@@ -42,7 +42,7 @@ class Refund extends Component {
   handleSubmit = e => {
     console.log("CHARGE ID", this.state.chargeId);
     e.preventDefault();
-    fetch(`http://35.167.36.255:8080/payment/refund`, {
+    fetch(`http://localhost:8080/payment/refund`, {
       method: "POST",
       headers: {
         Accept: "application/json",

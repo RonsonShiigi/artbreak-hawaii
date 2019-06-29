@@ -16,7 +16,7 @@ class Edit_Error extends Component {
     return (
       <div className="container">
         <h1>There was an error editing your artpiece</h1>
-        <a href="http://35.167.36.255:8081/dashboard">Try Again</a>
+        <a href="http://localhost:8081/dashboard">Try Again</a>
       </div>
     );
   }

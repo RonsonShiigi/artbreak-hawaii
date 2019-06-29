@@ -38,7 +38,7 @@ class Delete extends Component {
     } else {
       console.log("you are trying to delete");
       axios
-        .get("http://35.167.36.255:8080/products")
+        .get("http://localhost:8080/products")
         .then(res => {
           let products = res.data;
           products.filter(product => {
@@ -56,7 +56,7 @@ class Delete extends Component {
         })
         .then(data => {
           axios
-            .delete("http://35.167.36.255:8080/products/" + this.state.product_id, {
+            .delete("http://localhost:8080/products/" + this.state.product_id, {
               data: { body: this.state }
             })
             .then(data => {

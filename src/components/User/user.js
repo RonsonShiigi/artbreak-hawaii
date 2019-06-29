@@ -24,7 +24,7 @@ class User extends Component {
   }
 
   componentDidMount(req, res) {
-    fetch(`http://35.167.36.255:8080/users/${this.props.match.params.id}`)
+    fetch(`http://localhost:8080/users/${this.props.match.params.id}`)
       .then(res => {
         return res.json();
       })
