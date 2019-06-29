@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 function Logout(props) {
   const handleSubmit = e => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/auth/logout", {
+    fetch("http://35.167.36.255:8080/api/auth/logout", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -21,7 +21,7 @@ function Logout(props) {
         console.log("User Logged Out...");
       })
       .then(() => {
-        window.location.replace("http://localhost:8081");
+        window.location.replace("http://35.167.36.255:8081");
       })
       .catch(err => {
         console.log(err);

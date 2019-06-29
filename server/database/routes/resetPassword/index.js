@@ -49,7 +49,7 @@ router.route("/").post((req, res) => {
                 text:
                   `Forgot your password, no problem. Creative minds have no room for mundane things such as passwords. \n\n` +
                   `Time flys when you're having fun, don't let this bad boy expire. Click or paste this link into your browser to complete the process within one hour. \n\n` +
-                  `http://localhost:8081/resetPassword/?tkn=${token}\n\n` +
+                  `http://35.167.36.255:8081/resetPassword/?tkn=${token}\n\n` +
                   "If you did not request this, please ignore this email and your password will remain unchanged."
               };
 

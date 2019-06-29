@@ -24,7 +24,7 @@ class ForgotPassword extends Component {
     this.setState({ isValid: true });
     this.setState({ emailSent: null });
     const emailLowercase = this.state.email.toLowerCase();
-    fetch("http://localhost:8080/resetPassword", {
+    fetch("http://35.167.36.255:8080/resetPassword", {
       method: "POST",
       credentials: "include",
       headers: {

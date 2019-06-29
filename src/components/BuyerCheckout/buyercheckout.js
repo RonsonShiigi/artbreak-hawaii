@@ -30,7 +30,7 @@ class BuyerCheckout extends Component {
     if (token) {
       this.setState({ uriToken: token });
     }
-    fetch(`http://localhost:8080/invoice/${token}`)
+    fetch(`http://35.167.36.255:8080/invoice/${token}`)
       .then(res => {
         return res.json();
       })
@@ -43,7 +43,7 @@ class BuyerCheckout extends Component {
         this.setState({ artist: itemsData.user_id });
       })
       .then(() => {
-        fetch(`http://localhost:8080/users/${this.state.userId}`)
+        fetch(`http://35.167.36.255:8080/users/${this.state.userId}`)
           .then(res => {
             return res.json();
           })
@@ -60,7 +60,7 @@ class BuyerCheckout extends Component {
   };
 
   onToken(token, addresses) {
-    fetch("http://localhost:8080/payment/checkout", {
+    fetch("http://35.167.36.255:8080/payment/checkout", {
       method: "POST",
       headers: {
         Accept: "application/json",

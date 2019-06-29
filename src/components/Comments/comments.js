@@ -19,7 +19,7 @@ class Comments extends Component {
   componentDidMount() {
     this.setState({ user_id: localStorage.getItem("userId") });
     axios
-      .get("http://localhost:8080/comments")
+      .get("http://35.167.36.255:8080/comments")
       .then(res => {
         let data = res.data;
         this.setState({ allCommentsArr: data });
@@ -54,7 +54,7 @@ class Comments extends Component {
     } else {
       console.log("this is comments state", this.state);
       axios
-        .post("http://localhost:8080/comments", obj)
+        .post("http://35.167.36.255:8080/comments", obj)
         .then(res => {
           console.log("response", res.data);
         })

@@ -16,7 +16,7 @@ class InvoiceHistory extends Component {
   componentDidMount() {
     this.setState({ user_id: localStorage.getItem("userId") });
     axios
-      .get("http://localhost:8080/invoice")
+      .get("http://35.167.36.255:8080/invoice")
       .then(res => {
         console.log("response from serve", res.data);
         this.setState({ invoices: res.data });
