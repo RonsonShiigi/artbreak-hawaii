@@ -27,11 +27,15 @@ class SendMessageForm extends Component {
     const styles = {
       container: {
         paddingTop: 25,
-        borderTop: "1px #4C758F solid"
+        borderTop: "1px #4C758F solid",
+        width: "78vw",
+        marginTop: "auto"
       },
       form: {
         display: "flex",
-        width: "auto"
+        flexDirection: "column",
+        width: "auto",
+        height: "auto"
       },
       input: {
         width: "auto",
@@ -44,10 +48,16 @@ class SendMessageForm extends Component {
         fontSize: 16,
         padding: 0,
         paddingLeft: 20
+      },
+      inputDiv: {
+        display: "flex",
+        flexDirection: "column",
+        padding: 100,
+        flex: 1
       }
     };
     return (
-      <div style={styles.container}>
+      <div className="inputDiv" style={styles.container}>
         <div>
           <form onSubmit={this.onSubmit} style={styles.form}>
             <input

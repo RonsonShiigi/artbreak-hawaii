@@ -25,7 +25,8 @@ class MessagesList extends Component {
         listStyle: "none",
         display: "flex",
         flexDirection: "column",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        paddingBottom: 0
       },
       li: {
         marginTop: 2,

@@ -22,12 +22,12 @@ class ChatScreen extends Component {
     this.sendTypingEvent = this.sendTypingEvent.bind(this);
     this.subscribeToRoom = this.subscribeToRoom.bind(this);
     this.getRooms = this.getRooms.bind(this);
-    this.createRoom = this.createRoom.bind(this);
   }
 
   sendTypingEvent() {
     this.state.currentUser.isTypingIn({ roomId: this.state.currentRoom.id });
     // .catch(error => console.error("error", error));
+    this.forceUpdate(this.getRooms());
   }
 
   sendMessage(text) {
@@ -35,16 +35,26 @@ class ChatScreen extends Component {
       text,
       roomId: this.state.roomId
     });
+    this.forceUpdate(this.getRooms());
   }
 
   getRooms() {
     this.currentUser
       .getJoinableRooms()
       .then(joinableRooms => {
-        this.setState({
-          joinableRooms,
-          joinedRooms: this.currentUser.rooms
-        });
+        this.setState(
+          {
+            joinableRooms,
+            joinedRooms: this.currentUser.rooms
+          },
+          () => {
+            localStorage.setItem(
+              "joinedRooms",
+              JSON.stringify(this.state.joinedRooms)
+            );
+          }
+        );
+        console.log(">>>>>>", joinableRooms);
       })
       .catch(err => console.log("error on joinableRooms: ", err));
   }
@@ -52,7 +62,6 @@ class ChatScreen extends Component {
   subscribeToRoom(roomId) {
     this.setState({ messages: [] });
     this.setState({ roomId: roomId });
-    console.log("stateROOM ID", this.state.roomId);
 
     this.currentUser
       .subscribeToRoom({
@@ -84,16 +93,7 @@ class ChatScreen extends Component {
         this.setState({ currentRoom });
       })
       .catch(err => console.log("error on subscribing to room: ", err));
-  }
-
-  createRoom(name) {
-    this.currentUser
-      .createRoom({
-        name
-      })
-      .then(this.subscribeToRoom(this.state.room.id))
-      .catch(err => console.log("error with createRoom: ", err));
-    console.log("roomid", this.state.roomId);
+    this.forceUpdate(this.getRooms());
   }
 
   componentDidMount() {
@@ -105,6 +105,7 @@ class ChatScreen extends Component {
       },
       body: JSON.stringify({ username: localUsername })
     }).then(response => {
+      console.log("res>>>", response);
       const chatManager = new Chatkit.ChatManager({
         instanceLocator: "v1:us1:d6baf088-e188-43f2-8140-5d6388842598",
         userId: localStorage.getItem("username"),
@@ -127,12 +128,13 @@ class ChatScreen extends Component {
   }
 
   render() {
+    console.log(this.state.joinedRooms.length);
     // console.log("curr user", this.state);
     // console.log("this.props", this.props);
     const styles = {
       container: {
-        height: "88vh",
-        width: "100vw",
+        height: "85vh",
+        width: "120vw",
         marginTop: "105px",
         display: "flex",
         flex: 1,
@@ -148,20 +150,20 @@ class ChatScreen extends Component {
       },
       whosOnlineListContainer: {
         width: "15%",
-        paddingTop: 50,
+        paddingTop: 40,
         paddingLeft: 10,
-        backgroundColor: "#2c303b",
+        backgroundColor: "#252525",
         color: "white",
         flexDirection: "column"
       },
       chatListContainer: {
-        paddingTop: 55,
+        paddingTop: 40,
+        paddingLeft: 15,
         display: "flex",
         height: "auto",
         flexDirection: "column",
         background: "white",
         flexWrap: "columnWrap",
-        paddingLeft: 30,
         width: "81vw"
       },
       li: {
